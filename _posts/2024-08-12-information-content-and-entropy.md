@@ -5,6 +5,7 @@ Information content and Entropy are very important concept in Information theory
 ---
 
 ### Information Content (Self-Information)
+#### Intuition
 - Information content quantifies how much information is gained (or how much surprise there is) when a specific event happens.
 - Surprising Events Carry More Information
     - Lower Probability => Higher Information
@@ -13,7 +14,7 @@ Information content and Entropy are very important concept in Information theory
     - **Coin Flip** - If you flip a fair coin, and it lands on heads, the outcome isn't very surprising because the probability of heads is 0.5. The information content here is relatively low
     - **Die Roll** - If you roll a die and it lands on 6, the outcome is more surprising because the probability of rolling a 6 is only $1/6$. The information content here is higher
 
-**Definition of Information:**
+#### Definition
 - The information content of an event $x$ with probability $p(x)$ is defined as:
 
 $$ 
@@ -37,15 +38,26 @@ $$ I(x) >= 0 $$
 
 ### Entropy
 
+#### Intuition
 - Entropy is a concept from information theory introduced by Claude Shannon in 1948. 
 - It measures the uncertainty or randomness in a probability distribution. 
 - In the context of machine learning and data science, entropy quantifies the unpredictability or impurity in a dataset.
 
-**Definition of Entropy:**
-For discrete random variable X with possible outcomes $x_1, x_2, ..., x_n$ and a probability distribution $p(x)$, entropy $H(X)$ is defined as the expected value of the information content across all possible outcomes of a random variable.
+#### Definition
+- Given discrete random variable X with possible outcomes $x_1, x_2, ..., x_n$ and a probability distribution $p(x)$, 
+- Entropy $H(X)$ is defined as the expected value of the information content across all possible outcomes of the random variable X.
 
-$$
-H\left( X \right) = -\sum_{i=1}^n p\left( x_i \right) log_2 p\left( x_i \right) 
-$$
+$$ H(X) = E(I(X)) $$
+
+$$ H(X) = E(-log(p(X))) $$
+
+$$ H(X) = - p(x_1) log(p(x_1)) - p(x_2) log(p(x_2)) ... - p(x_n) log(p(x_n)) $$
+
+$$ H\left( X \right) =  -\sum_{i=1}^n p\left( x_i \right) log_2 p\left( x_i \right) $$
+
+#### Properties
+- **Non-Negativity** - Entropy is always non-negative
+- **Maximization for Uniform Distribution** - Entropy is maximized when the distribution is uniform, meaning all outcomes are equally likely, reflecting maximum uncertainty.
+- **Additivity** - Independent sources of uncertainty (from independent events) add up
 
 
