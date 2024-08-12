@@ -1,4 +1,4 @@
-## Information Content : Intuition, and Uses
+## Information Content
 
 ### Intuition
 - Information content quantifies how much information is gained (or how much surprise there is) when a specific event happens
