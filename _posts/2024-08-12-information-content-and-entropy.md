@@ -15,6 +15,7 @@ Information content and Entropy are very important concept in Information theory
 
 **Definition of Information:**
 - The information content of an event `x` with probability `p(x)` is defined as:
+
 $$ 
 I(x) = -log(p(x)) 
 $$
@@ -26,12 +27,9 @@ $$
 - Why the Negative Log? 
     - The negative sign ensures that information content is positive
 
-$$ 
-We know 0 <= p(x) <= 1, 
-=> log(p(x)) <= 0
-=> -log(p(x)) >= 0
-$$
-    
+$$ 0 <= p(x) <= 1 $$
+$$ log(p(x)) <= 0 $$
+$$ -log(p(x)) >= 0 $$
 
 ### Entropy
 
