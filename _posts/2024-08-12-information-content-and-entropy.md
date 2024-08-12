@@ -21,8 +21,8 @@ I(x) = -log(p(x))
 $$
 
 - This is based on the idea that rare events carry more information when they occur, while common events carry less
-    - If an event is very likely (high $`p(x)`$), the information content is low (because it's not surprising).
-    - If an event is unlikely (low $`p(x)`$), the information content is high (because it's surprising).
+    - If an event is very likely i.e. high $p(x)$, the information content is low (because it's not surprising).
+    - If an event is unlikely i.e. low $p(x)$, the information content is high (because it's surprising).
 
 - Why the Negative Log? 
     - The negative sign ensures that information content is positive
