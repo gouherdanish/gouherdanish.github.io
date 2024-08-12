@@ -33,6 +33,8 @@ $$ log(p(x)) <= 0 $$
 
 $$ -log(p(x)) >= 0 $$
 
+$$ I(x) >= 0 $$
+
 ### Entropy
 
 - Entropy is a concept from information theory introduced by Claude Shannon in 1948. 
@@ -40,7 +42,7 @@ $$ -log(p(x)) >= 0 $$
 - In the context of machine learning and data science, entropy quantifies the unpredictability or impurity in a dataset.
 
 **Definition of Entropy:**
-For discrete random variable X with possible outcomes $`x_1`$, $`x_2`$, ..., $`x_n`$ and a probability distribution $`p(x)`$, entropy $`H(X)`$ is defined as the expected value of the information content across all possible outcomes of a random variable.
+For discrete random variable X with possible outcomes $`\left( x_1, x_2, ..., x_n \right)`$ and a probability distribution `p(x)`, entropy `H(X)` is defined as the expected value of the information content across all possible outcomes of a random variable.
 
 $$
 H\left( X \right) = -\sum_{i=1}^n p\left( x_i \right) log_2 p\left( x_i \right) 
