@@ -12,10 +12,8 @@ Cross Entropy Loss function is very important concept in Machine Learning. Below
 - It measures the uncertainty or randomness in a probability distribution. 
 - In the context of machine learning and data science, entropy quantifies the unpredictability or impurity in a dataset.
 
-$$ (a+b)^2 = a^2 + 2ab + b^2 $$
+$ (a+b)^2 = a^2 + 2ab + b^2 $
 
-```math
-H\left( X \right) = -\sum_{i=1}^n p\left( x_i \right) log_2 p\left( x_i \right)
-```
+$$ H\left( X \right) = -\sum_{i=1}^n p\left( x_i \right) log_2 p\left( x_i \right) $$
 
 
