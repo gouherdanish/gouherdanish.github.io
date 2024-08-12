@@ -11,18 +11,18 @@ Information content and Entropy are very important concept in Information theory
     - Higher Probability => Lower Information
 - Example:
     - **Coin Flip** - If you flip a fair coin, and it lands on heads, the outcome isn't very surprising because the probability of heads is 0.5. The information content here is relatively low
-    - **Die Roll** - If you roll a die and it lands on 6, the outcome is more surprising because the probability of rolling a 6 is only `1/6`. The information content here is higher
+    - **Die Roll** - If you roll a die and it lands on 6, the outcome is more surprising because the probability of rolling a 6 is only $1/6$. The information content here is higher
 
 **Definition of Information:**
-- The information content of an event `x` with probability `p(x)` is defined as:
+- The information content of an event $x$ with probability $p(x)$ is defined as:
 
 $$ 
 I(x) = -log(p(x)) 
 $$
 
 - This is based on the idea that rare events carry more information when they occur, while common events carry less
-    - If an event is very likely (high `p(x)`), the information content is low (because it's not surprising).
-    - If an event is unlikely (low `p(x)`), the information content is high (because it's surprising).
+    - If an event is very likely (high $p(x)$), the information content is low (because it's not surprising).
+    - If an event is unlikely (low $p(x)$), the information content is high (because it's surprising).
 
 - Why the Negative Log? 
     - The negative sign ensures that information content is positive
@@ -42,7 +42,7 @@ $$ I(x) >= 0 $$
 - In the context of machine learning and data science, entropy quantifies the unpredictability or impurity in a dataset.
 
 **Definition of Entropy:**
-For discrete random variable X with possible outcomes $x_1, x_2, ..., x_n$ and a probability distribution `p(x)`, entropy `H(X)` is defined as the expected value of the information content across all possible outcomes of a random variable.
+For discrete random variable X with possible outcomes $x_1, x_2, ..., x_n$ and a probability distribution $p(x)$, entropy $H(X)$ is defined as the expected value of the information content across all possible outcomes of a random variable.
 
 $$
 H\left( X \right) = -\sum_{i=1}^n p\left( x_i \right) log_2 p\left( x_i \right) 
