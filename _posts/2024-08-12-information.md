@@ -32,21 +32,31 @@ $$ I(x) >= 0 $$
 
 #### Hand Calculation
 Consider an experiment where a fair coin is flipped 3 times. Here are following outcomes
+
 $$ Sample Space = {HHH,HHT,HTH,THH,HTT,THT,TTH,TTT} $$
 
 Let $X$ denote a random variable which represents the number of heads in 3 consecutive coin flips
+
 $$ X = {0,1,2,3} $$
 
 The probability $p(X)$ associated with each $X$
+
 $$ p(X=0) = p(TTT) = 1/8 $$
+
 $$ p(X=1) = p(HTT or THT or TTH) = 3/8 $$
+
 $$ p(X=2) = p(HHT or HTH or THH) = 3/8 $$
+
 $$ p(X=3) = p(HHH) = 1/8 $$
 
 Information $I(X)$ for each $X$ can be calculated as follows,
+
 $$ I(X=0) = -log(p(X=0)) = -log(1/8) = 2.07944154 $$
+
 $$ I(X=1) = -log(p(X=1)) = -log(3/8) = 0.98082925 $$
+
 $$ I(X=2) = -log(p(X=2)) = -log(3/8) = 0.98082925 $$
+
 $$ I(X=3) = -log(p(X=3)) = -log(1/8) = 2.07944154 $$
 
 #### Implementation
