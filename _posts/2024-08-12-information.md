@@ -71,8 +71,9 @@ def information(prob):
 
 ```
 
-#### Github
+### Github
 This has been properly implemented using OOPS concept in my following repository
+
 [Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py)
 
 
