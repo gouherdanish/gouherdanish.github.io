@@ -30,14 +30,14 @@ $$ -log(p(x)) >= 0 $$
 
 $$ I(x) >= 0 $$
 
-#### Hand Calculation
+### Hand Calculation
 Consider an experiment where a fair coin is flipped 3 times. Here are following outcomes
 
-$$ Sample Space = {HHH,HHT,HTH,THH,HTT,THT,TTH,TTT} $$
+$$ Sample Space = \{HHH,HHT,HTH,THH,HTT,THT,TTH,TTT\} $$
 
 Let $X$ denote a random variable which represents the number of heads in 3 consecutive coin flips
 
-$$ X = {0,1,2,3} $$
+$$ X = \{0,1,2,3\} $$
 
 The probability $p(X)$ associated with each $X$
 
@@ -59,21 +59,21 @@ $$ I(X=2) = -log(p(X=2)) = -log(3/8) = 0.98082925 $$
 
 $$ I(X=3) = -log(p(X=3)) = -log(1/8) = 2.07944154 $$
 
-#### Implementation
+### Implementation
 ```
 from numpy import log
 
 def information(prob):
     return -log(prob)
 
->>> information(prob=1/2) # 
->>> information(prob=1/6)
+>>> information(prob=1/8) = 0.98082925 # High probability has low information content
+>>> information(prob=3/8) = 2.07944154 # Low probability has high information content
 
 ```
 
 #### Github
 This has been properly implemented using OOPS concept in my following repository
-Repo - https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py
+[Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py)
 
 
 
