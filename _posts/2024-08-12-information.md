@@ -66,8 +66,8 @@ from numpy import log
 def information(prob):
     return -log(prob)
 
->>> information(prob=1/8) = 0.98082925 # High probability has low information content
->>> information(prob=3/8) = 2.07944154 # Low probability has high information content
+>>> information(prob=3/8) = 0.98082925 # High probability has low information content
+>>> information(prob=1/8) = 2.07944154 # Low probability has high information content
 ```
 
 ### OOPS Implementation
