@@ -59,7 +59,7 @@ $$ I(X=2) = -log(p(X=2)) = -log(3/8) = 0.98082925 $$
 
 $$ I(X=3) = -log(p(X=3)) = -log(1/8) = 2.07944154 $$
 
-### Implementation
+### Formulation
 ```
 from numpy import log
 
@@ -68,13 +68,18 @@ def information(prob):
 
 >>> information(prob=1/8) = 0.98082925 # High probability has low information content
 >>> information(prob=3/8) = 2.07944154 # Low probability has high information content
-
 ```
 
-### Github
+### OOPS Implementation
+```
+from random_event import RandomEvent
+
+event = RandomEvent(x='Getting a six when a fair die is thrown', prob=1/6)
+print(event.information) # 1.791759469228055
+```
 This has been properly implemented using OOPS concept in my following repository
 
-[Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py)
+Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py)
 
 
 
