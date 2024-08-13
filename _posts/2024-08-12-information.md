@@ -3,7 +3,7 @@
 ### Intuition
 - Information content quantifies how much information is gained (or how much surprise there is) when a specific event happens
 - It is also known as self-information
-- Surprising Events Carry More Information
+- Surprising events carry more information
     - Lower Probability => Rare event => Higher Information
     - Higher Probability => Common event => Lower Information
 - Example:
@@ -63,7 +63,7 @@ $$ I(X=3) = -log(p(X=3)) = -log(1/8) = 2.07944154 $$
 ```
 from numpy import log
 
-def information(prob):
+def information(prob: float):
     return -log(prob)
 
 >>> information(prob=3/8) = 0.98082925 # High probability has low information content
