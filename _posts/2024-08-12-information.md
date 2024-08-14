@@ -1,4 +1,9 @@
-## Information : Measuring surprise level of an event
+---
+layout: post
+title: "Information : Measuring surprise level of an event"
+date: 2024-08-10
+tags: ["Information Theory"]
+---
 
 ### Intuition
 - Information content quantifies how much information is gained (or how much surprise there is) when a specific event happens
