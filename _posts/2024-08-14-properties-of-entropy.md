@@ -42,7 +42,7 @@ $$ \sum_{i} p(x_i) = 1 $$
 
 The Lagrangian $\mathcal(L)$ can be formulated using Lagrange multiplier theorem as follows,
 
-$$ L = - \sum_{i=1}^n p(x_i) \log p( x_i) + \lambda (\sum_{i=1}^n p(x_i) - 1) $$
+$$ L = - \sum_{i=1}^n p(x_i) \log p( x_i) + \lambda \left( \sum_{i=1}^n p(x_i) - 1 \right) $$
 
 $$ \Rightarrow L = - p(x_1) \log p(x_1) - p(x_2) \log p(x_2) - ... - p(x_n) \log p(x_n) + \lambda (p(x_1) + p(x_2) + ... + p(x_n) - 1) $$
 
