@@ -12,17 +12,17 @@ Entropy has several desirable properties. Some of these properties are presented
 
 Proof:
 
-$ We know, probability of any event lies in (0,1) $
+We know, probability of any event lies in (0,1)
 
-$ \Rightarrow 0 <= p(x) <= 1 $
+$$ \Rightarrow 0 <= p(x) <= 1 $$
 
-$ \Rightarrow \log (p(x)) <= 0 $
+$$ \Rightarrow \log (p(x)) <= 0 $$
 
-$ \Rightarrow -\log (p(x)) >= 0 $
+$$ \Rightarrow -\log (p(x)) >= 0 $$
 
-$ \Rightarrow -p(x) \log (p(x)) >= 0 $
+$$ \Rightarrow -p(x) \log (p(x)) >= 0 $$
 
-$ \Rightarrow H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) >= 0 $
+$$ \Rightarrow H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) >= 0 $$
 
 ---
 
@@ -78,7 +78,7 @@ $$ \Rightarrow C = p(x_i) = {1 \over n} $$
 
 which is the Uniform Probability Distribution.
 
-This means that all entropy is maximum when all outcomes are equally likely.
+This means that entropy is maximum when all outcomes are equally likely.
 
 Intuitively, the uniform distribution spreads the probabilities evenly across all outcomes thus, achieving the highest possible entropy 
 $\log n$ for `n` distinct outcomes
