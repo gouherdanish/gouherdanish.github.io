@@ -2,7 +2,7 @@
 layout: post
 title: "Random Variable: Quantifying Random Events"
 date: 2024-08-11
-tags: ["Proability"]
+tags: ["Probability"]
 ---
 
 Random Variable is a very important concept in Probability and forms the base in the study of Probability Distributions
