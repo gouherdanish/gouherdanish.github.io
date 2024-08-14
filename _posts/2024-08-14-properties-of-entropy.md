@@ -82,8 +82,27 @@ which is the Uniform Probability Distribution.
 
 This means that entropy is maximum when all outcomes are equally likely.
 
+---
+### 3. Maximum Entropy of a random variable is $\log n$
+
+$$ H(X) = - \sum_{i=1}^n p(x_i) \log {p(x_i)}  $$
+
+Entropy is maximum for a uniform distribution (Prop 2) for which
+
+$$ p(x_i) = {1 \over n} $$
+
+$$ \Rightarrow H(X) = -\sum_{i=1}^n {1 \over n} \log {1 \over n} $$
+
+$$ \Rightarrow H(X) = -{1 \over n} \log {1 \over n} \sum_{i=1}^n 1 $$
+
+$$ \Rightarrow H(X) = - {1 \over n} \log {1 \over n} (1)$$
+
+$$ \Rightarrow H(X) = \log n $$
+
 Intuitively, the uniform distribution spreads the probabilities evenly across all outcomes thus, achieving the highest possible entropy 
 $\log n$ for `n` distinct outcomes
+
+---
 
 ### Implementation
 For full implementation, refer following repository
