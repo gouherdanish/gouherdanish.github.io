@@ -10,7 +10,7 @@ Entropy has several desirable properties. Some of these properties are presented
 ---
 ### 1. Entropy is always non-negative
 
-Proof:
+**Proof** :
 
 We know, probability of any event lies in (0,1)
 
@@ -28,9 +28,11 @@ $$ \Rightarrow H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) >= 0 $$
 
 ### 2. Entropy is maximum when all outcomes are equally likely
 
-Proof : 
+**Proof** : 
 
-Objective Function: Maximize Entropy $H(X)$, 
+Objective Function for this optimization problem can be formulated as follows
+
+Maximize Entropy, 
 
 $$ H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) $$
 
