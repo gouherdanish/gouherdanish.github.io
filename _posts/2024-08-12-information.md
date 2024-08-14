@@ -6,7 +6,8 @@ tags: ["Information Theory"]
 ---
 
 Information Theory deals with how to measure information and how to communicate the information effectively. Here we try to learn the what Information means both intuitively and mathematically
-----
+
+---
 
 ### Intuition
 - Information content quantifies how much information is gained (or how much surprise there is) when a specific event happens
@@ -18,6 +19,8 @@ Information Theory deals with how to measure information and how to communicate 
     - **Coin Flip** - If you flip a fair coin, and it lands on heads, the outcome isn't very surprising because the probability of heads is 0.5. The information content here is relatively low
     - **Die Roll** - If you roll a die and it lands on 6, the outcome is more surprising because the probability of rolling a 6 is only $1/6$. The information content here is higher
 
+---
+
 ### Definition
 - The information content of an event $x$ with probability $p(x)$ is defined as:
 
@@ -26,6 +29,8 @@ $$ I(x) = -log(p(x)) $$
 - This is based on the idea that rare events carry more information when they occur, while common events carry less
     - If an event is very likely i.e. high $p(x)$, the information content is low (because it's not surprising).
     - If an event is unlikely i.e. low $p(x)$, the information content is high (because it's surprising).
+
+---
 
 ### Properties
 - Information content is always positive
@@ -37,6 +42,8 @@ $$ log(p(x)) <= 0 $$
 $$ -log(p(x)) >= 0 $$
 
 $$ I(x) >= 0 $$
+
+---
 
 ### Hand Calculation
 Consider an experiment where a fair coin is flipped 3 times. Here are following outcomes
@@ -67,6 +74,8 @@ $$ I(X=2) = -log(p(X=2)) = -log(3/8) = 0.98082925 $$
 
 $$ I(X=3) = -log(p(X=3)) = -log(1/8) = 2.07944154 $$
 
+---
+
 ### Formulation
 ```
 from numpy import log
@@ -77,6 +86,8 @@ def information(prob: float):
 >>> information(prob=3/8) = 0.98082925 # High probability has low information content
 >>> information(prob=1/8) = 2.07944154 # Low probability has high information content
 ```
+
+---
 
 ### OOPS Implementation
 ```
@@ -89,7 +100,7 @@ For full implementation, refer following repository
 
 Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py)
 
-
+---
 
 
 
