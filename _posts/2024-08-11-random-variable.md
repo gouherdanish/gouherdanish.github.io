@@ -1,4 +1,9 @@
-
+---
+layout: post
+title: "Random Variable: Quantifying Random Events"
+date: 2024-08-11
+tags: ["Proability"]
+---
 
 #### Implementation
 ```
