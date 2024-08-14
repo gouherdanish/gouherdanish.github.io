@@ -13,6 +13,13 @@ Random Variable is a very important concept in Probability and forms the base in
 - Random variable assings a numerical value to the outcome of a random experiment
 - The random variable always takes on Real values
 
+### Types 
+
+#### Discrete Random Variable
+
+
+#### Continuous Random Variable
+
 ### Hand Calculation
 
 #### Experiment 1 - Die Roll

@@ -16,13 +16,13 @@ We know, probability of any event lies in (0,1)
 
 $$ \Rightarrow 0 <= p(x) <= 1 $$
 
-$$ \Rightarrow \log \left( p(x)) <= 0 $$
+$$ \Rightarrow \log \left( p(x) \right) <= 0 $$
 
-$$ \Rightarrow -\log \left( p(x)) >= 0 $$
+$$ \Rightarrow -\log \left( p(x) \right) >= 0 $$
 
-$$ \Rightarrow -p(x) \log \left( p(x)) >= 0 $$
+$$ \Rightarrow -p(x) \log \left( p(x) \right) >= 0 $$
 
-$$ \Rightarrow H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) >= 0 $$
+$$ \Rightarrow H(X) = -\sum_{i} p(x_i) \log \left(p( x_i) \right) >= 0 $$
 
 ---
 
@@ -93,13 +93,15 @@ From property 2, we know that Entropy is maximum for a uniform distribution for 
 
 Substituting,
 
-$$ \Rightarrow H_max = -\sum_{i=1}^n {1 \over n} \log \left( {1 \over n} \right) $$
+$$ \Rightarrow H_{max} = -\sum_{i=1}^n {1 \over n} \log \left( {1 \over n} \right) $$
 
-$$ \Rightarrow H_max = -{1 \over n} \log \left( {1 \over n} \right) \sum_{i=1}^n 1 $$
+$$ \Rightarrow H_{max} = -{1 \over n} \log \left( {1 \over n} \right) \sum_{i=1}^n 1 $$
 
-$$ \Rightarrow H_max = - \left( {1 \over n} \log \left( {1 \over n} \right) \right) (1)$$
+$$ \Rightarrow H_{max} = - \left( {1 \over n} \log \left( {1 \over n} \right) \right) (n)$$
 
-$$ \Rightarrow H_max = \log n $$
+$$ \Rightarrow H_{max} = - \log {1 \over n} $$
+
+$$ \Rightarrow H_{max} = \log n $$
 
 Intuitively, the uniform distribution spreads the probabilities evenly across all outcomes thus, achieving the highest possible entropy 
 `log n` for `n` distinct outcomes
@@ -110,21 +112,44 @@ Intuitively, the uniform distribution spreads the probabilities evenly across al
 **Proof** : 
 
 $$ H = - \sum_{i=1}^n p_i \log p_i $$
+
 $$ H = - p_1 \log p_1 - p_2 \log p_2 - ... - p_i \log p_i - ... -p_n \log p_n $$
 
 Taking first-order partial derivative wrt each probability,
+
 $$ \frac {\partial H}{\partial p_i} = \frac {\partial}{\partial p_i} ({- p_i \log p_i})
 
 $$ \Rightarrow \frac {\partial H}{\partial p_i} = ({-1 - \log {p_i}}) $$
 
 Taking second-order partial derivative wrt each probability,
-$$ \frac {\partial^2 H}{\partial {p_i}^2} = \frac {\partial^2}{\partial {p_i}^2} ({-1 - \log {p_i}})$$
+
+$$ \frac {\partial^2 H}{\partial {p_i}^2} = \frac {\partial}{\partial {p_i}} ({-1 - \log {p_i}})$$
+
 $$ \Rightarrow \frac {\partial^2 H}{\partial {p_i}^2} = -\frac {1}{p_i} $$
+
 $$ \Rightarrow \frac {\partial^2 H}{\partial {p_i}^2} < 0 $$ Since, $p_i > 0$ (probability is always positive)
 
-Since the second derivative of Entropy function is always negative, it is concave.
+Since its second derivative is always negative, Entropy function is concave.
 Intuitively, this means entropy function has decreasing first derivative(slope of tangent), making it bend
 downwards, therefore the curvature is concave.
+
+### 5. Entropies of independent random variables are additive
+
+**Proof** : 
+
+If X and Y are independent random variables, then Joint probability distribution of X and Y can be written as,
+
+$$ P(X=x_i and Y=y_i) = P(X=x_i) \times P(Y=y_i) $$
+
+Joint Entropy can be defined as follows
+
+$$ H(X,Y) = -\sum_{i,j} p(x_i,y_i) \log p(x_i,y_i) $$
+
+$$ \Rightarrow H(X,Y) = -\sum_{i,j} p(x_i)p(y_i) \log ({p(x_i) p(y_i)}) $$
+
+$$ \Rightarrow H(X,Y) = -\sum_{i,j} p(x_i)p(y_i) (\log {p(x_i) + \log p(y_i)}) $$
+
+$$ \Rightarrow H(X,Y) = -\sum_{i,j} p(x_i)p(y_i) \log {p(x_i) -\sum_{i,j} p(x_i)p(y_i)  \log p(y_i)} $$
 
 ### Implementation
 For full implementation, refer following repository
