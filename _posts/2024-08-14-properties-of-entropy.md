@@ -5,7 +5,8 @@ date: 2024-08-14
 tags: ["Information Theory"]
 ---
 
-Entropy has several desirable properties. Below I present some of these along with mathematical proofs.
+Entropy has several desirable properties. Some of these properties are presented below along with their mathematical proofs.
+
 ---
 ### Entropy is always non-negative
 
@@ -67,3 +68,10 @@ This means that all entropy is maximum when all outcomes are equally likely.
 
 Intuitively, the uniform distribution spreads the probabilities evenly across all outcomes thus, achieving the highest possible entropy 
 $\log n$ for `n` distinct outcomes
+
+### Implementation
+For full implementation, refer following repository
+
+Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/git)
+
+---
