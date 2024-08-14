@@ -5,6 +5,14 @@ date: 2024-08-11
 tags: ["Proability"]
 ---
 
+Random Variable is a very important concept in Probability and forms the base in the study of Probability Distributions
+
+---
+
+### Intuition
+- Random variable assings a numerical value to the outcome of a random experiment
+- The random variable always takes on Real values
+
 ### Hand Calculation
 
 #### Experiment 1 - Die Roll
