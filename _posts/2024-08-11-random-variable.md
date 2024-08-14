@@ -65,9 +65,3 @@ X = RandomVariable(events)  # X = {0: 0.167, 1: 0.833}
 For full implementation, refer following repository
 
 Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_variable.py)
-
----
-events = [
-        RandomEvent(0,0.5),
-        RandomEvent(1,0.5)
-    ]

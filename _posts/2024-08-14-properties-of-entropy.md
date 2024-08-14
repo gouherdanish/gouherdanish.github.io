@@ -108,5 +108,3 @@ $\log n$ for `n` distinct outcomes
 For full implementation, refer following repository
 
 Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/git)
-
----

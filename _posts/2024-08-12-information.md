@@ -99,8 +99,3 @@ print(event.information) # 1.791759469228055
 For full implementation, refer following repository
 
 Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/blob/main/random_event.py)
-
----
-
-
-
