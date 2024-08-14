@@ -16,11 +16,11 @@ We know, probability of any event lies in (0,1)
 
 $$ \Rightarrow 0 <= p(x) <= 1 $$
 
-$$ \Rightarrow \log (p(x)) <= 0 $$
+$$ \Rightarrow \log \left( p(x)) <= 0 $$
 
-$$ \Rightarrow -\log (p(x)) >= 0 $$
+$$ \Rightarrow -\log \left( p(x)) >= 0 $$
 
-$$ \Rightarrow -p(x) \log (p(x)) >= 0 $$
+$$ \Rightarrow -p(x) \log \left( p(x)) >= 0 $$
 
 $$ \Rightarrow H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) >= 0 $$
 
@@ -85,24 +85,46 @@ This means that entropy is maximum when all outcomes are equally likely.
 ---
 ### 3. Maximum Entropy of a random variable is `log n`
 
+**Proof** : 
+
 $$ H(X) = - \sum_{i=1}^n p(x_i) \log {p(x_i)}  $$
 
-Entropy is maximum for a uniform distribution (Prop 2) for which
+From property 2, we know that Entropy is maximum for a uniform distribution for which $ p(x_i) = {1 \over n} $
 
-$$ p(x_i) = {1 \over n} $$
+Substituting,
 
-$$ \Rightarrow H(X) = -\sum_{i=1}^n {1 \over n} \log ({1 \over n}) $$
+$$ \Rightarrow H_max = -\sum_{i=1}^n {1 \over n} \log \left( {1 \over n} \right) $$
 
-$$ \Rightarrow H(X) = -{1 \over n} \log ({1 \over n}) \sum_{i=1}^n 1 $$
+$$ \Rightarrow H_max = -{1 \over n} \log \left( {1 \over n} \right) \sum_{i=1}^n 1 $$
 
-$$ \Rightarrow H(X) = - ({1 \over n} \log ({1 \over n})) (1)$$
+$$ \Rightarrow H_max = - \left( {1 \over n} \log \left( {1 \over n} \right) \right) (1)$$
 
-$$ \Rightarrow H(X) = \log n $$
+$$ \Rightarrow H_max = \log n $$
 
 Intuitively, the uniform distribution spreads the probabilities evenly across all outcomes thus, achieving the highest possible entropy 
-$\log n$ for `n` distinct outcomes
+`log n` for `n` distinct outcomes
 
 ---
+### 4. Entropy is a concave function of the probability distribution
+
+**Proof** : 
+
+$$ H = - \sum_{i=1}^n p_i \log p_i $$
+$$ H = - p_1 \log p_1 - p_2 \log p_2 - ... - p_i \log p_i - ... -p_n \log p_n $$
+
+Taking first-order partial derivative wrt each probability,
+$$ \frac {\partial H}{\partial p_i} = \frac {\partial}{\partial p_i} ({- p_i \log p_i})
+
+$$ \Rightarrow \frac {\partial H}{\partial p_i} = ({-1 - \log {p_i}}) $$
+
+Taking second-order partial derivative wrt each probability,
+$$ \frac {\partial^2 H}{\partial {p_i}^2} = \frac {\partial^2}{\partial {p_i}^2} ({-1 - \log {p_i}})$$
+$$ \Rightarrow \frac {\partial^2 H}{\partial {p_i}^2} = -\frac {1}{p_i} $$
+$$ \Rightarrow \frac {\partial^2 H}{\partial {p_i}^2} < 0 $$ Since, $p_i > 0$ (probability is always positive)
+
+Since the second derivative of Entropy function is always negative, it is concave.
+Intuitively, this means entropy function has decreasing first derivative(slope of tangent), making it bend
+downwards, therefore the curvature is concave.
 
 ### Implementation
 For full implementation, refer following repository
