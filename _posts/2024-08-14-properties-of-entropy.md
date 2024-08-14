@@ -8,7 +8,7 @@ tags: ["Information Theory"]
 Entropy has several desirable properties. Some of these properties are presented below along with their mathematical proofs.
 
 ---
-### Entropy is always non-negative
+### 1. Entropy is always non-negative
 
 Proof:
 
@@ -24,9 +24,15 @@ $$ H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) >= 0 $$
 
 ---
 
-### Entropy is maximum when all outcomes are equally likely
+### 2. Entropy is maximum when all outcomes are equally likely
 
-Proof : To maximize Entropy $H(X)$ with respect to each probability $p(x_i)$, subject to constraint that probabilities sum to 1
+Proof : 
+
+Objective Function: Maximize Entropy $H(X)$, 
+
+$$ H(X) = -\sum_{i} p(x_i) \log  (p( x_i)) $$
+
+subject to constraint that probabilities sum to 1
 
 $$ \sum_{i} p(x_i) = 1 $$
 
@@ -34,13 +40,15 @@ The Lagrangian $\mathcal(L)$ can be formulated using Lagrange multiplier theorem
 
 $$ L = - \sum_{i=1}^n p(x_i) \log p( x_i) + \lambda (\sum_{i=1}^n p(x_i) - 1) $$
 
-$$ L = - p(x_1) \log p(x_1) - p(x_2) \log p(x_1) - ... - p(x_n) \log p(x_n) + \lambda (p(x_1) + p(x_2) + ... + p(x_n) - 1) $$
+Expanding, 
 
-Finding partial derivatives of the Lagrangian with respect to $p(x_i)$,
+$$ L = - p(x_1) \log p(x_1) - p(x_2) \log p(x_2) - ... - p(x_n) \log p(x_n) + \lambda (p(x_1) + p(x_2) + ... + p(x_n) - 1) $$
+
+Finding partial derivatives of the Lagrangian with respect to $p(x_1)$,
 
 $$ \frac{\partial L}{\partial p(x_1)} = -p(x_1){1 \over p(x_1)} - \log p(x_1)(1) + \lambda (1) = \lambda - 1 - \log p(x_1)$$
 
-Similarly,
+Similarly we can find the partial derivates with respect to each $p(x_1)$,
 
 $$ \frac{\partial L}{\partial p(x_i)} = \lambda - 1 - \log p(x_i) $$
 
