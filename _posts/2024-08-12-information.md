@@ -5,6 +5,9 @@ date: 2024-08-10
 tags: ["Information Theory"]
 ---
 
+Information Theory deals with how to measure information and how to communicate the information effectively. Here we try to learn the what Information means both intuitively and mathematically
+----
+
 ### Intuition
 - Information content quantifies how much information is gained (or how much surprise there is) when a specific event happens
 - It is also known as self-information
