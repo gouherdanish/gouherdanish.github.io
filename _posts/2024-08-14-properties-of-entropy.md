@@ -40,7 +40,7 @@ subject to constraint that probabilities sum to 1
 
 $$ \sum_{i} p(x_i) = 1 $$
 
-The Lagrangian $\mathcal(L)$ can be formulated using Lagrange multiplier theorem as follows,
+The Lagrangian can be formulated using Lagrange multiplier theorem as follows,
 
 $$ L = - \sum_{i=1}^n p(x_i) \log p( x_i) + \lambda \left( \sum_{i=1}^n p(x_i) - 1 \right) $$
 
@@ -140,7 +140,7 @@ downwards, therefore the curvature is concave.
 
 If X and Y are independent random variables, then Joint probability distribution of X and Y can be written as,
 
-$$ P(X=x_i, Y=y_i) = P(X=x_i) \* P(Y=y_i) $$
+$$ P(X=x_i, Y=y_i) = P(X=x_i) \times P(Y=y_i) $$
 
 Joint Entropy for independent events can be defined as follows
 
@@ -163,7 +163,7 @@ $$ \Rightarrow H(X,Y) = H(X) + H(Y) $$
 
 From chain rule of probability,
 
-$$ P(A and B) = P(A) \* P(B|A) = P(B) \* P(A|B) $$
+$$ P(A and B) = P(A) \times P(B|A) = P(B) \times P(A|B) $$
 
 If X and Y are dependent random variables, then joint entropy can be written as
 
@@ -174,7 +174,7 @@ This is called the chain rule of Entropy
 $$ \Rightarrow H(X,Y) \leq H(X) + H(Y) $$
 
 Joint Entropy for dependent events is less than the sum of individual entropies. 
-Intuitively, this happens because knowing one variable reduces the uncertainty about the other
+Intuitively, this means that knowing one variable reduces the uncertainty about the other
 
 ---
 ### Implementation
