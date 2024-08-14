@@ -33,7 +33,7 @@ $$ I(x) = -log(p(x)) $$
 ---
 
 ### Properties
-- Information content is always positive
+- **Non-Negativity** - Information content is always positive
 
 $$ 0 <= p(x) <= 1 $$
 
