@@ -88,7 +88,7 @@ $$ H(p,q)_{min} = H(p,p) = -\sum_{i} p_i \log p_i = H(p) $$
 
 ### 5. Cross Entropy is a convex function
 
-$$ H(p,q) = -\sum_{i} p \log q $$
+$$ H(p,q) = -\sum_{i} p_i \log q_i $$
 
 Taking first order Partial Derivative of $H(p,q)$,
 
@@ -103,3 +103,14 @@ $$ \Rightarrow \frac {\partial^2 H}{\partial {q_i}^2} = {p_i} \over {q_i}^2 $$
 $$ \Rightarrow \frac {\partial^2 H}{\partial {q_i}^2} > 0 $$ Since, $p_i, q_i > 0$ (probability is always positive)
 
 Since its second derivative is always negative, Cross Entropy function is concave (curved upwards).
+
+---
+### 6. Relative Entropy denotes the information lost when q is used to estimate p
+
+$$ H(p,q) = -\sum_{i} p_i \log q_i $$
+
+$$ H(p,q) = -\sum_{i} p_i \log p_i \left({q_i} \over {p_i} \right) $$
+
+$$ H(p,q) = -\sum_{i} p_i \log p_i -\sum_{i} p_i \log \left({q_i} \over {p_i} \right) $$
+
+$$ H(p,q) = H(p) + D_{KL}(p,q) $$
