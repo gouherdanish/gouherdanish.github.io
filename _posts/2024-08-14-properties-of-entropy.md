@@ -175,9 +175,3 @@ $$ \Rightarrow H(X,Y) \leq H(X) + H(Y) $$
 
 Joint Entropy for dependent events is less than the sum of individual entropies. 
 Intuitively, this means that knowing one variable reduces the uncertainty about the other
-
----
-### Implementation
-For full implementation, refer following repository
-
-Github - [Stats Concepts](https://github.com/gouherdanish/stats_concepts/git)
