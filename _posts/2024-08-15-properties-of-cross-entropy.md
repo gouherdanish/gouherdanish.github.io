@@ -107,7 +107,7 @@ Taking second-order partial derivative wrt each probability,
 
 $$ \frac {\partial^2 H}{\partial {q_i}^2} = \frac {\partial}{\partial {q_i}} \left(-{p_i \over q_i} \right) $$
 
-$$ \Rightarrow \frac {\partial^2 H}{\partial {q_i}^2} = \frac {p_i}{q_i}^2 $$
+$$ \Rightarrow \frac {\partial^2 H}{\partial {q_i}^2} = \frac {p_i}{q_i^2} $$
 
 Since, $p_i, q_i > 0$ (probability is always positive)
 

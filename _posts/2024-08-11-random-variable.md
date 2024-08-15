@@ -57,7 +57,7 @@ $$ p(X=2) = p(HHT or HTH or THH) = 3/8 $$
 $$ p(X=3) = p(HHH) = 1/8 $$
 
 ---
-### OOPS Implementation
+### Implementation
 ```
 from random_event import RandomEvent
 from random_variable import RandomVariable

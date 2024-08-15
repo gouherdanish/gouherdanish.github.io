@@ -89,7 +89,7 @@ def information(prob: float):
 
 ---
 
-### OOPS Implementation
+### Implementation
 ```
 from random_event import RandomEvent
 
