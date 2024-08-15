@@ -163,7 +163,7 @@ $$ \Rightarrow H(X,Y) = H(X) + H(Y) $$
 
 From chain rule of probability,
 
-$$ P(A and B) = P(A) \times P(B|A) = P(B) \times P(A|B) $$
+$$ P(A \cap B) = P(A) \times P(B|A) = P(B) \times P(A|B) $$
 
 If X and Y are dependent random variables, then joint entropy can be written as
 

@@ -21,21 +21,23 @@ $$ H(p,q) = - \sum_{i=1}^n p(x_i) \log q(x_i) $$
 
 ---
 ### Properties
-1. Cross entropy is always non-negative
+#### 1. Cross entropy is always non-negative
 
 **Proof**
 
-$$ \Rightarrow H(p,q) = -\sum_{i} p(x_i) \log \left(q( x_i) \right) >= 0 $$ Since $0 <= p(x), q(x) <= 1 $
+$$ \Rightarrow H(p,q) = -\sum_{i} p(x_i) \log \left(q( x_i) \right) >= 0 $$ 
+
+Since $0 <= p(x), q(x) <= 1 $
 
 ---
-2. Cross entropy is asymmetric
+#### 2. Cross entropy is asymmetric
 
 **Proof**
 
 $$ H(p,q) \ne H(q,p) $$ This follows from the definition
 
 ---
-3. Cross entropy is minimized when predicted distribution is exactly the same as actual distribution
+#### 3. Cross entropy is minimized when predicted distribution is exactly the same as actual distribution
 
 **Proof** :
 
@@ -55,15 +57,15 @@ $$ L = - \sum_{i=1}^n p(x_i) \log q( x_i) + \lambda \left( \sum_{i=1}^n q(x_i) -
 
 Taking first order partial derivative,
 
-$$ \frac {\partial L}{\partial {q_i}} = \frac {\partial }{\partial {q_i}} \left({ -p_i \log q_i} \rigLt) + \frac {\partial }{\partial {q_i}}  \lambda q_i $$
+$$ \frac {\partial L}{\partial {q_i}} = \frac {\partial }{\partial {q_i}} \left({ -p_i \log q_i} \right) + \frac {\partial }{\partial {q_i}}  \lambda q_i $$
 
-$$ \Rightarrow \frac {\partial L}{\partial {q_i}} = -p_i{1 \over q_i} + \lambda (1) $$
+$$ \Rightarrow \frac {\partial L}{\partial {q_i}} = -p_i({1 \over q_i}) + \lambda (1) $$
 
 For minimum cross entropy,
 
 $$ \frac{\partial L}{\partial q_i} = 0 $$
 
-$$ \Rightarrow -p_i{1 \over q_i} + \lambda = 0 $$
+$$ \Rightarrow -({p_i \over q_i}) + \lambda = 0 $$
 
 $$ p_i = \lambda q_i $$
 
@@ -79,11 +81,29 @@ $$ \Rightarrow \lambda (1) = 1 $$
 
 $$ \Rightarrow \lambda = 1 $$
 
-This means,
+$$ \Rightarrow p_i = q_i $$
 
-$$ p_i = q_i $$
+This means, Cross entropy is minimized when $p(x_i) = q(x_i)$
 
+$$ H(p,q)_{min} = H(p,p) = H(p) $$
 
+---
+
+#### 4. Cross Entropy is a convex function
+
+$$ H(p,q) = -\sum_{i} p \log q $$
+
+Taking first order Partial Derivative of $H(p,q)$,
+
+$$ \Rightarrow \frac {\partial H}{\partial {q_i}} = -({p_i \over q_i}) $$
+
+Taking second-order partial derivative wrt each probability,
+
+$$ \frac {\partial^2 H}{\partial {q_i}^2} = \frac {\partial}{\partial {q_i}} -({p_i \over q_i}) $$
+
+$$ \Rightarrow \frac {\partial^2 H}{\partial {q_i}^2} = \frac {p_i}{q_i}^2 $$
+
+$$ \Rightarrow \frac {\partial^2 H}{\partial {q_i}^2} > 0 $$ Since, $p_i > 0$ (probability is always positive)
 
 
 
