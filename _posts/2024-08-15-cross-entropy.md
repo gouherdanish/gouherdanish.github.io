@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cross Entropy"
+title: "Cross Entropy - Measuring randomness induced while estimation"
 date: 2024-08-15
 tags: ["Information Theory"]
 ---
