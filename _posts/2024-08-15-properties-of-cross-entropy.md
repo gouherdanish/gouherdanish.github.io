@@ -67,9 +67,7 @@ $$ \Rightarrow \sum_{i} \lambda q_i = 1 $$
 
 $$ \Rightarrow \lambda \sum_{i} q_i = 1 $$
 
-Since $ \sum_{i} p_i = 1 $
-
-$$ \Rightarrow \lambda (1) = 1 $$ 
+$$ \Rightarrow \lambda (1) = 1 \; Since \sum q_i = 1 $$ 
 
 $$ \Rightarrow \lambda = 1 $$
 
