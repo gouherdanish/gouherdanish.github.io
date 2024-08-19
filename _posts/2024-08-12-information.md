@@ -33,15 +33,29 @@ $$ I(x) = -log(p(x)) $$
 ---
 
 ### Properties
-- **Non-Negativity** - Information content is always positive
+- Information content is always positive
+
+**Proof:**
 
 $$ 0 <= p(x) <= 1 $$
 
-$$ log(p(x)) <= 0 $$
+$$ \Rightarrow log(p(x)) <= 0 $$
 
-$$ -log(p(x)) >= 0 $$
+$$ \Rightarrow -log(p(x)) >= 0 $$
 
-$$ I(x) >= 0 $$
+$$ \Rightarrow I(x) >= 0 $$
+
+- Information of independent events add up
+
+**Proof:**
+
+From probability theory, we know that,
+
+$$ P(A \;and\; B) = P(A) \times P(B) $$
+
+$$ \Rightarrow -\log(P(A \;and\; B)) = -\log(P(A) \times P(B)) $$
+
+$$ \Rightarrow I(A \;and\; B) = I(A) + I(B) $$
 
 ---
 
