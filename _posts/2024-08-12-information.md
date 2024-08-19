@@ -38,6 +38,8 @@ $$ I(x) = -log(p(x)) $$
 
 **Proof:**
 
+From probability theory, we know for probability of an event,
+
 $$ 0 <= p(x) <= 1 $$
 
 $$ \Rightarrow log(p(x)) <= 0 $$
@@ -50,11 +52,13 @@ $$ \Rightarrow I(x) >= 0 $$
 
 **Proof:**
 
-From probability theory, we know that,
+From probability theory, we know that for independent events,
 
 $$ P(A \;and\; B) = P(A) \times P(B) $$
 
 $$ \Rightarrow -\log(P(A \;and\; B)) = -\log(P(A) \times P(B)) $$
+
+$$ \Rightarrow -\log(P(A \;and\; B)) = -\log(P(A)) -  \log(P(B)) $$
 
 $$ \Rightarrow I(A \;and\; B) = I(A) + I(B) $$
 
