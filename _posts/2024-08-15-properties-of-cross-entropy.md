@@ -120,19 +120,17 @@ Cross entropy is given by,
 
 $$ H(p,q) = -\sum_{i} p_i \log q_i $$
 
-$$ H(p,q) = -\sum_{i} p_i \log \left( p_i {q_i} \over {p_i} \right) $$
+$$ \Rightarrow H(p,q) = -\sum_{i} p_i \log \left( p_i {q_i} \over {p_i} \right) $$
 
-$$ H(p,q) = -\sum_{i} p_i \log p_i -\sum_{i} p_i \log \left({q_i} \over {p_i} \right) $$
+$$ \Rightarrow H(p,q) = -\sum_{i} p_i \log p_i -\sum_{i} p_i \log \left({q_i} \over {p_i} \right) $$
 
-$$ H(p,q) = H(p) + D_{KL}(p,q) $$
+$$ \Rightarrow H(p,q) = H(p) + D_{KL}(p,q) $$
 
 where,
 
 $$D_{KL}(p,q) = \sum_{i} p_i \log \left({p_i} \over {q_i} \right) $$
 
-where $D_{KL}(p,q)$ is known as the Kullback-Liebler Divergence (KL Divergence)
-
-This is also known as Relative Entropy which can be written as,
+The term $D_{KL}(p,q)$ is known as Relative Entropy or Kullback-Liebler Divergence (KL Divergence) which can be written as,
 
 $$ D_{KL}(p,q) = H(p,q) - H(p) $$
 
@@ -147,7 +145,7 @@ From Property 3, cross entropy is at least equal to the entropy of the actual di
 
 $$ H(p,q) \geq H(p) $$
 
-$$ H(p,q) - H(p) \geq 0 $$
+$$ \Rightarrow H(p,q) - H(p) \geq 0 $$
 
-$$ D_{KL}(p,q) \geq 0 $$
+$$ \Rightarrow D_{KL}(p,q) \geq 0 $$
 
