@@ -33,7 +33,8 @@ $$ I(x) = -log(p(x)) $$
 ---
 
 ### Properties
-- Information content is always positive
+
+#### Information content is always positive
 
 **Proof:**
 
@@ -45,7 +46,7 @@ $$ \Rightarrow -log(p(x)) >= 0 $$
 
 $$ \Rightarrow I(x) >= 0 $$
 
-- Information of independent events add up
+#### Information of independent events add up
 
 **Proof:**
 
