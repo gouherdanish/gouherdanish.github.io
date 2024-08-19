@@ -99,7 +99,7 @@ $$ H(p,q) = -\sum_{i} p_i \log q_i $$
 
 Taking first order Partial Derivative of $H(p,q)$,
 
-$$ \Rightarrow \frac {\partial H}{\partial {q_i}} = -({p_i \over q_i}) $$
+$$ \Rightarrow \frac {\partial H}{\partial {q_i}} = -{p_i \over q_i} $$
 
 Taking second-order partial derivative wrt each probability,
 
