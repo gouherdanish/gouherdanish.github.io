@@ -29,7 +29,7 @@ $$ H(p,q) = - \sum_{i=1}^n p(x_i) \log q(x_i) $$
 - Minimum value of Cross entropy is equal to the entropy of actual distribution
 - Cross Entropy is a convex function
 
-**Note: ** 
+**Note:** 
 For mathematical proofs of these properties, refer [this](https://gouherdanish.github.io/2024/08/15/properties-of-cross-entropy)
 
 ---
