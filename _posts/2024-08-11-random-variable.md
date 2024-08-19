@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Random Variable: Quantifying Random Events"
+title: "Random Variable: How to quantify random events"
 date: 2024-08-11
 tags: ["Probability"]
 ---
@@ -11,14 +11,25 @@ Random Variable is a very important concept in Probability and forms the base in
 
 ### Intuition
 - Random variable assings a numerical value to the outcome of a random experiment
-- The random variable always takes on Real values
+- The random variable always takes on real values
 
 ### Types 
 
-#### Discrete Random Variable
+#### 1. Discrete Random Variable
 
+- It can take distinct and countable values
+- E.g. Tossing a fair coin three times, if `X` is random variable which represents the number of heads obtained, then it can take integer values 0, 1, 2 or 3 corresponding to getting no heads, one heads, two heads or three heads respectively
+- In this case, the probability distribution is a **Probability Mass Function** given by,
 
-#### Continuous Random Variable
+$$ P(X=0) = {1 \over 8} \; P(X=1) = {3 \over 8} \; P(X=2) = {3 \over 8} \; P(X=3) = {1 \over 8} $$
+
+#### 2. Continuous Random Variable
+
+- It can take any value within a continuous range
+- E.g. Time to complete a task, if X represents the time taken in minutes, then it can take any positive real values
+- In this case, the probability distribution is a **Probability Density Function** which (assuming normal distribution) can be given by
+
+$$ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) $$
 
 ### Hand Calculation
 
