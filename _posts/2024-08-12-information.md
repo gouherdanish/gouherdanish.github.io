@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Information : Measuring surprise level of an event"
+title: "Information: How to measure surprise level of an event"
 date: 2024-08-12
 tags: ["Information Theory"]
 ---
