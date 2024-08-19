@@ -34,7 +34,7 @@ $$ I(x) = -log(p(x)) $$
 
 ### Properties
 
-#### Information content is always positive
+#### 1. Information content is always positive
 
 **Proof:**
 
@@ -48,7 +48,7 @@ $$ \Rightarrow -log(p(x)) >= 0 $$
 
 $$ \Rightarrow I(x) >= 0 $$
 
-#### Information of independent events add up
+#### 2. Information of independent events add up
 
 **Proof:**
 
@@ -69,7 +69,8 @@ Consider an experiment where a fair coin is flipped 3 times. Here are following 
 
 $$ Sample Space = \{HHH,HHT,HTH,THH,HTT,THT,TTH,TTT\} $$
 
-Let $X$ denote a random variable which represents the number of heads in 3 consecutive coin flips
+Let `X` denote a random variable which represents the number of heads in 3 consecutive coin flips 
+which can take integer values 0, 1, 2 and 3 only. So,
 
 $$ X = \{0,1,2,3\} $$
 
