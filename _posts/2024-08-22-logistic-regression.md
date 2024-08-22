@@ -19,11 +19,12 @@ That will make things a lot easier
 - One Predictor Variable
 
 ---
-
 ### The Sigmoid Function
-
-#### Formula
 
 $$ \sigmoid(x) = \frac {1}{1+e^{-x}} $$
 
 $where x \in {\mathbb{R}} \; \sigmoid(x) \in (0,1)$
+
+Since, its output range is limited to (0,1), the Sigmoid function is very much suitable to represent probabilities
+
+---
