@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Properties of Cross Entropy"
-date: 2024-08-15
+date: 2024-08-16
 tags: ["Information Theory"]
 ---
 Entropy has several desirable properties. Some of these properties are presented below along with their mathematical proofs.
