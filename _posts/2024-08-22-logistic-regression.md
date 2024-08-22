@@ -22,28 +22,61 @@ That will make things a lot easier
 ---
 ### Linear Model
 
-$$ z =  $$
+Each example has just one predictor variable (x) which is fed into a linear model characteized by weight w and bias b
 
+$$ z = w x + b $$
+
+In this case, $ w,b \n {\mathbb{R}} $ i.e. these are scalar values
+
+So, z will also be scalar $ z\n {\mathbb{R}} $
+
+But, logistic regression requires the output as probabilities in the range (0,1)
+
+---
 ### Sigmoid Function
 
-$$ \sigma(x) = \frac {1}{1+e^{-x}} $$
-
-$where x \in {\mathbb{R}} \; \sigma(x) \in (0,1)$
-
+When binary classification is involved, we can use Sigmoid function to limit the prediction in the range (0,1). 
 Since, its output range is limited to (0,1), the Sigmoid function is very much suitable to represent probabilities
+
+Sigmoid function can be given by,
+
+$$ \hat{y} = \sigma(z) = \frac {1}{1+e^{-z}} $$
+
+where, 
+
+$$ z \in {\mathbb{R}} $$
+
+$$ \sigma(z) \in (0,1) $$
 
 ---
 ### Cross Entropy Loss
 
-We know, Cross entropy $H(p,q)$ for two probability distributions p(X) and q(X) for a given random variable X can be defined as,
+- Cross entropy measures how well one probability distribution approximates another and is often used to quantify the difference between predicted and true distributions in machine learning tasks.
 
-$$ H(p,q) = - \sum_{i=1}^n p(x_i) \log q(x_i) $$
+- Specifically, in the context of machine learning, 
+    - $y$ represents the actual probability distribution 
+    - $\hat{y}$ represents the predicted probability distribution
 
-- Specifically, in terms of machine learning,
-    - p(X) represents the true probability distribution of X \implies y
-    - q(X) represents the predicted probability distribution of X by the model \Rightarrow \hat{y}
+In this context, cross entropy can be defined as,
 
-- Intuitively, Cross entropy measures how well one probability distribution approximates another and is often used to quantify the difference between predicted and true distributions in machine learning tasks. So, we can write,
+$$ H(y,\hat{y}) = - \sum_{i=1}^n y_i \log \hat{y_i} $$
 
-$$ H(y,\hat{y}) = - \sum_{i=1}^n y \log \hat{y} $$
+where, `n` represents the number of output classes 
 
+For Binary Classification, $n = 2$
+
+$$ H(y,\hat{y}) = - y_1 \log \hat{y_1} - y_2 \log \hat{y_2} $$
+
+Also, since probabilities sum to 1,
+
+$$ y_1 + y_2 = 1 $$
+
+$$ \hat{y_1} + \hat{y_2} = 1 $$
+
+we can write,
+
+$$ H(y,\hat{y}) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+
+This is Binary Cross Entropy Loss
+
+---
