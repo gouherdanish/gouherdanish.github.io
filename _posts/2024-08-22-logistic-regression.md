@@ -4,6 +4,7 @@ title: "Logistic Regression: Concepts Deep Dive and Implementation from Scratch"
 date: 2024-08-22
 tags: ["Machine Learning"]
 ---
+
 Logistic Regression is a powerful yet simple and explainable ML algorithm. Understanding its intricacies is vital to any ML practitioner.
 
 Here we implement Logistic regression from scratch, we take a very simple example but will go very in-depth, presenting with theory and hand calculation at each step. 
@@ -45,3 +46,4 @@ $$ H(p,q) = - \sum_{i=1}^n p(x_i) \log q(x_i) $$
 - Intuitively, Cross entropy measures how well one probability distribution approximates another and is often used to quantify the difference between predicted and true distributions in machine learning tasks. So, we can write,
 
 $$ H(y,\hat{y}) = - \sum_{i=1}^n y \log \hat{y} $$
+
