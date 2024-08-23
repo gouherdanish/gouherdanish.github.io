@@ -53,15 +53,13 @@ $$ \sigma(z) \in (0,1) $$
 
 - Cross entropy measures how well one probability distribution approximates another and is often used to quantify the difference between predicted and true distributions in machine learning tasks.
 
-- Specifically, in the context of machine learning, 
-    - $y$ represents the actual probability distribution 
-    - $\hat{y}$ represents the predicted probability distribution
-
-In this context, cross entropy for one example can be defined as,
+- Cross entropy for one example can be defined as,
 
 $$ H(y,\hat{y}) = - \sum_{i=1}^n y_i \log \hat{y_i} $$
 
-where, 
+Here,
+- $y$ denotes actual ground truth binary label which is either 0 or 1 
+- $\hat{y}$ denotes predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
 - `n` represents the number of output classes 
 - `i` represents $i^{th}$ class
 
@@ -84,11 +82,6 @@ Average Cross Entropy loss over all `m` examples can be given by,
 $$ L = \sum_{i=1}^m \ell_i = \sum_{i=1}^m H \left( y,\hat{y} \right) $$ 
 
 $$ \Rightarrow L = \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log (1-\hat{y_i})] $$
-
-Here,
-- $y$ denotes actual ground truth binary label which is either 0 or 1 
-
-- \hat{y} denotes predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
 
 ---
 
@@ -120,7 +113,7 @@ $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}
 
 For proof, refer []()
 
-#### 3. Calculate $ \frac{\partial \z_i}{\partial \hat{w_i}} $
+#### 3. Calculate $ \frac{\partial z_i}{\partial w_i} $
 
 $$ z_i = w_ix_i + b_i $$
 
@@ -136,6 +129,6 @@ $$ \frac{\partial \ell_i}{\partial w_i} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{
 
 $$ \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
 
-Summing over all the m examples,
+Summing over all the `m` examples,
 
-$$ L = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
+$$ L = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
