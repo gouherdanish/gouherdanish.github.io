@@ -94,23 +94,27 @@ Here,
 
 ### Gradient of Loss Function
 
-From above, we have derived the Binary cross entropy loss for {i^{th}} example,
+From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
-$$ \ell_i = - \left[ y_i \log(\hat{y_i}) + (1 - y_i) \log(1 - \hat{y_i}) \right] $$
+$$ \ell_i = - \left y_i \log(\hat{y_i}) - (1 - y_i) \log(1 - \hat{y_i}) \right $$
 
 #### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
 $$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
 
-$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{-y_i(1-\hat{y_i})+\hat{y_i}(1-y_i)}{\hat{y_i}(1-\hat{y_i})} $$
+$$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{-y_i(1-\hat{y_i})+\hat{y_i}(1-y_i)}{\hat{y_i}(1-\hat{y_i})} $$
 
-$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} $$
+$$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} $$
 
 #### 2. Calculate $ \frac{\partial \y_i}{\partial \hat{z_i}} $
 
 $$ \hat{y_i} = \sigma(z_i) = \frac {1}{1+e^{-z_i}} $$
 
-$$ \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{-1}({1+e^{-z_i}}^2)\right) \left({-e^{-z_i}} \right) $$
+
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{-1}{1+e^{-z_i}} \right) \left( \frac{e^{-z_i}}{1+e^{-z_i}} \right)
+
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
 
 For proof, refer []()
 
@@ -118,12 +122,11 @@ For proof, refer []()
 
 $$ z_i = w_ix_i + b_i $$
 
-$$ \frac{\partial \z_i}{\partial \hat{w_i}} = x_i $$
-
+$$ \frac{\partial z_i}{\partial w_i} = x_i $$
 
 Using product rule, the first derivative of loss function w.r.t to model params can be given by,
 
-$$ \frac{\partial \ell_i}{\partial \hat{w_i}} = \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial \hat{z_i}} \times \frac{\partial \z_i}{\partial \hat{w_i}} $$
+$$ \frac{\partial \ell_i}{\partial w_i} = \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial z_i} \times \frac{\partial z_i}{\partial w_i} $$
 
 Substituting,
 
