@@ -57,7 +57,7 @@ $$ \sigma(z) \in (0,1) $$
     - $y$ represents the actual probability distribution 
     - $\hat{y}$ represents the predicted probability distribution
 
-In this context, cross entropy can be defined as,
+In this context, cross entropy for one example can be defined as,
 
 $$ H(y,\hat{y}) = - \sum_{i=1}^n y_i \log \hat{y_i} $$
 
@@ -75,27 +75,49 @@ $$ y_1 + y_2 = 1 \implies y_2 = 1 - y_1 $$
 
 $$ \hat{y_1} + \hat{y_2} = 1 \implies \hat{y_2} = 1 - \hat{y_1}$$
 
-we can write,
+we can write the Binary Cross Entropy loss for one example as,
 
-$$ H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+$$ l = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
-This is Binary Cross Entropy loss for one example.
+Average Cross Entropy loss over all `m` examples can be given by,
 
-Extending for all `m` examples and summing up, we get Binary Cross Entropy Loss,
+$$ L = \sum_{j=1}^m l_j = \sum_{j=1}^m H \left( y,\hat{y} \right) $$ 
 
-$$ H \left( y,\hat{y} \right) = \sum_{j=1}^m [- y^j \log \hat{y^j} - (1-y^j) \log (1-\hat{y^j})] $$
+$$ \Rightarrow L = \sum_{j=1}^m [- y_j \log \hat{y_j} - (1-y_j) \log (1-\hat{y_j})] $$
 
+Here,
+- y - actual ground truth binary label which is either 0 or 1 
+
+$$ y \in {0,1} \implies $$ either 0 or \ 1
+
+- \hat{y} - predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
+
+$$ \hat{y} = \sigma(z) = \frac {1}{1+e^{-z}} $$
+
+$$ \hat{y} \in [0,1) \; real values $$
 ---
 
 ### Gradient of Loss Function
 
-From above, we have derived the Binary cross entropy loss function,
+From above, we have derived the Binary cross entropy loss for one example,
 
-$$ H \left( y,\hat{y} \right) = \sum_{j=1}^m [- y^j \log \hat{y^j} - (1-y^j) \log (1-\hat{y^j})] $$
+$$ \ell_i = - \left[ y_i \log(\hat{y_i}) + (1 - y_i) \log(1 - \hat{y_i}) \right] $$
 
-Here,
-- y - actual ground truth binary label which is either 0 or 1 
-    - $ y \in {0,1} $
-- \hat{y} - predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
-    - $ \hat{y} \in [0,1) $
+Taking first derivative w.r.t to model params,
+
+$$ \frac{\partial \ell_i}{\partial \hat{w_i}} = $$ \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial \hat{z_i}} \times \frac{\partial \z_i}{\partial \hat{w_i}}
+
+#### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
+
+$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
+
+#### 2. Calculate $ \frac{\partial \y_i}{\partial \hat{z_i}} $
+
+$$ \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
+
+#### 3. Calculate $ \frac{\partial \z_i}{\partial \hat{w_i}} $
+
+
+
+
 
