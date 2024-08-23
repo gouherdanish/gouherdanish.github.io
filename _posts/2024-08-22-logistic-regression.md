@@ -96,7 +96,7 @@ Here,
 
 From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
-$$ \ell_i = - \left y_i \log(\hat{y_i}) - (1 - y_i) \log(1 - \hat{y_i}) \right $$
+$$ \ell_i = - \left( y_i \log(\hat{y_i}) - (1 - y_i) \log(1 - \hat{y_i}) \right) $$
 
 #### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
@@ -106,13 +106,13 @@ $$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{-y_i(1-\hat{y_
 
 $$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} $$
 
-#### 2. Calculate $ \frac{\partial \y_i}{\partial \hat{z_i}} $
+#### 2. Calculate $ \frac{\partial \hat{y_i}}{\partial z_i} $
 
 $$ \hat{y_i} = \sigma(z_i) = \frac {1}{1+e^{-z_i}} $$
 
-$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{-1}({1+e^{-z_i}}^2)\right) \left({-e^{-z_i}} \right) $$
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{-1}{(1+e^{-z_i})^2}\right) \left({-e^{-z_i}} \right) $$
 
-$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{-1}{1+e^{-z_i}} \right) \left( \frac{e^{-z_i}}{1+e^{-z_i}} \right)
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{-1}{1+e^{-z_i}} \right) \left( \frac{e^{-z_i}}{1+e^{-z_i}} \right) $$
 
 $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
 
