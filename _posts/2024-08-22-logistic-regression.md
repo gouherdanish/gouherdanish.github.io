@@ -86,3 +86,16 @@ Extending for all `m` examples and summing up, we get Binary Cross Entropy Loss,
 $$ H \left( y,\hat{y} \right) = \sum_{j=1}^m [- y^j \log \hat{y^j} - (1-y^j) \log (1-\hat{y^j})] $$
 
 ---
+
+### Gradient of Loss Function
+
+From above, we have derived the Binary cross entropy loss function,
+
+$$ H \left( y,\hat{y} \right) = \sum_{j=1}^m [- y^j \log \hat{y^j} - (1-y^j) \log (1-\hat{y^j})] $$
+
+Here,
+- y - actual ground truth binary label which is either 0 or 1 
+    - $ y \in {0,1} $
+- \hat{y} - predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
+    - $ \hat{y} \in [0,1) $
+
