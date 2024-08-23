@@ -142,7 +142,7 @@ Let's consider an example for a Binary Classification Problem
 
 Let's take some historical data from Gouher's OTT watchlist history
 
-```
+$$
 \begin{tabular}{|c|c|c|c|}
 \hline
 name & rating & released_date & watched \\
@@ -156,7 +156,7 @@ indiana jones & 8.1 & 1990 & 0 \\
 Tiger 3 & 4.5 & 2023 & 0 \\
 \hline
 \end{tabular}
-```
+$$
 
 Let's see how we can formulate this problem from the ground up
 
