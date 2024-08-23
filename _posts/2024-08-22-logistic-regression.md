@@ -77,47 +77,57 @@ $$ \hat{y_1} + \hat{y_2} = 1 \implies \hat{y_2} = 1 - \hat{y_1}$$
 
 we can write the Binary Cross Entropy loss for one example as,
 
-$$ l = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+$$ \ell = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 Average Cross Entropy loss over all `m` examples can be given by,
 
-$$ L = \sum_{j=1}^m l_j = \sum_{j=1}^m H \left( y,\hat{y} \right) $$ 
+$$ L = \sum_{i=1}^m \ell_i = \sum_{i=1}^m H \left( y,\hat{y} \right) $$ 
 
-$$ \Rightarrow L = \sum_{j=1}^m [- y_j \log \hat{y_j} - (1-y_j) \log (1-\hat{y_j})] $$
+$$ \Rightarrow L = \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log (1-\hat{y_i})] $$
 
 Here,
-- y - actual ground truth binary label which is either 0 or 1 
+- $y$ denotes actual ground truth binary label which is either 0 or 1 
 
-$$ y \in {0,1} \implies $$ either 0 or \ 1
+- \hat{y} denotes predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
 
-- \hat{y} - predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
-
-$$ \hat{y} = \sigma(z) = \frac {1}{1+e^{-z}} $$
-
-$$ \hat{y} \in [0,1) \; real values $$
 ---
 
 ### Gradient of Loss Function
 
-From above, we have derived the Binary cross entropy loss for one example,
+From above, we have derived the Binary cross entropy loss for {i^{th}} example,
 
 $$ \ell_i = - \left[ y_i \log(\hat{y_i}) + (1 - y_i) \log(1 - \hat{y_i}) \right] $$
-
-Taking first derivative w.r.t to model params,
-
-$$ \frac{\partial \ell_i}{\partial \hat{w_i}} = $$ \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial \hat{z_i}} \times \frac{\partial \z_i}{\partial \hat{w_i}}
 
 #### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
 $$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
 
+$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}
+
 #### 2. Calculate $ \frac{\partial \y_i}{\partial \hat{z_i}} $
+
+$$ \hat{y_i} = \sigma(z_i) = \frac {1}{1+e^{-z_i}} $$
 
 $$ \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
 
+For proof, refer []()
+
 #### 3. Calculate $ \frac{\partial \z_i}{\partial \hat{w_i}} $
 
+$$ z_i = w_ix_i + b_i $$
 
+$$ \frac{\partial \z_i}{\partial \hat{w_i}} = x_i $$
+
+
+Using product rule, the first derivative of loss function w.r.t to model params can be given by,
+
+$$ \frac{\partial \ell_i}{\partial \hat{w_i}} = \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial \hat{z_i}} \times \frac{\partial \z_i}{\partial \hat{w_i}} $$
+
+Substituting,
+
+$$ \frac{\partial \ell_i}{\partial w_i} =  $$
+
+$$ \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
 
 
 
