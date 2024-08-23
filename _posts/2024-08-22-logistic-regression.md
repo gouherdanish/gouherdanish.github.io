@@ -61,7 +61,9 @@ In this context, cross entropy can be defined as,
 
 $$ H(y,\hat{y}) = - \sum_{i=1}^n y_i \log \hat{y_i} $$
 
-where, `n` represents the number of output classes 
+where, 
+- `n` represents the number of output classes 
+- `i` represents $i^{th}$ class
 
 For Binary Classification, $n = 2$
 
@@ -77,6 +79,10 @@ we can write,
 
 $$ H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
-This is Binary Cross Entropy Loss
+This is Binary Cross Entropy loss for one example.
+
+Extending for all `m` examples and summing up, we get Binary Cross Entropy Loss,
+
+$$ H \left( y,\hat{y} \right) = \sum_{j=1}^m [- y^j \log \hat{y^j} - (1-y^j) \log (1-\hat{y^j})] $$
 
 ---
