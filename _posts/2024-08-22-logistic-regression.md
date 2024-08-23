@@ -22,13 +22,13 @@ That will make things a lot easier
 ---
 ### Linear Model
 
-Each example has just one predictor variable (x) which is fed into a linear model characteized by weight w and bias b
+Each example has just one predictor variable (`x`) which is fed into a linear model characteized by weight `w` and bias `b`
 
 $$ z = w x + b $$
 
-In this case, $ w,b \n {\mathbb{R}} $ i.e. these are scalar values
+In this case, $ w,b \in {\mathbb{R}} $ i.e. these are scalar values
 
-So, z will also be scalar $ z\n {\mathbb{R}} $
+So, z will also be scalar $ z \in {\mathbb{R}} $
 
 But, logistic regression requires the output as probabilities in the range (0,1)
 
@@ -75,7 +75,7 @@ $$ \hat{y_1} + \hat{y_2} = 1 $$
 
 we can write,
 
-$$ H(y,\hat{y}) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+$$ H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 This is Binary Cross Entropy Loss
 
