@@ -71,9 +71,9 @@ $$ H(y,\hat{y}) = - y_1 \log \hat{y_1} - y_2 \log \hat{y_2} $$
 
 Also, since probabilities sum to 1,
 
-$$ y_1 + y_2 = 1 $$
+$$ y_1 + y_2 = 1 \; \implies \; y_2 = 1 - y_1 $$
 
-$$ \hat{y_1} + \hat{y_2} = 1 $$
+$$ \hat{y_1} + \hat{y_2} = 1 \; \implies \; hat{y_2} = 1 - hat{y_1}$$
 
 we can write,
 
