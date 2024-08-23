@@ -20,7 +20,9 @@ That will make things a lot easier
 - One Predictor Variable
 
 ---
-### Linear Model
+### Concepts
+
+#### Linear Model
 
 Each example has just one predictor variable (`x`) which is fed into a linear model characteized by weight `w` and bias `b`
 
@@ -33,7 +35,8 @@ So, z will also be scalar $ z \in {\mathbb{R}} $
 But, logistic regression requires the output as probabilities in the range (0,1)
 
 ---
-### Sigmoid Function
+
+#### Sigmoid Function
 
 When binary classification is involved, we can use Sigmoid function to limit the prediction in the range (0,1). 
 Since, its output range is limited to (0,1), the Sigmoid function is very much suitable to represent probabilities
@@ -49,7 +52,7 @@ $$ z \in {\mathbb{R}} $$
 $$ \sigma(z) \in (0,1) $$
 
 ---
-### Cross Entropy Loss
+#### Cross Entropy Loss
 
 - Cross entropy measures how well one probability distribution approximates another and is often used to quantify the difference between predicted and true distributions in machine learning tasks.
 
@@ -85,7 +88,7 @@ $$ \Rightarrow L = \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log (1-\hat{y_i
 
 ---
 
-### Gradient of Loss Function
+#### Gradient of Loss Function
 
 From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
@@ -132,3 +135,26 @@ $$ \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
 Summing over all the `m` examples,
 
 $$ L = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
+
+### Hand Calculations
+
+Let's consider an example for a Binary Classification Problem
+
+"_Gouher browses movies through OTT and his decision to watch a particular movie is based on its rating and release date._"
+
+Let's take some historical data from Gouher's OTT watchlist history
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+name & rating & released_date & watched \\
+\hline
+kalki & 6.2 & 2024 & 1 \\
+\hline
+tumbbad & 7.8 & 2018 & 1 \\\\
+\hline
+indiana jones & 8.1 & 1990 & 0 \\
+\hline
+Tiger 3 & 4.5 & 2023 & 0 \\
+\hline
+\end{tabular}
+
