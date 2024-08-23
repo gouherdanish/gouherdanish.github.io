@@ -102,7 +102,9 @@ $$ \ell_i = - \left[ y_i \log(\hat{y_i}) + (1 - y_i) \log(1 - \hat{y_i}) \right]
 
 $$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
 
-$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}
+$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{-y_i(1-\hat{y_i})+\hat{y_i}(1-y_i)}{\hat{y_i}(1-\hat{y_i})} $$
+
+$$ \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} $$
 
 #### 2. Calculate $ \frac{\partial \y_i}{\partial \hat{z_i}} $
 
@@ -125,9 +127,10 @@ $$ \frac{\partial \ell_i}{\partial \hat{w_i}} = \frac{\partial \ell_i}{\partial 
 
 Substituting,
 
-$$ \frac{\partial \ell_i}{\partial w_i} =  $$
+$$ \frac{\partial \ell_i}{\partial w_i} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} \hat{y_i}(1 - \hat{y_i}) x_i $$
 
 $$ \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
 
+Summing over all the m examples,
 
-
+$$ L = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
