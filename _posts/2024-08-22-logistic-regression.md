@@ -98,6 +98,8 @@ From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
 $$ \ell_i = - \left( y_i \log(\hat{y_i}) - (1 - y_i) \log(1 - \hat{y_i}) \right) $$
 
+We can calculate required partial derivatives as follows,
+
 #### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
 $$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
