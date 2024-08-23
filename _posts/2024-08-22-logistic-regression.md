@@ -17,18 +17,18 @@ That will make things a lot easier
 ### Assumptions
 
 - Binary Classification
-- One Predictor Variable
+- Two Predictor Variables
 
 ---
 ### Concepts
 
 #### Linear Model
 
-Each example has just one predictor variable (`x`) which is fed into a linear model characteized by weight `w` and bias `b`
+Each example is fed into a linear model characteized by weight `w` and bias `b`
 
-$$ z = w x + b $$
+$$ z = w_1 x_1 + w_2 x_2 + b $$
 
-In this case, $ w,b \in {\mathbb{R}} $ i.e. these are scalar values
+In this case, $ w_1,w_2,b \in {\mathbb{R}} $ i.e. these are scalar values
 
 So, z will also be scalar $ z \in {\mathbb{R}} $
 
@@ -132,7 +132,7 @@ $$ \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
 
 Summing over all the `m` examples,
 
-$$ L = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
+$$ \frac{\partial L}{\partial w} = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
 
 ### Hand Calculations
 
@@ -142,7 +142,7 @@ Let's consider an example for a Binary Classification Problem
 
 Let's take some historical data from Gouher's OTT watchlist history
 
-| name          | rating | released_date | watched | 
+| movie name    | rating | released date | watched | 
 | ------------- | ------ | ------------- | ------- |
 | kalki         |   6.2  |     2024      |    1    |
 | tumbbad       |   7.8  |     2018      |    1    | 
@@ -151,4 +151,61 @@ Let's take some historical data from Gouher's OTT watchlist history
 
 Let's see how we can formulate this problem from the ground up
 
-#### Step 1 - 
+#### Step 1 - Data Preparation
+
+|   i   | $x_1$ | $x_2$ | $y$ |
+| ----- | ----- | ----- | --- |
+|   1   |  6.2  | 2024  |  1  |
+|   2   |  7.8  | 2018  |  1  |
+|   3   |  8.1  | 1990  |  0  |
+|   4   |  4.5  | 2023  |  0  |
+
+#### Step 2 - Linear Model
+
+if `w` and `b` are weights
+
+$$ z = w_1x_1 + w_2x_2 + b $$
+
+Initially, $ w_1 = w_2 = b = 0 $
+
+$$ \Rightarrow z = 0 $$
+
+#### Step 3 - Sigmoid Function
+
+$$ \hat{y} = \frac{1}{1+e^{-z}} $$
+
+$$ \hat{y} = \frac{1}{2} \since z=0 $$ 
+
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ |
+| ----- | ----- | ----- | --- | --------- |
+|   1   |  6.2  | 2024  |  1  |    0.5    |
+|   2   |  7.8  | 2018  |  1  |    0.5    |
+|   3   |  8.1  | 1990  |  0  |    0.5    |
+|   4   |  4.5  | 2023  |  0  |    0.5    |
+
+
+#### Step 4 - Cross Entropy Loss
+
+$$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+
+For the 1st example, 
+
+$$ \ell_1 = - 1 \log (0.5) - (1-1) \log (1-0.5) $$
+
+$$ \ell_1 = 0.693
+
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\ell_i$ |
+| ----- | ----- | ----- | --- | --------- | -------- |
+|   1   |  6.2  | 2024  |  1  |    0.5    |   0.693  |
+|   2   |  7.8  | 2018  |  1  |    0.5    |   0.693  |
+|   3   |  8.1  | 1990  |  0  |    0.5    |   0.693  |
+|   4   |  4.5  | 2023  |  0  |    0.5    |   0.693  |
+
+Averaging over all $m=4$ examples,
+
+$$ L = \sum_{i=1}^m \ell_i = {0.693*4} / 4 = 0.693 $$
+
+#### Step 5 - Gradient Computation
+
+$$ \frac{\partial L}{\partial w} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
+
