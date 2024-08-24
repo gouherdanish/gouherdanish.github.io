@@ -158,10 +158,10 @@ Let's see how we can formulate this problem from the ground up
 From the problem statement, 
 
 - Features (Predictor Variables)
-    - rating \rightarrow $x_1$
-    - released date \rightarrow $x_2$
+    - rating $\rightarrow x_1$
+    - released date $\rightarrow x_2$
 - Label (Target Variable)
-    - watched \rightarrow $y$
+    - watched $\rightarrow y$
 
 |   i   | $x_1$ | $x_2$ | $y$ |
 | ----- | ----- | ----- | --- |
@@ -177,6 +177,8 @@ if `w` and `b` are weights
 $$ z = w_1x_1 + w_2x_2 + b $$
 
 Initially, $ w_1 = w_2 = b = 0 $
+
+$$ \begin{bmatrix} X \\ Y \end{bmatrix} $$
 
 $$ \Rightarrow z = 0 $$
 
