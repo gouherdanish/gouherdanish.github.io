@@ -178,15 +178,17 @@ $$ z = w_1x_1 + w_2x_2 + b $$
 
 Initially, $ w_1 = w_2 = b = 0 $
 
-$$ \begin{bmatrix} X \\ Y \end{bmatrix} $$
+$$ z = \left( \begin{array}{cc} 6.2 & 2024 \\ 7.8 & 2018 \\ 8.1 & 1990 \\ 4.5 & 2023 \end{array} \right) \left( \begin{array}{cc} 0 \\ 0 \end{array} \right) + \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
 
-$$ \Rightarrow z = 0 $$
+$$ \Rightarrow z = \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
 
 #### Step 3 - Sigmoid Function
 
 $$ \hat{y} = \frac{1}{1+e^{-z}} $$
 
-$$ \Rightarrow  \hat{y} = 0.5 \; since \; z=0 $$ 
+$$ \Rightarrow \hat{y} = 0.5 \; since \; z=0 $$ 
+
+$$ \Rightarrow \hat{y} = \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ |
 | ----- | ----- | ----- | --- | --------- |
@@ -199,6 +201,8 @@ $$ \Rightarrow  \hat{y} = 0.5 \; since \; z=0 $$
 
 $$ residual = \hat{y} - y $$
 
+$$ \Rightarrow \hat{y} = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
+
 |  $i$  | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |
 | ----- | ----- | ----- | --- | --------- | ------------- |
 |   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |
@@ -210,11 +214,9 @@ $$ residual = \hat{y} - y $$
 
 $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
-For the 1st example, 
+$$ \Rightarrow \ell = -\left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
-$$ \ell^{(1)} = - 1 \log (0.5) - (1-1) \log (1-0.5) $$
-
-$$ \ell^{(1)} = 0.693 $$
+$$ \Rightarrow \ell = -\left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right)
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |  $\ell$  |
 | ----- | ----- | ----- | --- | --------- | ------------- | -------- |
