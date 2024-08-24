@@ -92,11 +92,11 @@ $$ \Rightarrow L = \frac{1}{m} \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log
 
 From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
-$$ \ell_i = - \left( y_i \log(\hat{y_i}) - (1 - y_i) \log(1 - \hat{y_i}) \right) $$
+$$ \ell_i = - y_i \log\hat{y_i} - (1 - y_i) \log(1 - \hat{y_i}) $$
 
 We can calculate required partial derivatives as follows,
 
-### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
+#### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
 $$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
 
@@ -104,7 +104,7 @@ $$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{-y_i(1-\hat{y_
 
 $$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} $$
 
-### 2. Calculate $ \frac{\partial \hat{y_i}}{\partial z_i} $
+#### 2. Calculate $ \frac{\partial \hat{y_i}}{\partial z_i} $
 
 $$ \hat{y_i} = \sigma(z_i) = \frac {1}{1+e^{-z_i}} $$
 
@@ -112,9 +112,9 @@ $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \frac{-1}{(1+e^{-z_i})^
 
 $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{1}{1+e^{-z_i}} \right) \left( \frac{e^{-z_i}}{1+e^{-z_i}} \right) $$
 
-$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \frac{1}{m} \hat{y_i}(1 - \hat{y_i}) $$
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
 
-### 3. Calculate $ \frac{\partial z_i}{\partial w_i} $
+#### 3. Calculate $ \frac{\partial z_i}{\partial w_i} $
 
 $$ z_i = w_ix_i + b_i $$
 
@@ -276,3 +276,35 @@ $$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ 0.03625 \end{array} \right)$$
 ---
 
 ## Implementation
+
+```
+m = len(X)
+_bias = 0
+_weights = np.zeros(m)
+
+def linear_model(X):
+    return _bias + np.dot(X,_weights)
+
+def sigmoid(X):
+    return 1/(1 + np.exp(-linear_model(X)))
+
+def predict_proba(X):
+    return sigmoid(X)
+
+def predict(z):
+    y_prob = predict_proba(X)
+    return np.where(y_prob > 0.5,1,0)
+
+def fit(X,y,iterations=100,learning_rate=0.01):
+    for i in range(iterations):
+        # Model predicts
+        y_pred = predict_proba(X)
+        residual = y_pred - y
+        # Compute Gradients
+        dLdb = (1/m) * sum(residual)
+        dLdw = (1/m) * np.dot(residual,X)
+        # Update Model parameters
+        _bias += (-1 * learning_rate * dLdb)
+        _weights += (-1 * learning_rate * dLdw)
+
+```
