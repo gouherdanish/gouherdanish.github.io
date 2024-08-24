@@ -153,6 +153,14 @@ Let's see how we can formulate this problem from the ground up
 
 #### Step 1 - Data Preparation
 
+From the problem statement, 
+
+- Features (Predictor Variables)
+    - rating \rightarrow $x_1$
+    - released date \rightarrow $x_2$
+- Label (Target Variable)
+    - watched \rightarrow $y$
+
 |   i   | $x_1$ | $x_2$ | $y$ |
 | ----- | ----- | ----- | --- |
 |   1   |  6.2  | 2024  |  1  |
@@ -174,7 +182,7 @@ $$ \Rightarrow z = 0 $$
 
 $$ \hat{y} = \frac{1}{1+e^{-z}} $$
 
-$$ \hat{y} = \frac{1}{2} \since z=0 $$ 
+$$ \Rightarrow  \hat{y} = 0.5 \; since \; z=0 $$ 
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ |
 | ----- | ----- | ----- | --- | --------- |
@@ -183,6 +191,16 @@ $$ \hat{y} = \frac{1}{2} \since z=0 $$
 |   3   |  8.1  | 1990  |  0  |    0.5    |
 |   4   |  4.5  | 2023  |  0  |    0.5    |
 
+#### Step 4 - Residuals (Prediction Error)
+
+$$ residual = \hat{y_i} - y_i $$
+
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y}$ - y |
+| ----- | ----- | ----- | --- | --------- | ------------- |
+|   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |
+|   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |
+|   3   |  8.1  | 1990  |  0  |    0.5    |      0.5      |
+|   4   |  4.5  | 2023  |  0  |    0.5    |      0.5      |
 
 #### Step 4 - Cross Entropy Loss
 
@@ -194,18 +212,36 @@ $$ \ell_1 = - 1 \log (0.5) - (1-1) \log (1-0.5) $$
 
 $$ \ell_1 = 0.693
 
-|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\ell_i$ |
-| ----- | ----- | ----- | --- | --------- | -------- |
-|   1   |  6.2  | 2024  |  1  |    0.5    |   0.693  |
-|   2   |  7.8  | 2018  |  1  |    0.5    |   0.693  |
-|   3   |  8.1  | 1990  |  0  |    0.5    |   0.693  |
-|   4   |  4.5  | 2023  |  0  |    0.5    |   0.693  |
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y}$ - y | $\ell_i$ |
+| ----- | ----- | ----- | --- | --------- | ------------- | -------- |
+|   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |   0.693  |
+|   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |   0.693  |
+|   3   |  8.1  | 1990  |  0  |    0.5    |      0.5      |   0.693  |
+|   4   |  4.5  | 2023  |  0  |    0.5    |      0.5      |   0.693  |
 
 Averaging over all $m=4$ examples,
 
-$$ L = \sum_{i=1}^m \ell_i = {0.693*4} / 4 = 0.693 $$
+$$ L = \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
 
 #### Step 5 - Gradient Computation
 
-$$ \frac{\partial L}{\partial w} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
+$$ \frac{\partial L}{\partial b} = \sum_{i=1}^m (\hat{y_i} - y_i)(1) $$
 
+$$ \frac{\partial L}{\partial w_1} = \sum_{i=1}^m (\hat{y_i} - y_i)x_{1}^{(i)} $$
+
+$$ \frac{\partial L}{\partial w_2} = \sum_{i=1}^m (\hat{y_i} - y_i)x_{2}^{(i)} $$
+
+For the 1st example, 
+
+$$ \frac{\partial L}{\partial b} = (\hat{y_1} - y_1)(1) = -0.5 $$
+
+$$ \frac{\partial L}{\partial w_1} = (\hat{y_1} - y_1)(x_{1}^{(1)}) = (-0.5)(6.2) = -3.1 $$
+
+$$ \frac{\partial L}{\partial w_2} = (\hat{y_1} - y_1)(x_{2}^{(1)}) = (-0.5)(2024) = -1012  $$
+
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y}$ - y | $\ell_i$ | $\frac{\partial L}{\partial b}$ | $\frac{\partial L}{\partial w_1}$ | $\frac{\partial L}{\partial w_2}$ |
+| ----- | ----- | ----- | --- | --------- | ------------- | -------- | ------------------------------- | ------------------------------- | ------------------------------- |
+|   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |   0.693  |         -0.5                    |         -3.1                               |         -1012                   |
+|   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |   0.693  |         -0.5                    |         -3.9                               |         -1009                   |
+|   3   |  8.1  | 1990  |  0  |    0.5    |      0.5      |   0.693  |          0.5                    |          4.05                               |         995                    |
+|   4   |  4.5  | 2023  |  0  |    0.5    |      0.5      |   0.693  |          0.5                    |         -3.1                               |         1011.5                  |
