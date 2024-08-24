@@ -275,7 +275,7 @@ $$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ 0.03625 \end{array} \right)$$
 
 ---
 
-## Implementation
+## Formulation
 
 ```
 m = len(X)
@@ -308,3 +308,39 @@ def fit(X,y,iterations=100,learning_rate=0.01):
         _weights += (-1 * learning_rate * dLdw)
 
 ```
+
+---
+
+## Implementation
+
+```
+from logistic_regression import LogisticRegression
+
+# Data Gathering
+df = pd.DataFrame({
+    'movie':['Kalki','Tumbbad','Indiana Jones','Tiger 3'],
+    'rating':[6.2,7.8,8.1,4.5],
+    'released_date':[2024,2018,1990,2023],
+    'watched':[1,1,0,0]
+})
+
+# Feature Engg
+df['recency'] = pd.Timestamp.today().year - df['released_date']
+
+# Training Data Prep
+X = df[['rating','recency']].to_numpy()
+y = df['watched'].to_numpy()
+
+# Model Training
+model = LogisticRegression(iterations=1,learning_rate=0.01)
+model.fit(X,y)
+print(model.history())      # [0.6931471805599453] -> gives loss history in 1 epoch of training
+print(model.gradients())    # [0.0, -0.175,  3.625] -> loss gradient relevant to each model parameter 
+print(model.parameters())   # [0.0, 0.00175, -0.03625] -> updated model parameters
+```
+
+All the values match with the Hand Calculation Section
+
+For full implementation, refer following repository
+
+Github - [ML Concepts](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression.py)
