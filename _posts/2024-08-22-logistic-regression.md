@@ -20,9 +20,9 @@ That will make things a lot easier
 - Two Predictor Variables
 
 ---
-### Concepts
+## Concepts
 
-#### Linear Model
+### Linear Model
 
 Each example is fed into a linear model characteized by weight `w` and bias `b`
 
@@ -36,7 +36,7 @@ But, logistic regression requires the output as probabilities in the range (0,1)
 
 ---
 
-#### Sigmoid Function
+### Sigmoid Function
 
 When binary classification is involved, we can use Sigmoid function to limit the prediction in the range (0,1). 
 Since, its output range is limited to (0,1), the Sigmoid function is very much suitable to represent probabilities
@@ -52,7 +52,7 @@ $$ z \in {\mathbb{R}} $$
 $$ \sigma(z) \in (0,1) $$
 
 ---
-#### Cross Entropy Loss
+### Cross Entropy Loss
 
 - Cross entropy measures how well one probability distribution approximates another and is often used to quantify the difference between predicted and true distributions in machine learning tasks.
 
@@ -88,7 +88,7 @@ $$ \Rightarrow L = \frac{1}{m} \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log
 
 ---
 
-#### Gradient of Loss Function
+### Gradient of Loss Function
 
 From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
@@ -96,7 +96,7 @@ $$ \ell_i = - \left( y_i \log(\hat{y_i}) - (1 - y_i) \log(1 - \hat{y_i}) \right)
 
 We can calculate required partial derivatives as follows,
 
-#### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
+### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
 $$ \frac{\partial \ell_i}{\partial \hat{y_i}} = -\frac{y_i}{\hat{y_i}} + \frac{1 - y_i}{1 - \hat{y_i}} $$
 
@@ -104,7 +104,7 @@ $$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{-y_i(1-\hat{y_
 
 $$ \Rightarrow \frac{\partial \ell_i}{\partial \hat{y_i}} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} $$
 
-#### 2. Calculate $ \frac{\partial \hat{y_i}}{\partial z_i} $
+### 2. Calculate $ \frac{\partial \hat{y_i}}{\partial z_i} $
 
 $$ \hat{y_i} = \sigma(z_i) = \frac {1}{1+e^{-z_i}} $$
 
@@ -114,7 +114,7 @@ $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{1}{1+e^{-z
 
 $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \frac{1}{m} \hat{y_i}(1 - \hat{y_i}) $$
 
-#### 3. Calculate $ \frac{\partial z_i}{\partial w_i} $
+### 3. Calculate $ \frac{\partial z_i}{\partial w_i} $
 
 $$ z_i = w_ix_i + b_i $$
 
@@ -136,7 +136,9 @@ $$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \frac{\partial \ell_
 
 $$ \Rightarrow \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
 
-### Hand Calculations
+## Hand Calculations
+
+### Problem
 
 Let's consider an example for a Binary Classification Problem
 
@@ -153,7 +155,7 @@ Let's take some historical data from Gouher's OTT watchlist history
 
 Let's see how we can formulate this problem from the ground up
 
-#### Step 1 - Data Preparation
+### Data Preparation
 
 From the problem statement, 
 
@@ -170,7 +172,9 @@ From the problem statement,
 |   3   |  8.1  | 1990  |  0  |
 |   4   |  4.5  | 2023  |  0  |
 
-#### Step 2 - Linear Model
+### Model Training - Epoch 1 
+
+#### Step 1 - Linear Model
 
 if `w` and `b` are weights
 
@@ -182,7 +186,7 @@ $$ z = \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 19
 
 $$ \Rightarrow z = \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
 
-#### Step 3 - Sigmoid Function
+#### Step 2 - Sigmoid Function
 
 $$ \hat{y} = \frac{1}{1+e^{-z}} $$
 
@@ -197,7 +201,7 @@ $$ \Rightarrow \hat{y} = \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{
 |   3   |  8.1  | 1990  |  0  |    0.5    |
 |   4   |  4.5  | 2023  |  0  |    0.5    |
 
-#### Step 4 - Residuals (Prediction Error)
+#### Step 3 - Residuals (Prediction Error)
 
 $$ residual = \hat{y} - y $$
 
@@ -246,15 +250,29 @@ $$ \Rightarrow \frac{\partial \ell}{\partial w} = \left( \begin{array}{cc} -0.5 
 
 Averaging over all $m=4$ examples, the gradients are,
 
-$$\frac{\partial L}{\partial b} = \frac{1}{4} \left( -0.5 - 0.5 + 0.5 + 0.5 \right) = 0 $$
+$$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \left( \begin{array}{cc} \frac{\partial \ell_i}{\partial b} \\ \frac{\partial \ell_i}{\partial w_1} \\ \frac{\partial \ell_i}{\partial w_2} \end{array} \right) $$
 
-$$\frac{\partial L}{\partial w_1} = \frac{1}{4} \left( -3.1 - 3.9 + 4.05 + 2.25 \right) = \frac{-0.7}{4} = -0.175 $$
+$$ \frac{\partial L}{\partial w} = \frac{1}{m} \left( \begin{array}{cc} -0.5 - 0.5 + 0.5 + 0.5 \\ -3.1 - 3.9 + 4.05 + 2.25 \\ -1012 - 1009 + 995 + 1011.5 \end{array} \right) $$
 
-$$\frac{\partial L}{\partial w_2} = \frac{1}{4} \left( -1012 - 1009 + 995 + 1011.5 \right) = \frac{-14.5}{4} = -3.625 $$
+$$ \frac{\partial L}{\partial w} = \left( \begin{array}{cc} 0 \\ -0.175 \\ -3.625 \end{array} \right) $$
 
 ---
 #### Step 6 - Updating Weights
 
 Assuming the learning rate, $\alpha = 0.01$
 
-$$ w := w - \alpha frac{\partial L}{\partial w} $$
+$$ w := w - \alpha \frac{\partial L}{\partial w} $$
+
+$$ w := \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) -0.01 \left( \begin{array}{cc} 0 \\ -0.175 \\ -3.625 \end{array} \right)$$
+
+$$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ 0.03625 \end{array} \right)$$
+
+#### Step 7 - Repeat
+
+- Steps 1 - 6 is called one epoch where the model sees all the training examples once and finds the error in its prediction and updates its parameters.
+
+- These steps are repeated for certain number of epochs such that the training error is minimized and the model becomes confident about the training data 
+
+---
+
+## Implementation
