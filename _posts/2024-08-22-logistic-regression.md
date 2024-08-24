@@ -178,7 +178,7 @@ $$ z = w_1x_1 + w_2x_2 + b $$
 
 Initially, $ w_1 = w_2 = b = 0 $
 
-$$ z = \left( \begin{array}{cc} 6.2 & 2024 \\ 7.8 & 2018 \\ 8.1 & 1990 \\ 4.5 & 2023 \end{array} \right) \left( \begin{array}{cc} 0 \\ 0 \end{array} \right) + \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
+$$ z = \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 1990 \\ 1 & 4.5 & 2023 \end{array} \right) \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) $$
 
 $$ \Rightarrow z = \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
 
@@ -201,7 +201,7 @@ $$ \Rightarrow \hat{y} = \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{
 
 $$ residual = \hat{y} - y $$
 
-$$ \Rightarrow \hat{y} = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
+$$ \Rightarrow \hat{y} - y = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
 |  $i$  | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |
 | ----- | ----- | ----- | --- | --------- | ------------- |
@@ -216,7 +216,7 @@ $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 $$ \Rightarrow \ell = -\left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
-$$ \Rightarrow \ell = -\left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right)
+$$ \Rightarrow \ell = -\left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right) $$
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |  $\ell$  |
 | ----- | ----- | ----- | --- | --------- | ------------- | -------- |
@@ -231,11 +231,9 @@ $$ L = \frac{1}{m} \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
 
 #### Step 5 - Gradient Computation
 
-$$ \frac{\partial L}{\partial b} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)(1) $$
+$$ \frac{\partial \ell}{\partial w_i} = (\hat{y} - y)x_i $$
 
-$$ \frac{\partial L}{\partial w_1} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_{1}^{(i)} $$
-
-$$ \frac{\partial L}{\partial w_2} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_{2}^{(i)} $$
+$$ \Rightarrow \frac{\partial \ell}{\partial w_i} = -\left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 1990 \\ 1 & 4.5 & 2023 \end{array} \right) $$
 
 For the 1st example, 
 
