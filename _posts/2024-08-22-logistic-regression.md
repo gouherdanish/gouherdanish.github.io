@@ -216,7 +216,7 @@ $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 $$ \Rightarrow \ell = -\left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
-$$ \Rightarrow \ell = -\left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right) $$
+$$ \Rightarrow \ell = \left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right) $$
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |  $\ell$  |
 | ----- | ----- | ----- | --- | --------- | ------------- | -------- |
@@ -231,26 +231,20 @@ $$ L = \frac{1}{m} \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
 
 #### Step 5 - Gradient Computation
 
-$$ \frac{\partial \ell}{\partial w_i} = (\hat{y} - y)x_i $$
+$$ \frac{\partial \ell}{\partial w} = (\hat{y} - y)x $$
 
-$$ \Rightarrow \frac{\partial \ell}{\partial w_i} = -\left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 1990 \\ 1 & 4.5 & 2023 \end{array} \right) $$
+$$ \Rightarrow \frac{\partial \ell}{\partial w} = -\left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 1990 \\ 1 & 4.5 & 2023 \end{array} \right) $$
 
-For the 1st example, 
+$$ \Rightarrow \frac{\partial \ell}{\partial w} = \left( \begin{array}{cc} -0.5 & -3.1 & -1012 \\ -0.5 & -3.9 & -1009 \\ 0.5 & 4.05 & 995 \\ 0.5 & 2.25 & 1011.5 \end{array} \right) $$
 
-$$ \left( \frac{\partial L}{\partial b} \right)^{(1)} = (\hat{y^{(1)}} - y^{(1)})(1) = -0.5 $$
-
-$$ \frac{\partial L}{\partial w_1}^{(1)} = (\hat{y^{(1)}} - y^{(1)})(x_{1}^{(1)}) = (-0.5)(6.2) = -3.1 $$
-
-$$ \frac{\partial L}{\partial w_2}^{(1)} = (\hat{y^{(1)}} - y^{(1)})(x_{2}^{(1)}) = (-0.5)(2024) = -1012  $$
-
-|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ | $\ell$ | $\frac{\partial L}{\partial b}$ | $\frac{\partial L}{\partial w_1}$ | $\frac{\partial L}{\partial w_2}$ |
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ | $\ell$ | $\frac{\partial \ell}{\partial b}$ | $\frac{\partial \ell}{\partial w_1}$ | $\frac{\partial \ell}{\partial w_2}$ |
 | ----- | ----- | ----- | --- | --------- | -------- | -------- | ---------- | ----------- | --------- |
 |   1   |  6.2  | 2024  |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.1     |   -1012   |
 |   2   |  7.8  | 2018  |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.9     |   -1009   |
 |   3   |  8.1  | 1990  |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    4.05     |    995    |
 |   4   |  4.5  | 2023  |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    2.25     |   1011.5  |
 
-Averaging over all $m=4$ examples,
+Averaging over all $m=4$ examples, the gradients are,
 
 $$\frac{\partial L}{\partial b} = \frac{1}{4} \left( -0.5 - 0.5 + 0.5 + 0.5 \right) = 0 $$
 
@@ -258,3 +252,9 @@ $$\frac{\partial L}{\partial w_1} = \frac{1}{4} \left( -3.1 - 3.9 + 4.05 + 2.25 
 
 $$\frac{\partial L}{\partial w_2} = \frac{1}{4} \left( -1012 - 1009 + 995 + 1011.5 \right) = \frac{-14.5}{4} = -3.625 $$
 
+---
+#### Step 6 - Updating Weights
+
+Assuming the learning rate, $\alpha = 0.01$
+
+$$ w := w - \alpha frac{\partial L}{\partial w}$$
