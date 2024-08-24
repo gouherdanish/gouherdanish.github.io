@@ -82,9 +82,9 @@ $$ \ell = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y})
 
 Average Cross Entropy loss over all `m` examples can be given by,
 
-$$ L = \sum_{i=1}^m \ell_i = \sum_{i=1}^m H \left( y,\hat{y} \right) $$ 
+$$ L = \frac{1}{m} \sum_{i=1}^m \ell_i = \frac{1}{m} \sum_{i=1}^m H \left( y,\hat{y} \right) $$ 
 
-$$ \Rightarrow L = \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log (1-\hat{y_i})] $$
+$$ \Rightarrow L = \frac{1}{m} \sum_{i=1}^m [- y_i \log \hat{y_i} - (1-y_i) \log (1-\hat{y_i})] $$
 
 ---
 
@@ -112,7 +112,7 @@ $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \frac{-1}{(1+e^{-z_i})^
 
 $$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \left( \frac{1}{1+e^{-z_i}} \right) \left( \frac{e^{-z_i}}{1+e^{-z_i}} \right) $$
 
-$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \hat{y_i}(1 - \hat{y_i}) $$
+$$ \Rightarrow \frac{\partial \hat{y_i}}{\partial z_i} = \frac{1}{m} \hat{y_i}(1 - \hat{y_i}) $$
 
 #### 3. Calculate $ \frac{\partial z_i}{\partial w_i} $
 
@@ -128,11 +128,13 @@ Substituting,
 
 $$ \frac{\partial \ell_i}{\partial w_i} = \frac{\hat{y_i}-y_i}{\hat{y_i}(1-\hat{y_i})} \times \hat{y_i}(1 - \hat{y_i}) \times x_i $$
 
-$$ \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
+$$ \Rightarrow \frac{\partial \ell_i}{\partial w_i} = (\hat{y_i} - y_i)x_i $$
 
-Summing over all the `m` examples,
+Averaging over all the `m` examples,
 
-$$ \frac{\partial L}{\partial w} = \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} = \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
+$$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \frac{\partial \ell_i}{\partial w_i} $$ 
+
+$$ \Rightarrow \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
 
 ### Hand Calculations
 
@@ -193,9 +195,9 @@ $$ \Rightarrow  \hat{y} = 0.5 \; since \; z=0 $$
 
 #### Step 4 - Residuals (Prediction Error)
 
-$$ residual = \hat{y_i} - y_i $$
+$$ residual = \hat{y} - y $$
 
-|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y}$ - y |
+|  $i$  | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |
 | ----- | ----- | ----- | --- | --------- | ------------- |
 |   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |
 |   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |
@@ -208,11 +210,11 @@ $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 For the 1st example, 
 
-$$ \ell_1 = - 1 \log (0.5) - (1-1) \log (1-0.5) $$
+$$ \ell^(1) = - 1 \log (0.5) - (1-1) \log (1-0.5) $$
 
-$$ \ell_1 = 0.693
+$$ \ell^(1) = 0.693
 
-|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y}$ - y | $\ell_i$ |
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |  $\ell$  |
 | ----- | ----- | ----- | --- | --------- | ------------- | -------- |
 |   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |   0.693  |
 |   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |   0.693  |
@@ -221,15 +223,15 @@ $$ \ell_1 = 0.693
 
 Averaging over all $m=4$ examples,
 
-$$ L = \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
+$$ L = \frac{1}{m} \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
 
 #### Step 5 - Gradient Computation
 
-$$ \frac{\partial L}{\partial b} = \sum_{i=1}^m (\hat{y_i} - y_i)(1) $$
+$$ \frac{\partial L}{\partial b} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)(1) $$
 
-$$ \frac{\partial L}{\partial w_1} = \sum_{i=1}^m (\hat{y_i} - y_i)x_{1}^{(i)} $$
+$$ \frac{\partial L}{\partial w_1} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_{1}^{(i)} $$
 
-$$ \frac{\partial L}{\partial w_2} = \sum_{i=1}^m (\hat{y_i} - y_i)x_{2}^{(i)} $$
+$$ \frac{\partial L}{\partial w_2} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_{2}^{(i)} $$
 
 For the 1st example, 
 
@@ -239,9 +241,13 @@ $$ \frac{\partial L}{\partial w_1} = (\hat{y_1} - y_1)(x_{1}^{(1)}) = (-0.5)(6.2
 
 $$ \frac{\partial L}{\partial w_2} = (\hat{y_1} - y_1)(x_{2}^{(1)}) = (-0.5)(2024) = -1012  $$
 
-|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y}$ - y | $\ell_i$ | $\frac{\partial L}{\partial b}$ | $\frac{\partial L}{\partial w_1}$ | $\frac{\partial L}{\partial w_2}$ |
-| ----- | ----- | ----- | --- | --------- | ------------- | -------- | ------------------------------- | ------------------------------- | ------------------------------- |
-|   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |   0.693  |         -0.5                    |         -3.1                               |         -1012                   |
-|   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |   0.693  |         -0.5                    |         -3.9                               |         -1009                   |
-|   3   |  8.1  | 1990  |  0  |    0.5    |      0.5      |   0.693  |          0.5                    |          4.05                               |         995                    |
-|   4   |  4.5  | 2023  |  0  |    0.5    |      0.5      |   0.693  |          0.5                    |         -3.1                               |         1011.5                  |
+|   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ | $\ell$ | $\frac{\partial L}{\partial b}$ | $\frac{\partial L}{\partial w_1}$ | $\frac{\partial L}{\partial w_2}$ |
+| ----- | ----- | ----- | --- | --------- | -------- | -------- | ---------- | ----------- | --------- |
+|   1   |  6.2  | 2024  |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.1     |   -1012   |
+|   2   |  7.8  | 2018  |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.9     |   -1009   |
+|   3   |  8.1  | 1990  |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    4.05     |    995    |
+|   4   |  4.5  | 2023  |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    -3.1     |   1011.5  |
+
+Averaging over all $m=4$ examples,
+
+$$\frac{\partial L}{\partial w_1} = \frac{1}{m} $$
