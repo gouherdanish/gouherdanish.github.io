@@ -257,4 +257,4 @@ $$\frac{\partial L}{\partial w_2} = \frac{1}{4} \left( -1012 - 1009 + 995 + 1011
 
 Assuming the learning rate, $\alpha = 0.01$
 
-$$ w := w - \alpha frac{\partial L}{\partial w}$$
+$$ w := w - \alpha frac{\partial L}{\partial w} $$
