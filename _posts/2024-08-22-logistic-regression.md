@@ -339,8 +339,45 @@ print(model.gradients())    # [0.0, -0.175,  3.625] -> loss gradient relevant to
 print(model.parameters())   # [0.0, 0.00175, -0.03625] -> updated model parameters
 ```
 
-All the values match with the Hand Calculation Section
+All the values match with the Hand Calculation done for 1 epoch of training
 
 For full implementation, refer following repository
 
 Github - [ML Concepts](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression.py)
+
+---
+
+## Verification
+
+We verify our own implementation against the state-of-the-art sklearn implementation.
+
+```
+# SOTA Implementation Using Sklearn
+import sklearn
+
+model = sklearn.linear_model.SGDClassifier(loss='log_loss',penalty=None,max_iter=100,learning_rate='constant',eta0=0.01,random_state=42)
+model.fit(X, y)
+print(model.coef_)                      # [[ 0.24185039 -0.17151609]] 
+print(model.itercept_)                  # [-0.02785408]
+
+y_val_prob = model.predict_proba(X)
+y_val = model.predict(X)
+print([p2 for p1,p2 in y_val_prob])     # [0.8133032438552896, 0.696245481408132, 0.019832274960378975, 0.7086748039455667]
+print(y_val)                            # [1 1 0 1]
+```
+
+```
+# Scratch Implementation
+from logistic_regression import LogisticRegression
+
+model = LogisticRegression(iterations=100,learning_rate=0.01)
+model.fit(X, y)
+print(model.parameters()[0])            # [ 0.23113958, -0.15335232]
+print(model.parameters()[1])            # -0.026008310204226472
+
+y_val_prob = model.predict_proba(X)
+y_val = model.predict(X)
+print(y_val_prob)                       # [0.80330136 0.70198464 0.03331849 0.70282098]
+print(y_val)                            # [1 1 0 1]
+```
+
