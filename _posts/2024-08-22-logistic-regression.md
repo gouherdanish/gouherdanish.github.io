@@ -155,22 +155,33 @@ Let's take some historical data from Gouher's OTT watchlist history
 
 Let's see how we can formulate this problem from the ground up
 
-### Data Preparation
+### Feature Engineering
+
+Let's create a new feature `recency` to indicate how old the movie is. The lower the recency, the newer the movie is.
+
+| movie name    | rating | released date | watched | recency |
+| ------------- | ------ | ------------- | ------- | ------- |
+| kalki         |   6.2  |     2024      |    1    |    0    |
+| tumbbad       |   7.8  |     2018      |    1    |    6    | 
+| indiana jones |   8.1  |     1990      |    0    |   34    | 
+| Tiger 3       |   4.5  |     2023      |    0    |    1    | 
+
+### Training Data Preparation
 
 From the problem statement, 
 
 - Features (Predictor Variables)
     - rating $\rightarrow x_1$
-    - released date $\rightarrow x_2$
+    - recency $\rightarrow x_2$
 - Label (Target Variable)
     - watched $\rightarrow y$
 
 |   i   | $x_1$ | $x_2$ | $y$ |
 | ----- | ----- | ----- | --- |
-|   1   |  6.2  | 2024  |  1  |
-|   2   |  7.8  | 2018  |  1  |
-|   3   |  8.1  | 1990  |  0  |
-|   4   |  4.5  | 2023  |  0  |
+|   1   |  6.2  |   0   |  1  |
+|   2   |  7.8  |   6   |  1  |
+|   3   |  8.1  |  34   |  0  |
+|   4   |  4.5  |   1   |  0  |
 
 ### Model Training - Epoch 1 
 
@@ -182,7 +193,7 @@ $$ z = w_1x_1 + w_2x_2 + b $$
 
 Initially, $ w_1 = w_2 = b = 0 $
 
-$$ z = \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 1990 \\ 1 & 4.5 & 2023 \end{array} \right) \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) $$
+$$ z = \left( \begin{array}{cc} 1 & 6.2 & 0 \\ 1 & 7.8 & 6 \\ 1 & 8.1 & 34 \\ 1 & 4.5 & 1 \end{array} \right) \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) $$
 
 $$ \Rightarrow z = \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
 
@@ -196,10 +207,10 @@ $$ \Rightarrow \hat{y} = \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ |
 | ----- | ----- | ----- | --- | --------- |
-|   1   |  6.2  | 2024  |  1  |    0.5    |
-|   2   |  7.8  | 2018  |  1  |    0.5    |
-|   3   |  8.1  | 1990  |  0  |    0.5    |
-|   4   |  4.5  | 2023  |  0  |    0.5    |
+|   1   |  6.2  |   0   |  1  |    0.5    |
+|   2   |  7.8  |   6   |  1  |    0.5    |
+|   3   |  8.1  |  34   |  0  |    0.5    |
+|   4   |  4.5  |   1   |  0  |    0.5    |
 
 #### Step 3 - Residuals (Prediction Error)
 
@@ -209,10 +220,10 @@ $$ \Rightarrow \hat{y} - y = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5
 
 |  $i$  | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |
 | ----- | ----- | ----- | --- | --------- | ------------- |
-|   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |
-|   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |
-|   3   |  8.1  | 1990  |  0  |    0.5    |      0.5      |
-|   4   |  4.5  | 2023  |  0  |    0.5    |      0.5      |
+|   1   |  6.2  |   0   |  1  |    0.5    |     -0.5      |
+|   2   |  7.8  |   6   |  1  |    0.5    |     -0.5      |
+|   3   |  8.1  |  34   |  0  |    0.5    |      0.5      |
+|   4   |  4.5  |   1   |  0  |    0.5    |      0.5      |
 
 #### Step 4 - Cross Entropy Loss
 
@@ -224,10 +235,10 @@ $$ \Rightarrow \ell = \left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ |  $\ell$  |
 | ----- | ----- | ----- | --- | --------- | ------------- | -------- |
-|   1   |  6.2  | 2024  |  1  |    0.5    |     -0.5      |   0.693  |
-|   2   |  7.8  | 2018  |  1  |    0.5    |     -0.5      |   0.693  |
-|   3   |  8.1  | 1990  |  0  |    0.5    |      0.5      |   0.693  |
-|   4   |  4.5  | 2023  |  0  |    0.5    |      0.5      |   0.693  |
+|   1   |  6.2  |   0   |  1  |    0.5    |     -0.5      |   0.693  |
+|   2   |  7.8  |   6   |  1  |    0.5    |     -0.5      |   0.693  |
+|   3   |  8.1  |  34   |  0  |    0.5    |      0.5      |   0.693  |
+|   4   |  4.5  |   1   |  0  |    0.5    |      0.5      |   0.693  |
 
 Averaging over all $m=4$ examples,
 
@@ -237,24 +248,24 @@ $$ L = \frac{1}{m} \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
 
 $$ \frac{\partial \ell}{\partial w} = (\hat{y} - y)x $$
 
-$$ \Rightarrow \frac{\partial \ell}{\partial w} = -\left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) \left( \begin{array}{cc} 1 & 6.2 & 2024 \\ 1 & 7.8 & 2018 \\ 1 & 8.1 & 1990 \\ 1 & 4.5 & 2023 \end{array} \right) $$
+$$ \Rightarrow \frac{\partial \ell}{\partial w} = -\left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5 \end{array} \right) \left( \begin{array}{cc} 1 & 6.2 & 0 \\ 1 & 7.8 & 6 \\ 1 & 8.1 & 34 \\ 1 & 4.5 & 1 \end{array} \right) $$
 
-$$ \Rightarrow \frac{\partial \ell}{\partial w} = \left( \begin{array}{cc} -0.5 & -3.1 & -1012 \\ -0.5 & -3.9 & -1009 \\ 0.5 & 4.05 & 995 \\ 0.5 & 2.25 & 1011.5 \end{array} \right) $$
+$$ \Rightarrow \frac{\partial \ell}{\partial w} = \left( \begin{array}{cc} -0.5 & -3.1 & 0 \\ -0.5 & -3.9 & -3 \\ 0.5 & 4.05 & 17 \\ 0.5 & 2.25 & 0.5 \end{array} \right) $$
 
 |   i   | $x_1$ | $x_2$ | $y$ | $\hat{y}$ | $\hat{y} - y$ | $\ell$ | $\frac{\partial \ell}{\partial b}$ | $\frac{\partial \ell}{\partial w_1}$ | $\frac{\partial \ell}{\partial w_2}$ |
 | ----- | ----- | ----- | --- | --------- | -------- | -------- | ---------- | ----------- | --------- |
-|   1   |  6.2  | 2024  |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.1     |   -1012   |
-|   2   |  7.8  | 2018  |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.9     |   -1009   |
-|   3   |  8.1  | 1990  |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    4.05     |    995    |
-|   4   |  4.5  | 2023  |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    2.25     |   1011.5  |
+|   1   |  6.2  |   0   |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.1     |     0     |
+|   2   |  7.8  |   6   |  1  |    0.5    |   -0.5   |   0.693  |    -0.5    |    -3.9     |    -3     |
+|   3   |  8.1  |  34   |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    4.05     |    17     |
+|   4   |  4.5  |   1   |  0  |    0.5    |    0.5   |   0.693  |     0.5    |    2.25     |    0.5    |
 
 Averaging over all $m=4$ examples, the gradients are,
 
 $$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \left( \begin{array}{cc} \frac{\partial \ell_i}{\partial b} \\ \frac{\partial \ell_i}{\partial w_1} \\ \frac{\partial \ell_i}{\partial w_2} \end{array} \right) $$
 
-$$ \frac{\partial L}{\partial w} = \frac{1}{m} \left( \begin{array}{cc} -0.5 - 0.5 + 0.5 + 0.5 \\ -3.1 - 3.9 + 4.05 + 2.25 \\ -1012 - 1009 + 995 + 1011.5 \end{array} \right) $$
+$$ \frac{\partial L}{\partial w} = \frac{1}{m} \left( \begin{array}{cc} -0.5 - 0.5 + 0.5 + 0.5 \\ -3.1 - 3.9 + 4.05 + 2.25 \\ 0 - 3 + 17 + 0.5 \end{array} \right) $$
 
-$$ \frac{\partial L}{\partial w} = \left( \begin{array}{cc} 0 \\ -0.175 \\ -3.625 \end{array} \right) $$
+$$ \frac{\partial L}{\partial w} = \left( \begin{array}{cc} 0 \\ -0.175 \\ 3.625 \end{array} \right) $$
 
 ---
 #### Step 6 - Updating Weights
@@ -263,9 +274,9 @@ Assuming the learning rate, $\alpha = 0.01$
 
 $$ w := w - \alpha \frac{\partial L}{\partial w} $$
 
-$$ w := \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) -0.01 \left( \begin{array}{cc} 0 \\ -0.175 \\ -3.625 \end{array} \right)$$
+$$ w := \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) -0.01 \left( \begin{array}{cc} 0 \\ -0.175 \\ 3.625 \end{array} \right)$$
 
-$$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ 0.03625 \end{array} \right)$$
+$$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ -0.03625 \end{array} \right)$$
 
 #### Step 7 - Repeat
 
