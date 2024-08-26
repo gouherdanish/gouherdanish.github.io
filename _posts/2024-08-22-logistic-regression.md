@@ -9,17 +9,17 @@ Logistic Regression is a powerful yet simple and explainable ML algorithm. Under
 
 Here we implement Logistic regression from scratch, we take a very simple example but will go very in-depth, presenting with theory and hand calculation at each step. 
 
-We will also verify our results it with standard implementations from Scikit Learn package
+We will also verify our results with standard implementations from `scikit-Learn` package
 
 That will make things a lot easier and intuitive
 
 ---
 ## Assumptions
 
-- Two output classes Binary Classification
-- Two Predictor Variables are considered for simplicity
-- Binary Cross entropy (log loss) is taken as Model loss function 
-- No regularization is considered (penalty=0)
+- Only two target classes are present (Binary Classification)
+- Only two predictor Variables are considered for simplicity
+- Binary Cross entropy (log loss) is considered as the model loss function 
+- Regularization is not considered (penalty=0)
 - Learning rate is assumed comstant (0.01)
 
 ---
