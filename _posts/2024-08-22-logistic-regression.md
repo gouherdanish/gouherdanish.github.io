@@ -340,6 +340,9 @@ def fit(X,y,iterations=100,learning_rate=0.01):
 
 ## Implementation
 
+- These useful functions are wrapped in a class and committed to Github repo 
+- Repo Link - [Logistic Regression from Scratch](https://github.com/gouherdanish/ml_concepts/blob/main/)
+
 ```
 from logistic_regression import LogisticRegression
 
