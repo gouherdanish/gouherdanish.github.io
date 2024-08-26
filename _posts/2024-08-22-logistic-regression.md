@@ -16,8 +16,11 @@ That will make things a lot easier
 ---
 ### Assumptions
 
-- Binary Classification
-- Two Predictor Variables
+- Two output classes Binary Classification
+- Two Predictor Variables are considered for simplicity
+- Binary Cross entropy (log loss) is taken as Model loss function 
+- No regularization is considered (penalty=0)
+- Learning rate is assumed comstant (0.01)
 
 ---
 ## Concepts
@@ -136,6 +139,7 @@ $$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \frac{\partial \ell_
 
 $$ \Rightarrow \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
 
+---
 ## Hand Calculations
 
 ### Problem
@@ -155,6 +159,8 @@ Let's take some historical data from Gouher's OTT watchlist history
 
 Let's see how we can formulate this problem from the ground up
 
+---
+
 ### Feature Engineering
 
 Let's create a new feature `recency` to indicate how old the movie is. The lower the recency, the newer the movie is.
@@ -166,15 +172,17 @@ Let's create a new feature `recency` to indicate how old the movie is. The lower
 | indiana jones |   8.1  |     1990      |    0    |   34    | 
 | Tiger 3       |   4.5  |     2023      |    0    |    1    | 
 
-### Training Data Preparation
-
-From the problem statement, 
 
 - Features (Predictor Variables)
     - rating $\rightarrow x_1$
     - recency $\rightarrow x_2$
 - Label (Target Variable)
     - watched $\rightarrow y$
+
+---
+### Training Data Preparation
+
+From the problem statement, the training data looks like this.
 
 |   i   | $x_1$ | $x_2$ | $y$ |
 | ----- | ----- | ----- | --- |
@@ -183,6 +191,7 @@ From the problem statement,
 |   3   |  8.1  |  34   |  0  |
 |   4   |  4.5  |   1   |  0  |
 
+---
 ### Model Training - Epoch 1 
 
 #### Step 1 - Linear Model
@@ -197,6 +206,7 @@ $$ z = \left( \begin{array}{cc} 1 & 6.2 & 0 \\ 1 & 7.8 & 6 \\ 1 & 8.1 & 34 \\ 1 
 
 $$ \Rightarrow z = \left( \begin{array}{cc} 0 \\ 0 \\ 0 \\ 0 \end{array} \right) $$
 
+---
 #### Step 2 - Sigmoid Function
 
 $$ \hat{y} = \frac{1}{1+e^{-z}} $$
@@ -212,6 +222,7 @@ $$ \Rightarrow \hat{y} = \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{
 |   3   |  8.1  |  34   |  0  |    0.5    |
 |   4   |  4.5  |   1   |  0  |    0.5    |
 
+---
 #### Step 3 - Residuals (Prediction Error)
 
 $$ residual = \hat{y} - y $$
@@ -225,6 +236,7 @@ $$ \Rightarrow \hat{y} - y = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5
 |   3   |  8.1  |  34   |  0  |    0.5    |      0.5      |
 |   4   |  4.5  |   1   |  0  |    0.5    |      0.5      |
 
+---
 #### Step 4 - Cross Entropy Loss
 
 $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
@@ -244,6 +256,7 @@ Averaging over all $m=4$ examples,
 
 $$ L = \frac{1}{m} \sum_{i=1}^m \ell_i = \frac{0.693*4}{4} = 0.693 $$
 
+---
 #### Step 5 - Gradient Computation
 
 $$ \frac{\partial \ell}{\partial w} = (\hat{y} - y)x $$
@@ -263,7 +276,7 @@ Averaging over all $m=4$ examples, the gradients are,
 
 $$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \left( \begin{array}{cc} \frac{\partial \ell_i}{\partial b} \\ \frac{\partial \ell_i}{\partial w_1} \\ \frac{\partial \ell_i}{\partial w_2} \end{array} \right) $$
 
-$$ \frac{\partial L}{\partial w} = \frac{1}{m} \left( \begin{array}{cc} -0.5 - 0.5 + 0.5 + 0.5 \\ -3.1 - 3.9 + 4.05 + 2.25 \\ 0 - 3 + 17 + 0.5 \end{array} \right) $$
+$$ \frac{\partial L}{\partial w} = \frac{1}{4} \left( \begin{array}{cc} -0.5 - 0.5 + 0.5 + 0.5 \\ -3.1 - 3.9 + 4.05 + 2.25 \\ 0 - 3 + 17 + 0.5 \end{array} \right) $$
 
 $$ \frac{\partial L}{\partial w} = \left( \begin{array}{cc} 0 \\ -0.175 \\ 3.625 \end{array} \right) $$
 
@@ -278,6 +291,7 @@ $$ w := \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) -0.01 \left( \b
 
 $$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ -0.03625 \end{array} \right)$$
 
+---
 #### Step 7 - Repeat
 
 - Steps 1 - 6 is called one epoch where the model sees all the training examples once and finds the error in its prediction and updates its parameters.
@@ -287,6 +301,8 @@ $$ w := \left( \begin{array}{cc} 0 \\ 0.00175 \\ -0.03625 \end{array} \right)$$
 ---
 
 ## Formulation
+
+- We can formulate the above into useful functions as shown below.
 
 ```
 m = len(X)
