@@ -9,12 +9,12 @@ Logistic Regression is a powerful yet simple and explainable ML algorithm. Under
 
 Here we implement Logistic regression from scratch, we take a very simple example but will go very in-depth, presenting with theory and hand calculation at each step. 
 
-We will also verify our results it with standard implementations fr 
+We will also verify our results it with standard implementations from Scikit Learn package
 
-That will make things a lot easier
+That will make things a lot easier and intuitive
 
 ---
-### Assumptions
+## Assumptions
 
 - Two output classes Binary Classification
 - Two Predictor Variables are considered for simplicity
