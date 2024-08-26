@@ -351,8 +351,9 @@ Github - [ML Concepts](https://github.com/gouherdanish/ml_concepts/blob/main/log
 
 We verify our own implementation against the state-of-the-art sklearn implementation.
 
+### SOTA Implementation Using Sklearn
+
 ```
-# SOTA Implementation Using Sklearn
 import sklearn
 
 model = sklearn.linear_model.SGDClassifier(loss='log_loss',penalty=None,max_iter=100,learning_rate='constant',eta0=0.01,random_state=42)
@@ -366,8 +367,9 @@ print([p2 for p1,p2 in y_val_prob])     # [0.8133032438552896, 0.696245481408132
 print(y_val)                            # [1 1 0 1]
 ```
 
+### Scratch Implementation
+
 ```
-# Scratch Implementation
 from logistic_regression import LogisticRegression
 
 model = LogisticRegression(iterations=100,learning_rate=0.01)
@@ -381,3 +383,10 @@ print(y_val_prob)                       # [0.80330136 0.70198464 0.03331849 0.70
 print(y_val)                            # [1 1 0 1]
 ```
 
+Note:
+- The final predicted classes match perfectly with Sklearn.
+- Individual probability values and model weights don't match exactly since Sklearn uses additional parameters while training the model
+```
+print(model.get_params())
+{'alpha': 0.0001, 'average': False, 'class_weight': None, 'early_stopping': False, 'epsilon': 0.1, 'eta0': 0.01, 'fit_intercept': True, 'l1_ratio': 0.15, 'learning_rate': 'constant', 'loss': 'log_loss', 'max_iter': 100, 'n_iter_no_change': 5, 'n_jobs': None, 'penalty': None, 'power_t': 0.5, 'random_state': 42, 'shuffle': True, 'tol': 0.001, 'validation_fraction': 0.1, 'verbose': 0, 'warm_start': False}
+```
