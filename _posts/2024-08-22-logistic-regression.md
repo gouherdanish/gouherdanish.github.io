@@ -339,11 +339,11 @@ print(model.gradients())    # [0.0, -0.175,  3.625] -> loss gradient relevant to
 print(model.parameters())   # [0.0, 0.00175, -0.03625] -> updated model parameters
 ```
 
-All the values match with the Hand Calculation done for 1 epoch of training
+Note:
 
-For full implementation, refer following repository
-
-Github - [ML Concepts](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression.py)
+- Model calculated log loss **MATCHES** with hand calculation
+- Model calculated gradients **MATCHES** with hand calculation
+- Model weights and bias updated after 1st epoch **MATCHES** with hand calculation
 
 ---
 
@@ -351,7 +351,7 @@ Github - [ML Concepts](https://github.com/gouherdanish/ml_concepts/blob/main/log
 
 We verify our own implementation against the state-of-the-art sklearn implementation.
 
-### SOTA Implementation Using Sklearn
+#### SOTA Implementation Using Sklearn
 
 ```
 import sklearn
@@ -367,7 +367,7 @@ print([p2 for p1,p2 in y_val_prob])     # [0.8133032438552896, 0.696245481408132
 print(y_val)                            # [1 1 0 1]
 ```
 
-### Scratch Implementation
+#### Scratch Implementation
 
 ```
 from logistic_regression import LogisticRegression
@@ -390,3 +390,11 @@ Note:
 print(model.get_params())
 {'alpha': 0.0001, 'average': False, 'class_weight': None, 'early_stopping': False, 'epsilon': 0.1, 'eta0': 0.01, 'fit_intercept': True, 'l1_ratio': 0.15, 'learning_rate': 'constant', 'loss': 'log_loss', 'max_iter': 100, 'n_iter_no_change': 5, 'n_jobs': None, 'penalty': None, 'power_t': 0.5, 'random_state': 42, 'shuffle': True, 'tol': 0.001, 'validation_fraction': 0.1, 'verbose': 0, 'warm_start': False}
 ```
+
+
+For full implementation, refer following repository
+
+Github 
+- [Logistic Regression from Scratch](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression.py)
+- [Logistic Regression using Sklearn](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression_sklearn.py)
+
