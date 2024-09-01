@@ -121,4 +121,35 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
     - Without the ability to plan, model-free agents may take longer to discover optimal policies, especially in complex environments
 
 ---
+### Stationary Problems
+
+- Intuition
+    - Environment is fixed
+    - The transition probabilities, reward functions, and state dynamics remain constant throughout the learning process.
+    - These are relatively simpler and more common in academic examples
+- Example
+    - N-armed bandit problem is stationary when each arm has a fixed mean reward
+- Usage
+    - Exploration can gradually decrease over time as the agent becomes more confident in its estimates. 
+    - An agent might use strategies like decaying epsilon in the epsilon-greedy method.
+    - The agent's policy and value function can converge to the optimal policy as the learning process stabilizes
+    - Algorithms like Q-learning, SARSA, and others assume stationarity and perform well when the environment is fixed.
+
+---
+### Non-stationary Problems
+
+- Intuition
+    - Environment can change over time
+    - The reward distribution associated with each action can change over time
+- Example
+    - N-armed bandit problem is stationary when reward for each arm fluctuates over time. In this case, an arm that is optimal at one point might become suboptimal later
+    - user preferences in recommendation systems, market conditions in trading algorithms, or strategies in competitive games can change over time.
+- Usage
+    - Ongoing exploration is necessary because the optimal action may change over time. 
+    - Agent might use techniques like adaptive epsilon-greedy or sliding window averages are used to ensure the agent remains responsive to changes
+    - The agent's policy may need to continuously adapt, preventing convergence to a single optimal policy. Instead, the agent might converge to a strategy that balances recent information with exploration
+    - Algorithms that incorporate mechanisms to adapt to changing environments, such as contextual bandits, thompson sampling, or meta-learning, are better suited for non-stationary problems.
+    - Requires the agent to be more flexible and robust
+
+
 ### On-Policy RL
