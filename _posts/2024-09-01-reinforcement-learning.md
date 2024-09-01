@@ -85,6 +85,7 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
 - A factor between 0 and 1 that determines the importance of future rewards.
 - Example: A discount factor of 0.9 means future rewards are considered less important than immediate rewards.
 
+---
 ## Types of RL
 
 ### Model-Based RL
@@ -102,6 +103,7 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
     - Model may not represent the real environment correctly thereby inducing inaccurate, suboptimal or even harmful results
     - Building accurate model can be complex and computationally expensive (especially in high dimensional environments)
 
+---
 ### Model-Free RL
 
 - Intuition
@@ -117,3 +119,6 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
 - Cons
     - It requires a large number of interactions with the environment to learn effectively, which can be costly or impractical in many real-world scenarios
     - Without the ability to plan, model-free agents may take longer to discover optimal policies, especially in complex environments
+
+---
+### On-Policy RL
