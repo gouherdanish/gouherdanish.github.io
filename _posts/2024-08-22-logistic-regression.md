@@ -2,7 +2,7 @@
 layout: post
 title: "Logistic Regression: Concepts Deep Dive and Implementation from Scratch"
 date: 2024-08-22
-tags: ["Machine Learning"]
+tags: ["Machine Learning","Supervised Learning"]
 ---
 
 Logistic Regression is a powerful yet simple and explainable ML algorithm. Understanding its intricacies is vital to any ML practitioner.

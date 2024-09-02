@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Reinforcement Learning - Concepts"
+title: "Reinforcement Learning - Concepts Revision"
 date: 2024-09-01
-tags: ["Machine Learning"]
+tags: ["Machine Learning","Reinforcement Learning"]
 ---
 
 Reinforcement Learning is a powerful framework for developing intelligent agents capable of learning and making decisions through trial and error
