@@ -69,7 +69,7 @@ $$ \Righarrow Q_{k+1} = Q_k + \frac{1}{k} \left (R_k - Q_k \right)$$
 
 - This is the incremental update policy for Q-value
 
-- _Exploitation_ choosed the action with the maximum q-value at a given time step is chosen
+- _Exploitation_ chooses the action with the maximum q-value at a given time step is chosen
 
 Example
 - Suppose, in the 3-arm bandit problem, the arms are rotated 10 times
@@ -138,13 +138,13 @@ $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
     - represented by $\epsilon$
 - Usually $\epsilon=0.1$
 
-| $t$  | Action | Reward |
-| ---- | ----- | ------  |
-|  0   | $S_1$ |    2    |
-|  1   | $S_1$ |    2    |
-|  2   | $S_1$ |    2    |
-|  3   | $S_2$ |    5    |
-|  4   | $S_2$ |    1    |
+| $t$  | Action | Reward | $k_{S1}$ | $k_{S2}$ | $k_{S2}$ | $Q_{S1}$ | $Q_{S2}$ | $Q_{S2}$ |
+| ---- | ----- | ------  | -------- | -------- | -------- | -------- | -------- | -------- |
+|  0   | $S_1$ |    2    |     0    |     0    |     0    |     0    |     0    |     0    |
+|  1   | $S_1$ |    2    |     1    |     0    |     0    |     2    |     0    |     0    |
+|  2   | $S_1$ |    2    |     2    |     0    |     0    |     2    |     0    |     0    |
+|  3   | $S_2$ |    5    |     2    |     0    |     0    |     2    |     0    |     0    |
+|  4   | $S_2$ |    1    | 
 |  5   | $S_3$ |   2.6   |
 |  6   | $S_1$ |    2    |
 |  7   | $S_2$ |    3    |
