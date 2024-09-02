@@ -52,50 +52,87 @@ $$ R_3 = \mathbb{N}(3,1) \; normal \; distribution $$
 
 Let's continue with the 3-arm bandits example
 
-### Fully Greedy Policy
+### Greedy Policy
 
 - The agent selects same arm at each time step
 - No exploration, only exploitation 
 - $\epsilon=0$
 
-| Time | Constant Policy |
-| $t$  | $S_1$ | $S_2$ | $S_3$ |
-| ---- | ----- | ----- | ----- |
-|  0   |   2   |   3   |  3.0  |
-|  1   |   2   |   1   |  2.7  |
-|  2   |   2   |   2   |  3.2  |
-|  3   |   2   |   6   |  3.1  |
-|  4   |   2   |   1   |  3.9  |
-|  5   |   2   |   3   |  4.2  |
-|  6   |   2   |   6   |  2.0  |
-|  7   |   2   |   2   |  1.0  |
-|  8   |   2   |   1   |  3.0  |
-|  9   |   2   |   3   |  3.0  |
+| $t$  | Action | Reward | Action | Reward | Action | Reward |
+| ---- | ----- | ----- | ----- | ----- | ----- | ----- |
+|  0   | $S_1$ |   2   | $S_2$ |   3   | $S_3$ |  3.0  |
+|  1   | $S_1$ |   2   | $S_2$ |   1   | $S_3$ |  2.7  |
+|  2   | $S_1$ |   2   | $S_2$ |   2   | $S_3$ |  3.2  |
+|  3   | $S_1$ |   2   | $S_2$ |   6   | $S_3$ |  3.1  |
+|  4   | $S_1$ |   2   | $S_2$ |   1   | $S_3$ |  3.9  |
+|  5   | $S_1$ |   2   | $S_2$ |   3   | $S_3$ |  4.2  |
+|  6   | $S_1$ |   2   | $S_2$ |   6   | $S_3$ |  2.0  |
+|  7   | $S_1$ |   2   | $S_2$ |   2   | $S_3$ |  1.0  |
+|  8   | $S_1$ |   2   | $S_2$ |   1   | $S_3$ |  3.0  |
+|  9   | $S_1$ |   2   | $S_2$ |   3   | $S_3$ |  3.0  |
 
 From above table, we can calculate the total reward achievable 
 
-- Constant Policy: $S_1$
+- Constant Action: $S_1$
 
 $$ R_{1,total} = 2*10 = 20 $$
 
-- Constant Policy: $S_2$
+- Constant Action: $S_2$
 
 $$ R_{1,total} = (3+1+2+6+1+3+6+2+1+3) = 28 $$
 
-- Constant Policy: $S_3$
+- Constant Action: $S_3$
 
 $$ R_{1,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
 
 
+### Non-Greedy Policy
+
+- The agent selects random arm at each time step
+- Full exploration, no exploitation 
+- $\epsilon=1$
+
+| $t$  | Action | Reward |
+| ---- | ----- | ------  |
+|  0   | $S_1$ |    2    |
+|  1   | $S_3$ |   4.1   |
+|  2   | $S_1$ |    2    |
+|  3   | $S_2$ |    5    |
+|  4   | $S_2$ |    1    |
+|  5   | $S_3$ |   2.6   |
+|  6   | $S_1$ |    2    |
+|  7   | $S_2$ |    3    |
+|  8   | $S_1$ |    2    |
+|  9   | $S_3$ |   3.0   |
 
 
-### Random Policy (Fully Greedy, $\epsilon$=1)
+From above table, we can calculate the total reward achieved
 
-Suppose, there are 10 time steps and at each of the steps, our RL agent selects a random slot
-
-
+$$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 
 
+### Epsilon-Greedy Policy
+
+- The agent sometimes selects arm 
+- $\epsilon=0.1$
+
+| $t$  | Action | Reward |
+| ---- | ----- | ------  |
+|  0   | $S_1$ |    2    |
+|  1   | $S_3$ |   4.1   |
+|  2   | $S_1$ |    2    |
+|  3   | $S_2$ |    5    |
+|  4   | $S_2$ |    1    |
+|  5   | $S_3$ |   2.6   |
+|  6   | $S_1$ |    2    |
+|  7   | $S_2$ |    3    |
+|  8   | $S_1$ |    2    |
+|  9   | $S_3$ |   3.0   |
+
+
+From above table, we can calculate the total reward achieved
+
+$$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 
 ---
 ## Formulation
