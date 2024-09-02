@@ -51,17 +51,17 @@ $$ R_3 = \mathbb{N}(3,1) \; normal \; distribution $$
 
 - Q-value for an action `a` at a given time step `t` can be estimated as follows
 
-$$ Q_{t}(a) = \frac{R_1 + R_2 + ... + R_k}{k}$$
+$$ Q_{t}(a) = \frac{R_1 + R_2 + ... + R_k}{k} $$
 
 - Let $Q_k$ denote the estimate for the kth reward i.e. the average of first $k-1$ awards
 
-$$ Q_{k} = \frac{1}{k-1}\sum{i=1}^{k-1} R_i $$
+$$ Q_{k} = \frac{1}{k-1}\sum_{i=1}^{k-1} R_i $$
 
 Similarly,
 
-$$ Q_{k+1} = \frac{1}{k}\sum{i=1}^k R_i $$
+$$ Q_{k+1} = \frac{1}{k}\sum_{i=1}^k R_i $$
 
-$$ \Righarrow Q_{k+1} = \frac{1}{k} \left (R_k + \sum{i=1}^{k-1} R_i \right)$$
+$$ \Righarrow Q_{k+1} = \frac{1}{k} \left (R_k + \sum_{i=1}^{k-1} R_i \right)$$
 
 $$ \Righarrow Q_{k+1} = \frac{1}{k} \left (R_k + (k-1)Q_k \right)$$
 
