@@ -164,7 +164,11 @@ From above table, we can calculate the total reward achieved
 $$ R_{total} = 2+2+2+5+1+2.6+2+6+2+3 = 27.6 $$
 
 ---
-## Formulation
+## Implementation
+
+
+
+
 
 
 
