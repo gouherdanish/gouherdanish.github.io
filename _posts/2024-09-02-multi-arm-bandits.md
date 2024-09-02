@@ -94,7 +94,24 @@ Let's continue with the 3-arm bandits example
 |  7   | $S_1$ |   2   |  2  | $S_2$ |   2   | 3.14  | $S_3$ |  1.0  | 3.15 |
 |  8   | $S_1$ |   2   |  2  | $S_2$ |   1   |  3   | $S_3$ |  3.0  | 2.88 |
 |  9   | $S_1$ |   2   |  2  | $S_2$ |   3   | 2.7  | $S_3$ |  3.0  | 2.9 |
+| ---- | ----- | ----- |  20  | ----- | ----- | 28 | ----- | --- | 30.1 |
 
+
+From above table, we can calculate the total reward achievable 
+
+- Constant Policy: $S_1$
+
+$$ R_{1,total} = 2*10 = 20 $$
+
+- Constant Policy: $S_2$
+
+$$ R_{1,total} = (3+1+2+6+1+3+6+2+1+3) = 28 $$
+
+- Constant Policy: $S_3$
+
+$$ R_{1,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
+
+---
 ### Non-Greedy Policy
 
 - The agent selects random arm at each time step
@@ -144,7 +161,7 @@ $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 
 From above table, we can calculate the total reward achieved
 
-$$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
+$$ R_{total} = 2+2+2+5+1+2.6+2+6+2+3 = 27.6 $$
 
 ---
 ## Formulation
