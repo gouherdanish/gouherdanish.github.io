@@ -47,6 +47,40 @@ $$ R_3 = \mathbb{N}(3,1) \; normal \; distribution $$
     - Greedy or $\epsilon$-greedy are types of policy that agent follows at each step
     - e.g. $\epsilon = 0.1$ means the agent will explore a random new slot machine with 10% probabity
 
+## Action-value Estimates
+
+- Q-value for an action `a` at a given time step `t` can be estimated as follows
+
+$$ Q_{t}(a) = \frac{R_1 + R_2 + ... + R_k}{k}$$
+
+- Let $Q_k$ denote the estimate for the kth reward i.e. the average of first $k-1$ awards
+
+$$ Q_{k} = \frac{1}{k-1}\sum{i=1}^{k-1} R_i $$
+
+Similarly,
+
+$$ Q_{k+1} = \frac{1}{k}\sum{i=1}^k R_i $$
+
+$$ \Righarrow Q_{k+1} = \frac{1}{k} \left (R_k + \sum{i=1}^{k-1} R_i \right)$$
+
+$$ \Righarrow Q_{k+1} = \frac{1}{k} \left (R_k + (k-1)Q_k \right)$$
+
+$$ \Righarrow Q_{k+1} = Q_k + \frac{1}{k} \left (R_k - Q_k \right)$$
+
+- This is the incremental update policy for Q-value
+
+- _Exploitation_ choosed the action with the maximum q-value at a given time step is chosen
+
+Example
+- Suppose, in the 3-arm bandit problem, the arms are rotated 10 times
+- Also, assume that the arms are selected as follows
+
+| Action, $a$ | k |
+|------------ | - |
+| $S_1$       | 3 |
+| $S_2$       | 2 |
+| $S_3$       | 5 |
+
 ---
 ## Hand Calculation
 
@@ -58,33 +92,18 @@ Let's continue with the 3-arm bandits example
 - No exploration, only exploitation 
 - $\epsilon=0$
 
-| $t$  | Action | Reward | Action | Reward | Action | Reward |
-| ---- | ----- | ----- | ----- | ----- | ----- | ----- |
-|  0   | $S_1$ |   2   | $S_2$ |   3   | $S_3$ |  3.0  |
-|  1   | $S_1$ |   2   | $S_2$ |   1   | $S_3$ |  2.7  |
-|  2   | $S_1$ |   2   | $S_2$ |   2   | $S_3$ |  3.2  |
-|  3   | $S_1$ |   2   | $S_2$ |   6   | $S_3$ |  3.1  |
-|  4   | $S_1$ |   2   | $S_2$ |   1   | $S_3$ |  3.9  |
-|  5   | $S_1$ |   2   | $S_2$ |   3   | $S_3$ |  4.2  |
-|  6   | $S_1$ |   2   | $S_2$ |   6   | $S_3$ |  2.0  |
-|  7   | $S_1$ |   2   | $S_2$ |   2   | $S_3$ |  1.0  |
-|  8   | $S_1$ |   2   | $S_2$ |   1   | $S_3$ |  3.0  |
-|  9   | $S_1$ |   2   | $S_2$ |   3   | $S_3$ |  3.0  |
-
-From above table, we can calculate the total reward achievable 
-
-- Constant Action: $S_1$
-
-$$ R_{1,total} = 2*10 = 20 $$
-
-- Constant Action: $S_2$
-
-$$ R_{1,total} = (3+1+2+6+1+3+6+2+1+3) = 28 $$
-
-- Constant Action: $S_3$
-
-$$ R_{1,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
-
+| $t$  | Action | Reward | Q | Action | Reward | Q | Action | Reward | Q |
+| ---- | ----- | ----- | --- | ----- | ----- | ----- | ----- | --- | --- |
+|  0   | $S_1$ |   2   |  2  | $S_2$ |   3   |  0  | $S_3$ |  3.0  | 0   |
+|  1   | $S_1$ |   2   |  2  | $S_2$ |   1   |  3  | $S_3$ |  2.7  | 3   |
+|  2   | $S_1$ |   2   |  2  | $S_2$ |   2   |  2  | $S_3$ |  3.2  | 2.85 |
+|  3   | $S_1$ |   2   |  2  | $S_2$ |   6   |  2  | $S_3$ |  3.1  | 2.96 |
+|  4   | $S_1$ |   2   |  2  | $S_2$ |   1   |  3  | $S_3$ |  3.9  | 3 |
+|  5   | $S_1$ |   2   |  2  | $S_2$ |   3   | 2.6   | $S_3$ |  4.2  | 3.18 |
+|  6   | $S_1$ |   2   |  2  | $S_2$ |   6   | 2.33  | $S_3$ |  2.0  | 3.35 |
+|  7   | $S_1$ |   2   |  2  | $S_2$ |   2   | 3.14  | $S_3$ |  1.0  | 3.15 |
+|  8   | $S_1$ |   2   |  2  | $S_2$ |   1   |  3   | $S_3$ |  3.0  | 2.88 |
+|  9   | $S_1$ |   2   |  2  | $S_2$ |   3   | 2.7  | $S_3$ |  3.0  | 2.9 |
 
 ### Non-Greedy Policy
 
@@ -113,13 +132,16 @@ $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 
 ### Epsilon-Greedy Policy
 
-- The agent sometimes selects arm 
-- $\epsilon=0.1$
+- Most of the times, the agent selects arm from its knowledge so far that it estimates will give immediate maximum reward
+    - represented by $1-\epsilon$
+- Sometimes, the agent explores and selects a new arm
+    - represented by $\epsilon$
+- Usually $\epsilon=0.1$
 
 | $t$  | Action | Reward |
 | ---- | ----- | ------  |
 |  0   | $S_1$ |    2    |
-|  1   | $S_3$ |   4.1   |
+|  1   | $S_1$ |    2    |
 |  2   | $S_1$ |    2    |
 |  3   | $S_2$ |    5    |
 |  4   | $S_2$ |    1    |
