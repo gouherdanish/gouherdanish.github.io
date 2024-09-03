@@ -178,7 +178,9 @@ episodes = 100
 
 setup = Setup()
 bandits = setup.bandits
-
+agent = Agent(epsilon=epsilon,n_actions=len(bandits))
+env = NarmBanditsPlayGround(agent=agent,bandits=bandits)
+env.run(episodes=episodes)
 ```
 
 ---
