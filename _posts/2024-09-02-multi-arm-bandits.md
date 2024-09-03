@@ -102,18 +102,21 @@ From above table, we can calculate the total reward achievable
 - Constant Policy: $S_1$
 
 $$ R_{1,total} = 2*10 = 20 $$
+$$ R_{1,avg} = 20/10 = 2 $$
+
+<img src="{{site.url}}/images/greedy_1.png"/>
 
 - Constant Policy: $S_2$
 
 $$ R_{2,total} = (3+1+2+6+1+3+6+2+1+3) = 28 $$
+$$ R_{2,avg} = 28/10 = 2.8 $$
+
+<img src="{{site.url}}/images/greedy_2.png"/>
 
 - Constant Policy: $S_3$
 
 $$ R_{3,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
-
-<img src="{{site.url}}/images/greedy_1.png"/>
-
-<img src="{{site.url}}/images/greedy_2.png"/>
+$$ R_{3,avg} = 30.1/10 = 3.01 $$
 
 <img src="{{site.url}}/images/greedy_3.png"/>
 
