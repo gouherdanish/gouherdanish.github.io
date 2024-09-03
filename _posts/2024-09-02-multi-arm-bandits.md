@@ -113,6 +113,9 @@ $$ R_{3,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
 
 <img src="{{site.url}}/images/greedy_1.png"/>
 
+Note:
+- Due to greedy expoitation, it can be observed that the agent is stuck in immediate constant reward
+
 ---
 ### Non-Greedy Policy
 
@@ -138,6 +141,12 @@ From above table, we can calculate the total reward achieved
 
 $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 
+<img src="{{site.url}}/images/non_greedy_1.png"/>
+
+<img src="{{site.url}}/images/non_greedy_2.png"/>
+
+Note:
+- Due to random exploration, it can be observed that the agent does not converge to optimal solution
 
 ### Epsilon-Greedy Policy
 
@@ -164,6 +173,13 @@ $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 From above table, we can calculate the total reward achieved
 
 $$ R_{total} = 2+2+2+5+1+2.6+2+6+2+3 = 27.6 $$
+
+<img src="{{site.url}}/images/epsilon_greedy_1.png"/>
+
+<img src="{{site.url}}/images/epsilon_greedy_2.png"/>
+
+Note:
+- Due to greedy expoitation, it can be observed that the agent is stuck in immediate constant reward
 
 ---
 ## Implementation
