@@ -30,7 +30,7 @@ $$ P(R_{t+1}=r, S_{t+1}=s' | S_0,A_0,R_1,S_1,A_1,...,R_t,S_t,A_t) $$
 ---
 ### 2. Markov Property
 
-- It states that the future state of a process depends only on the current state, not on the sequence of events that preceded it. 
+- It states that the future state of a process depends only on the current state, not on the sequence of events that preceded it. In other words, the process is "memoryless"
 - If the state signal has the Markov property, then the environment’s response at t + 1 depends only on the state and action representations at t
 - This means that we can predict all future states and expected rewards from knowledge only of the current state
 
@@ -38,6 +38,10 @@ $$ P(R_{t+1}=r, S_{t+1}=s' | S_0,A_0,R_1,S_1,A_1,...,R_t,S_t,A_t) $$
 $$ P(R_{t+1}=r, S_{t+1}=s' | S_t, A_t) $$
 
 ---
-### 3. Markov Decision Process
+### 3. Finite Markov Decision Process
+- A reinforcement learning task that satisfies the Markov property is called a _Markov decision process (MDP)_
+- If the state and action spaces are finite,then it is called a _finite Markov decision process (finite MDP)_
+- 90% of modern reinforcement learning problems involve Finite MDP assumptions
 
-- In other words, the process is "memoryless"
+**Definition**
+- A particular finite MDP is defined by its state and action sets and by the one-step dynamics of the environment.
