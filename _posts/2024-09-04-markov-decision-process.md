@@ -2,7 +2,7 @@
 layout: post
 title: "Markov Decision Process - Concepts"
 date: 2024-09-04
-tags: ["Machine Learning","Reinforcement Learning","Probability Theory"]
+tags: ["Reinforcement Learning"]
 ---
 
 The Markov Property is a fundamental concept in probability theory and reinforcement learning
