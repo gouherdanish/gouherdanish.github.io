@@ -217,7 +217,9 @@ env = NarmBanditsPlayGround(agent=agent,bandits=bandits)
 env.run(episodes=episodes)
 ```
 
----
+For full implementation, refer following repository
+
+Github - [RL Concepts](https://github.com/gouherdanish/rl_concepts/blob/main/narm_bandits)
 
 
 
