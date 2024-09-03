@@ -113,8 +113,14 @@ $$ R_{3,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
 
 <img src="{{site.url}}/images/greedy_1.png"/>
 
+<img src="{{site.url}}/images/greedy_2.png"/>
+
+<img src="{{site.url}}/images/greedy_3.png"/>
+
 Note:
-- Due to greedy expoitation, it can be observed that the agent is stuck in immediate constant reward
+- Due to greedy expoitation, it can be observed that the agent is stuck in immediate constant reward distribution
+- If the agent initially selects Arm 1, then it continues to select Arm 1 subsequently.
+    - The reward from that arm may follow certain distribution
 
 ---
 ### Non-Greedy Policy
@@ -148,6 +154,7 @@ $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 Note:
 - Due to random exploration, it can be observed that the agent does not converge to optimal solution
 
+---
 ### Epsilon-Greedy Policy
 
 - Most of the times, the agent selects arm from its knowledge so far that it estimates will give immediate maximum reward
@@ -179,7 +186,8 @@ $$ R_{total} = 2+2+2+5+1+2.6+2+6+2+3 = 27.6 $$
 <img src="{{site.url}}/images/epsilon_greedy_2.png"/>
 
 Note:
-- Due to greedy expoitation, it can be observed that the agent is stuck in immediate constant reward
+- Epsilon-greedy agent converges to optimal solution after sufficient time steps
+- Exploration vs Exploitation trade-off is necessary to maximize long term rewards
 
 ---
 ## Implementation
