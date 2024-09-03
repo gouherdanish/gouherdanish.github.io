@@ -25,6 +25,7 @@ The Markov Property is a fundamental concept in probability theory and reinforce
 
 **Definition**
 - In the most general, causal case this response may depend on everything that has happened earlier
+
 $$ P(R_{t+1}=r, S_{t+1}=s' | S_0,A_0,R_1,S_1,A_1,...,R_t,S_t,A_t) $$
 
 ---
@@ -35,6 +36,7 @@ $$ P(R_{t+1}=r, S_{t+1}=s' | S_0,A_0,R_1,S_1,A_1,...,R_t,S_t,A_t) $$
 - This means that we can predict all future states and expected rewards from knowledge only of the current state
 
 **Definition**
+
 $$ P(R_{t+1}=r, S_{t+1}=s' | S_t, A_t) $$
 
 ---
