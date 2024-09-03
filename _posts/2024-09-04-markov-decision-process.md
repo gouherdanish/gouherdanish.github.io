@@ -47,3 +47,7 @@ $$ P(R_{t+1}=r, S_{t+1}=s' | S_t, A_t) $$
 
 **Definition**
 - A particular finite MDP is defined by its state and action sets and by the one-step dynamics of the environment.
+
+$$ p(s',r|s,a) = P(S_{t+1}=s', R_{t+1}=r | S_t=s, A_t=a) $$
+
+---
