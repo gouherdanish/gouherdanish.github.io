@@ -102,6 +102,7 @@ From above table, we can calculate the total reward achievable
 - Constant Action: $S_1$
 
 $$ R_{1,total} = 2*10 = 20 $$
+
 $$ R_{1,avg} = \frac{20}{10} = 2 $$
 
 <img src="{{site.url}}/images/greedy_1.png"/>
@@ -187,6 +188,8 @@ Note:
 From above table, we can calculate the total reward achieved
 
 $$ R_{total} = 2+2+2+5+1+2.6+2+6+2+3 = 27.6 $$
+
+$$ R_{avg} = \frac{27.6}{10} = 2.76 $$
 
 <img src="{{site.url}}/images/epsilon_greedy_1.png"/>
 
