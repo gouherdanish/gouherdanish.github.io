@@ -111,7 +111,7 @@ $$ R_{2,total} = (3+1+2+6+1+3+6+2+1+3) = 28 $$
 
 $$ R_{3,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
 
-<img src="images/greedy_1.png"/>
+<img src="{{site.url}}/images/greedy_1.png"/>
 
 ---
 ### Non-Greedy Policy
