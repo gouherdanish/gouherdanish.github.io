@@ -24,24 +24,32 @@ The Markov Property is a fundamental concept in probability theory and reinforce
 - The state influences the actions available and the rewards received.
 
 **Definition**
-- In the most general, causal case this response may depend on everything that has happened earlier
+- In the most general, causal case, the state of the environment at time step $t+1$ may depend on everything that has happened earlier till the time step $t$
 
 $$ P(R_{t+1}=r, S_{t+1}=s' | S_0,A_0,R_1,S_1,A_1,...,R_t,S_t,A_t) $$
 
 ---
 ### 2. Markov Property
 
-- It states that the future state of a process depends only on the current state, not on the sequence of events that preceded it. In other words, the process is "memoryless"
-- If the state signal has the Markov property, then the environment’s response at t + 1 depends only on the state and action representations at t
+- It states that the future state of a process depends only on the current state, not on the sequence of events that preceded it. 
+
+> The future is independent of the past given the present
+
 - This means that we can predict all future states and expected rewards from knowledge only of the current state
+- The state captures all relevant information from the history
+- Once the state is known, the history may be thrown away
+- The state is a sufficient statistic of the future
 
 **Definition**
+
+- If the state signal has the Markov property, then the environment’s response at t + 1 depends only on the state and action representations at t
 
 $$ P(R_{t+1}=r, S_{t+1}=s' | S_t, A_t) $$
 
 ---
 ### 3. Finite Markov Decision Process
 - A reinforcement learning task that satisfies the Markov property is called a _Markov decision process (MDP)_
+- Since the process only needs to know the current state, we can call this process "memoryless"
 - If the state and action spaces are finite,then it is called a _finite Markov decision process (finite MDP)_
 - 90% of modern reinforcement learning problems involve Finite MDP assumptions
 
@@ -49,5 +57,8 @@ $$ P(R_{t+1}=r, S_{t+1}=s' | S_t, A_t) $$
 - A particular finite MDP is defined by its state and action sets and by the one-step dynamics of the environment.
 
 $$ p(s',r|s,a) = P(S_{t+1}=s', R_{t+1}=r | S_t=s, A_t=a) $$
+
+
+**Definition**
 
 ---
