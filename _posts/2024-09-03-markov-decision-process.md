@@ -99,7 +99,7 @@ $$ v_{\pi}(S_t) = \mathbb{E}[G_t | S_t = s] $$
 
 $$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma G_{t+1} | S_t = s] $$
 
-$$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma \mathbb{E}[G_{t+1}]] $$
+$$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma \mathbb{E}[G_{t+1} | S_t = s, A_t = a]] $$
 
 $$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma v_{\pi}(S_{t+1})] $$
 
@@ -115,13 +115,13 @@ $$ v = R + \gamma Pv $$
 **Bellman Equation**
 - The action value function represents the expected return from taking action `a` in a given state `s` and thereafter following a given policy $\pi$
 
-$$ q_{\pi}(S_t) = \mathbb{E}[G_t | S_t = s, A_t = a] $$
+$$ q_{\pi}(S_t,A_t) = \mathbb{E}[G_t | S_t = s, A_t = a] $$
 
-$$ q_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma G_{t+1} | S_t = s, A_t = a] $$
+$$ q_{\pi}(S_t,A_t) = \mathbb{E}[R_{t+1} + \gamma G_{t+1} | S_t = s, A_t = a] $$
 
-$$ q_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma \mathbb{E}[G_{t+1}]] $$
+$$ q_{\pi}(S_t,A_t) = \mathbb{E}[R_{t+1} + \gamma \mathbb{E}[G_{t+1} | S_t = s, A_t = a]] $$
 
-$$ q_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma q_{\pi}(S_{t+1})] $$
+$$ q_{\pi}(S_t,A_t) = \mathbb{E}[R_{t+1} + \gamma q_{\pi}(S_{t+1})] $$
 
 $$ q = R + \gamma Pq $$
 
