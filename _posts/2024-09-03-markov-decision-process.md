@@ -58,7 +58,51 @@ $$ P(R_{t+1}=r, S_{t+1}=s' | S_t, A_t) $$
 
 $$ p(s',r|s,a) = P(S_{t+1}=s', R_{t+1}=r | S_t=s, A_t=a) $$
 
+---
+### 4. Returns ($G_t$)
 
 **Definition**
 
+- The return is the total cumulative reward from time step t to the end of the episode
+
+$$ G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + ... $$
+
+where $\gamma$ is the _discount factor_
+
+**Discount Factor**
+
+- The discount factor determines the present value of future rewards
+- Case 1: $\gamma = 0$ 
+    - the agent is “myopic” i.e. it is concerned only with maximizing immediate rewards
+    - its objective in this case is to learn how to choose $A_t$ so as to maximize only $R_{t+1}$
+    - but in general, acting to maximize immediate reward can reduce access to future rewards so that the return may actually be reduced.
+- Case 2: $\gamma \rightarrow 1$ 
+    -  the agent becomes far-sighted i.e. the objective takes future rewards into account more strongly
+
+**Incremental Update Formula**
+
+$$ G_t = R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + ...) $$
+
+$$ G_t = R_{t+1} + \gamma G_{t+1} $$
+
 ---
+
+### 5. State Value Function ($V(s)$)
+
+**Definition**
+- Intuitively, it means how good it is for the agent to be in a given state 
+
+**Bellman Equation**
+- The value function represents the expected return from state `s` under a given policy
+
+$$ v_{\pi}(S_t) = \mathbb{E}[G_t | S_t = s] $$
+
+$$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma G_{t+1} | S_t = s] $$
+
+$$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma \mathbb{E}[G_{t+1}]] $$
+
+$$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma v_{\pi}(S_{t+1})] $$
+
+- This is the _bellman equation_ for Value Function
+
+$$ v = R + \gamma Pv $$
