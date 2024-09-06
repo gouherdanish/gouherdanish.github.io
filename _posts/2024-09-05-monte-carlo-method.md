@@ -48,4 +48,6 @@ $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}
 
     2. Since, we don't know the true expectation, so we use a sample 
 
-$$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \left (G_t - \hat{v}_{\theta}(S_t) \right ) $$
+$$ {v}(S_t) \leftarrow {v}(S_t) + 2 \alpha \left (G_t - {v}(S_t) \right ) $$
+
+$$ {v}(S_t) \leftarrow {v}(S_t) + 2 \alpha \left (G_t - {v}(S_t) \right ) $$
