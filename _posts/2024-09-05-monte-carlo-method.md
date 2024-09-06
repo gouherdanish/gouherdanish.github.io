@@ -36,14 +36,16 @@ $$ \theta(S_t) \leftarrow \theta(S_t) - \alpha \frac{\partial J}{\partial \theta
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)]$$
 
 - Assumption:
-    - Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
+    1. Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
 
 $$ \hat{v}_{\theta}(S_t) = \theta (S_t)$$
 
-$$ \Rightarrow \frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t) = 1 $$
+$$ \frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t) = 1 $$
 
-$$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )] $$
+Substituting,
 
-    - we don't know the true expectation, so we use a sample 
+$$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )] $$
+
+    2. Since, we don't know the true expectation, so we use a sample 
 
 $$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \left (G_t - \hat{v}_{\theta}(S_t) \right ) $$
