@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Markov Decision Process - Concepts"
-date: 2024-09-03
+date: 2024-09-04
 tags: ["Reinforcement Learning"]
 ---
 
