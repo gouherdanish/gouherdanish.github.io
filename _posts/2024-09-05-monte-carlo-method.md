@@ -51,9 +51,9 @@ $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}
 
 Since, we don't know the true expectation, so we use a sample 
 
-$$ {v}(S_t) \leftarrow {v}(S_t) + 2 \alpha \left (G_t - {v}(S_t) \right ) $$
+$$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \left (G_t - \theta(S_t) \right ) $$
 
-$$ {v}(S_t) \leftarrow {v}(S_t) + 2 \alpha \left (G_t - {v}(S_t) \right ) $$
+$$ {v}(S_t) \leftarrow {v}(S_t) + \alpha \left (G_t - {v}(S_t) \right ) $$
 
 - This is the monte carlo update rule
 
