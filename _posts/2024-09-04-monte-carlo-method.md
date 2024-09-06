@@ -35,6 +35,22 @@ Monte Carlo methods are ways of solving the reinforcement learning problem based
 ---
 ### Concepts
 
+#### Episode
+- when the agent–environment interaction breaks naturally into subsequences of repeated interactions
+- e.g. plays of a game, trips through a maze
+- Each episode ends in a special state called the terminal state
+
+#### Visit
+- Each occurrence of state `s` in an episode is called a visit to `s`
+- State `s` may be visited multiple times in the same episode also
+
+#### First-Visit MC
+- The first time a state `s` is visited in an episode is called the _first visit_ to `s`
+- This method estimates the value of state `s` as the average of the returns following _first visits_ to s
+
+#### Every-Visit MC
+- This method estimates the value of state `s` as the average of the returns following _all visits_ to s
+
 #### Experience
 - In Monte Carlo methods, "experience" refers to the observed sequences of states, actions, and rewards that an agent encounters while interacting with an environment
 - We assume experience is divided into episodes, and that all episodes eventually terminate no matter what actions are selected
@@ -58,6 +74,7 @@ Monte Carlo methods are ways of solving the reinforcement learning problem based
     - Unlike temporal difference methods, Monte Carlo doesn't use estimates of other states' values to update the current state's value. 
     - It relies solely on actual experienced returns.
 
+---
 ### Derivation
 
 **Goal**
