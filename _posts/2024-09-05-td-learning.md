@@ -13,23 +13,45 @@ TD Learning is a central and novel idea in reinforcement learning
 - TD Learning is a combination of the Monte Carlo method and Dynamic Programming. 
     - Like Monte Carlo methods, TD methods can learn directly from raw experience without a model of the environment’s dynamics.
     - Like DP, TD methods update estimates based in part on other learned estimates, without waiting for a final outcome
-- It updates the value of the current state based on the estimated value of the next state. That's why they are called _bootstrapping methods_ like DP
+- It updates the value of the current state based on the estimated value of the next state. 
+- This means they learn a guess from a guess that's why they are called _bootstrapping methods_ like DP
+
+## Advantages
+
+### TD vs DP
+
+- TD methods have an advantage over DP methods in that they do not require a model of the environment, of its reward and next-state probability distributions
+
+### TD vs Monte Carlo
+
+- With Monte Carlo methods one must wait until the end of an episode, because only then is the return known. 
+- Some applications have very long episodes, so that delaying all learning until an episode’s end is too slow.
+- Other applications are continuing tasks and have no episodes at all.
+- TD methods have usually been found to converge faster than constant-$\alpha$ MC methods
 
 ---
 
 ## Derivation
 
-- Goal: Estimate the state-value function $v_{\pi}(S_t)$ for a given policy $\pi$.
+**Goal**: 
 
-- Actual value: $v_{\pi}(S_t)$ is the value of the state $S_t$
+Estimate the state-value function $v_{\pi}(S_t)$ for a given policy $\pi$.
 
-- Hypothesis Function: Let $\hat{v}_{\theta}(S_t)$ denote the estimated value function 
+**Actual value:** 
 
-- Objective Function: Need to minimize the MSE between actual value and estimated value
+$v_{\pi}(S_t)$ is the value of the state $S_t$
+
+**Hypothesis Function:**
+
+Let $\hat{v}_{\theta}(S_t)$ denote the estimated value function 
+
+**Objective Function:** 
+
+Need to minimize the MSE between actual value and estimated value
 
 $$ J(\theta) = \mathbb{E}\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )^2 $$
 
-- Gradient:
+**Gradient:**
 
 $$ \frac{\partial J}{\partial \theta} = \frac{\partial}{\partial \theta} \mathbb{E}\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )^2 $$
 
@@ -37,11 +59,13 @@ $$ \Rightarrow \frac{\partial J}{\partial \theta} = \mathbb{E}[\frac{\partial}{\
 
 $$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)] $$
 
-- Stochastic Gradient Descent
+**Stochastic Gradient Descent**
 
 $$ \theta(S_t) \leftarrow \theta(S_t) - \alpha \frac{\partial J}{\partial \theta}$$
 
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)]$$
+
+**Assumptions**
 
 - Assumption 1: 
 
@@ -71,6 +95,6 @@ $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \left (R_{t+1} + \gamma v(S_{t+
 
 $$ {v}(S_t) \leftarrow {v}(S_t) + \alpha \left (R_{t+1} + \gamma v(S_{t+1}) - {v}(S_t) \right ) $$
 
-- This is update rule for TD(0) method
--  Monte Carlo methods must wait until the end of the episode to determine the increment to $v(S_t)$ (only then is $G_t$ known)
+- This is the update rule for TD(0) method
+- It updates the value of the current state based on the estimated value of the next state
 

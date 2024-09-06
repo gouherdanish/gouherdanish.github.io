@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Monte Carlo Method"
-date: 2024-09-05
+date: 2024-09-04
 tags: ["Reinforcement Learning"]
 ---
 
