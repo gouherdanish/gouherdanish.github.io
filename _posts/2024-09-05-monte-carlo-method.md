@@ -29,10 +29,21 @@ $$ \Rightarrow \frac{\partial J}{\partial \theta} = \mathbb{E}[\left (G_t - \fra
 
 $$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)] $$
 
-- Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
+- Stochastic Gradient Descent
+
+$$ \theta(S_t) \leftarrow \theta(S_t) - \alpha \frac{\partial J}{\partial \theta}$$
+
+$$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)]$$
+
+- Assumption:
+    - Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
 
 $$ \hat{v}_{\theta}(S_t) = \theta (S_t)$$
 
-$$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (G_t - \frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t) \right )] $$
+$$ \Rightarrow \frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t) = 1 $$
 
-- Stochastic Gradient Descent
+$$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )] $$
+
+    - we don't know the true expectation, so we use a sample 
+
+$$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \left (G_t - \hat{v}_{\theta}(S_t) \right ) $$
