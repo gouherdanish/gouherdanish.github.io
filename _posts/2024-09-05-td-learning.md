@@ -8,7 +8,7 @@ tags: ["Reinforcement Learning"]
 TD Learning is a central and novel idea in reinforcement learning
 
 ---
-## Intuition
+### Intuition
 
 - TD Learning is a combination of the Monte Carlo method and Dynamic Programming. 
     - Like Monte Carlo methods, TD methods can learn directly from raw experience without a model of the environment’s dynamics.
@@ -16,13 +16,13 @@ TD Learning is a central and novel idea in reinforcement learning
 - It updates the value of the current state based on the estimated value of the next state. 
 - This means they learn a guess from a guess that's why they are called _bootstrapping methods_ like DP
 
-## Advantages
+### Advantages
 
-### TD vs DP
+#### TD vs DP
 
 - TD methods have an advantage over DP methods in that they do not require a model of the environment, of its reward and next-state probability distributions
 
-### TD vs Monte Carlo
+#### TD vs Monte Carlo
 
 - With Monte Carlo methods one must wait until the end of an episode, because only then is the return known. 
 - Some applications have very long episodes, so that delaying all learning until an episode’s end is too slow.
@@ -31,23 +31,24 @@ TD Learning is a central and novel idea in reinforcement learning
 
 ---
 
-## Derivation
+### Derivation
 
 **Goal**: 
 
-Estimate the state-value function $v_{\pi}(S_t)$ for a given policy $\pi$.
+- Estimate the state-value function $v_{\pi}(S_t)$ for a given policy $\pi$.
 
 **Actual value:** 
 
-$v_{\pi}(S_t)$ is the value of the state $S_t$
+- $v_{\pi}(S_t)$ is the value of the state $S_t$
 
 **Hypothesis Function:**
 
-Let $\hat{v}_{\theta}(S_t)$ denote the estimated value function 
+- Let $\hat{v}_{\theta}(S_t)$ denote the estimated value function 
 
 **Objective Function:** 
 
-Need to minimize the MSE between actual value and estimated value
+- Need to minimize the MSE between actual value and estimated value
+- The objective function can be written as follows
 
 $$ J(\theta) = \mathbb{E}\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )^2 $$
 
@@ -61,13 +62,15 @@ $$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (v_{\pi}
 
 **Stochastic Gradient Descent**
 
+- Parameter update rule is governed by
+
 $$ \theta(S_t) \leftarrow \theta(S_t) - \alpha \frac{\partial J}{\partial \theta}$$
 
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)]$$
 
 **Assumptions**
 
-- Assumption 1: 
+_Assumption 1_
 
 Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
 
@@ -79,7 +82,7 @@ Substituting,
 
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (v_{\pi}(S_t) - \hat{v}_{\theta}(S_t) \right )] $$
 
-- Assumption 2: 
+_Assumption 2_
 
 Since, We don't know $v_{\pi}(S_t)$, but we can use the Bellman equation as a target
 
@@ -87,7 +90,7 @@ $$ v_{\pi}(S_t) = \mathbb{E}[R_{t+1} + \gamma v_{\pi}(S_{t+1})] $$
 
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \left (R_{t+1} + \gamma v_{\pi}(S_{t+1}) - \theta(S_t) \right ) $$
 
-- Assumption 3:
+_Assumption 3_
 
 Since we still don't know $v_{\pi}(S_{t+1})$, so we approximate it with our current estimate $v(S_{t+1})$
 
