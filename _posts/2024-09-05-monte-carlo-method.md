@@ -25,7 +25,7 @@ $$ J(\theta) = \mathbb{E}\left (G_t - \hat{v}_{\theta}(S_t) \right )^2 $$
 
 $$ \frac{\partial J}{\partial \theta} = \frac{\partial}{\partial \theta} \mathbb{E}\left (G_t - \hat{v}_{\theta}(S_t) \right )^2 $$
 
-$$ \Rightarrow \frac{\partial J}{\partial \theta} = \mathbb{E}[\left (G_t - \frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t) \right )^2]  $$
+$$ \Rightarrow \frac{\partial J}{\partial \theta} = \mathbb{E}[\frac{\partial}{\partial \theta}  \left (G_t - \hat{v}_{\theta}(S_t) \right )^2]  $$
 
 $$ \Rightarrow \frac{\partial J}{\partial \theta} = -2 \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)] $$
 
@@ -35,8 +35,9 @@ $$ \theta(S_t) \leftarrow \theta(S_t) - \alpha \frac{\partial J}{\partial \theta
 
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )\frac{\partial}{\partial \theta}  \hat{v}_{\theta}(S_t)]$$
 
-- Assumption:
-    1. Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
+- Assumption 1: 
+
+Let's assume that in the simplest case, we have one parameter per state, so $\theta$ is essentially a lookup table.
 
 $$ \hat{v}_{\theta}(S_t) = \theta (S_t)$$
 
@@ -46,8 +47,13 @@ Substituting,
 
 $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \mathbb{E}[\left (G_t - \hat{v}_{\theta}(S_t) \right )] $$
 
-    2. Since, we don't know the true expectation, so we use a sample 
+- Assumption 2: 
+
+Since, we don't know the true expectation, so we use a sample 
 
 $$ {v}(S_t) \leftarrow {v}(S_t) + 2 \alpha \left (G_t - {v}(S_t) \right ) $$
 
 $$ {v}(S_t) \leftarrow {v}(S_t) + 2 \alpha \left (G_t - {v}(S_t) \right ) $$
+
+- This is the monte carlo update rule
+
