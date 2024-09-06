@@ -2,7 +2,7 @@
 layout: post
 title: "Multi-arm Bandits: Exploration vs Exploitation"
 date: 2024-09-02
-tags: ["Machine Learning","Reinforcement Learning"]
+tags: ["Reinforcement Learning"]
 ---
 
 The N-armed bandit problem is a classic reinforcement learning problem that is often used to illustrate the exploration-exploitation trade-off.

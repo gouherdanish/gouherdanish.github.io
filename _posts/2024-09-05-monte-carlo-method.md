@@ -17,7 +17,7 @@ The Monte Carlo method estimates the value of a state based on the average retur
 
 - Hypothesis Function: Let $\hat{v}_{\theta}(S_t)$ denote the estimated value function 
 
-- Objective Function: Need to minimize the MSE between actual return and e
+- Objective Function: Need to minimize the MSE between actual return and estimated value
 
 $$ J(\theta) = \mathbb{E}\left (G_t - \hat{v}_{\theta}(S_t) \right )^2 $$
 
@@ -55,5 +55,6 @@ $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \left (G_t - \theta(S_t) \right
 
 $$ {v}(S_t) \leftarrow {v}(S_t) + \alpha \left (G_t - {v}(S_t) \right ) $$
 
-- This is the monte carlo update rule
+- This is update rule for a _simple every-visit Monte Carlo method_ suitable for nonstationary environments 
+-  Monte Carlo methods must wait until the end of the episode to determine the increment to $v(S_t)$ (only then is $G_t$ known)
 
