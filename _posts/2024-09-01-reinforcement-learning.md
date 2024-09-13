@@ -158,6 +158,10 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
     - The agent learns the value of the policy it is currently following
     - Learns and improves the same policy that is used for decision-making
     - This means that the policy used to make decisions during exploration (**behaviour policy**) is the same as the policy being optimized (**update policy**)
+- Pros
+    - Can be more stable and may converge to a policy that performs well under the specific conditions of exploration
+- Cons
+    - It might be less efficient in finding the optimal policy because it is constrained by the need to balance exploration and exploitation simultaneously
 - Example
     - SARSA (State-Action-Reward-State-Action) is an on-policy algorithm
 - Usage
@@ -169,6 +173,10 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
 - Intuition
     - Learns the optimal policy independently of the decision-making process. 
     - It is more flexible and sample-efficient but can be more complex and less stable.
+- Pros
+    - Typically more sample-efficient and capable of converging to the optimal policy faster since it uses the best possible action (even if it wasn’t taken)
+- Cons
+    - It can be less stable and may require more careful tuning to ensure convergence, especially when using function approximation
 - Example
     - Q-learning is an off-policy algorithm
 - Usage

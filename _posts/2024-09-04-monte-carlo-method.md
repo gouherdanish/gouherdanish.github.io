@@ -139,3 +139,202 @@ $$ {v}(S_t) \leftarrow {v}(S_t) + \alpha \left (G_t - {v}(S_t) \right ) $$
 - This is update rule for a _simple every-visit Monte Carlo method_ suitable for nonstationary environments 
 -  Monte Carlo methods must wait until the end of the episode to determine the increment to $v(S_t)$ (only then is $G_t$ known)
 
+
+### Hand Calculation
+
+#### Example
+
+- Let's take an example of 2*2 Gridworld 
+
+```
+1 - 2
+3 - 4
+```
+
+#### Initial Conditions
+- Start State: (1,1) or cell 1 (top-left corner)
+- Goal State: (2,3) or cell 4 (bottom-right corner)
+- Actions: Up, Down, Left, Right
+- Reward Structure: +1 for reaching the goal (cell 9), and 0 for all other cells.
+- Initial Q-values: Assume all Q-values are initialized to 0.
+- Learning Rate ($\alpha$): 0.5
+- Discount Factor ($\gamma$): 0.9
+
+Initial Q-table looks like this
+
+| State | Action | $Q(s,a)$ |
+| - | - |
+| 1 | Down | 0 |
+| 1 | Right | 0 |
+| 2 | Down | 0 |
+| 2 | Left | 0 |
+| 3 | Up | 0 |
+| 3 | Right | 0 |
+| 4 | Up | 0 |
+| 4 | Left | 0 |
+
+Other (s,a) pairs are not valid as they will lead to crossing the grid boundary
+
+#### Episode 1
+
+Let's assume the agent follows the following path during episode 1
+
+$$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow State 4 $$
+
+**Step 1**
+
+- Agent moves right from state 1 to state 2
+- No reward in the next state, so $R_{t+1} = 0$
+
+$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma Q(2,Down) - {Q}(1,Right) \right ) $$
+
+$$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
+
+$$ {Q}(1,Right) \leftarrow 0 $$
+
+**Step 2**
+
+- Agent moves down from state 2 to state 4
+- Since 4 is goal state, so $R_{t+1} = 1$
+- Since 4 is goal state, any action that takes agent away from 4 should have no value, so $Q(4,a') = 0$
+
+$$ {Q}(2,Down) \leftarrow {Q}(2,Down) + \alpha \left (R_{t+1} + \gamma Q(4,a') - {Q}(2,Down) \right ) $$
+
+$$ {Q}(2,Down) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
+
+$$ {Q}(2,Down) \leftarrow 0.5 $$
+
+**Backpropagation**
+
+- Since agent has reached the goal state, it will now update its q-value estimates for all the steps it tool along the path traced
+
+_State 2, Action Down -> State 4 (Goal)_
+
+$$ {Q}(2,Down) \leftarrow 0.5 $$
+
+_State 1, Action Right -> State 2_
+
+$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma Q(2,Down) - {Q}(1,Right) \right ) $$
+
+$$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0.5 - 0) $$
+
+$$ {Q}(1,Right) \leftarrow 0.225 $$
+
+
+**Updated Q-table**
+
+| State | Action | $Q(s,a)$ |
+| - | - |
+| 1 | Down | 0 |
+| 1 | Right | 0.225 |
+| 2 | Down | 0.5 |
+| 2 | Left | 0 |
+| 3 | Up | 0 |
+| 3 | Right | 0 |
+| 4 | Up | 0 |
+| 4 | Left | 0 |
+
+**Episode 1 ends**
+
+
+#### Episode 2
+
+Let's assume the agent follows the following path during episode 2
+
+$$ State 1 \rightarrow Down \rightarrow State 3 \rightarrow Up \rightarrow State 1 \rightarrow Down \rightarrow State 3 \rightarrow Right \rightarrow State 4 $$
+
+**Step 1**
+
+- Agent moves right from state 1 to state 3
+- Since 3 is not the goal state, so $R_{t+1} = 0$
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Up) - {Q}(1,Down) \right ) $$
+
+$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
+
+$$ {Q}(1,Down) \leftarrow 0 $$
+
+**Step 2**
+
+- Agent moves down from state 3 to state 1
+- Since 1 is not the goal state, so $R_{t+1} = 0$
+
+$$ {Q}(3,Up) \leftarrow {Q}(3,Up) + \alpha \left (R_{t+1} + \gamma Q(1,Down) - {Q}(3,Up) \right ) $$
+
+$$ {Q}(3,Up) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
+
+$$ {Q}(3,Up) \leftarrow 0 $$
+
+**Step 3**
+
+- Agent moves down from state 1 to state 3
+- Since 3 is not the goal state, so $R_{t+1} = 0$
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Right) - {Q}(1,Down) \right ) $$
+
+$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
+
+$$ {Q}(1,Down) \leftarrow 0 $$
+
+**Step 4**
+
+- Agent moves down from state 3 to state 4
+- Since 4 is goal state, so $R_{t+1} = 1$
+- Since 4 is goal state, any action that takes agent away from 4 should have no value, so $Q(4,a') = 0$
+
+$$ {Q}(3,Right) \leftarrow {Q}(3,Right) + \alpha \left (R_{t+1} + \gamma Q(4,a') - {Q}(3,Right) \right ) $$
+
+$$ {Q}(3,Right) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
+
+$$ {Q}(3,Right) \leftarrow 0.5 $$
+
+**Backpropagation**
+
+- Since agent has reached the goal state, it will now update its q-value estimates for all the steps it tool along the path traced
+
+_State 3, Action Right -> State 4 (Goal)_
+
+$$ {Q}(3,Right) \leftarrow 0.5 $$
+
+
+_State 1, Action Down -> State 3_
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Right) - {Q}(1,Down) \right ) $$
+
+$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0.5 - 0) $$
+
+$$ {Q}(1,Down) \leftarrow 0.225 $$
+
+
+_State 3, Action Up -> State 1_
+
+$$ {Q}(3,Up) \leftarrow {Q}(3,Up) + \alpha \left (R_{t+1} + \gamma Q(1,Down) - {Q}(3,Up) \right ) $$
+
+$$ {Q}(3,Up) \leftarrow 0 + 0.5(0 + 0.9*0.225 - 0) $$
+
+$$ {Q}(3,Up) \leftarrow 0.10125 $$
+
+
+_State 1, Action Down -> State 3_
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Up) - {Q}(1,Down) \right ) $$
+
+$$ {Q}(1,Down) \leftarrow 0.225 + 0.5(0 + 0.9*0.10125 - 0.225) $$
+
+$$ {Q}(1,Down) \leftarrow 0.158 $$
+
+**Updated Q-table**
+
+| State | Action | $Q(s,a)$ |
+| - | - |
+| 1 | Down | 0.158 |
+| 1 | Right | 0.225 |
+| 2 | Down | 0.5 |
+| 2 | Left | 0 |
+| 3 | Up | 0.10125 |
+| 3 | Right | 0.5 |
+| 4 | Up | 0 |
+| 4 | Left | 0 |
+
+**Episode 2 ends**
+

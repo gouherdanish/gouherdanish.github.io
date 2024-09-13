@@ -38,14 +38,6 @@ $$ {Q}(S_t,A_t) \leftarrow {Q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma Q(S_{t+
 
 ---
 
-### Policy
-
-- SARSA typically uses an $\epsilon$-greedy policy:
-    - With probability $1-\epsilon$, choose the action with the highest Q-value
-    - With probability $\epsilon$, choose a random action
-
----
-
 ### Hand Calculation
 
 #### Example
