@@ -83,8 +83,13 @@ $$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow St
 
 - Agent moves right from state 1 to state 2
 - No reward in the next state, so $R_{t+1} = 0$
+- At 2, max q-value out of all the actions is 
 
-$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma Q(2,Down) - {Q}(1,Right) \right ) $$
+$$ \max{a'} Q(2,a') = max(Q(2,UP), Q(2,DOWN), Q(2,LEFT),Q(2,RIGHT))= max(0,0.5,0,0) = 0.5 $$
+
+- Applying Update rule
+
+$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma \max{a'} Q(2,a') - {Q}(1,Right) \right ) $$
 
 $$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
 
@@ -96,35 +101,18 @@ $$ {Q}(1,Right) \leftarrow 0 $$
 - Since 4 is goal state, so $R_{t+1} = 1$
 - Since 4 is goal state, any action that takes agent away from 4 should have no value, so $Q(4,a') = 0$
 
-$$ {Q}(2,Down) \leftarrow {Q}(2,Down) + \alpha \left (R_{t+1} + \gamma Q(4,a') - {Q}(2,Down) \right ) $$
+$$ {Q}(2,Down) \leftarrow {Q}(2,Down) + \alpha \left (R_{t+1} + \gamma \max{a'} Q(2,a') - {Q}(2,Down) \right ) $$
 
 $$ {Q}(2,Down) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
 
 $$ {Q}(2,Down) \leftarrow 0.5 $$
-
-**Backpropagation**
-
-- Since agent has reached the goal state, it will now update its q-value estimates for all the steps it tool along the path traced
-
-_State 2, Action Down -> State 4 (Goal)_
-
-$$ {Q}(2,Down) \leftarrow 0.5 $$
-
-_State 1, Action Right -> State 2_
-
-$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma Q(2,Down) - {Q}(1,Right) \right ) $$
-
-$$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0.5 - 0) $$
-
-$$ {Q}(1,Right) \leftarrow 0.225 $$
-
 
 **Updated Q-table**
 
 | State | Action | $Q(s,a)$ |
 | - | - |
 | 1 | Down | 0 |
-| 1 | Right | 0.225 |
+| 1 | Right | 0 |
 | 2 | Down | 0.5 |
 | 2 | Left | 0 |
 | 3 | Up | 0 |
@@ -139,14 +127,19 @@ $$ {Q}(1,Right) \leftarrow 0.225 $$
 
 Let's assume the agent follows the following path during episode 2
 
-$$ State 1 \rightarrow Down \rightarrow State 3 \rightarrow Up \rightarrow State 1 \rightarrow Down \rightarrow State 3 \rightarrow Right \rightarrow State 4 $$
+$$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Left \rightarrow State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow State 4 $$
 
 **Step 1**
 
-- Agent moves right from state 1 to state 3
-- Since 3 is not the goal state, so $R_{t+1} = 0$
+- Agent moves right from state 1 to state 2
+- Since 2 is not the goal state, so $R_{t+1} = 0$
+- At 2, max q-value out of all the actions is 
 
-$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Up) - {Q}(1,Down) \right ) $$
+$$ \max{a'} Q(2,a') = max(Q(2,UP), Q(2,DOWN), Q(2,LEFT),Q(2,RIGHT))= max(0,0.5,0,0) = 0.5 $$
+
+- Applying Update rule
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma \max{a'} Q(2,a') - {Q}(1,Down) \right ) $$
 
 $$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
 
@@ -185,41 +178,6 @@ $$ {Q}(3,Right) \leftarrow {Q}(3,Right) + \alpha \left (R_{t+1} + \gamma Q(4,a')
 $$ {Q}(3,Right) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
 
 $$ {Q}(3,Right) \leftarrow 0.5 $$
-
-**Backpropagation**
-
-- Since agent has reached the goal state, it will now update its q-value estimates for all the steps it tool along the path traced
-
-_State 3, Action Right -> State 4 (Goal)_
-
-$$ {Q}(3,Right) \leftarrow 0.5 $$
-
-
-_State 1, Action Down -> State 3_
-
-$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Right) - {Q}(1,Down) \right ) $$
-
-$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0.5 - 0) $$
-
-$$ {Q}(1,Down) \leftarrow 0.225 $$
-
-
-_State 3, Action Up -> State 1_
-
-$$ {Q}(3,Up) \leftarrow {Q}(3,Up) + \alpha \left (R_{t+1} + \gamma Q(1,Down) - {Q}(3,Up) \right ) $$
-
-$$ {Q}(3,Up) \leftarrow 0 + 0.5(0 + 0.9*0.225 - 0) $$
-
-$$ {Q}(3,Up) \leftarrow 0.10125 $$
-
-
-_State 1, Action Down -> State 3_
-
-$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Up) - {Q}(1,Down) \right ) $$
-
-$$ {Q}(1,Down) \leftarrow 0.225 + 0.5(0 + 0.9*0.10125 - 0.225) $$
-
-$$ {Q}(1,Down) \leftarrow 0.158 $$
 
 **Updated Q-table**
 
