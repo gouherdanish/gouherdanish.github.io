@@ -203,5 +203,28 @@ _Episode 2 ends_
 ### Implementation
 
 ```
+from entities.env import GridWorld
+from constants import AgentParams, EnvParams
+from factory.game_factory import GameFactory
+from factory.agent_factory import AgentFactory
 
+# Inputs
+method = 'qlearning'
+episodes = 10
+
+# GridWorld Environment 
+# - EnvParams contains grid dimension, start position, goal position
+env = GridWorld(env_params=EnvParams())
+
+# Qlearning Agent
+# - AgentParams contains epsilon(greedy factor), gamma(discount factor), alpha(learning rate)
+agent = AgentFactory.get(type=method, states=env.states, agent_params=AgentParams())
+
+# Agent-Environment Interaction
+# - Trains the agent over number of episodes and agent builds estimates of each state and action
+# - and learns to navigate the grid to reah goal position
+game = GameFactory.get(method=method,env=env,agent=agent)
+game.run(episodes=episodes)
+
+print([(s,a,q) for (s,a), q in self.agent.estimates.items() if q.value != 0])
 ```
