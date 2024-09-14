@@ -30,11 +30,11 @@ Q-Learning is an off-policy temporal difference (TD) learning algorithm
 
 - For an on-policy method we must estimate the action value $q_{\pi}(s, a)$ for the current behavior policy $\pi$ and for all states `s` and actions `a`
 
-$$ {Q}(S_t,A_t) \leftarrow {Q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma Q(S_{t+1},A_{t+1}) - {Q}(S_t,A_t) \right ) $$
+$$ {Q}(S_t,A_t) \leftarrow {Q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma max_{a'}Q(S_{t+1},a') - {Q}(S_t,A_t) \right ) $$
 
 - This update is done after every transition from a state $S_t$ unless it is a terminal state $S_T$
 
-- If $S_{t+1}$ is terminal then $q(S_{t+1},A_{t+1}) = 0$
+- If $S_{t+1}$ is terminal then $Q(S_{t+1},A_{t+1}) = 0$
 
 ---
 
@@ -46,6 +46,7 @@ $$ {Q}(S_t,A_t) \leftarrow {Q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma Q(S_{t+
 
 ```
 1 - 2
+|   |
 3 - 4
 ```
 
@@ -62,16 +63,22 @@ Initial Q-table looks like this
 
 | State | Action | $Q(s,a)$ |
 | - | - |
+| 1 | Up | 0 |
 | 1 | Down | 0 |
+| 1 | Left | 0 |
 | 1 | Right | 0 |
+| 2 | Up | 0 |
 | 2 | Down | 0 |
 | 2 | Left | 0 |
+| 2 | Right | 0 |
 | 3 | Up | 0 |
+| 3 | Down | 0 |
+| 3 | Left | 0 |
 | 3 | Right | 0 |
 | 4 | Up | 0 |
+| 4 | Down | 0 |
 | 4 | Left | 0 |
-
-Other (s,a) pairs are not valid as they will lead to crossing the grid boundary
+| 4 | Right | 0 |
 
 #### Episode 1
 
@@ -85,11 +92,11 @@ $$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow St
 - No reward in the next state, so $R_{t+1} = 0$
 - At 2, max q-value out of all the actions is 
 
-$$ \max{a'} Q(2,a') = max(Q(2,UP), Q(2,DOWN), Q(2,LEFT),Q(2,RIGHT))= max(0,0.5,0,0) = 0.5 $$
+$$ \max_{a'} Q(2,a') = max(Q(2,UP), Q(2,DOWN), Q(2,LEFT),Q(2,RIGHT))= max(0,0.5,0,0) = 0.5 $$
 
 - Applying Update rule
 
-$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma \max{a'} Q(2,a') - {Q}(1,Right) \right ) $$
+$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(2,a') - {Q}(1,Right) \right ) $$
 
 $$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
 
