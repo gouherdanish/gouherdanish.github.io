@@ -61,24 +61,12 @@ $$ {Q}(S_t,A_t) \leftarrow {Q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma max_{a'
 
 Initial Q-table looks like this
 
-| State | Action | $Q(s,a)$ |
-| - | - |
-| 1 | Up | 0 |
-| 1 | Down | 0 |
-| 1 | Left | 0 |
-| 1 | Right | 0 |
-| 2 | Up | 0 |
-| 2 | Down | 0 |
-| 2 | Left | 0 |
-| 2 | Right | 0 |
-| 3 | Up | 0 |
-| 3 | Down | 0 |
-| 3 | Left | 0 |
-| 3 | Right | 0 |
-| 4 | Up | 0 |
-| 4 | Down | 0 |
-| 4 | Left | 0 |
-| 4 | Right | 0 |
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0 |
+| 2 | 0 | 0 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
 
 #### Episode 1
 
@@ -104,24 +92,12 @@ $$ {Q}(1,Right) \leftarrow 0 $$
 
 **Updated Q-table**
 
-| State | Action | $Q(s,a)$ |
-| - | - |
-| 1 | Up | 0 |
-| 1 | Down | 0 |
-| 1 | Left | 0 |
-| 1 | Right | 0 |
-| 2 | Up | 0 |
-| 2 | Down | 0 |
-| 2 | Left | 0 |
-| 2 | Right | 0 |
-| 3 | Up | 0 |
-| 3 | Down | 0 |
-| 3 | Left | 0 |
-| 3 | Right | 0 |
-| 4 | Up | 0 |
-| 4 | Down | 0 |
-| 4 | Left | 0 |
-| 4 | Right | 0 |
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0 |
+| 2 | 0 | 0 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
 
 **Step 2**
 
@@ -137,27 +113,14 @@ $$ {Q}(2,Down) \leftarrow 0.5 $$
 
 **Updated Q-table**
 
-| State | Action | $Q(s,a)$ |
-| - | - |
-| 1 | Up | 0 |
-| 1 | Down | 0 |
-| 1 | Left | 0 |
-| 1 | Right | 0 |
-| 2 | Up | 0 |
-| 2 | Down | 0.5 |
-| 2 | Left | 0 |
-| 2 | Right | 0 |
-| 3 | Up | 0 |
-| 3 | Down | 0 |
-| 3 | Left | 0 |
-| 3 | Right | 0 |
-| 4 | Up | 0 |
-| 4 | Down | 0 |
-| 4 | Left | 0 |
-| 4 | Right | 0 |
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0 |
+| 2 | 0 | 0.5 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
 
 _Episode 1 ends_
-
 
 #### Episode 2
 
@@ -184,24 +147,12 @@ $$ {Q}(1,Right) \leftarrow 0.225 $$
 
 **Updated Q-table**
 
-| State | Action | $Q(s,a)$ |
-| - | - |
-| 1 | Up | 0 |
-| 1 | Down | 0 |
-| 1 | Left | 0 |
-| 1 | Right | 0.225 |
-| 2 | Up | 0 |
-| 2 | Down | 0.5 |
-| 2 | Left | 0 |
-| 2 | Right | 0 |
-| 3 | Up | 0 |
-| 3 | Down | 0 |
-| 3 | Left | 0 |
-| 3 | Right | 0 |
-| 4 | Up | 0 |
-| 4 | Down | 0 |
-| 4 | Left | 0 |
-| 4 | Right | 0 |
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0.225 |
+| 2 | 0 | 0.5 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
 
 **Step 2**
 
@@ -217,24 +168,12 @@ $$ {Q}(2,Up) \leftarrow 0.225 $$
 
 **Updated Q-table**
 
-| State | Action | $Q(s,a)$ |
-| - | - |
-| 1 | Up | 0 |
-| 1 | Down | 0 |
-| 1 | Left | 0 |
-| 1 | Right | 0.225 |
-| 2 | Up | 0.225 |
-| 2 | Down | 0.5 |
-| 2 | Left | 0 |
-| 2 | Right | 0 |
-| 3 | Up | 0 |
-| 3 | Down | 0 |
-| 3 | Left | 0 |
-| 3 | Right | 0 |
-| 4 | Up | 0 |
-| 4 | Down | 0 |
-| 4 | Left | 0 |
-| 4 | Right | 0 |
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0.225 |
+| 2 | 0.225 | 0.5 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
 
 **Step 3**
 
@@ -250,27 +189,14 @@ $$ {Q}(2,Down) \leftarrow 0.75 $$
 
 **Updated Q-table**
 
-| State | Action | $Q(s,a)$ |
-| - | - |
-| 1 | Up | 0 |
-| 1 | Down | 0 |
-| 1 | Left | 0 |
-| 1 | Right | 0.225 |
-| 2 | Up | 0.225 |
-| 2 | Down | 0.75 |
-| 2 | Left | 0 |
-| 2 | Right | 0 |
-| 3 | Up | 0 |
-| 3 | Down | 0 |
-| 3 | Left | 0 |
-| 3 | Right | 0 |
-| 4 | Up | 0 |
-| 4 | Down | 0 |
-| 4 | Left | 0 |
-| 4 | Right | 0 |
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0.225 |
+| 2 | 0.225 | 0.75 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
 
-
-_Episode 1 ends_
+_Episode 2 ends_
 
 ### Implementation
 
