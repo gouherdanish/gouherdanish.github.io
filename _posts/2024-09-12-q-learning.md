@@ -76,7 +76,8 @@ $$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow St
 
 **Step 1**
 
-- Agent moves right from state 1 to state 2
+- Agent select action Right - Exploration
+- Agent moves from state 1 to state 2
 - No reward in the next state, so $R_{t+1} = 0$
 - At 2, max q-value out of all the actions is 
 
@@ -101,11 +102,12 @@ $$ {Q}(1,Right) \leftarrow 0 $$
 
 **Step 2**
 
-- Agent moves down from state 2 to state 4
+- Agent select action Down - Exploration
+- Agent moves from state 2 to state 4
 - Since 4 is goal state, so $R_{t+1} = 1$
 - Since 4 is goal state, any action that takes agent away from 4 should have no value, so $Q(4,a') = 0$
 
-$$ {Q}(2,Down) \leftarrow {Q}(2,Down) + \alpha \left (R_{t+1} + \gamma \max{a'} Q(2,a') - {Q}(2,Down) \right ) $$
+$$ {Q}(2,Down) \leftarrow {Q}(2,Down) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(2,a') - {Q}(2,Down) \right ) $$
 
 $$ {Q}(2,Down) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
 
