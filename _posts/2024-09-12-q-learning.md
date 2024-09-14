@@ -92,7 +92,7 @@ $$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow St
 - No reward in the next state, so $R_{t+1} = 0$
 - At 2, max q-value out of all the actions is 
 
-$$ \max_{a'} Q(2,a') = max(Q(2,UP), Q(2,DOWN), Q(2,LEFT),Q(2,RIGHT))= max(0,0.5,0,0) = 0.5 $$
+$$ \max_{a'} Q(2,a') = max(Q(2,Up), Q(2,Down), Q(2,Left),Q(2,Right)) = max(0,0,0,0) = 0 $$
 
 - Applying Update rule
 
@@ -101,6 +101,27 @@ $$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma \max_{a
 $$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
 
 $$ {Q}(1,Right) \leftarrow 0 $$
+
+**Updated Q-table**
+
+| State | Action | $Q(s,a)$ |
+| - | - |
+| 1 | Up | 0 |
+| 1 | Down | 0 |
+| 1 | Left | 0 |
+| 1 | Right | 0 |
+| 2 | Up | 0 |
+| 2 | Down | 0 |
+| 2 | Left | 0 |
+| 2 | Right | 0 |
+| 3 | Up | 0 |
+| 3 | Down | 0 |
+| 3 | Left | 0 |
+| 3 | Right | 0 |
+| 4 | Up | 0 |
+| 4 | Down | 0 |
+| 4 | Left | 0 |
+| 4 | Right | 0 |
 
 **Step 2**
 
@@ -118,86 +139,141 @@ $$ {Q}(2,Down) \leftarrow 0.5 $$
 
 | State | Action | $Q(s,a)$ |
 | - | - |
+| 1 | Up | 0 |
 | 1 | Down | 0 |
+| 1 | Left | 0 |
 | 1 | Right | 0 |
+| 2 | Up | 0 |
 | 2 | Down | 0.5 |
 | 2 | Left | 0 |
+| 2 | Right | 0 |
 | 3 | Up | 0 |
+| 3 | Down | 0 |
+| 3 | Left | 0 |
 | 3 | Right | 0 |
 | 4 | Up | 0 |
+| 4 | Down | 0 |
 | 4 | Left | 0 |
+| 4 | Right | 0 |
 
-**Episode 1 ends**
+_Episode 1 ends_
 
 
 #### Episode 2
 
 Let's assume the agent follows the following path during episode 2
 
-$$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Left \rightarrow State 1 \rightarrow Right \rightarrow State 2 \rightarrow Down \rightarrow State 4 $$
+$$ State 1 \rightarrow Right \rightarrow State 2 \rightarrow Up \rightarrow State 2 \rightarrow Down \rightarrow State 4 $$
 
 **Step 1**
 
-- Agent moves right from state 1 to state 2
+- Agent selects action RIGHT - Exploration
+- Agent moves from state 1 to state 2
 - Since 2 is not the goal state, so $R_{t+1} = 0$
 - At 2, max q-value out of all the actions is 
 
-$$ \max{a'} Q(2,a') = max(Q(2,UP), Q(2,DOWN), Q(2,LEFT),Q(2,RIGHT))= max(0,0.5,0,0) = 0.5 $$
+$$ \max_{a'} Q(2,a') = max(Q(2,Up), Q(2,Down), Q(2,Left),Q(2,Right)) = max(0,0.5,0,0) = 0.5 $$
 
 - Applying Update rule
 
-$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma \max{a'} Q(2,a') - {Q}(1,Down) \right ) $$
+$$ {Q}(1,Right) \leftarrow {Q}(1,Right) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(2,a') - {Q}(1,Right) \right ) $$
 
-$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
+$$ {Q}(1,Right) \leftarrow 0 + 0.5(0 + 0.9*0.5 - 0) $$
 
-$$ {Q}(1,Down) \leftarrow 0 $$
-
-**Step 2**
-
-- Agent moves down from state 3 to state 1
-- Since 1 is not the goal state, so $R_{t+1} = 0$
-
-$$ {Q}(3,Up) \leftarrow {Q}(3,Up) + \alpha \left (R_{t+1} + \gamma Q(1,Down) - {Q}(3,Up) \right ) $$
-
-$$ {Q}(3,Up) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
-
-$$ {Q}(3,Up) \leftarrow 0 $$
-
-**Step 3**
-
-- Agent moves down from state 1 to state 3
-- Since 3 is not the goal state, so $R_{t+1} = 0$
-
-$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma Q(3,Right) - {Q}(1,Down) \right ) $$
-
-$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
-
-$$ {Q}(1,Down) \leftarrow 0 $$
-
-**Step 4**
-
-- Agent moves down from state 3 to state 4
-- Since 4 is goal state, so $R_{t+1} = 1$
-- Since 4 is goal state, any action that takes agent away from 4 should have no value, so $Q(4,a') = 0$
-
-$$ {Q}(3,Right) \leftarrow {Q}(3,Right) + \alpha \left (R_{t+1} + \gamma Q(4,a') - {Q}(3,Right) \right ) $$
-
-$$ {Q}(3,Right) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
-
-$$ {Q}(3,Right) \leftarrow 0.5 $$
+$$ {Q}(1,Right) \leftarrow 0.225 $$
 
 **Updated Q-table**
 
 | State | Action | $Q(s,a)$ |
 | - | - |
-| 1 | Down | 0.158 |
+| 1 | Up | 0 |
+| 1 | Down | 0 |
+| 1 | Left | 0 |
 | 1 | Right | 0.225 |
+| 2 | Up | 0 |
 | 2 | Down | 0.5 |
 | 2 | Left | 0 |
-| 3 | Up | 0.10125 |
-| 3 | Right | 0.5 |
+| 2 | Right | 0 |
+| 3 | Up | 0 |
+| 3 | Down | 0 |
+| 3 | Left | 0 |
+| 3 | Right | 0 |
 | 4 | Up | 0 |
+| 4 | Down | 0 |
 | 4 | Left | 0 |
+| 4 | Right | 0 |
 
-**Episode 2 ends**
+**Step 2**
 
+- Agent selects action UP - Exploration
+- Agent stays at state 2
+- Since 2 is not the goal state, so $R_{t+1} = 0$
+
+$$ {Q}(2,Up) \leftarrow {Q}(2,Up) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(2,a') - {Q}(2,Up) \right ) $$
+
+$$ {Q}(2,Up) \leftarrow 0 + 0.5(0 + 0.9*0.5 - 0) $$
+
+$$ {Q}(2,Up) \leftarrow 0.225 $$
+
+**Updated Q-table**
+
+| State | Action | $Q(s,a)$ |
+| - | - |
+| 1 | Up | 0 |
+| 1 | Down | 0 |
+| 1 | Left | 0 |
+| 1 | Right | 0.225 |
+| 2 | Up | 0.225 |
+| 2 | Down | 0.5 |
+| 2 | Left | 0 |
+| 2 | Right | 0 |
+| 3 | Up | 0 |
+| 3 | Down | 0 |
+| 3 | Left | 0 |
+| 3 | Right | 0 |
+| 4 | Up | 0 |
+| 4 | Down | 0 |
+| 4 | Left | 0 |
+| 4 | Right | 0 |
+
+**Step 3**
+
+- Agent selects action DOWN - Exploitation
+- Agent moves from state 2 to state 4
+- Since 3 is not the goal state, so $R_{t+1} = 0$
+
+$$ {Q}(2,Down) \leftarrow {Q}(2,Down) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(4,a') - {Q}(2,Down) \right ) $$
+
+$$ {Q}(2,Down) \leftarrow 0.5 + 0.5(1 + 0.9*0 - 0.5) $$
+
+$$ {Q}(2,Down) \leftarrow 0.75 $$
+
+**Updated Q-table**
+
+| State | Action | $Q(s,a)$ |
+| - | - |
+| 1 | Up | 0 |
+| 1 | Down | 0 |
+| 1 | Left | 0 |
+| 1 | Right | 0.225 |
+| 2 | Up | 0.225 |
+| 2 | Down | 0.75 |
+| 2 | Left | 0 |
+| 2 | Right | 0 |
+| 3 | Up | 0 |
+| 3 | Down | 0 |
+| 3 | Left | 0 |
+| 3 | Right | 0 |
+| 4 | Up | 0 |
+| 4 | Down | 0 |
+| 4 | Left | 0 |
+| 4 | Right | 0 |
+
+
+_Episode 1 ends_
+
+### Implementation
+
+```
+
+```
