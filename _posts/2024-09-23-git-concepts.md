@@ -62,8 +62,8 @@ code .
 - We create a new directory and cd to it
 
 ```
-mkdir my-repo
-cd my-repo
+mkdir my-unique-repo
+cd my-unique-repo
 ```
 
 - Then we use VS code editor and start development
@@ -72,11 +72,33 @@ cd my-repo
 code .
 ```
 
-**Step 2 - Initialize a git folder**
+**Step 2 - Initialize a git folder locally**
 
-Create a local repo**
-
+- Say we have completed lot of experimentations and our PoC is ready
+- We can use Git to track this codebase even now
+- Go to your local terminal and cd to your local codebase
+- To enable git to track the development in this directory, we initialize local git here
 
 ```
 git init
+```
+
+- PS: Ensure `git` is installed before doing this
+
+**Step 3 - Create Repo in Github Account**
+
+- Login to your github account
+- Click New Repository
+- Give suitable unique name of repository (say _my-unique-repo_)
+- Click create
+
+PS - Note the <git remote add origin command> which we will use in Step 4
+
+**Step 4 - Add remote origin**
+
+- We have created repo locally and on Github remote as well but we have yet to connect the two
+- To achieve this, we add remote origin which lets the local git know that where it needs to commit the code remotely
+
+```
+git remote add origin <>
 ```
