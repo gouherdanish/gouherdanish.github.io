@@ -5,21 +5,20 @@ date: 2024-09-23
 tags: ["Git"]
 ---
 
-Git is an important tool when it comes to software development.
 
----
+## Introduction
 
-### Introduction
-
+- Git is an important tool when it comes to software development.
 - Git is used in all the avenues and steps of software lifecycle
 - Knowledge of version control using Git is of paramount importance for any software engineer
 
-### Creating a Git Repo
+---
+## Creating a Git Repo
 
 - Let's say a business requirement comes and we need to start implementing a new feature or service
 - There can be two approaches for this as shown below
 
-#### Approach 1 - Creating repo first then starting development 
+### Approach 1 - Creating repo first then starting development 
 - We can create a fresh git repo from start itself, then clone it locally and then start development
 - This usually is standard operating procedure in conventional SDE teams.
 
@@ -49,7 +48,7 @@ code .
 ```
 
 ---
-#### Approach 2 - Starting developement first then creating repo
+### Approach 2 - Starting developement first then creating repo
 
 - In second approach, we can start developing locally first and then after we have a proof of concept ready, we think of converting it into a service. At this time, we think of creating a repo and committing the code.
 - This is the case of most Data Science, Data Analytics or Business Analytics teams where engineers do lot of experimentations locally before committing their code
@@ -102,7 +101,7 @@ git remote add origin <...>
 ```
 
 ---
-### Conclusion
+## Conclusion
 
 - We explored two ways of creating Git repositories
 - Having knowledge of the different ways of creating a repo can help developers master version control and enable greater flexibility in software development
