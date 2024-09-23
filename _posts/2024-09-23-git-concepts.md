@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Git Commands"
+title: "Creating Git Repo"
 date: 2024-09-23
 tags: ["Git"]
 ---
@@ -9,12 +9,10 @@ Git is an important tool when it comes to software development.
 
 ---
 
-## Introduction
+### Introduction
 
 - Git is used in all the avenues and steps of software lifecycle
 - Knowledge of version control using Git is of paramount importance for any software engineer
-
-## Concepts
 
 ### Creating a Git Repo
 
@@ -92,7 +90,7 @@ git init
 - Give suitable unique name of repository (say _my-unique-repo_)
 - Click create
 
-PS - Note the <git remote add origin command> which we will use in Step 4
+PS - Note the `git remote add origin ...` which we will use in Step 4
 
 **Step 4 - Add remote origin**
 
@@ -100,5 +98,11 @@ PS - Note the <git remote add origin command> which we will use in Step 4
 - To achieve this, we add remote origin which lets the local git know that where it needs to commit the code remotely
 
 ```
-git remote add origin <>
+git remote add origin <...>
 ```
+
+---
+### Conclusion
+
+- We explored two ways of creating Git repositories
+- Having knowledge of the different ways of creating a repo can help developers master version control and enable greater flexibility in software development
