@@ -19,33 +19,55 @@ Git is an important tool when it comes to software development.
 ### Creating a Git Repo
 
 - Let's say a business requirement comes and we need to start implementing a new feature or service
-- There can be two approaches for this
-    - We can create a fresh git repo from start itself, then clone it locally and then start development
-        - This usually is standard operating procedure in conventional SDE teams.
-    - We can start development locally first and then after we have a proof of concept ready, we think of scaling it into a service. At this time, we think of creating a repo and committing the code.
-        - This is the case of most Data Science, Data Analytics or Business Analytics teams where engineers do lot of experimentations locally before committing their code
-        - PS - Although this can be taken care by branching out (we will discuss branching later)
+- There can be two approaches for this as shown below
 
-#### Approach 1 - Starting afresh
-- When we have not yet started working on a feature
+#### Approach 1 - Creating repo first then starting development 
+- We can create a fresh git repo from start itself, then clone it locally and then start development
+- This usually is standard operating procedure in conventional SDE teams.
 
-
-#### Create a git repo on remote
+**Step 1 - Create a git repo on remote**
 
 - Login to your github account
 - Click New Repository
-- Give suitable and unique name of repository and Click create
+- Give suitable unique name of repository (say _my-unique-repo_)
+- Click create
 
-- Create a local repo
+**Step 2 - Clone repo locally**
+
+- Click `clone` on the Github repository you just created and copy the command
+- Start terminal and `cd` to change current directory to wherever you want to start development
+- Paste the command on the terminal
+
+```
+git clone <REPO_URL>
+```
+
+**Step 3 - Start Development**
+
+- If you are using Visual Studio, then you can use following to start VS code editor and start development
+
+```
+code .
+```
+
+---
+#### Approach 2 - Starting developement first then creating repo
+
+- We can start development locally first and then after we have a proof of concept ready, we think of scaling it into a service. At this time, we think of creating a repo and committing the code.
+        - This is the case of most Data Science, Data Analytics or Business Analytics teams where engineers do lot of experimentations locally before committing their code
+        - PS - Although this can be taken care by branching out (we will discuss branching later)
+
+
+- After this we creat
+
+#### Initialize a git folder
+
+Create a local repo**
 
 ```
 mkdir my-repo
 cd my-repo
 ```
-
-- After this we creat
-
-#### Initialize a git folder
 
 ```
 git init
