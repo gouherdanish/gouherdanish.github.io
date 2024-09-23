@@ -53,21 +53,29 @@ code .
 ---
 #### Approach 2 - Starting developement first then creating repo
 
-- We can start development locally first and then after we have a proof of concept ready, we think of scaling it into a service. At this time, we think of creating a repo and committing the code.
-        - This is the case of most Data Science, Data Analytics or Business Analytics teams where engineers do lot of experimentations locally before committing their code
-        - PS - Although this can be taken care by branching out (we will discuss branching later)
+- In second approach, we can start developing locally first and then after we have a proof of concept ready, we think of converting it into a service. At this time, we think of creating a repo and committing the code.
+- This is the case of most Data Science, Data Analytics or Business Analytics teams where engineers do lot of experimentations locally before committing their code
+- PS - Although this can be taken care by branching out (we will discuss branching later)
 
+**Step 1 - Start Development**
 
-- After this we creat
-
-#### Initialize a git folder
-
-Create a local repo**
+- We create a new directory and cd to it
 
 ```
 mkdir my-repo
 cd my-repo
 ```
+
+- Then we use VS code editor and start development
+
+```
+code .
+```
+
+**Step 2 - Initialize a git folder**
+
+Create a local repo**
+
 
 ```
 git init
