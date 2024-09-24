@@ -12,7 +12,7 @@ Also, I believe , I love to learn new things and expand my knowledge horizon.
 
 Following my passion to write, I started this blog basis my mantra
 
-_Learning new things is important but leveraging what you know and solidifying your basics is vital_
+> Learning new things is important but leveraging what you know and solidifying your basics is vital
 
 In this blog, I try to accumulate the knowledge I have gathered so far and also document new learnings as I move along in my professional journey.
 
