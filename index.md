@@ -8,6 +8,15 @@ Currently I am working as a Data Science Architect at AiDash India Pvt Ltd, Bang
 On the personal side, I am a husband and a father of a 2 year old son. 
 I love to spend time with him in my free time.
 
-Also, I love to learn new things and expand my knowledge horizon. 
-I started this blog to document these learnings as I move along in my professional journey
+Also, I believe , I love to learn new things and expand my knowledge horizon. 
+
+Following my passion to write, I started this blog basis my mantra
+
+_Learning new things is important but leveraging what you know and solidifying your basics is vital_
+
+In this blog, I try to accumulate the knowledge I have gathered so far and also document new learnings as I move along in my professional journey.
+
+Welcome aboard this learning train !!
+
+Hope you like it !!
 
