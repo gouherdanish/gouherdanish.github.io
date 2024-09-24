@@ -140,6 +140,13 @@ $$ \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m \frac{\partial \ell_
 $$ \Rightarrow \frac{\partial L}{\partial w} = \frac{1}{m} \sum_{i=1}^m (\hat{y_i} - y_i)x_i $$
 
 ---
+### Gradient Descent
+
+We utilize the Gradient Descent Weight Update Rule as follows
+
+$$ w := w - \alpha \frac{\partial L}{\partial w} $$
+
+---
 ## Hand Calculations
 
 ### Problem
@@ -283,9 +290,11 @@ $$ \frac{\partial L}{\partial w} = \left( \begin{array}{cc} 0 \\ -0.175 \\ 3.625
 ---
 #### Step 6 - Updating Weights
 
-Assuming the learning rate, $\alpha = 0.01$
+We utilize the Gradient Descent Weight Update Rule as follows
 
 $$ w := w - \alpha \frac{\partial L}{\partial w} $$
+
+Assuming the learning rate, $\alpha = 0.01$
 
 $$ w := \left( \begin{array}{cc} 0 \\ 0 \\ 0 \end{array} \right) -0.01 \left( \begin{array}{cc} 0 \\ -0.175 \\ 3.625 \end{array} \right)$$
 
@@ -330,7 +339,7 @@ def fit(X,y,iterations=100,learning_rate=0.01):
         # Compute Gradients
         dLdb = (1/m) * sum(residual)
         dLdw = (1/m) * np.dot(residual,X)
-        # Update Model parameters
+        # Update Model parameters (Gradient Descent)
         _bias += (-1 * learning_rate * dLdb)
         _weights += (-1 * learning_rate * dLdw)
 
