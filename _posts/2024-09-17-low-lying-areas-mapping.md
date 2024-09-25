@@ -72,27 +72,28 @@ Note:
 ### Case Studies
 - Below we present two case studies around Whitefield and Outer Ring Road
 - These areas are major IT Hubs and contribute significantly to employment
+- Below, we present our validations with the ground truth where we show that the low lying areas identified by the model actually suffered damage during the torrential floods 
 
-#### 1. Nallurahalli and Whitefield
+#### 1. Whitefield Area
 - I live in Nallurahalli which is a village in Whitefield.
 - This area has seen rapid urbanization with surrounding EPIP zone being a bustling IT hub 
 - It is a densely populated residential area with lots of built-up area and very less green cover
 - Nallurahalli and surrounding villages suffered significant damages due to Sep 2022 floods
-- Some apartments got flooded very bad with parking area fully submerge with neck-deep water leves
+- Some apartments got flooded very bad with parking area fully submerge with neck-deep water levels
 - The closeness of these apartments with nearby Storm Water Drain may also have played a part in the flooding.
-- It was one of the disaster zones which was visited by the then CM Shri BS Yediyurappa.
+- It was one of the disaster zones which was visited by the then CM Shri Basavaraj Bommaiah.
+
+<img src="{{site.url}}/images/low_lying_areas/ss_feliciity_damage.png"/>
 
 **Validation 1 - The DNA Opulence Apartments**
 <img src="{{site.url}}/images/low_lying_areas/dna_opulence.png"/>
 
 **Validation 2 - SS Felicity Homes**
-- Similarly above it is SS Felicity Apartments which also got flooded heavily during the same time.
-- 
 <img src="{{site.url}}/images/low_lying_areas/ss_feliciity.png"/>
 
 #### 2. Outer Ring Road (ORR)
 - ORR is an arterial road connecting major tech parks in Bellandur and surrounding villages
-- The road was fully submerged with water as high as waist level
+- The road was fully submerged with water as high as waist level flowing on road
 
 **Validation 1**
 <img src="{{site.url}}/images/low_lying_areas/bellandur.png"/>
