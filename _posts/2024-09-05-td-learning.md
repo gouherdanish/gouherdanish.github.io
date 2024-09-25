@@ -98,6 +98,27 @@ $$ \theta(S_t) \leftarrow \theta(S_t) + 2 \alpha \left (R_{t+1} + \gamma v(S_{t+
 
 $$ {v}(S_t) \leftarrow {v}(S_t) + \alpha \left (R_{t+1} + \gamma v(S_{t+1}) - {v}(S_t) \right ) $$
 
-- This is the update rule for TD(0) method
-- It updates the value of the current state based on the estimated value of the next state
+**TD(0) Update**
 
+_Update Rule for State Value Function_
+- As derived above, here is the update rule for state-value function for TD(0) method
+- It updates the value of the current state $v_t$ based on the estimated value of the next state $v_{t+1}$
+
+$$ {v}(S_t) \leftarrow {v}(S_t) + \alpha \left (R_{t+1} + \gamma v(S_{t+1}) - {v}(S_t) \right ) $$
+
+_Update Rule for Action Value Function - SARSA_
+- On similar lines, we can derive the update rule for action-value function for TD(0) method
+- It updates the value of the current state-action $q_t$ based on the estimated value of the next state $q_{t+1}$
+
+$$ {q}(S_t,A_t) \leftarrow {q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma q(S_{t+1},A_{t+1}) - {q}(S_t,A_t) \right ) $$
+
+_Update Rule for Action Value Function - Q-Learning_
+- Q-Learning uses Bellman optimality conditions
+- It updates the value of the current state-action $q_t$ based on the maximum estimated q-value of the next state$
+
+$$ {q}(S_t,A_t) \leftarrow {q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma max_{a'}Q(S_{t+1},a') - {q}(S_t,A_t) \right ) $$
+
+### Conclusion
+- We presented a deep dive into Temporal Difference Learning technique
+- We used Gradient Descent optimization to derive the TD update rule
+- Also, finally we presented the update rules for some key TD algorithms e.g. SARSA, Q-Learning

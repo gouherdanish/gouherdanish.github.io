@@ -228,3 +228,8 @@ game.run(episodes=episodes)
 
 print([(s,a,q) for (s,a), q in self.agent.estimates.items() if q.value != 0])
 ```
+
+---
+### Conclusion
+- Q-Learning is a fundamental reinforcement learning technique
+- We implemented a Q-Learning Bot that learns to navigate a Gridworld environment
