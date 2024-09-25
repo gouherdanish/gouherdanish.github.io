@@ -14,15 +14,15 @@ tags: ["Geospatial"]
 
 ---
 ### Causes of Flooding
-- There are several reasons being cited for increase in urban flooding instances in Bangalore
-    - Rapid unplanned development 
-    - Land use changes
-    - Increase in built-up areas 
-    - Decrease in vegetation cover
-    - Low infiltration and percolation
-    - Increase in surface run-off volume
-    - Overflow in Storm water drains (SWDs) due to poor Drainage 
-    - Encroachment of natural bodies e.g. lakes and SWDs
+- Rapid unplanned development 
+- Land use changes
+- Increase in built-up areas 
+- Decrease in vegetation cover
+- Low infiltration and percolation
+- Increase in surface run-off volume
+- Overflow in Storm water drains (SWDs) due to poor Drainage 
+- Encroachment of natural bodies e.g. lakes and SWDs
+- Climate Change
 
 ---
 ### Data Source
@@ -116,10 +116,10 @@ Note:
 - National Disaster Response Force (NDRF) reportedly rescued 200 residents in boats in this area
 - Encroachment of the nearby Halanayakanahalli Lake might have played a key role in the disaster
 
-<img src="{{site.url}}/images/low_lying_areas/rbd_layout.png"/>
-
-
 <img src="{{site.url}}/images/low_lying_areas/rbd_damage.png"/>
+
+**Validation 1 - Rainbow Drive Layout**
+<img src="{{site.url}}/images/low_lying_areas/rbd_layout.png"/>
 
 
 #### 4. Yemalur, Old Airport Road
@@ -133,5 +133,16 @@ Note:
 
 <img src="{{site.url}}/images/low_lying_areas/yemalur_damage2.png"/>
 
+**Validation 1 - Yemalur**
 <img src="{{site.url}}/images/low_lying_areas/yemalur.png"/>
+
+---
+### Reference
+- Implementation and code can be found on Github
+https://github.com/gouherdanish/urban_flooding
+
+---
+### Conclusion
+- Urban flooding is a growing cause of concern in Bangalore
+- This app aims to identify the low-lying areas in Bangalore which are at risk of Urban flooding
 
