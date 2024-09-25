@@ -83,15 +83,21 @@ Note:
 - The closeness of these apartments with nearby Storm Water Drain may also have played a part in the flooding.
 - It was one of the disaster zones which was visited by the then CM Shri Basavaraj Bommaiah.
 
+**Validation 1 - DNA Apartments**
+- DNA apartment residents faced severe challenges during the floods
+- Surrounding Storm Water Drain got swollen and water came inside the apartment which filled up the parking area significantly damaging vehicles
+- Reportedly NDRF team had to rescue few stranded residents on boats
 <img src="{{site.url}}/images/low_lying_areas/dna_apt_damage.png"/>
 
-<img src="{{site.url}}/images/low_lying_areas/ss_felicity_damage.png"/>
-
-
-**Validation 1 - DNA Apartments**
+- Our assessment highlights this location as a low-lying area and thus aligns with the resulting damage.
 <img src="{{site.url}}/images/low_lying_areas/dna_opulence.png"/>
 
 **Validation 2 - SS Felicity Homes**
+- Residents of SS Felicity homes reported neck-deep water level in their basement parking
+- Vehicles were damaged and residents were stranded.
+<img src="{{site.url}}/images/low_lying_areas/ss_felicity_damage.png"/>
+
+Our assessment highlights this location as a low-lying area and thus aligns with the resulting damage.
 <img src="{{site.url}}/images/low_lying_areas/ss_felicity.png"/>
 
 #### 2. Outer Ring Road (ORR)
@@ -101,13 +107,15 @@ Note:
 
 <img src="{{site.url}}/images/low_lying_areas/orr_damage.png"/>
 
-**Validation 1**
+Below, we show our assessment also validates this road has many low-lying hotspots which are prone to flooding.
+
+**Validation 1 - Bellandur**
 <img src="{{site.url}}/images/low_lying_areas/bellandur.png"/>
 
-**Validation 2**
+**Validation 2 - Devarabisanahalli**
 <img src="{{site.url}}/images/low_lying_areas/devarabisanahalli.png"/>
 
-**Validation 3**
+**Validation 3 - Kadubisanahalli**
 <img src="{{site.url}}/images/low_lying_areas/kadubisanahalli.png"/>
 
 #### 3. Sarjapura Road
