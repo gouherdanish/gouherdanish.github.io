@@ -13,7 +13,7 @@ tags: ["Geospatial"]
 - Historically, this area has seen rapid development during recent years causing significant built-up and depleting green cover due to which the surface run-off gets accumulated which is worsened by less natural infiltration and swollen drains thereby causing floods.
 
 ---
-### Causes
+### Causes of Flooding
 - There are several reasons being cited for increase in urban flooding instances in Bangalore
     - Rapid unplanned development 
     - Land use changes
@@ -36,7 +36,7 @@ tags: ["Geospatial"]
         - https://kgis.ksrsac.in/kgis/downloads.aspx
 
 ---
-### Image Segmentation 
+### Image Segmentation Process
 - Download DEM data in tiff format 
 - Read DEM using Rioxarray in Python
 - Perform pixel-wise segmentation
@@ -46,7 +46,24 @@ tags: ["Geospatial"]
 
 --- 
 ### Streamlit App
-- 
+- The app is started by running 
+```
+streamlit run app.py
+```
+
+- This is the landing page
+<img src="{{site.url}}/images/low_lying_areas/landing_page.png"/>
+
+- The user can select his village from the dropdown
+<img src="{{site.url}}/images/low_lying_areas/dropdown.png"/>
+
+- After selecting village, the app shows the data for that village
+<img src="{{site.url}}/images/low_lying_areas/nallurahalli.png"/>
+
+
+Note: 
+- Online raster segmentation is expensive operation and causes latency on user's end. Therefore, the app uses static segmentation currently by default
+- The app is not deployed on server and currently works in local
 
 ---
 ### Validation
