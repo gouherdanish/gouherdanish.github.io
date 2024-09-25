@@ -74,7 +74,7 @@ Note:
 - These areas are major IT Hubs and contribute significantly to employment
 - Below, we present our validations with the ground truth where we show that the low lying areas identified by the model actually suffered damage during the torrential floods 
 
-#### 1. Whitefield Area
+#### 1. Whitefield, Borewell Road
 - I live in Nallurahalli which is a village in Whitefield.
 - This area has seen rapid urbanization with surrounding EPIP zone being a bustling IT hub 
 - It is a densely populated residential area with lots of built-up area and very less green cover
@@ -83,17 +83,55 @@ Note:
 - The closeness of these apartments with nearby Storm Water Drain may also have played a part in the flooding.
 - It was one of the disaster zones which was visited by the then CM Shri Basavaraj Bommaiah.
 
-<img src="{{site.url}}/images/low_lying_areas/ss_feliciity_damage.png"/>
+<img src="{{site.url}}/images/low_lying_areas/dna_apt_damage.png"/>
 
-**Validation 1 - The DNA Opulence Apartments**
+<img src="{{site.url}}/images/low_lying_areas/ss_felicity_damage.png"/>
+
+
+**Validation 1 - DNA Apartments**
 <img src="{{site.url}}/images/low_lying_areas/dna_opulence.png"/>
 
 **Validation 2 - SS Felicity Homes**
-<img src="{{site.url}}/images/low_lying_areas/ss_feliciity.png"/>
+<img src="{{site.url}}/images/low_lying_areas/ss_felicity.png"/>
 
 #### 2. Outer Ring Road (ORR)
 - ORR is an arterial road connecting major tech parks in Bellandur and surrounding villages
-- The road was fully submerged with water as high as waist level flowing on road
+- The areas surrounding ORR have seen uncontrolled urbanization 
+- During the Sep 2022 floods, the ORR was fully submerged with water as high as waist level flowing on the road
+
+<img src="{{site.url}}/images/low_lying_areas/orr_damage.png"/>
 
 **Validation 1**
 <img src="{{site.url}}/images/low_lying_areas/bellandur.png"/>
+
+**Validation 2**
+<img src="{{site.url}}/images/low_lying_areas/devarabisanahalli.png"/>
+
+**Validation 3**
+<img src="{{site.url}}/images/low_lying_areas/kadubisanahalli.png"/>
+
+#### 3. Sarjapura Road
+- Rainbow Drive Layout around Sarjapura Road is a luxurious residential area.
+- This area got significantly damaged and many residents got stuck in their homes enitrely cut-off from basic amenitites. 
+- National Disaster Response Force (NDRF) reportedly rescued 200 residents in boats in this area
+- Encroachment of the nearby Halanayakanahalli Lake might have played a key role in the disaster
+
+<img src="{{site.url}}/images/low_lying_areas/rbd_layout.png"/>
+
+
+<img src="{{site.url}}/images/low_lying_areas/rbd_damage.png"/>
+
+
+#### 4. Yemalur, Old Airport Road
+- Yemalur is home to many luxurious gated communities and villa settlements.
+- Most prominent ones are Divyasree 77, Epsilon villas, Sobha Palladian etc with villas costing as high as 10 cr+.
+- Many of these layouts were ghosted during the floods as residents took refuge in nearby hotels after being stranded and cut-off from basic necessities.
+
+<img src="{{site.url}}/images/low_lying_areas/yemalur_damage.png"/>
+
+<img src="{{site.url}}/images/low_lying_areas/yemalur_damage1.png"/>
+
+<img src="{{site.url}}/images/low_lying_areas/yemalur_damage2.png"/>
+
+<img src="{{site.url}}/images/low_lying_areas/yemalur.png"/>
+
