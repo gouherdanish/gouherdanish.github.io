@@ -7,9 +7,9 @@ tags: ["Geospatial"]
 
 ---
 ### Background
-- During the Bangalore floods in Sep 2022, many areas got submerged including IT parks and residential areas
-- I live in Nallurahalli village in Whitefield zone, East Bangalore which suffered significant flooding during Sep 2022 floods
-- It was one of the disaster zones which was visited by the then CM Shri BS Yediyurappa.
+- On Sep 5, 2022, major thunderstorm struck Bangalore city and IMD recorded 132 mm of rain in a span of 24 hours
+- The incessant downpour caused many areas to get submerged including IT parks and residential areas
+- India's IT hub reportedly registered a loss of over Rs 225 crores
 - Historically, this area has seen rapid development during recent years causing significant built-up and depleting green cover due to which the surface run-off gets accumulated which is worsened by less natural infiltration and swollen drains thereby causing floods.
 
 ---
@@ -51,11 +51,14 @@ tags: ["Geospatial"]
 streamlit run app.py
 ```
 
+
 - This is the landing page
 <img src="{{site.url}}/images/low_lying_areas/landing_page.png"/>
 
+
 - The user can select his village from the dropdown
 <img src="{{site.url}}/images/low_lying_areas/dropdown.png"/>
+
 
 - After selecting village, the app shows the data for that village
 <img src="{{site.url}}/images/low_lying_areas/nallurahalli.png"/>
@@ -66,8 +69,30 @@ Note:
 - The app is not deployed on server and currently works in local
 
 ---
-### Validation
+### Case Studies
+- Below we present two case studies around Whitefield and Outer Ring Road
+- These areas are major IT Hubs and contribute significantly to employment
 
-- Nallurahalli is a locality in Whitefield where I live and it suffered significant flooding during Sep 2022 floods
+#### 1. Nallurahalli and Whitefield
+- I live in Nallurahalli which is a village in Whitefield.
+- This area has seen rapid urbanization with surrounding EPIP zone being a bustling IT hub 
+- It is a densely populated residential area with lots of built-up area and very less green cover
+- Nallurahalli and surrounding villages suffered significant damages due to Sep 2022 floods
+- Some apartments got flooded very bad with parking area fully submerge with neck-deep water leves
+- The closeness of these apartments with nearby Storm Water Drain may also have played a part in the flooding.
 - It was one of the disaster zones which was visited by the then CM Shri BS Yediyurappa.
 
+**Validation 1 - The DNA Opulence Apartments**
+<img src="{{site.url}}/images/low_lying_areas/dna_opulence.png"/>
+
+**Validation 2 - SS Felicity Homes**
+- Similarly above it is SS Felicity Apartments which also got flooded heavily during the same time.
+- 
+<img src="{{site.url}}/images/low_lying_areas/ss_feliciity.png"/>
+
+#### 2. Outer Ring Road (ORR)
+- ORR is an arterial road connecting major tech parks in Bellandur and surrounding villages
+- The road was fully submerged with water as high as waist level
+
+**Validation 1**
+<img src="{{site.url}}/images/low_lying_areas/bellandur.png"/>
