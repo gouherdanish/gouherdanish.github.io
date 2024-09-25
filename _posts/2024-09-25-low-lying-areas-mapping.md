@@ -9,11 +9,16 @@ tags: ["Geospatial"]
 ### Background
 - On Sep 5, 2022, major thunderstorm struck Bangalore city and IMD recorded 132 mm of rain in a span of 24 hours
 - The incessant downpour caused many areas to get submerged including IT parks and residential areas
-- India's IT hub reportedly registered a loss of over Rs 225 crores
-- Historically, this area has seen rapid development during recent years causing significant built-up and depleting green cover due to which the surface run-off gets accumulated which is worsened by less natural infiltration and swollen drains thereby causing floods.
+- India's IT hub reportedly registered a loss of over Rs 225 crores in the aftermath of the floods
 
 ---
 ### Causes of Flooding
+- Historically, Bangalore has seen rapid unplanned development during recent years.
+- This has caused land use changes and increase in built-up area due to which the surface run-off gets accumulated.
+- This is worsened by depleting green cover due to which there is minimal infiltration and percolation and 
+- Encroachment around the natural lakes, catchment areas and storm water drains has only added to the misery causing drains to swell up after rains thereby causing floods.
+- Climate Change has also a key role to play in the urban flooding
+
 - Rapid unplanned development 
 - Land use changes
 - Increase in built-up areas 
@@ -70,9 +75,9 @@ Note:
 
 ---
 ### Case Studies
-- Below we present two case studies around Whitefield and Outer Ring Road
-- These areas are major IT Hubs and contribute significantly to employment
-- Below, we present our validations with the ground truth where we show that the low lying areas identified by the model actually suffered damage during the torrential floods 
+- Below we present two case studies in key areas around Whitefield, Outer Ring Road, Sarjapura Road and Old Airport Road.
+- These areas are major IT Hubs and contribute significantly to employment and revenue.
+- Below, we present our validations with the ground truth where we show that the low lying areas identified by our assessment actually suffered damage during the torrential floods of Sep 2022
 
 #### 1. Whitefield, Borewell Road
 - I live in Nallurahalli which is a village in Whitefield.
