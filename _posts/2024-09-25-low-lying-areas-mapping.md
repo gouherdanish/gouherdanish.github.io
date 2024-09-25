@@ -19,16 +19,6 @@ tags: ["Geospatial"]
 - Encroachment around the natural lakes, catchment areas and storm water drains has only added to the misery causing drains to swell up after rains thereby causing floods.
 - Climate Change has also a key role to play in the urban flooding
 
-- Rapid unplanned development 
-- Land use changes
-- Increase in built-up areas 
-- Decrease in vegetation cover
-- Low infiltration and percolation
-- Increase in surface run-off volume
-- Overflow in Storm water drains (SWDs) due to poor Drainage 
-- Encroachment of natural bodies e.g. lakes and SWDs
-- Climate Change
-
 ---
 ### Data Source
 - Elevation Data 
