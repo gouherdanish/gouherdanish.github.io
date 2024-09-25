@@ -30,10 +30,10 @@ tags: ["Geospatial"]
     - DEM data is available as open-source from SRTM mission (Shuttle Radar Topography Mission)
     - The resolution of the data is 30m (1 arc second)
     - Sample data for the study region was downloaded from USGS 
-        - https://earthexplorer.usgs.gov/
+        - [USGS](https://earthexplorer.usgs.gov/)
 - Bangalore Village Boundaries
     - This data was downloaded from KGIS website
-        - https://kgis.ksrsac.in/kgis/downloads.aspx
+        - [KGIS](https://kgis.ksrsac.in/kgis/downloads.aspx)
 
 ---
 ### Image Segmentation Process
@@ -147,7 +147,7 @@ Below, we show our assessment also validates this road has many low-lying hotspo
 ---
 ### Reference
 - Implementation and code can be found on Github
-[https://github.com/gouherdanish/urban_flooding](Urban Flooding)
+[Urban Flooding](https://github.com/gouherdanish/urban_flooding)
 
 ---
 ### Conclusion
