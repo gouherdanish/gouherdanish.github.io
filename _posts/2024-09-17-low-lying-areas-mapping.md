@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Urban Flooding Study - Locating Potential Low-Lying Spots in Bangalore"
-date: 2024-09-19
+title: "Streamlit app to locate flood-prone areas in Bangalore"
+date: 2024-09-25
 tags: ["Geospatial"]
 ---
 
@@ -147,7 +147,7 @@ Below, we show our assessment also validates this road has many low-lying hotspo
 ---
 ### Reference
 - Implementation and code can be found on Github
-https://github.com/gouherdanish/urban_flooding
+[https://github.com/gouherdanish/urban_flooding](Urban Flooding)
 
 ---
 ### Conclusion
