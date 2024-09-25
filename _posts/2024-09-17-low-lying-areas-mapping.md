@@ -146,8 +146,9 @@ Below, we show our assessment also validates this road has many low-lying hotspo
 
 ---
 ### Reference
-- Implementation and code can be found on Github
-[Urban Flooding](https://github.com/gouherdanish/urban_flooding)
+
+Implementation and code can be found on Github
+- [Urban Flooding](https://github.com/gouherdanish/urban_flooding)
 
 ---
 ### Conclusion
