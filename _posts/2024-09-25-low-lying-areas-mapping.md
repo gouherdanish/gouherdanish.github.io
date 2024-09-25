@@ -15,8 +15,8 @@ tags: ["Geospatial"]
 ### Causes of Flooding
 - Historically, Bangalore has seen rapid unplanned development during recent years.
 - This has caused land use changes and increase in built-up area due to which the surface run-off gets accumulated.
-- This is worsened by depleting green cover due to which there is minimal infiltration and percolation and 
-- Encroachment around the natural lakes, catchment areas and storm water drains has only added to the misery causing drains to swell up after rains thereby causing floods.
+- This is worsened by depleting green cover due to which there is minimal infiltration and percolation. 
+- Encroachment around the natural lakes, catchment areas and storm water drains has only added to the misery causing drains to swell up during rains thereby causing floods.
 - Climate Change has also a key role to play in the urban flooding
 
 ---
