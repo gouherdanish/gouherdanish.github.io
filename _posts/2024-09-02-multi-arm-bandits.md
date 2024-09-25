@@ -105,7 +105,7 @@ $$ R_{1,total} = 2*10 = 20 $$
 
 $$ R_{1,avg} = \frac{20}{10} = 2 $$
 
-<img src="{{site.url}}/images/greedy_1.png"/>
+<img src="{{site.url}}/images/narm_bandits/greedy_1.png"/>
 
 #### 2. Constant Action: $S_2$
 
@@ -113,7 +113,7 @@ $$ R_{2,total} = (3+1+2+6+1+3+6+2+1+3) = 28 $$
 
 $$ R_{2,avg} = \frac{28}{10} = 2.8 $$
 
-<img src="{{site.url}}/images/greedy_2.png"/>
+<img src="{{site.url}}/images/narm_bandits/greedy_2.png"/>
 
 #### 3. Constant Action: $S_3$
 
@@ -121,7 +121,7 @@ $$ R_{3,total} = (3.0+2.7+3.2+3.1+3.9+4.2+2.0+1.0+3.0+3.0) = 30.1 $$
 
 $$ R_{3,avg} = \frac{20.1}{10} = 3.01 $$
 
-<img src="{{site.url}}/images/greedy_3.png"/>
+<img src="{{site.url}}/images/narm_bandits/greedy_3.png"/>
 
 Note:
 - Due to greedy expoitation, it can be observed that the agent is stuck in immediate constant reward distribution
@@ -155,9 +155,9 @@ $$ R_{total} = 2+4.1+2+5+1+2.6+2+3+2+3.0 = 26.7 $$
 
 $$ R_{avg} = \frac{26.7}{10} = 2.67 $$
 
-<img src="{{site.url}}/images/non_greedy_1.png"/>
+<img src="{{site.url}}/images/narm_bandits/non_greedy_1.png"/>
 
-<img src="{{site.url}}/images/non_greedy_2.png"/>
+<img src="{{site.url}}/images/narm_bandits/non_greedy_2.png"/>
 
 Note:
 - Due to random exploration, it can be observed that the agent does not converge to optimal solution
@@ -191,9 +191,9 @@ $$ R_{total} = 2+2+2+5+1+2.6+2+6+2+3 = 27.6 $$
 
 $$ R_{avg} = \frac{27.6}{10} = 2.76 $$
 
-<img src="{{site.url}}/images/epsilon_greedy_1.png"/>
+<img src="{{site.url}}/images/narm_bandits/epsilon_greedy_1.png"/>
 
-<img src="{{site.url}}/images/epsilon_greedy_2.png"/>
+<img src="{{site.url}}/images/narm_bandits/epsilon_greedy_2.png"/>
 
 Note:
 - Epsilon-greedy agent converges to optimal solution after sufficient time steps
