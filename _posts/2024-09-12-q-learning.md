@@ -124,6 +124,7 @@ $$ {Q}(2,Down) \leftarrow 0.5 $$
 
 _Episode 1 ends_
 
+
 #### Episode 2
 
 Let's assume the agent follows the following path during episode 2
@@ -199,6 +200,99 @@ $$ {Q}(2,Down) \leftarrow 0.75 $$
 | 4 | 0 | 0 | 0 | 0 |
 
 _Episode 2 ends_
+
+
+#### Episode 3
+
+Let's assume the agent follows the following path during episode 2
+
+$$ State 1 \rightarrow Down \rightarrow State 3 \rightarrow Up \rightarrow State 1 \rightarrow Down \rightarrow State 3 \rightarrow Right \rightarrow State 4 $$
+
+**Step 1**
+
+- Agent moves down from state 1 to state 3
+- Since 3 is not the goal state, so $R_{t+1} = 0$
+- $max_{a'} Q(3,a') = max(0,0,0,0) = 0$
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(3,a') - {Q}(1,Down) \right ) $$
+
+$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0 - 0) $$
+
+$$ {Q}(1,Down) \leftarrow 0 $$
+
+**Updated Q-table**
+
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0.225 |
+| 2 | 0.225 | 0.75 | 0 | 0 |
+| 3 | 0 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
+
+**Step 2**
+
+- Agent moves up from state 3 to state 1
+- Since 1 is not the goal state, so $R_{t+1} = 0$
+- $max_{a'} Q(1,a') = max(0,0,0,0.225) = 0.225$
+
+$$ {Q}(3,Up) \leftarrow {Q}(3,Up) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(1,a') - {Q}(3,Up) \right ) $$
+
+$$ {Q}(3,Up) \leftarrow 0 + 0.5(0 + 0.9*0.225 - 0) $$
+
+$$ {Q}(3,Up) \leftarrow 0.10125 $$
+
+**Updated Q-table**
+
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0 | 0 | 0.225 |
+| 2 | 0.225 | 0.75 | 0 | 0 |
+| 3 | 0.10125 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
+
+**Step 3**
+
+- Agent moves down from state 1 to state 3
+- Since 3 is not the goal state, so $R_{t+1} = 0$
+- $max_{a'} Q(3,a') = max(0,0,0,0.10125) = 0.10125$
+
+$$ {Q}(1,Down) \leftarrow {Q}(1,Down) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(3,a') - {Q}(1,Down) \right ) $$
+
+$$ {Q}(1,Down) \leftarrow 0 + 0.5(0 + 0.9*0.10125 - 0) $$
+
+$$ {Q}(1,Down) \leftarrow 0.0455625 $$
+
+**Updated Q-table**
+
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0.0455625 | 0 | 0.225 |
+| 2 | 0.225 | 0.75 | 0 | 0 |
+| 3 | 0.10125 | 0 | 0 | 0 |
+| 4 | 0 | 0 | 0 | 0 |
+
+**Step 4**
+
+- Agent moves right from state 3 to state 4
+- Since 4 is goal state, so $R_{t+1} = 1$
+- Since 4 is goal state, any action that takes agent away from 4 should have no value, so $Q(4,a') = 0$
+
+$$ {Q}(3,Right) \leftarrow {Q}(3,Right) + \alpha \left (R_{t+1} + \gamma \max_{a'} Q(4,a') - {Q}(3,Right) \right ) $$
+
+$$ {Q}(3,Right) \leftarrow 0 + 0.5(1 + 0.9*0 - 0) $$
+
+$$ {Q}(3,Right) \leftarrow 0.5 $$
+
+**Updated Q-table**
+
+| State\Action | Up | Down | Left | Right |
+| - | - | - | - | - |
+| 1 | 0 | 0.0455625 | 0 | 0.225 |
+| 2 | 0.225 | 0.75 | 0 | 0 |
+| 3 | 0.10125 | 0 | 0 | 0.5 |
+| 4 | 0 | 0 | 0 | 0 |
+
+_Episode 3 ends_
 
 ### Implementation
 
