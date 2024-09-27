@@ -83,7 +83,20 @@ Example: The robot’s estimate of the benefit of moving in a particular directi
 ### 9. Discount Factor($\gamma$)
 
 - A factor between 0 and 1 that determines the importance of future rewards.
+    - Low value of gamma means agent is 'myopic' and prefers immediate rewards
+    - High value of gamma means agent is far-sighted and prefers long-term rewards
 - Example: A discount factor of 0.9 means future rewards are considered less important than immediate rewards.
+
+### 10. Greedy Factor ($\epsilon$)
+- A factor between 0 and 1 which controls the exploration vs exploitation trade-off
+- Example: $\epsilon=0.1$ means the agent goes for exploration only 10% of the times and other times it exploits i.e. it chooses the best available actions.
+- Good strategy is to have decaying epsilon so that in the initial stages the agent goes for exploration often enough and discovers new ways to get high reward and then in later episodes it prioritizes its existing knowledge and chooses the best possible action
+
+### 11. Learning Rate ($\alpha$)
+- A factor between 0 and 1 which controls how fast the agent learns and converges to optimal policy
+    - High value of alpha tells the agent to adapt fast to new learnings
+    - Low value of alpha tells the agent to stabilize its learnings
+- Good strategy is to have decaying learning rate so as to have fast learning during the initial stages and as time goes on the agent stabilizes its learning and converges
 
 ---
 ## Types of RL
