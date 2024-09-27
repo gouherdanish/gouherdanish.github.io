@@ -77,7 +77,7 @@ where $\gamma$ is the _discount factor_
     - its objective in this case is to learn how to choose action $A_t$ so as to maximize only $R_{t+1}$
     - but in general, acting to maximize immediate reward can reduce access to future rewards so that the return may actually be reduced.
 - Case 2: $\gamma \rightarrow 1$ 
-    -  the agent becomes far-sighted i.e. the objective takes future rewards into account more strongly
+    -  the agent becomes "far-sighted" i.e. the objective takes future rewards into account more strongly
 
 **Incremental Update Formula**
 
