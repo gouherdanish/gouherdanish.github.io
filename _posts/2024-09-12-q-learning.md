@@ -202,6 +202,22 @@ _Episode 2 ends_
 
 ### Implementation
 
+- We provide a possible implementation of the Gridworld Bot using Q-Learning based updates
+
+**Assumptions**
+
+_Environment_
+- Grid size is assumed constant as 2*2
+- Start Pos - Top Left Corner i.e. (0,0)
+- Goal Position - Bottom right corner i.e. (1,1)
+- Step size - 1
+
+_Agent_
+- Learning Rate ($\alpha$) - 0.5
+- Discount Factor ($\gamma$) - 0.9
+- Greed Factor ($\epsilon$) - 0.1
+
+**Code**
 ```
 from entities.env import GridWorld
 from constants import AgentParams, EnvParams
@@ -209,24 +225,26 @@ from factory.game_factory import GameFactory
 from factory.agent_factory import AgentFactory
 
 # Inputs
-method = 'qlearning'
-episodes = 10
+>>> method = 'qlearning'
+>>> episodes = 2
 
 # GridWorld Environment 
 # - EnvParams contains grid dimension, start position, goal position
-env = GridWorld(env_params=EnvParams())
+>>> env = GridWorld(env_params=EnvParams())
 
 # Qlearning Agent
 # - AgentParams contains epsilon(greedy factor), gamma(discount factor), alpha(learning rate)
-agent = AgentFactory.get(type=method, states=env.states, agent_params=AgentParams())
+>>> agent = AgentFactory.get(type=method, states=env.states, agent_params=AgentParams())
 
 # Agent-Environment Interaction
 # - Trains the agent over number of episodes and agent builds estimates of each state and action
 # - and learns to navigate the grid to reah goal position
-game = GameFactory.get(method=method,env=env,agent=agent)
-game.run(episodes=episodes)
+>>> game = GameFactory.get(method=method,env=env,agent=agent)
+>>> game.run(episodes=episodes)
 
-print([(s,a,q) for (s,a), q in self.agent.estimates.items() if q.value != 0])
+>>> print([(s,a,q) for (s,a), q in self.agent.estimates.items() if q.value != 0])
+[(State(0,0), <Actions.RIGHT: 'right'>, Q(0.225)), (State(0,1), <Actions.DOWN: 'down'>, Q(0.75))]
+
 ```
 
 ---
