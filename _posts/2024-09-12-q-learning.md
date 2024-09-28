@@ -51,8 +51,8 @@ $$ {Q}(S_t,A_t) \leftarrow {Q}(S_t,A_t) + \alpha \left (R_{t+1} + \gamma max_{a'
 ```
 
 #### Initial Conditions
-- Start State: (1,1) or cell 1 (top-left corner)
-- Goal State: (2,3) or cell 4 (bottom-right corner)
+- Start State: (0,0) or cell 1 (top-left corner)
+- Goal State: (2,2) or cell 4 (bottom-right corner)
 - Actions: Up, Down, Left, Right
 - Reward Structure: +1 for reaching the goal (cell 9), and 0 for all other cells.
 - Initial Q-values: Assume all Q-values are initialized to 0.
