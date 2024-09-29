@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Docker: Concepts and Usage"
-date: 2024-09-29
+date: 2024-09-28
 tags: ["Software Development"]
 ---
 
@@ -152,6 +152,12 @@ docker rmi <image-id>
 ```
 docker exec -it <container-id> /bin/bash    # goes inside the container and opens interactive shell
 ```
+
+---
+### Summary
+
+- Docker is a containerization platform that uses OS-level virtualization to package software applications and their dependencies into reusable units called containers
+- Docker containers can be run on any host with Docker or an equivalent container runtime installed, whether locally on your laptop or in a remote cloud.
 
 ---
 ### Conclusion
