@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Creating a Git Repository"
+title: "Git: Creating a Repository"
 date: 2024-09-23
-tags: ["Git"]
+tags: ["Software Development"]
 ---
 
 ---
