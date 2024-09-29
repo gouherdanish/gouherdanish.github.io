@@ -153,9 +153,9 @@ docker rmi <image-id>
 docker exec -it <container-id> /bin/bash    # goes inside the container and opens interactive shell
 ```
 
-### Docker Network
-
-
 ---
-## Conclusion
+### Conclusion
+
+- We introduced Docker and saw how it helps us navigate software development and deployment phases safely and efficiently.
+- We also went through some useful commands to interact with docker engine.
 
