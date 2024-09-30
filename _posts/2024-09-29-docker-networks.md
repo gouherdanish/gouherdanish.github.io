@@ -33,7 +33,7 @@ Note:
 #### 3. Overlay Network
 - This mode enables containers running on different hosts to communicate with each other as if they were on the same network
 - Overlay networks use a distributed control plane to manage network routing
-- All containers across different hosts but connected to this network can communicate
+- Containers across different hosts but connected to overlay network can communicate
 
 
 ---
