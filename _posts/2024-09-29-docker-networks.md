@@ -27,8 +27,10 @@ Note:
 
 #### 2. Host Network
 - This mode gives the container full access to the host’s network stack
-- It can give performance improvements when container has lot of ports
-- it can also introduce potential security risks
+- It can give performance improvements since there is no Network Address Translation (NAT) involved. 
+- It can help also when container has lot of ports
+- It can also introduce potential security risks
+- It is only supported on Linux
 
 #### 3. Overlay Network
 - This mode enables containers running on different hosts to communicate with each other as if they were on the same network
