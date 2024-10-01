@@ -127,7 +127,7 @@ What's next?
     ...
 ```
 
-**Communication between Containers**
+**Communication between Containers - Using IP Address**
 - Since the containers are in the same bridge network, they can communicate among themselves using IP addresses.
 - Below we go inside the container 2 and try to connect to container 1 from there
 ```
@@ -161,6 +161,7 @@ What's next?
   Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
   Learn more at https://docs.docker.com/go/debug-cli/
 ```
+
 - Similarly we can connect to container 2 from container 1
 ```
 % docker exec -it nginx1 curl http://172.17.0.3:80
@@ -193,6 +194,9 @@ What's next?
   Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
   Learn more at https://docs.docker.com/go/debug-cli/
 ```
+
+**Communication between Containers - Using DNS**
+- Since the containers are in the same bridge network, they should be able to communicate using DNS.
 
 **List networks**
 ```
