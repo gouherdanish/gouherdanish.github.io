@@ -38,7 +38,128 @@ Note:
 
 ---
 
-### Demo
+### Demo1 - Using Default Bridge Networks
+
+**Create two containers from `nginx` image**
+
+```
+docker run -itd --name nginx1 -p 8081:80 nginx
+39568968b1612f70a2370bd06f6f11590ad505ad3e392ea7b90e0b738aeb3247
+
+docker run -itd --name nginx2 -p 8082:80 nginx
+e77b9f9dfd501ee74a834ccded2dbe515a4d7371d7ab95d27cda18af9b2b30a6
+```
+
+**List Containers**
+```
+% docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                  NAMES
+e77b9f9dfd50   nginx     "/docker-entrypoint.…"   5 seconds ago    Up 4 seconds    0.0.0.0:8082->80/tcp   nginx2
+d00b9e56ccbd   nginx     "/docker-entrypoint.…"   9 minutes ago    Up 9 minutes    0.0.0.0:8080->80/tcp   nginx1
+```
+
+**Communication between Host and Container**
+- We can communicate to the containers from our local machine
+
+```
+% curl http://0.0.0.0:8081
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+What's next?
+  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
+  Learn more at https://docs.docker.com/go/debug-cli/
+```
+
+- Typing http://0.0.0.0:8081 in browser opens the following page in the browser
+<img src="{{site.url}}/images/docker/nginx.png"/>
+
+**Inspect Container**
+```
+% docker inspect nginx1
+- This gives a nested json in the following format
+- Note the `IPAddress` on the container1 - 172.17.0.2
+- Similarly note the `IPAddress` on the container2 - 172.17.0.3
+
+```
+...
+    ...
+    "Networks": {
+        "bridge": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": null,
+            "MacAddress": "02:42:ac:11:00:02",
+            "NetworkID": "059a6cf12dbae364b16b2d314a3cd8ec030ad406455c7a73ca7d833b405ef8a8",
+            "EndpointID": "8f9483947445e38c52eeb0b86f911386dacb33b596955186ed34cd73bb09f690",
+            "Gateway": "172.17.0.1",
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DriverOpts": null,
+            "DNSNames": null
+        }
+    }
+    ...
+...
+```
+
+**Communication between Containers**
+```
+% docker exec -it nginx2 curl http://172.17.0.2:80
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+What's next?
+  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
+  Learn more at https://docs.docker.com/go/debug-cli/
+```
+
 
 **List networks**
 ```
@@ -50,10 +171,32 @@ ef3b5b8c6741   host      host      local
 67e0dc7301a8   none      null      local
 ```
 
-**Create a Bridge Network**
+
+
+### Demo2 - User-Defined Bridge Networks
+
+**List networks**
+```
+docker network ls
+
+NETWORK ID     NAME      DRIVER    SCOPE
+059a6cf12dba   bridge    bridge    local
+ef3b5b8c6741   host      host      local
+67e0dc7301a8   none      null      local
+```
+
+**Create a user-defined Bridge Network**
 
 ```
 docker network create mynet --driver bridge
-
 mynet
+```
+
+- We can see that the `mynet` has been created
+```
+NETWORK ID     NAME      DRIVER    SCOPE
+059a6cf12dba   bridge    bridge    local
+ef3b5b8c6741   host      host      local
+**ed35c394a57c   mynet     bridge    local**
+67e0dc7301a8   none      null      local
 ```
