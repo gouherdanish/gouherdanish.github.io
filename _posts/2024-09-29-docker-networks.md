@@ -98,9 +98,8 @@ What's next?
 **Inspect Container**
 - This gives a nested json in the following format
 - Note the containers utilize the _default bridge network_
-- Also, note the `IPAddress` on the container1 - 172.17.0.2
-- Similarly note the `IPAddress` on the container2 - 172.17.0.3
-
+- Note the key `DNSNames` is null
+    - this is the reason why default bridge network does not support automatic service discovery through DNS
 ```
 % docker inspect nginx1
     ...
@@ -114,7 +113,7 @@ What's next?
                 "NetworkID": "059a6cf12dbae364b16b2d314a3cd8ec030ad406455c7a73ca7d833b405ef8a8",
                 "EndpointID": "8f9483947445e38c52eeb0b86f911386dacb33b596955186ed34cd73bb09f690",
                 "Gateway": "172.17.0.1",
-                "IPAddress": "172.17.0.2",
+                "IPAddress": "172.17.0.2", <<--
                 "IPPrefixLen": 16,
                 "IPv6Gateway": "",
                 "GlobalIPv6Address": "",
@@ -126,6 +125,9 @@ What's next?
         ...
     ...
 ```
+
+- Also, note the `IPAddress` on the container1 - 172.17.0.2
+- Similarly inspect the container 2 and note the `IPAddress` on the container2 - 172.17.0.3
 
 **Communication between Containers - Using IP Address**
 - Since the containers are in the same bridge network, they can communicate among themselves using IP addresses.
@@ -197,4 +199,45 @@ docker run -itd --name nginx1 -p 8081:80 --network mynet nginx
 
 docker run -itd --name nginx2 -p 8082:80 --network mynet nginx
 %54f6603fdd17de678089c9d25bc4428f7b9ce674d7aa2c6157f00afd1fe6b450
+```
+
+**List Containers**
+
+```
+% docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                  NAMES
+54f6603fdd17   nginx     "/docker-entrypoint.…"   4 seconds ago    Up 3 seconds    0.0.0.0:8082->80/tcp   nginx2
+0cb1aa688fa3   nginx     "/docker-entrypoint.…"   12 seconds ago   Up 12 seconds   0.0.0.0:8081->80/tcp   nginx1
+```
+
+**Inspect Containers**
+
+```
+% docker inspect nginx1
+...
+    ...
+        "Networks": {
+            "mynet": {
+                "IPAMConfig": null,
+                "Links": null,
+                "Aliases": null,
+                "MacAddress": "02:42:ac:13:00:02",
+                "NetworkID": "ed35c394a57c97248efddb7bdedbb3b6b6a9876b03bc4e4df6e43f3c49f389e3",
+                "EndpointID": "493db165368f169eb12401bc982a13f46b5ac596466eefa5a65fdd028e1c91f5",
+                "Gateway": "172.19.0.1",
+                "IPAddress": "172.19.0.2",
+                "IPPrefixLen": 16,
+                "IPv6Gateway": "",
+                "GlobalIPv6Address": "",
+                "GlobalIPv6PrefixLen": 0,
+                "DriverOpts": null,
+                "DNSNames": [
+                    "nginx1",
+                    "0cb1aa688fa3"
+                ]
+            }
+            }
+    ...
+...
+
 ```
