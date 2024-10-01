@@ -129,119 +129,72 @@ What's next?
 
 **Communication between Containers - Using IP Address**
 - Since the containers are in the same bridge network, they can communicate among themselves using IP addresses.
-- Below we go inside the container 2 and try to connect to container 1 from there
+- Below connect to container 1 from inside container 2
 
 ```
 % docker exec -it nginx2 curl http://172.17.0.3:80
 
+...
 <!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-<body>
 <h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-
-What's next?
-  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
-  Learn more at https://docs.docker.com/go/debug-cli/
+...
 ```
 
-- Similarly we can connect to container 2 from container 1
+- Similarly we can connect to container 2 from inside container 1
 
 ```
 % docker exec -it nginx1 curl http://172.17.0.3:80
-
+...
 <!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-<body>
 <h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-
-What's next?
-  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
-  Learn more at https://docs.docker.com/go/debug-cli/
+...
 ```
 
 **Communication between Containers - Using DNS**
 - Working with IP addresses can be tricky or incovenient so it is preferred that the containers should be able to communicate using DNS itself.
-- The default bridge network can't provide that
+- However, the default bridge network doesn't support automatic service discovery
 
 ```
 % docker exec -it nginx1 curl http://172.17.0.3:80
 # FAILS
 ```
 
-**List networks**
 ```
-docker network ls
-
-NETWORK ID     NAME      DRIVER    SCOPE
-059a6cf12dba   bridge    bridge    local
-ef3b5b8c6741   host      host      local
-67e0dc7301a8   none      null      local
+% docker exec -it nginx2 curl http://172.17.0.2:80
+# FAILS
 ```
 
-
+**Stop Containers**
+```
+docker rm nginx1 ngix2
+```
 
 ### Demo2 - User-Defined Bridge Networks
-
-**List networks**
-```
-docker network ls
-
-NETWORK ID     NAME      DRIVER    SCOPE
-059a6cf12dba   bridge    bridge    local
-ef3b5b8c6741   host      host      local
-67e0dc7301a8   none      null      local
-```
+- User-defined bridge network support automatic service discovery
 
 **Create a user-defined Bridge Network**
 
 ```
-docker network create mynet --driver bridge
+% docker network create mynet --driver bridge
 mynet
 ```
 
 - We can see that the `mynet` has been created
 ```
+% docker ps
 NETWORK ID     NAME      DRIVER    SCOPE
 059a6cf12dba   bridge    bridge    local
 ef3b5b8c6741   host      host      local
-**ed35c394a57c   mynet     bridge    local**
+ed35c394a57c   mynet     bridge    local <<--
 67e0dc7301a8   none      null      local
+```
+
+**Create Containers with User-defined network**
+- We can provide `--network` tag to assign the user-defined network while creating containers
+```
+docker run -itd --name nginx1 -p 8081:80 --network mynet nginx
+0cb1aa688fa3e3709a803ccce6432f7451310e78876060b5705acb0ff844440a
+
+docker run -itd --name nginx2 -p 8082:80 --network mynet nginx
+%54f6603fdd17de678089c9d25bc4428f7b9ce674d7aa2c6157f00afd1fe6b450
 ```
