@@ -97,7 +97,7 @@ What's next?
 
 **Inspect Container**
 - This gives a nested json in the following format
-- Note the containers utilize the _default bridge network_
+- Note the containers utilize the default network _bridge_
 - Note the key `DNSNames` is null
     - this is the reason why default bridge network does not support automatic service discovery through DNS
 ```
@@ -126,8 +126,9 @@ What's next?
     ...
 ```
 
-- Also, note the `IPAddress` on the container1 - 172.17.0.2
-- Similarly inspect the container 2 and note the `IPAddress` on the container2 - 172.17.0.3
+- Note the IP addresses of container 1 and 2 after inspecting them
+    - container1 - 172.19.0.2
+    - container2 - 172.19.0.3
 
 **Communication between Containers - Using IP Address**
 - Since the containers are in the same bridge network, they can communicate among themselves using IP addresses.
@@ -211,7 +212,10 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 ```
 
 **Inspect Containers**
-
+- Note the containers utilize the user-defined bridge _mynet_
+- Note the key `DNSNames` is not null now and has `nginx1` tagged
+    - this is the reason why user-defined bridge network can support automatic service discovery through DNS
+    
 ```
 % docker inspect nginx1
 ...
@@ -241,3 +245,28 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 ...
 
 ```
+
+- Note the IP addresses of container 1 and 2 after inspecting them
+    - container1 - 172.19.0.2
+    - container2 - 172.19.0.3
+
+
+**Communication between Containers - Using DNS**
+- Since the user-defined network support DNS discovery, we can communicate between containers using DNS 
+- We can connect to nginx1 container from inside nginx2 container
+```
+docker exec -it nginx2 curl nginx1:80 
+...
+<!DOCTYPE html>
+<h1>Welcome to nginx!</h1>
+...
+```
+
+- Similarly, we can connect to nginx2 container from inside nginx2 container
+```
+docker exec -it nginx2 curl nginx1:80 
+...
+<!DOCTYPE html>
+<h1>Welcome to nginx!</h1>
+...
+
