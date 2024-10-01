@@ -63,33 +63,15 @@ d00b9e56ccbd   nginx     "/docker-entrypoint.…"   9 minutes ago    Up 9 minute
 
 ```
 % curl http://0.0.0.0:8081
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-
-What's next?
-  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
-  Learn more at https://docs.docker.com/go/debug-cli/
+HTTP/1.1 200 OK
+Server: nginx/1.27.1
+Date: Tue, 01 Oct 2024 05:14:30 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Mon, 12 Aug 2024 14:21:01 GMT
+Connection: keep-alive
+ETag: "66ba1a4d-267"
+Accept-Ranges: bytes
 ```
 
 - Typing http://0.0.0.0:8081 in browser opens the following page in the browser
@@ -135,22 +117,31 @@ What's next?
 - Below connect to container 1 from inside container 2
 
 ```
-% docker exec -it nginx2 curl http://172.17.0.3:80
-
-...
-<!DOCTYPE html>
-<h1>Welcome to nginx!</h1>
-...
+% docker exec -it nginx2 curl -I http://172.17.0.3:80
+HTTP/1.1 200 OK
+Server: nginx/1.27.1
+Date: Tue, 01 Oct 2024 05:14:30 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Mon, 12 Aug 2024 14:21:01 GMT
+Connection: keep-alive
+ETag: "66ba1a4d-267"
+Accept-Ranges: bytes
 ```
 
 - Similarly we can connect to container 2 from inside container 1
 
 ```
 % docker exec -it nginx1 curl http://172.17.0.3:80
-...
-<!DOCTYPE html>
-<h1>Welcome to nginx!</h1>
-...
+HTTP/1.1 200 OK
+Server: nginx/1.27.1
+Date: Tue, 01 Oct 2024 05:14:30 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Mon, 12 Aug 2024 14:21:01 GMT
+Connection: keep-alive
+ETag: "66ba1a4d-267"
+Accept-Ranges: bytes
 ```
 
 **Communication between Containers - Using DNS**
@@ -260,20 +251,30 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 
 ```
 docker exec -it nginx2 curl nginx1:80 
-...
-<!DOCTYPE html>
-<h1>Welcome to nginx!</h1>
-...
+HTTP/1.1 200 OK
+Server: nginx/1.27.1
+Date: Tue, 01 Oct 2024 05:14:30 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Mon, 12 Aug 2024 14:21:01 GMT
+Connection: keep-alive
+ETag: "66ba1a4d-267"
+Accept-Ranges: bytes
 ```
 
 - Similarly, we can connect to nginx2 container from inside nginx2 container
 
 ```
 docker exec -it nginx2 curl nginx1:80 
-...
-<!DOCTYPE html>
-<h1>Welcome to nginx!</h1>
-...
+HTTP/1.1 200 OK
+Server: nginx/1.27.1
+Date: Tue, 01 Oct 2024 05:14:30 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Mon, 12 Aug 2024 14:21:01 GMT
+Connection: keep-alive
+ETag: "66ba1a4d-267"
+Accept-Ranges: bytes
 
 ```
 
