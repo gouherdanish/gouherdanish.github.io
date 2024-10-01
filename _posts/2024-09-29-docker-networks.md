@@ -280,6 +280,25 @@ Accept-Ranges: bytes
 
 ```
 
+### Demo3 - Host network works on Linux only
+
+**Create Container in `host` network mode**
+- We can use `--network host` flag to create container in host mode
+
+```
+% docker run -dit --name nginx_host --network host nginx
+13746c4ceb52d4bccbbe615a78dcb46e4c98f9eec5c6ed39b705b13fe20c1c7d
+```
+
+**Communicate to container using host port**
+- This fails because I am working on Mac
+- Host mode is only supported on Linux
+
+```
+% curl -I 0.0.0.0:80
+curl: (7) Failed to connect to 0.0.0.0 port 80 after 0 ms: Couldn't connect to server
+```
+
 ---
 ### Conclusion
 - Docker provides networking capabilities to containers
