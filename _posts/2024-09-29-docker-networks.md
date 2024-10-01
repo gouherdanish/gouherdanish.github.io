@@ -184,6 +184,7 @@ mynet
 ```
 
 - We can see that the `mynet` has been created
+
 ```
 % docker ps
 NETWORK ID     NAME      DRIVER    SCOPE
@@ -195,6 +196,7 @@ ed35c394a57c   mynet     bridge    local <<--
 
 **Create Containers with User-defined network**
 - We can provide `--network` tag to assign the user-defined network while creating containers
+
 ```
 docker run -itd --name nginx1 -p 8081:80 --network mynet nginx
 0cb1aa688fa3e3709a803ccce6432f7451310e78876060b5705acb0ff844440a
@@ -255,6 +257,7 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 **Communication between Containers - Using DNS**
 - Since the user-defined network support DNS discovery, we can communicate between containers using DNS 
 - We can connect to nginx1 container from inside nginx2 container
+
 ```
 docker exec -it nginx2 curl nginx1:80 
 ...
@@ -264,6 +267,7 @@ docker exec -it nginx2 curl nginx1:80
 ```
 
 - Similarly, we can connect to nginx2 container from inside nginx2 container
+
 ```
 docker exec -it nginx2 curl nginx1:80 
 ...
