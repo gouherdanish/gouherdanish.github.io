@@ -130,6 +130,7 @@ What's next?
 **Communication between Containers - Using IP Address**
 - Since the containers are in the same bridge network, they can communicate among themselves using IP addresses.
 - Below we go inside the container 2 and try to connect to container 1 from there
+
 ```
 % docker exec -it nginx2 curl http://172.17.0.3:80
 
@@ -163,6 +164,7 @@ What's next?
 ```
 
 - Similarly we can connect to container 2 from container 1
+
 ```
 % docker exec -it nginx1 curl http://172.17.0.3:80
 
@@ -196,7 +198,13 @@ What's next?
 ```
 
 **Communication between Containers - Using DNS**
-- Since the containers are in the same bridge network, they should be able to communicate using DNS.
+- Working with IP addresses can be tricky or incovenient so it is preferred that the containers should be able to communicate using DNS itself.
+- The default bridge network can't provide that
+
+```
+% docker exec -it nginx1 curl http://172.17.0.3:80
+# FAILS
+```
 
 **List networks**
 ```
