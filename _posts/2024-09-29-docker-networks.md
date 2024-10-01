@@ -96,40 +96,42 @@ What's next?
 <img src="{{site.url}}/images/docker/nginx.png"/>
 
 **Inspect Container**
-```
-% docker inspect nginx1
 - This gives a nested json in the following format
-- Note the `IPAddress` on the container1 - 172.17.0.2
+- Note the containers utilize the _default bridge network_
+- Also, note the `IPAddress` on the container1 - 172.17.0.2
 - Similarly note the `IPAddress` on the container2 - 172.17.0.3
 
 ```
-...
+% docker inspect nginx1
     ...
-    "Networks": {
-        "bridge": {
-            "IPAMConfig": null,
-            "Links": null,
-            "Aliases": null,
-            "MacAddress": "02:42:ac:11:00:02",
-            "NetworkID": "059a6cf12dbae364b16b2d314a3cd8ec030ad406455c7a73ca7d833b405ef8a8",
-            "EndpointID": "8f9483947445e38c52eeb0b86f911386dacb33b596955186ed34cd73bb09f690",
-            "Gateway": "172.17.0.1",
-            "IPAddress": "172.17.0.2",
-            "IPPrefixLen": 16,
-            "IPv6Gateway": "",
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "DriverOpts": null,
-            "DNSNames": null
+        ...
+        "Networks": {
+            "bridge": {
+                "IPAMConfig": null,
+                "Links": null,
+                "Aliases": null,
+                "MacAddress": "02:42:ac:11:00:02",
+                "NetworkID": "059a6cf12dbae364b16b2d314a3cd8ec030ad406455c7a73ca7d833b405ef8a8",
+                "EndpointID": "8f9483947445e38c52eeb0b86f911386dacb33b596955186ed34cd73bb09f690",
+                "Gateway": "172.17.0.1",
+                "IPAddress": "172.17.0.2",
+                "IPPrefixLen": 16,
+                "IPv6Gateway": "",
+                "GlobalIPv6Address": "",
+                "GlobalIPv6PrefixLen": 0,
+                "DriverOpts": null,
+                "DNSNames": null
+            }
         }
-    }
+        ...
     ...
-...
 ```
 
 **Communication between Containers**
+- Since the containers are in the same bridge network, they can communicate among themselves using IP addresses.
+- Below we go inside the container 2 and try to connect to container 1 from there
 ```
-% docker exec -it nginx2 curl http://172.17.0.2:80
+% docker exec -it nginx2 curl http://172.17.0.3:80
 
 <!DOCTYPE html>
 <html>
@@ -159,7 +161,38 @@ What's next?
   Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
   Learn more at https://docs.docker.com/go/debug-cli/
 ```
+- Similarly we can connect to container 2 from container 1
+```
+% docker exec -it nginx1 curl http://172.17.0.3:80
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+What's next?
+  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug nginx1
+  Learn more at https://docs.docker.com/go/debug-cli/
+```
 
 **List networks**
 ```
