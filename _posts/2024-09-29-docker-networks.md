@@ -172,6 +172,7 @@ What's next?
 docker rm nginx1 ngix2
 ```
 
+---
 ### Demo2 - User-Defined Bridge Networks
 - User-defined bridge network support automatic service discovery
 
@@ -270,3 +271,11 @@ docker exec -it nginx2 curl nginx1:80
 <h1>Welcome to nginx!</h1>
 ...
 
+```
+
+---
+### Conclusion
+- Docker provides networking capabilities to containers
+- Containers are created in default `bridge` network
+- Containers in the same network can communicate using IP addresses
+- User-defined bridge networks allow communication between containers using DNS as well
