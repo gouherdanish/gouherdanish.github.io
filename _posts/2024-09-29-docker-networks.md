@@ -45,19 +45,67 @@ Note:
 **List networks**
 
 ```
-docker network ls
+% docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+059a6cf12dba   bridge    bridge    local
+ef3b5b8c6741   host      host      local
+67e0dc7301a8   none      null      local
 ```
 
 **Create new network**
 
 ```
-docker network create mynet -d bridge
+% docker network create mynet -d bridge
+% docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+059a6cf12dba   bridge    bridge    local
+ef3b5b8c6741   host      host      local
+ed35c394a57c   mynet     bridge    local
+67e0dc7301a8   none      null      local
 ```
 
-**Inspect a network**
+**Inspect a given network**
 
 ```
-docker network inspect mynet
+% docker network inspect mynet
+[
+    {
+        "Name": "mynet",
+        "Id": "ed35c394a57c97248efddb7bdedbb3b6b6a9876b03bc4e4df6e43f3c49f389e3",
+        "Created": "2024-09-29T17:27:16.222426512Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.19.0.0/16",
+                    "Gateway": "172.19.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+```
+- Note there is no containers attached to this network yet
+
+**Connect a container to network**
+
+```
+% docker network connect mynet nginx1
+% docker inspect mynet
 [
     {
         "Name": "mynet",
@@ -84,18 +132,11 @@ docker network inspect mynet
         },
         "ConfigOnly": false,
         "Containers": {
-            "0cb1aa688fa3e3709a803ccce6432f7451310e78876060b5705acb0ff844440a": {
+            "8891557ac7a9ec3668d78c87f85fb72ab5c0cfe669cb1ac94ac4901e63aebae2": {
                 "Name": "nginx1",
-                "EndpointID": "493db165368f169eb12401bc982a13f46b5ac596466eefa5a65fdd028e1c91f5",
+                "EndpointID": "5e7fb7234cb71795d46fa8b6db94b1a14b079c8bbd110390c737edeeab70fede",
                 "MacAddress": "02:42:ac:13:00:02",
                 "IPv4Address": "172.19.0.2/16",
-                "IPv6Address": ""
-            },
-            "54f6603fdd17de678089c9d25bc4428f7b9ce674d7aa2c6157f00afd1fe6b450": {
-                "Name": "nginx2",
-                "EndpointID": "423608656ddf11ec0a2038b6b5a0b1fb45e84eea2f8b838ce36ab1539d3987e3",
-                "MacAddress": "02:42:ac:13:00:03",
-                "IPv4Address": "172.19.0.3/16",
                 "IPv6Address": ""
             }
         },
@@ -103,6 +144,20 @@ docker network inspect mynet
         "Labels": {}
     }
 ]
+```
+
+- Now the container is attached as shown in the above dictionary
+
+**Disconnect a container from the network**
+
+```
+% docker network disconnect mynet nginx1
+```
+
+**Remove a network**
+
+```
+% docker network rm mynet
 ```
 
 ---
