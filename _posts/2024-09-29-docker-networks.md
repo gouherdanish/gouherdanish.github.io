@@ -146,7 +146,7 @@ ed35c394a57c   mynet     bridge    local
 ]
 ```
 
-- Now the container is attached as shown in the above dictionary
+- Now the container is attached to the user-defined network as shown in the above dictionary
 
 **Disconnect a container from the network**
 
@@ -179,7 +179,7 @@ e77b9f9dfd501ee74a834ccded2dbe515a4d7371d7ab95d27cda18af9b2b30a6
 % docker ps
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                  NAMES
 e77b9f9dfd50   nginx     "/docker-entrypoint.…"   5 seconds ago    Up 4 seconds    0.0.0.0:8082->80/tcp   nginx2
-d00b9e56ccbd   nginx     "/docker-entrypoint.…"   9 minutes ago    Up 9 minutes    0.0.0.0:8080->80/tcp   nginx1
+d00b9e56ccbd   nginx     "/docker-entrypoint.…"   9 minutes ago    Up 9 minutes    0.0.0.0:8081->80/tcp   nginx1
 ```
 
 **Communication between Host and Container**
@@ -273,12 +273,12 @@ Accept-Ranges: bytes
 - However, the default bridge network doesn't support automatic service discovery
 
 ```
-% docker exec -it nginx1 curl http://172.17.0.3:80
+% docker exec -it nginx1 curl nginx2:80
 # FAILS
 ```
 
 ```
-% docker exec -it nginx2 curl http://172.17.0.2:80
+% docker exec -it nginx2 curl nginx1:80
 # FAILS
 ```
 
@@ -335,33 +335,52 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
     - this is the reason why user-defined bridge network can support automatic service discovery through DNS
     
 ```
-% docker inspect nginx1
-...
-    ...
-        "Networks": {
-            "mynet": {
-                "IPAMConfig": null,
-                "Links": null,
-                "Aliases": null,
+% docker network inspect mynet
+[
+    {
+        "Name": "mynet",
+        "Id": "ed35c394a57c97248efddb7bdedbb3b6b6a9876b03bc4e4df6e43f3c49f389e3",
+        "Created": "2024-09-29T17:27:16.222426512Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.19.0.0/16",
+                    "Gateway": "172.19.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "747c7c78ac36e66528fc2162aee4d37670796747e77415170b83355f92d45216": {
+                "Name": "nginx2",
+                "EndpointID": "f93c825b63e178c666877ec5219e4104681403c1515d08de1e570bfd1809b143",
+                "MacAddress": "02:42:ac:13:00:03",
+                "IPv4Address": "172.19.0.3/16", <--
+                "IPv6Address": ""
+            },
+            "db9dd25e592a78060ce4e52277538f347fc3ff5a69830fa286118ea6d3ef5dd9": {
+                "Name": "nginx1",
+                "EndpointID": "4c696876fc50ff176e380f9fd355503c4512323570f7eeee8ccd83036eba9d2b",
                 "MacAddress": "02:42:ac:13:00:02",
-                "NetworkID": "ed35c394a57c97248efddb7bdedbb3b6b6a9876b03bc4e4df6e43f3c49f389e3",
-                "EndpointID": "493db165368f169eb12401bc982a13f46b5ac596466eefa5a65fdd028e1c91f5",
-                "Gateway": "172.19.0.1",
-                "IPAddress": "172.19.0.2",
-                "IPPrefixLen": 16,
-                "IPv6Gateway": "",
-                "GlobalIPv6Address": "",
-                "GlobalIPv6PrefixLen": 0,
-                "DriverOpts": null,
-                "DNSNames": [
-                    "nginx1",
-                    "0cb1aa688fa3"
-                ]
+                "IPv4Address": "172.19.0.2/16", <--
+                "IPv6Address": ""
             }
-            }
-    ...
-...
-
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
 ```
 
 - Note the IP addresses of container 1 and 2 after inspecting them
