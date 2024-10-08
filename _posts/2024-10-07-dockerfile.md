@@ -26,21 +26,21 @@ FROM continuumio/miniconda3:4.11.0
 
 SHELL ["/bin/bash", "-c"]
 
-RUN conda install geopandas==0.14.2
-
-ENV PROJ_LIB=/opt/conda/share/proj
-
 RUN mkdir -p /home/app
 
 WORKDIR /home/app
 
-COPY requirements.txt ./
-
-RUN conda install -c conda-forge --file requirements.txt
-
 COPY data data/
 
 COPY src src/
+
+COPY requirements.txt ./
+
+RUN conda install geopandas==0.14.2
+
+ENV PROJ_LIB=/opt/conda/share/proj
+
+RUN conda install -c conda-forge --file requirements.txt
 
 WORKDIR /home/app/src
 
@@ -96,6 +96,50 @@ _Copy files from Host to container_
 
 - We can't use RUN command here as RUN command is executed inside the container
 - We must use COPY command in this case
+
 ```
 COPY requirements.txt ./
+
+COPY data data/
+
+COPY src src/
 ```
+
+- This will create following folder structure inside the container
+
+```
+>>> ls /home/app
+data/
+src/
+requirements.txt
+```
+
+
+```
+>>> ls /home/app/src
+
+factory/
+segmentation/
+app.py
+main.py
+```
+
+Note:
+- We need to be careful while using COPY command as it does not copy the source folder itself like the `mv` command in Linux
+- Rather it copies all the contents inside the source folder one by one inside the destination folder
+```
+COPY src .
+```
+
+- E.g. Using COPY command as above will just copy all of the contents in the current directory which might not be as expected sometimes
+
+```
+>>> ls /home/app
+factory/
+segmentation/
+app.py
+main.py
+requirements.txt
+```
+
+- If the destination folder does not exist, it will create it and then copy files inside that
