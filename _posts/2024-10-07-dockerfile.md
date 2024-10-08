@@ -149,7 +149,7 @@ ENV PROJ_LIB=/opt/conda/share/proj
 ```
 
 _Installing packes from file_
-- We can specify `--file` tag followed by the `requirments.txt` file to install relevant packages
+- We can specify `--file` tag followed by the `requirements.txt` file to install relevant packages
 
 ```
 RUN conda install -c conda-forge --file requirements.txt
@@ -165,6 +165,10 @@ _Expose port_
 EXPOSE 8501
 ```
 
+Note:
+- The EXPOSE instruction inside a Dockerfile does not make the port accessible from outside the container by default. 
+- It simply informs Docker that the application inside the container will listen on a specified port.
+
 _Run app inside container_
 
 - We use CMD to denote the entrypoint Linux command
@@ -173,3 +177,9 @@ _Run app inside container_
 ```
 CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"]
 ```
+
+Note:
+- We could also use RUN to execute the command but there is a difference
+- There can be multiple RUN commands but just one CMD command which marks the entrypoint to the application
+
+### Build Image
