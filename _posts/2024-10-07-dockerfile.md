@@ -54,10 +54,31 @@ CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"
 
 **Base Image**
 
+- Every Dockerfile must have a base image which we must specify at the start of a Dockerfile 
+- We can use FROM directive to specify base image as shown below
+
 ```
 FROM continuumio/miniconda3:4.11.0
 ```
 
-- Every Dockerfile must have a base image on which it is based. 
-- We must specify base image at the start of a Dockerfile as shown above
-- 
+Note: Although _creating a Base image_ is never required for standard development, we still can create if we so need
+- Using `FROM scratch` directive which directs the docker engine to build fresh image and not pull from Dockerhub
+- Using `docker import` on the tarball of required File System libraries and binaries
+
+**Install specific Libraries**
+
+- We can use RUN command which tells Docker to execute the following command on the shell inside container
+- Runtime environment variables can be specified using ENV command
+```
+RUN conda install geopandas==0.14.2
+
+ENV PROJ_LIB=/opt/conda/share/proj
+```
+
+**Copy files from Host to container**
+
+- We can create a new directory inside container by using docker RUN command
+
+```
+RUN mkdir -p /home/app
+```
