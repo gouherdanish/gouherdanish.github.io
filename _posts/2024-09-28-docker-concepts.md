@@ -5,7 +5,7 @@ date: 2024-09-28
 tags: ["Software Development"]
 ---
 
-Docker is an important tool when it comes to software development.
+_"But it works on my machine" - SDE_
 
 ---
 ### Introduction
@@ -18,7 +18,7 @@ Docker is an important tool when it comes to software development.
 ### Background
 
 **Before Docker**
-- The software development process was tedious and inefficient before Docker came
+- Before Docker came, the software development process was tedious and inefficient
 - Let's say developer1 developed a service with necessary dependencies installed in his local machine.
 - If he wants to hand over the code to other developer/tester, the other developer needs to install the dependencies again which can have many bottlenecks
     - The dependencies versions may not match
