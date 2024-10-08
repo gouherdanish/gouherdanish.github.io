@@ -61,9 +61,11 @@ CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"
 FROM continuumio/miniconda3:4.11.0
 ```
 
-Note: Although _creating a Base image_ is never required for standard development, we still can create if we so need
-- Using `FROM scratch` directive which directs the docker engine to build fresh image and not pull from Dockerhub
-- Using `docker import` on the tarball of required File System libraries and binaries
+Note: 
+- Most of the images are based on some version of Linux base image either Debian, Alpine or Ubuntu.
+- Although _creating a Base image_ is never required for standard development, we can create one if we need to 
+    - Using `FROM scratch` directive which directs the docker engine to build fresh image and not pull from Dockerhub
+    - Using `docker import` on the tarball of required File System libraries and binaries
 
 **Copy files from Host to container**
 
@@ -117,7 +119,7 @@ main.py
 
 Note:
 - We need to be careful while using COPY command as it does not copy the source folder itself like the `mv` command in Linux
-- Rather it copies all the contents inside the source folder one by one inside the destination folder
+- Rather it copies all the contents inside the source folder one by one into the destination folder
 
 ```
 COPY src .
@@ -137,7 +139,7 @@ requirements.txt
 **Install Libraries**
 
 _Install one package_
-- We can use RUN command followed by `conda install` command which tells Docker to install that package inside container using conda
+- We can use RUN command followed by `conda install` command which tells Docker to install that package inside the container using conda
 - Runtime environment variables can be set using ENV command
 
 ```
@@ -164,6 +166,9 @@ EXPOSE 8501
 ```
 
 _Run app inside container_
+
+- We use CMD to denote the entrypoint Linux command
+- Always given at the end of a Dockerfile
 
 ```
 CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"]
