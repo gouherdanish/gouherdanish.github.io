@@ -17,8 +17,8 @@ Containerization is crucial for software development and deployment
 ### Create Dockerfile
 
 - Previously, in [this](https://gouherdanish.github.io/2024/09/25/low-lying-areas-mapping.html) blog, we have created a simple app to locate low-lying areas in Bangalore
-- In order to deploy this app in a container, we have to fist create a Docker image. 
-- Let's first create a Dockerfile and then use it to build image.
+- Before we deploy this app, we have to first create a Docker image. 
+- Let's create a Dockerfile which can be used to build image later.
 
 ```
 # Dockerfile
@@ -118,6 +118,7 @@ main.py
 Note:
 - We need to be careful while using COPY command as it does not copy the source folder itself like the `mv` command in Linux
 - Rather it copies all the contents inside the source folder one by one inside the destination folder
+
 ```
 COPY src .
 ```
@@ -138,6 +139,7 @@ requirements.txt
 _Install one package_
 - We can use RUN command followed by `conda install` command which tells Docker to install that package inside container using conda
 - Runtime environment variables can be set using ENV command
+
 ```
 RUN conda install geopandas==0.14.2
 
@@ -155,7 +157,8 @@ RUN conda install -c conda-forge --file requirements.txt
 
 _Expose port_
 
-- We can expose a port for our app inside the container
+- We can use EXPOSE command to expose a port for our app inside the container 
+
 ```
 EXPOSE 8501
 ```
