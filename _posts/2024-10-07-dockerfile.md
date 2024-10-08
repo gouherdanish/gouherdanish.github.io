@@ -65,16 +65,6 @@ Note: Although _creating a Base image_ is never required for standard developmen
 - Using `FROM scratch` directive which directs the docker engine to build fresh image and not pull from Dockerhub
 - Using `docker import` on the tarball of required File System libraries and binaries
 
-**Install specific Libraries**
-
-- We can use RUN command followed by `conda install` command which tells Docker to install the package inside container
-- Runtime environment variables can be set using ENV command
-```
-RUN conda install geopandas==0.14.2
-
-ENV PROJ_LIB=/opt/conda/share/proj
-```
-
 **Copy files from Host to container**
 
 _Create new Directory_
@@ -96,6 +86,7 @@ _Copy files from Host to container_
 
 - We can't use RUN command here as RUN command is executed inside the container
 - We must use COPY command in this case
+- It creates the destination folder if it does not exist
 
 ```
 COPY requirements.txt ./
@@ -142,4 +133,35 @@ main.py
 requirements.txt
 ```
 
-- If the destination folder does not exist, it will create it and then copy files inside that
+**Install Libraries**
+
+_Install one package_
+- We can use RUN command followed by `conda install` command which tells Docker to install that package inside container using conda
+- Runtime environment variables can be set using ENV command
+```
+RUN conda install geopandas==0.14.2
+
+ENV PROJ_LIB=/opt/conda/share/proj
+```
+
+_Installing packes from file_
+- We can specify `--file` tag followed by the `requirments.txt` file to install relevant packages
+
+```
+RUN conda install -c conda-forge --file requirements.txt
+```
+
+**Run app**
+
+_Expose port_
+
+- We can expose a port for our app inside the container
+```
+EXPOSE 8501
+```
+
+_Run app inside container_
+
+```
+CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"]
+```
