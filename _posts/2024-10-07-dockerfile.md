@@ -67,8 +67,8 @@ Note: Although _creating a Base image_ is never required for standard developmen
 
 **Install specific Libraries**
 
-- We can use RUN command which tells Docker to execute the following command on the shell inside container
-- Runtime environment variables can be specified using ENV command
+- We can use RUN command followed by `conda install` command which tells Docker to install the package inside container
+- Runtime environment variables can be set using ENV command
 ```
 RUN conda install geopandas==0.14.2
 
@@ -77,8 +77,25 @@ ENV PROJ_LIB=/opt/conda/share/proj
 
 **Copy files from Host to container**
 
-- We can create a new directory inside container by using docker RUN command
+_Create new Directory_
+- We can use RUN command followed by `mkdir` command to create a new directory inside container
+- `-p` flag is used to create parent folder if not present
 
 ```
 RUN mkdir -p /home/app
+```
+
+_Change working directory_
+- We can use WORKDIR command for this as follows
+
+```
+WORKDIR /home/app
+```
+
+_Copy files from Host to container_
+
+- We can't use RUN command here as RUN command is executed inside the container
+- We must use COPY command in this case
+```
+COPY requirements.txt ./
 ```
