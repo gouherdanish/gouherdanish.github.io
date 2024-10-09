@@ -14,48 +14,13 @@ Containerization is crucial for software development and deployment
 - Docker provides the flexibility to build image of our app and thereafter launch the app inside containers on any system.
 
 ---
-### Create Dockerfile
 
-- Previously, in [this](https://gouherdanish.github.io/2024/09/25/low-lying-areas-mapping.html) blog, we have created a simple app to locate low-lying areas in Bangalore
-- Before we deploy this app, we have to first create a Docker image. 
-- Let's create a Dockerfile which can be used to build image later.
-
-```
-# Dockerfile
-FROM continuumio/miniconda3:4.11.0
-
-SHELL ["/bin/bash", "-c"]
-
-RUN mkdir -p /home/app
-
-WORKDIR /home/app
-
-COPY data data/
-
-COPY src src/
-
-COPY requirements.txt ./
-
-RUN conda install geopandas==0.14.2
-
-ENV PROJ_LIB=/opt/conda/share/proj
-
-RUN conda install -c conda-forge --file requirements.txt
-
-WORKDIR /home/app/src
-
-EXPOSE 8501
-
-CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"]
-```
-
----
 ### Concepts
 
 **Base Image**
 
 - Every Dockerfile must have a base image which we must specify at the start of a Dockerfile 
-- We can use FROM directive to specify base image as shown below
+- We can use `FROM` directive to specify base image as shown below
 
 ```
 FROM continuumio/miniconda3:4.11.0
@@ -136,7 +101,7 @@ main.py
 requirements.txt
 ```
 
-**Install Libraries**
+**Install Packages inside container**
 
 _Install one package_
 - We can use RUN command followed by `conda install` command which tells Docker to install that package inside the container using conda
@@ -182,4 +147,48 @@ Note:
 - We could also use RUN to execute the command but there is a difference
 - There can be multiple RUN commands but just one CMD command which marks the entrypoint to the application
 
+---
+### Create Dockerfile
+
+- Previously, in [this](https://gouherdanish.github.io/2024/09/25/low-lying-areas-mapping.html) blog, we have created a simple app to locate low-lying areas in Bangalore
+- Before we deploy this app, we have to first create a Docker image. 
+- Using the concepts shown above, let's create a Dockerfile which can be used to build image.
+
+```
+# Dockerfile
+FROM continuumio/miniconda3:4.11.0
+
+SHELL ["/bin/bash", "-c"]
+
+RUN mkdir -p /home/app
+
+WORKDIR /home/app
+
+COPY data data/
+
+COPY src src/
+
+COPY requirements.txt ./
+
+RUN conda install geopandas==0.14.2
+
+ENV PROJ_LIB=/opt/conda/share/proj
+
+RUN conda install -c conda-forge --file requirements.txt
+
+WORKDIR /home/app/src
+
+EXPOSE 8501
+
+CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"]
+```
+
+---
 ### Build Image
+
+- we can use `docker build` to create docker image
+- `-t` flag is used to provide tag in the format image-name:image-tag
+
+```
+docker build -t urban-flooding:1.0 .
+```
