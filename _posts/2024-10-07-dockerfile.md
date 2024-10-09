@@ -188,7 +188,60 @@ CMD ["streamlit","run","main.py","--server.address=0.0.0.0","--server.port=8501"
 
 - we can use `docker build` to create docker image
 - `-t` flag is used to provide tag in the format image-name:image-tag
+- `.` signifies docker engine to use the Dockerfile placed in the current directory
 
 ```
-docker build -t urban-flooding:1.0 .
+>>> docker build -t urban-flooding:1.0 .
+REPOSITORY                 TAG       IMAGE ID       CREATED          SIZE
+urban-flooding             1.0       408b7d43c322   11 seconds ago   2.53GB
 ```
+
+---
+
+### Create container
+
+- we can use `docker run` command to run the image by creating a container
+- `-p` flag is used to do port binding
+    - Here, We have mapped container port 8501 to the host port 8003
+    - Http requests coming on host port 8003 will be port forwarded to container port 8501 and will be served
+- `-d` can be used to run the container in detached mode
+- `--name` flag is used to provide the name of the container
+
+```
+>>> docker run -p 8003:8501 --name floodapp urban-flooding:1.0
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8003
+```
+
+---
+
+### Access the app from host
+
+- we can use `curl` do a health check of the app
+```
+>>> curl -I http://0.0.0.0:8003
+HTTP/1.1 200 OK
+Server: TornadoServer/6.1
+Content-Type: text/html
+Date: Wed, 09 Oct 2024 17:48:25 GMT
+Accept-Ranges: bytes
+Etag: "2c06f1bb433d252a1eb544504956def4a269feb16611ea654d8c1a75495c830ea0b3d387e5cd3ddc0016819f4db0fc85474a0465d138dd293b9d952e5b947140"
+Last-Modified: Tue, 01 Oct 2024 21:34:20 GMT
+Cache-Control: no-cache
+Content-Length: 891
+Vary: Accept-Encoding
+```
+
+- If we paste the url in the browser, we can see the app is working fine
+<img src="{{site.url}}/images/low_lying_areas/landing_page.png"/>
+
+---
+
+### Conclusion
+
+- In this blog, we dockerized our existing streamlit app and deployed inside a container
+
