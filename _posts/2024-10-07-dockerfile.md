@@ -17,7 +17,7 @@ Containerization is crucial for software development and deployment
 
 ### Concepts
 
-**Base Image**
+**1. Base Image**
 
 - Every Dockerfile must have a base image which we must specify at the start of a Dockerfile 
 - We can use `FROM` directive to specify base image as shown below
@@ -32,10 +32,11 @@ Note:
     - Using `FROM scratch` directive which directs the docker engine to build fresh image and not pull from Dockerhub
     - Using `docker import` on the tarball of required File System libraries and binaries
 
-**Copy files from Host to container**
+**2. Copy files from Host to container**
 
 _Create new Directory_
-- We can use RUN command followed by `mkdir` command to create a new directory inside container
+- We can use RUN command to execute any Linux command inside the container
+- To create a directory, we can use `mkdir` command to create a new directory inside container
 - `-p` flag is used to create parent folder if not present
 
 ```
@@ -101,7 +102,7 @@ main.py
 requirements.txt
 ```
 
-**Install Packages inside container**
+**3. Install Packages inside container**
 
 _Install one package_
 - We can use RUN command followed by `conda install` command which tells Docker to install that package inside the container using conda
@@ -113,14 +114,14 @@ RUN conda install geopandas==0.14.2
 ENV PROJ_LIB=/opt/conda/share/proj
 ```
 
-_Installing packes from file_
+_Install packages from file_
 - We can specify `--file` tag followed by the `requirements.txt` file to install relevant packages
 
 ```
 RUN conda install -c conda-forge --file requirements.txt
 ```
 
-**Run app**
+**4. Run App**
 
 _Expose port_
 
@@ -200,9 +201,9 @@ urban-flooding             1.0       408b7d43c322   11 seconds ago   2.53GB
 
 ### Create container
 
-- we can use `docker run` command to run the image by creating a container
-- `-p` flag is used to do port binding
-    - Here, We have mapped container port 8501 to the host port 8003
+- we can use `docker run` command to create a container
+- `-p` flag is used to do port binding between host and container
+    - Here, we have mapped container port 8501 to the host port 8003
     - Http requests coming on host port 8003 will be port forwarded to container port 8501 and will be served
 - `-d` can be used to run the container in detached mode
 - `--name` flag is used to provide the name of the container
@@ -244,4 +245,4 @@ Vary: Accept-Encoding
 ### Conclusion
 
 - In this blog, we dockerized our existing streamlit app and deployed inside a container
-
+- We also could access the app from Host machine
