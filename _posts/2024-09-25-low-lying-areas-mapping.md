@@ -5,6 +5,8 @@ date: 2024-09-25
 tags: ["Geospatial"]
 ---
 
+Streamlit provides a very easy way to create a web application from demo purpose
+
 ---
 ### Background
 - On Sep 5, 2022, major thunderstorm struck Bangalore city and IMD recorded 132 mm of rain in a span of 24 hours
@@ -42,6 +44,7 @@ tags: ["Geospatial"]
 --- 
 ### Streamlit App
 - The app is started by running 
+
 ```
 streamlit run app.py
 ```
