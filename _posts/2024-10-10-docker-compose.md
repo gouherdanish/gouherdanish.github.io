@@ -13,17 +13,21 @@ Docker compose provides a declarative syntax which helps manage deployments effi
 - Previously, in [this](https://gouherdanish.github.io/2024/09/25/low-lying-areas-mapping.html) blog, we created a simple app to locate low-lying areas in Bangalore
 - Also, in [this](https://gouherdanish.github.io/2024/10/07/dockerfile.html) article, we created a Dockerfile for the same and built its image and ran it locally as a container
 
+---
 ### New Requirements
 - Let's say, we get new requirements to add couple of features into our app
     - Keep a log for the search history in our app so that we know how many times each villages are searched by users
     - Keep a log for the last searched village in our app so that the user should have to search for his village if the page is refreshed
----
 
-### Database Setup
+---
+### Database to the Rescue
 - The obvious solution to this is that we need to use a database
 - We can use MongoDB for this since
     - Most users will be searching for their villages and thus DB writes will be more. MongoDB is optimized for write-heavy needs
     - MongoDB is easy to use with its Mongo Express UI
+
+---
+### Database Setup
 - MongoDB can be setup using Docker very easily
 
 **Step 1 - Pull images**
@@ -40,7 +44,7 @@ docker pull mongo-express
 docker network create mongo-network
 ```
 
-**Step 2 - Run Containers**
+**Step 3 - Run Containers**
 - Start MongoDB and MongoUI containers using `docker run` command
 - Make sure to run both in same network so that the container can communicate natively
 
@@ -63,7 +67,7 @@ docker run -d \
 mongo-express
 ```
 
-**Step 3 - Check containers**
+**Step 4 - Check containers**
 - Both containers should be running
 
 ```
@@ -73,12 +77,12 @@ CONTAINER ID   IMAGE             COMMAND                  CREATED          STATU
 e29bf436c061   mongo             "docker-entrypoint.s…"   2 days ago       Up 2 days       0.0.0.0:27017->27017/tcp   mongodb
 ```
 
-**Step 4 - Check Mongo UI**
+**Step 5 - Check Mongo UI**
 - Open 0.0.0.0:8081 on browser for Mongo Express UI
 
 <img src="{{site.url}}/images/mongoui_0.png">
 
-**Step 5 - Create Document and Collection on MongoUI**
+**Step 6 - Create Document and Collection on MongoUI**
 
 <img src="{{site.url}}/images/mongoui.png">
 
