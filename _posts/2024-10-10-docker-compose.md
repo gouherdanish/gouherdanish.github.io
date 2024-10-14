@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Docker: Handling multi-container apps with Docker Compose"
+title: "Docker: Handling multi-container apps"
 date: 2024-10-10
 tags: ["Software Development"]
 ---
@@ -45,8 +45,7 @@ docker network create mongo-network
 ```
 
 **Step 3 - Run Containers**
-- Start MongoDB and MongoUI containers using `docker run` command
-- Make sure to run both in same network so that the container can communicate natively
+- Start MongoDB container using `docker run` command
 
 ```
 docker run -d \                                                                     
@@ -56,7 +55,10 @@ docker run -d \
 --network mongo-network \
 --name mongodb \
 mongo
+```
 
+- Next, start Mongo Express container
+```
 docker run -d \                                                                     
 -p 8081:8081 \
 --name mongoui \
@@ -66,6 +68,9 @@ docker run -d \
 -e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
 mongo-express
 ```
+
+Note
+- Make sure to run both in same network so that the container can communicate natively
 
 **Step 4 - Check containers**
 - Both containers should be running
@@ -80,13 +85,13 @@ e29bf436c061   mongo             "docker-entrypoint.s…"   2 days ago       Up 
 **Step 5 - Check Mongo UI**
 - Open 0.0.0.0:8081 on browser for Mongo Express UI
 
-<img src="{{site.url}}/images/mongoui_0.png">
+<img src="{{site.url}}/images/docker/mongoui_0.png">
 
 **Step 6 - Create Document and Collection on MongoUI**
 
-<img src="{{site.url}}/images/mongoui.png">
+<img src="{{site.url}}/images/docker/mongoui.png">
 
-<img src="{{site.url}}/images/mongoui_1.png">
+<img src="{{site.url}}/images/docker/mongoui_1.png">
 
 ---
 
