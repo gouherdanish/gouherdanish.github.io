@@ -94,53 +94,50 @@ e29bf436c061   mongo             "docker-entrypoint.s…"   2 days ago       Up 
 
 ---
 
-### Implementing Requirements
+### Implemention
+- After the Database has been setup, now it is time to implement the new features in our app
+- We can implement the above requirements using MongoDB Crud Operations
+- The implementation logic is given below
 
-- Find the village whose last searched flag is True
-    - If 
+**Logic**
+- Find the village whose last searched flag is True and use that for display instead of default village
+    - At start, when database has no entries available, select default village having index 0
 - Upsert the current village into the collection by incrementing its search counter by 1 and setting its last searched flag to True
 - Update the last searched flag to False for all other villages in the collection 
 
-```
-# app.py
-class App:
-    ...
-    def fetch(self):
-        """
-        Queries the MongoDB collection and dumps all the documents in a dataframe
-        Hides dataframe index
-        """
-        df = pd.DataFrame(self.user_requests_collection.find()).drop('_id',axis=1)
-        return df.style.hide_index().to_html() if len(df) != 0 else "None"
-    
-    def persist(self,village):
-        """
-        Performs two tasks
-        - Upserts the current village into the collection by incrementing its search counter to 1 and making it the last searched item
-        - Updates the last searched flag to False for all other villages in the collection 
-        """
-        self.user_requests_collection.update_one(
-            { "village": village },
-            { "$inc": { "count": 1 }, "$set": { "last": True }},
-            upsert = True
-        )
-        self.user_requests_collection.update_many(
-            { "village": {"$ne": village }},
-            { "$set": { "last": False } }
-        )
-    
-    def search_history(self):
-        """
-        Creates the search history as a dataframe table in the sidebar
-        """
-        st.sidebar.markdown("### Search History")
-        st.sidebar.write(self.fetch(),unsafe_allow_html=True)
+For detailed implementation, please refer
+[Urban Flooding App](https://github.com/gouherdanish/urban_flooding)
 
-    def last_searched_village(self):
-        """
-        Queries MongoDB collection to find the village whose last searched flag is True
-        """
-        last_searched_village = self.user_requests_collection.find_one({"last":True})
-        return last_searched_village if last_searched_village else {"village": None}
+---
+
+### Testing
+
+- The docker image needs to be rebuilt since we have implemented new features in our app now
+- We can follow below steps to launch new container 
+
+**Stop Container**
+- stop running container
+- remove the container
+- remove the image
+
+```
+docker stop flood-ctnr
+docker rm flood-ctnr
+docker rmi flood-image:1.0
+```
+
+**Build Image**
+- build docker image and tag appropriately
+
+```
+docker build -t flood-image:1.0 .
+```
+
+**Launch Container**
+- launch a docker container for our app with appropriate port mapping
+- If we launch the container in the same network as mongodb
+
+```
+docker run -d -p 8003:8501 --network mongo-network --name flood-ctnr flood-image:1.0
 ```
 
