@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Docker: Building your first Docker Image using Dockerfile"
+title: "Building your first Docker Image using Dockerfile"
 date: 2024-10-07
 tags: ["Software Development"]
 ---
