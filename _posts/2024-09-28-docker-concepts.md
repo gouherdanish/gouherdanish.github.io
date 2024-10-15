@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Docker: Concepts and Usage"
+title: "Docker Concepts and Usage"
 date: 2024-09-28
 tags: ["Software Development"]
 ---
