@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Docker: Networking in Containers"
+title: "Networking in Docker Containers"
 date: 2024-09-29
 tags: ["Software Development"]
 ---
