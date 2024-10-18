@@ -21,5 +21,23 @@ Docker compose provides a declarative syntax which helps manage deployments effi
 - Instead of launching different containers one by one, we can write a Docker Compose file which provides the details of every containerized service at one place
 
 ```
+# docker-compose.yaml
 
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+  mongoui:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
 ```
