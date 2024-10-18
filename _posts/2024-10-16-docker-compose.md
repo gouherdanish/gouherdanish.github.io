@@ -27,6 +27,7 @@ Docker compose provides a declarative syntax which helps manage deployments effi
 
 - We can use any text editor to create a docker compose yaml file
 - We just need to make sure of the proper arguments and indentation
+- Below we deploy MongoDB and Mongo Express UI as containers using yaml file
 
 ```
 # mongo.yaml
