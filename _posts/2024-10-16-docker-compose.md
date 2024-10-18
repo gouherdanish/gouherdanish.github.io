@@ -92,6 +92,7 @@ Note:
 - This happens because MongoDB was running inside a container which does not have any disk storage
 - We will use Docker Volumes to save data in a separate blog
 
+---
 ### Stopping Docker Containers
 - We can stop docker containers very easily as well using docker compose in one go
 - Note that it removes the network that it created as well which makes it very clean
