@@ -52,7 +52,7 @@ services:
 
 ---
 
-### Launch Docker Containers
+### Launching Docker Containers
 
 - Using docker compose file, it is very to launch all the docker containers in one go
 - Below we run the containers in detached mode which will not print the detailed logs
@@ -105,3 +105,9 @@ docker-compose -f mongo.yaml down
  ✔ Network urban_flooding_default      Removed
 ```
 
+---
+
+### Conclusion
+
+- We introduced Docker Compose and saw how it helps with multi-containered app deployment
+- Docker Compose makes handling multiple containers very easily with a declarative syntax in one place
