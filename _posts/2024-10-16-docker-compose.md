@@ -97,7 +97,7 @@ Note:
 - Note that it removes the network that it created as well which makes it very clean
 
 ```
-docker-compose -f mongo.yaml down
+>>> docker-compose -f mongo.yaml down
 
 [+] Running 3/3
  ✔ Container urban_flooding-mongoui-1  Removed
