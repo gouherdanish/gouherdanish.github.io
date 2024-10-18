@@ -18,4 +18,8 @@ Docker compose provides a declarative syntax which helps manage deployments effi
 
 ### Introducing Docker Compose
 
-- 
+- Instead of launching different containers one by one, we can write a Docker Compose file which provides the details of every containerized service at one place
+
+```
+
+```
