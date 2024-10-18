@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Using Github Container Registry "
+title: "Using Github Container Registry"
 date: 2024-10-18
 
 tags: ["Software Development"]
 ---
 
 A container registry is a repository—or collection of repositories—used to store and access container images
+
 ---
 
 ### Background of existing App
@@ -26,8 +27,8 @@ A container registry is a repository—or collection of repositories—used to s
 ### Types of Container Registries
 
 **Public Registry**
-- used by individuals or small teams that want to get up and running with their registry as quickly as possible
-- as organizations grow, this can bring more complex security issues like patching, privacy, and access control
+- It is used by individuals or small teams that want to get up and running with their registry as quickly as possible e.g. Dockerhub
+- As organizations grow, this can bring more complex security issues like patching, privacy, and access control
 
 **Private Registry**
 - Private registries provide a way to incorporate security and privacy into enterprise container image storage, either hosted remotely or on-premises. 
@@ -47,12 +48,45 @@ A container registry is a repository—or collection of repositories—used to s
 
 <img src="{{site.url}}/images/ghcr/pat.png">
 
-**Step 2 - Enable Docker Login to Github**
+**Step 2 - Enable Docker Login to Github Container Registry (GHCR)**
 
 ```
-docker login \
+>>> docker login \
 --username <your-github-username> \
---password <your-pat-created-in-step1> \
+--password <your-token-created-in-step1> \
 ghcr.io
 ```
+
+**Step 3 - Listing docker images**
+
+- We can list existing images in local and shortlist the one that we want to save to Container Registry
+```
+>>> docker images
+REPOSITORY                         TAG       IMAGE ID       CREATED        SIZE
+flood-image                        1.0       cee21ec5dcde   14 hours ago   2.58GB
+```
+
+**Step 4 - Tag docker images**
+
+- Tagging a docker image is just creating a copy of the image with a different name
+- We can check that a newly tagged image gets created
+
+```
+>>> docker tag flood-image:1.0 ghcr.io/gouherdanish/flood-image:1.0
+>>> docker images
+REPOSITORY                         TAG       IMAGE ID       CREATED        SIZE
+flood-image                        1.0       cee21ec5dcde   14 hours ago   2.58GB
+ghcr.io/gouherdanish/flood-image   1.0       cee21ec5dcde   14 hours ago   2.58GB
+```
+
+**Step 5 - Push image to GHCR**
+
+- Pushing a docker image saves it as a package inside Github Container Registry
+
+```
+>>> docker push ghcr.io/gouherdanish/flood-image:1.0 
+```
+
+<img src="{{site.url}}/images/ghcr/push.png">
+
 ---
