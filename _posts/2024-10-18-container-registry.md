@@ -38,6 +38,8 @@ A container registry is a repository—or collection of repositories—used to s
 ---
 ### Creating a Container Registry
 
+- In this article, we will explore Github Container Registry (GHCR) as it is available out of the box for all repositories hosted on GitHub
+
 **Step 1 - Create Github Token**
 - Go to Github -> Account -> Settings -> Developer Settings
 - Click Personal access tokens -> Tokens (classic)
