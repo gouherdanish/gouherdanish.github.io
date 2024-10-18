@@ -87,6 +87,12 @@ ghcr.io/gouherdanish/flood-image   1.0       cee21ec5dcde   14 hours ago   2.58G
 >>> docker push ghcr.io/gouherdanish/flood-image:1.0 
 ```
 
+- If we look at Github packages, we can see that our image has been published.
 <img src="{{site.url}}/images/ghcr/push.png">
 
 ---
+
+### Conclusion
+
+- We introduced Container Registry and saw how it can be used to store docker images in a production setting
+- Specifically, we set up Github Container Registry and pushed a docker image there
