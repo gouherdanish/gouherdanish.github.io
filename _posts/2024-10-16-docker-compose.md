@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Handling multi-container apps with Docker Compose"
-date: 2024-10-17
+title: "Handling multi-containered deployments with Docker Compose"
+date: 2024-10-16
 
 tags: ["Software Development"]
 ---
