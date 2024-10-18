@@ -11,7 +11,7 @@ Docker compose provides a declarative syntax which helps manage deployments effi
 ---
 ### Background of existing App
 
-- Previously, in [this](https://gouherdanish.github.io/2024/10/10/mongodb.html) article, we saw how database persistance helps us capture user-related data which improves overall user experience
+- Previously, in [this](https://gouherdanish.github.io/2024/10/12/mongodb.html) article, we saw how database persistance helps us capture user-related data which improves overall user experience
 - However, the process that we followed was very manual. We had to setup each container using terminal one-by-one which is not a production-ready workflow practice
 
 ---
