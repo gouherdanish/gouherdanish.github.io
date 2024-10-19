@@ -84,7 +84,7 @@ mongoui-1  | Mongo Express server listening at http://0.0.0.0:8081
 ...
 ```
 
-- If we go over to http://0.0.0.0:8081 in our browser, we will see something like this
+- If we go over to http://0.0.0.0:8501 in our browser, we will see something like this
 
 <img src="{{site.url}}/images/mongo/start.png">
 
