@@ -6,7 +6,7 @@ date: 2024-10-18
 tags: ["Software Development"]
 ---
 
-A container registry is a repository—or collection of repositories—used to store and access container images
+A container registry is a repository or collection of repositories used to store and access container images
 
 ---
 
