@@ -86,7 +86,7 @@ services:
 
 - Our app is hosted locally on port 8501
 - If we paste the url http://0.0.0.0:8501 in the browser, we can see the app is working fine
-<img src="{{site.url}}/images/low_lying_areas/landing_page.png"/>
+<img src="{{site.url}}/images/mongo/start.png">
 
 ---
 ### Stopping the App
