@@ -32,12 +32,12 @@ Docker compose provides a declarative syntax which helps manage deployments effi
 ```
 # mongo.yaml
 
-version: '3'
+version: '3'                                  <-- version of docker compose (deprecated now)
 services:
-  mongodb:
-    image: mongo
+  mongodb:                                    <-- container name
+    image: mongo                              <-- image name (from Dockerhub)
     ports:
-      - 27017:27017
+      - 27017:27017                           <-- port binding (host:container)
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
