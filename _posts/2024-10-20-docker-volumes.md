@@ -77,7 +77,7 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
 
 <img src="{{site.url}}/images/dkrv/existing_app.png">
 
-- The data for this app is saved inside the MongoDB container in a virtual FileSystem as shown above 
+- The data for this app is saved inside the MongoDB container in a virtual FileSystem as shown in above section
 - This data is rendered on Mongo Express UI as documents inside a NoSql database collection as follows
 
 <img src="{{site.url}}/images/dkrv/existing_data.png">
@@ -120,7 +120,7 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
   - When the app writes new data locally in the container, it gets persisted in the physical storage of the host as well
   - Also when container gets restarted, it looks for previously persisted data in the host and syncs into the container
 
-<img src="{{site.url}}/images/dkrv/docker_volume.png">
+<img src="{{site.url}}/images/dkrv/arch.png">
 
 ---
 ### Usecase for Docker Volumes
@@ -133,6 +133,7 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
 
 **Host Volumes**
 - In this case, we provide the full path of the host directory where we want to mount the container volume data
+- This will mount the host folder `/home/mount/data` to container folder `/data/db`
 
 <img src="{{site.url}}/images/dkrv/host_volume.png">
 
@@ -171,6 +172,7 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
 PS: 
 - Entering into Docker VM is a backdoor which can later be stopped being supported.
 - For all practical purposes, this should be avoided
+
 ---
 
 ### Enabling Data Persistence in our App 
