@@ -10,14 +10,24 @@ Docker Volumes enable us to persist data which can be used whenever container re
 
 ---
 
-### 
+### Background
 
-- MongoDB Container saves Data in Virtual Filesystem
-- There is no persistence inside a container and all the data saved inside will go away if the container is restarted
+- Previously, in [this](https://gouherdanish.github.io/2024/09/25/low-lying-areas-mapping.html) article, we created a Streamlit App  to locate low-lying areas in Bangalore 
+- Later, in [this](https://gouherdanish.github.io/2024/10/12/mongodb.html) article, we enabled database interactions to save user search history data 
+- Also, in [this](https://gouherdanish.github.io/2024/10/19/public-vs-private-registry.html) article, we enabled our App to pull images from Public and Private container registry and used Docker Compose to easily deploy our app in one go
+
+---
+
+### Issues in existing App
+
+- Currently the app data is saved in a Virtual Filesystem inside the MongoDB Container
+- Since, there is no persistence inside a container, we would lose all the saved data if the container is restarted
 - This might be a problem if we need our application to be stateful
 
 ---
 ### Understanding Virtual FileSystem
+
+- MongoDB Container saves Data in Virtual Filesystem
 
 **List docker containers**
 ``` 
@@ -29,6 +39,7 @@ adce32e96e52   ghcr.io/gouherdanish/flood-image:1.0   "streamlit run main.…"  
 ```
 
 **Go inside MongoDB container**
+- Since the mongodb is running in the container `901a8d0c8f42`, we exec inside it as follows
 ```
 >>> docker exec -it 901a8d0c8f42 bash
 ```
@@ -41,6 +52,8 @@ boot  dev   etc                         js-yaml.js  media  opt  root  sbin  sys 
 ```
 
 **Check where MongoDB saves data**
+
+- MongoDB saves data in `/data/db` directory inside the container
 ```
 root@901a8d0c8f42:/# ls /data/db   
 WiredTiger         collection-0-16809421161523113700.wt  index-1-16809421161523113700.wt  index-9-16909179650290339279.wt
@@ -53,4 +66,52 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
 
 ---
 
-### 
+### Understanding Data Persistence
+
+**Check existing app**
+- If we open `http://0.0.0.0:8501` in browser, we would see something like this
+
+<img src="{{site.url}}/images/dkrv/existing_app.png">
+
+- The data for this app is saved inside the MongoDB container in a virtual FileSystem as shown above 
+- This data is rendered on Mongo Express UI as documents inside a NoSql database collection as follows
+
+<img src="{{site.url}}/images/dkrv/existing_data.png">
+
+- Each document is a dictionary of key-value pairs which represents each village searched on the app and its statistics
+<img src="{{site.url}}/images/dkrv/existing_data_point.png">
+
+**Restart the app along with the database**
+- We can restart the app using docker-compose as follows
+
+```
+>>> docker-compose -f app.yaml down 
+[+] Running 4/4
+ ✔ Container urban_flooding-flood-app-1  Removed 
+ ✔ Container urban_flooding-mongodb-1    Removed 
+ ✔ Container urban_flooding-mongoui-1    Removed 
+ ✔ Network urban_flooding_default        Removed 
+
+>>> docker-compose -f app.yaml up -d
+[+] Running 4/4
+ ✔ Network urban_flooding_default        Created
+ ✔ Container urban_flooding-mongoui-1    Started
+ ✔ Container urban_flooding-flood-app-1  Started
+ ✔ Container urban_flooding-mongodb-1    Started 
+```
+
+**List new containers**
+```
+>>> docker ps
+CONTAINER ID   IMAGE                                  COMMAND                  CREATED         STATUS         PORTS                      NAMES
+e1caf3945cd2   ghcr.io/gouherdanish/flood-image:1.0   "streamlit run main.…"   6 minutes ago   Up 6 minutes   0.0.0.0:8501->8501/tcp     urban_flooding-flood-app-1
+21f417cc0f19   mongo-express                          "/sbin/tini -- /dock…"   6 minutes ago   Up 6 minutes   0.0.0.0:8081->8081/tcp     urban_flooding-mongoui-1
+8321cef684cd   mongo                                  "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes   0.0.0.0:27017->27017/tcp   urban_flooding-mongodb-1
+```
+
+
+- If we open `http://0.0.0.0:8501` in browser again, we would see this
+
+<img src="{{site.url}}/images/docker/restarted_app.png">
+
+- Notice, how all the existing data history of the searched villages has gone away now.
