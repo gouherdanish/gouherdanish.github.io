@@ -168,4 +168,110 @@ WiredTigerHS.wt    collection-7-16909179650290339279.wt  index-6-169091796502903
 _mdb_catalog.wt    diagnostic.data                       index-8-16909179650290339279.wt
 ```
 
+PS: 
+- Entering into Docker VM is a backdoor which can later be stopped being supported.
+- For all practical purposes, this should be avoided
 ---
+
+### Enabling Data Persistence in our App 
+
+- Now that we understand how Docker Volumes work, it's time to apply it in our app
+
+**Modify the deployment yaml**
+
+- Let's create a new file appv.yaml and include docker volume for `mongodb` container
+- Notice, we have used Named Volume `mongo-data` which is mounted on mongodb container data location `/data/db`
+
+```
+# appv.yaml
+
+version: '3'
+services:
+  flood-app:
+    image: ghcr.io/gouherdanish/flood-image:1.0
+    ports: 
+      - 8501:8501
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+  mongoui:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+volumes:
+  mongo-data:
+    driver: local
+```
+
+**Start the app**
+
+- We use the modified `appv.yaml` file to start our app with database containers enabled with persistence
+- Notice, how volume gets created in below output
+
+```
+>>> docker-compose -f appv.yaml up -d
+[+] Running 5/5
+ ✔ Network urban_flooding_default        Created
+ ✔ Volume "urban_flooding_mongo-data"    Created
+ ✔ Container urban_flooding-mongodb-1    Started
+ ✔ Container urban_flooding-flood-app-1  Started
+ ✔ Container urban_flooding-mongoui-1    Started 
+```
+
+**Check the app**
+
+- If we open `http://0.0.0.0:8501` in browser, we would see something like this
+
+<img src="{{site.url}}/images/mongo/start.png">
+
+- After searching for few villages, the app will have saved data in the Mongodb container which gets rendered as shown below
+
+<img src="{{site.url}}/images/dkrv/volume_enabled_stop.png">
+
+
+**Check data persistence**
+
+- To check if the container data gets persisted, we first stop the app
+
+```
+>>> docker-compose -f appv.yaml down 
+[+] Running 4/3
+ ✔ Container urban_flooding-mongoui-1    Removed
+ ✔ Container urban_flooding-flood-app-1  Removed
+ ✔ Container urban_flooding-mongodb-1    Removed
+ ✔ Network urban_flooding_default        Removed
+```
+
+- Then we again restart it using the same yaml file
+- Notice, how volume layer was not created this time
+  - This actually means the previously persisted data on the host was utilized during app startup
+
+```
+>>> docker-compose -f appv.yaml up -d
+[+] Running 4/4
+ ✔ Network urban_flooding_default        Created
+ ✔ Container urban_flooding-mongoui-1    Started
+ ✔ Container urban_flooding-mongodb-1    Started
+ ✔ Container urban_flooding-flood-app-1  Started
+```
+
+- Let's head over to the browser http://0.0.0.0:8501
+
+<img src="{{site.url}}/images/dkrv/volume_enabled_restart.png">
+
+- Notice how the previous data has persisted and we could re-use the data which was there before
+
+---
+
+### Conclusion
+- We explored Docker Volumes which enable data persistence in a container
