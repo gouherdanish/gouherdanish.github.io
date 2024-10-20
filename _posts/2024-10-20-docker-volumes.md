@@ -27,7 +27,7 @@ Docker Volumes enable us to persist data which can be used whenever container re
 ---
 ### Understanding Virtual FileSystem
 
-- MongoDB Container saves Data in Virtual Filesystem
+- MongoDB Container saves Data in Virtual Filesystem which can be accessed as follows
 
 **List docker containers**
 ``` 
@@ -100,18 +100,13 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
  ✔ Container urban_flooding-mongodb-1    Started 
 ```
 
-**List new containers**
-```
->>> docker ps
-CONTAINER ID   IMAGE                                  COMMAND                  CREATED         STATUS         PORTS                      NAMES
-e1caf3945cd2   ghcr.io/gouherdanish/flood-image:1.0   "streamlit run main.…"   6 minutes ago   Up 6 minutes   0.0.0.0:8501->8501/tcp     urban_flooding-flood-app-1
-21f417cc0f19   mongo-express                          "/sbin/tini -- /dock…"   6 minutes ago   Up 6 minutes   0.0.0.0:8081->8081/tcp     urban_flooding-mongoui-1
-8321cef684cd   mongo                                  "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes   0.0.0.0:27017->27017/tcp   urban_flooding-mongodb-1
-```
-
-
 - If we open `http://0.0.0.0:8501` in browser again, we would see this
 
 <img src="{{site.url}}/images/docker/restarted_app.png">
 
 - Notice, how all the existing data history of the searched villages has gone away now.
+
+---
+### Introducing Docker Volumes
+
+- 
