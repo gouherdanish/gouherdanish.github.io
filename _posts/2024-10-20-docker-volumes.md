@@ -64,6 +64,10 @@ WiredTigerHS.wt    collection-7-16909179650290339279.wt  index-6-169091796502903
 _mdb_catalog.wt    diagnostic.data                       index-8-16909179650290339279.wt
 ```
 
+- Similarly other databases use different location to save data inside a container
+  - MySQL saves data in `/var/lib/mysql` folder
+  - PostgreSQL saves data in `/var/lib/posgresql/data` folder
+
 ---
 
 ### Understanding Data Persistence
@@ -102,11 +106,66 @@ _mdb_catalog.wt    diagnostic.data                       index-8-169091796502903
 
 - If we open `http://0.0.0.0:8501` in browser again, we would see this
 
-<img src="{{site.url}}/images/docker/restarted_app.png">
+<img src="{{site.url}}/images/dkrv/restarted_app.png">
 
 - Notice, how all the existing data history of the searched villages has gone away now.
+- This lack of data persistence can pose issues in stateful applications
 
 ---
 ### Introducing Docker Volumes
 
-- 
+- Docker provides capability to mount a persistence layer in the container 
+- Essentially, we plug the physical storage on the host with the virtual filesystem inside the container
+- This works in two ways
+  - When the app writes new data locally in the container, it gets persisted in the physical storage of the host as well
+  - Also when container gets restarted, it looks for previously persisted data in the host and syncs into the container
+
+<img src="{{site.url}}/images/dkrv/docker_volume.png">
+
+---
+### Usecase for Docker Volumes
+
+- Whenever we are working with Databases or stateful applications, their containers need to have persistence mechanism
+- This keeps the data in sync between host and container and avoids losing the data on container restart
+
+---
+### Types of Docker Volumes
+
+**Host Volumes**
+- In this case, we provide the full path of the host directory where we want to mount the container volume data
+
+<img src="{{site.url}}/images/dkrv/host_volume.png">
+
+**Anonymous Volume**
+- In this case, we don't provide any path for the host directory
+- Docker chooses the directory based on the OS and creates volumes with anonymous hashes
+
+<img src="{{site.url}}/images/dkrv/anonymous_volume.png">
+
+**Named Volume**
+- In this case, we just provide a folder name on the host
+- The full path will be created by Docker based on the OS
+
+<img src="{{site.url}}/images/dkrv/named_volume.png">
+
+Note:
+- Named Volumes are used in production workflows
+
+---
+### Docker Volume Location on Host
+- Docker saves volumes in different location based on type of OS
+- Specifically for Mac OS, Docker creates a Linux VM on top of Mac OS in the background and stores all the data there
+- If we want to check the host volume mount, we need to enter the VM using `screen` and `tty` 
+- Then, we can go inside `/var/lib/docker/volumes` as shown below
+
+```
+# ls /var/lib/docker/volumes/urban_flooding_mongo-data/_data/
+WiredTiger         collection-0-16809421161523113700.wt  index-1-16809421161523113700.wt  index-9-16909179650290339279.wt
+WiredTiger.lock    collection-0-16909179650290339279.wt  index-1-16909179650290339279.wt  journal
+WiredTiger.turtle  collection-2-16909179650290339279.wt  index-3-16909179650290339279.wt  mongod.lock
+WiredTiger.wt      collection-4-16909179650290339279.wt  index-5-16909179650290339279.wt  sizeStorer.wt
+WiredTigerHS.wt    collection-7-16909179650290339279.wt  index-6-16909179650290339279.wt  storage.bson
+_mdb_catalog.wt    diagnostic.data                       index-8-16909179650290339279.wt
+```
+
+---
