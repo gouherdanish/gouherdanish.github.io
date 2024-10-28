@@ -40,7 +40,7 @@ tensor([[1,0.5,2],
 
 ### Softmax Function
 
-$$ Softmax(z) = \frac {e^{z_j}}{\sum_{j}{1+e^{z_j}}} $$
+$$ Softmax(z) = \frac {e^{z_j}}{\sum_{j} {1+e^{z_j}}} $$
 
 ```
 def softmax(z):
