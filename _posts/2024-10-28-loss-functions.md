@@ -46,14 +46,22 @@ $$ Softmax(z) = \frac {e^{z_j}}{\sum_{j}{1+e^{z_j}}} $$
 def softmax(z):
     return z.exp()/(z.exp().sum(-1)).unsqueeze(1)
 
->>> softmax(z)
+>>> yhat = softmax(z)
+>>> yhat
 tensor([[0.2312, 0.1402, 0.6285],
         [0.0674, 0.8214, 0.1112]])
 ```
 
 ### Negative Log Likelihood Loss (NLL Loss)
 
+```
+def nll(yhat,y):
+    return -yhat[range(y.shape[0]),y].log().mean()
 
+>>> loss = nll(yhat,y)
+>>> loss
+tensor(0.3306)
+```
 ---
 
 
