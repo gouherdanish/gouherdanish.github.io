@@ -49,7 +49,7 @@ There are various approaches we can take to calculate Cross Entropy. However eve
 
 Depending on the above, below we present possible approaches to calculate Cross Entropy in PyTorch
 
-### 1. Using Own Implementation - Unstable Way
+### Using Own Implementation - Unstable Way
 
 - The steps involved in this approach are outlined in the figure below
 
@@ -127,7 +127,7 @@ def nll_loss(logp,y):
 
 >>> loss = nll_loss(logp,y)
 >>> loss
-tensor([-0.4644, -0.1967])
+tensor([0.4644, 0.1967])
 ```
 
 **Step 4 - Take mean**
@@ -137,10 +137,13 @@ tensor([-0.4644, -0.1967])
 ```
 >>> ce_loss = loss.mean()
 >>> ce_loss
-tensor(-0.3306)
+tensor(0.3306)
+
+- Note that, this naive implementation of Softmax may lead to stability issues
 ```
 
-### 2. Using Own Implementation - Stable Way
+---
+### Using Own Implementation - Stable Way
 
 - In [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we explained that using naive implementation of softmax can lead to stability issues
 - We also showed that we can use Normalization to circumevent these issues and also introduced Log softmax which calculates both softmax and applies log in one go
@@ -152,21 +155,70 @@ tensor(-0.3306)
 
 **Step 1 - Calculate LogSoftmax**
 
-- As explained in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we can define log softmax function as follows
+- As explained in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we can define our own log softmax function as follows
 
 $$ \log p_i = z_i-z_{max} - \log {\sum_{j=1}^C e^{z_j-z_{max}}} $$
 
-```
-def nll(yhat,y):
-    return -yhat[range(y.shape[0]),y].log().mean()
+- This can be implemented in PyTorch as follows
 
->>> loss = nll(yhat,y)
+```
+def log_softmax(z):
+    z_max, _ = torch.max(z,-1,keepdim=True)
+    return z - z_max - (z-z_max).exp().sum(-1).log().unsqueeze(1)
+
+>>> logp = log_softmax(z)
+>>> logp
+tensor([[-1.4644, -1.9644, -0.4644],
+        [-2.6967, -0.1967, -2.1967]])
+```
+
+- Note that this is same as the output in Step 2 of previous section 
+- Thus we successfully calculated softmax and applied log also in one go.
+
+**Step 2 - Dot Product ($y \dot \log p_i$)**
+
+- Let's assume that Target y is in Class Number form (0 to N)
+
+```
+>>> y = torch.tensor([2,1])
+>>> y
+tensor([2,1])
+```
+
+- In this case, we can use the same function as previous section
+
+```
+def nll_loss(logp,y):
+    return -logp[range(len(y)),y]
+
+>>> loss = nll_loss(logp,y)
 >>> loss
+tensor([0.4644, 0.1967])
+```
+
+**Step 3 - Take mean**
+
+- For calculating Cross Entropy loss across all examples in the batch, we need to take the average
+
+```
+>>> ce_loss = loss.mean()
+>>> ce_loss
 tensor(0.3306)
 ```
 
-```
+---
+### 3. Using PyTorch Implementation - 1
 
+- Instead of using our own implementation, we can use PyTorch functions
+
+<img src="{{site.url}}/images/loss_fn/loss1.png">
+
+```
+>>> p = nn.functional.softmax(z)
+>>> logp = torch.log(p)
+>>> ce_loss = nn.functional.nll_loss(logp,y)
+>>> ce_loss
+tensor(-0.3306)
 ```
 
 ---
