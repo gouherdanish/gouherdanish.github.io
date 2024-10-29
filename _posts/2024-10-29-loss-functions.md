@@ -24,15 +24,20 @@ Loss functions are used extensively in Machine Learning. Cross Entropy Loss is u
 - Previously, in [this](https://gouherdanish.github.io/2024/08/15/cross-entropy.html) article, we understood the concept behind Cross Entropy and 
 - Also, in [this](https://gouherdanish.github.io/2024/08/16/properties-of-cross-entropy.html) article, we did a detailed mathematical analysis of the properties of cross entropy
 - Intuitively Cross Entropy measures how well one probability distribution approximates another
-- Cross Entropy Loss can be defined as,
+- Cross Entropy Loss for one input example can be defined as,
 
-$$ L = - \sum_{i=1}^n y_i \log p_i $$
+$$ l = - \sum_{i=1}^n y_i \log p_i $$
 
 Here,
 - $y$ denotes actual ground truth class vector in one-hot encoded form 
 - $p$ denotes predicted probability distribution which is a real value between 0 and 1 (represented by Softmax Output)
 - `n` represents the number of output classes 
 - `i` represents $i^{th}$ class
+
+- Cross Entropy Loss for `m` examples can be calculates as the mean of all the individual losses calculated above
+
+$$ L = \frac{1}{m} \sum_{i=1}^m $$
+
 
 ---
 ## How to calculate Cross Entropy ?
@@ -125,9 +130,20 @@ def nll_loss(logp,y):
 tensor([-0.4644, -0.1967])
 ```
 
+**Step 4 - Take mean**
+
+- For calculating Cross Entropy loss across all examples in the batch, we need to take the average
+
+```
+>>> ce_loss = loss.mean()
+>>> ce_loss
+tensor(-0.3306)
+```
+
 ### 2. Using Own Implementation - Stable Way
 
-- 
+- In [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we explained that using naive implementation of softmax can lead to stability issues
+- We also showed that we can use Normalization to circumevent these issues and also introduced Log softmax which calculates both softmax and applies log in one go
 - The steps involved in this approach are outlined in the figure below
 
 <img src="{{site.url}}/images/loss_fn/loss1.png">
@@ -135,6 +151,8 @@ tensor([-0.4644, -0.1967])
 - Below we explain each step in detail
 
 **Step 1 - Calculate LogSoftmax**
+
+- As explained in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we can define log softmax function as follows
 
 $$ \log p_i = z_i-z_{max} - \log {\sum_{j=1}^C e^{z_j-z_{max}}} $$
 
