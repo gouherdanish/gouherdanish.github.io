@@ -20,91 +20,12 @@ Loss functions are used extensively in Machine Learning.
 - In this article, we will understand what are the different loss functions used for classification
 
 ---
-## Concepts
+## 
 
-- Before diving into details, it is customary to understand few key concepts
+<img src="{{site.url}}/images/loss_fn/loss1.png">
 
-### Logits
 
-- When a neural network is used for classification, the final layer typically outputs a vector of scores, where each element corresponds to a specific class. These scores are known as logits
-- These values are not probabilities; they are simply the model's raw outputs.
-- For example, in a classification problem with 3 classes, the logits might look like 
-
-```
->>> z = model(X)    # X: input data, z: logits
->>> z
-tensor([[1,0.5,2],
-        [0.5,3,1]])
-```
-
-### Softmax Function (nn.functional.softmax)
-
-**Definition**
-- To interpret these logits as probabilities, we usually apply the softmax function, which converts the logits into values between 0 and 1 that sum to 1
-- Softmax is defined as follows
-
-$$ Softmax(z) = \frac {e^{z_j}}{\sum_{j} e^{z_j}} $$
-
-**Implementation**
-```
-def softmax(z):
-    return z.exp()/(z.exp().sum(-1)).unsqueeze(1)
-
->>> yhat = softmax(z)
->>> yhat
-tensor([[0.2312, 0.1402, 0.6285],
-        [0.0674, 0.8214, 0.1112]])
-```
-
-**Verification**
-- This can be verified using PyTorch implementation
-
-```
->>> import torch.nn as nn
->>> yhat = nn.functional.softmax(z)
->>> yhat
-tensor([[0.2312, 0.1402, 0.6285],
-        [0.0674, 0.8214, 0.1112]])
-```
-
-- Note that, for each example row, the probabilities now sum to 1
-
-```
-0.2312 + 0.1402 + 0.6285 = 1.0
-0.0674 + 0.8214 + 0.1112 = 1.0
-```
-
-**Limitation**
-z = torch.tensor([[1,0.5,2],[0.5,3,1],[1000,2000,-200],[-1000.0, -1000.0, 1000.0]])
-yhat = softmax(z)
-yhat
-
-### LogSoftmax Function (nn.functional.log_softmax)
-
-- To interpret these logits as probabilities, we usually apply the softmax function, which converts the logits into values between 0 and 1 that sum to 1
-- Softmax is defined as follows
-
-$$ Softmax(z) = \frac {e^{z_j}}{\sum_{j} {1+e^{z_j}}} $$
-
-```
-def softmax(z):
-    return z.exp()/(z.exp().sum(-1)).unsqueeze(1)
-
->>> yhat = softmax(z)
->>> yhat
-tensor([[0.2312, 0.1402, 0.6285],
-        [0.0674, 0.8214, 0.1112]])
-```
-
-- This can be verified using PyTorch implementation
-
-```
->>> import torch.nn as nn
->>> yhat = nn.functional.softmax(z)
->>> yhat
-tensor([[0.2312, 0.1402, 0.6285],
-        [0.0674, 0.8214, 0.1112]])
-```
+<img src="{{site.url}}/images/loss_fn/loss1.png">
 
 ### Negative Log Likelihood Loss
 
