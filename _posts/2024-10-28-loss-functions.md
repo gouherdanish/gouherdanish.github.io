@@ -15,7 +15,7 @@ Loss functions are used extensively in Machine Learning.
 - Classification problem can be solved using Machine Learning by both traditional ML techniques and Deep Learning using Neural Networks
 - Below is a Multilayer Perceptron (MLP) architecture for the MNIST classification
 
-<img src="{{site.url}}/images/loss_fn/nn.png">
+<img src="{{site.url}}/images/loss_fn/nn1.png">
 
 - In this article, we will understand what are the different loss functions used for classification
 
