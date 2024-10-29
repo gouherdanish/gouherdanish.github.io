@@ -26,7 +26,7 @@ Loss functions are used extensively in Machine Learning. Cross Entropy Loss is u
 - Intuitively Cross Entropy measures how well one probability distribution approximates another
 - Cross Entropy Loss for one input example can be defined as,
 
-$$ l = - \sum_{i=1}^n y_i \log p_i $$
+$$ \ell = - \sum_{i=1}^n y_i \log p_i $$
 
 Here,
 - $y$ denotes actual ground truth class vector in one-hot encoded form 
@@ -36,7 +36,7 @@ Here,
 
 - Cross Entropy Loss for `m` examples can be calculates as the mean of all the individual losses calculated above
 
-$$ L = \frac{1}{m} \sum_{i=1}^m $$
+$$ L = \frac{1}{m} \sum_{k=1}^m \ell_k $$
 
 
 ---
@@ -49,6 +49,9 @@ There are various approaches we can take to calculate Cross Entropy. However eve
 
 Depending on the above, below we present possible approaches to calculate Cross Entropy in PyTorch
 
+For all the approaches we describe below, the 
+
+---
 ### Using Own Implementation - Unstable Way
 
 - The steps involved in this approach are outlined in the figure below
