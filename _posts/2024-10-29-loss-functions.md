@@ -57,7 +57,7 @@ For all the approaches we describe below, we consider the following logits (z) a
 ```
 
 ---
-### Using Naive Implementation of Softmax
+### Approach 1 - Using Naive Implementation of Softmax
 
 - The steps involved in this approach are outlined in the figure below
 
@@ -155,7 +155,7 @@ Note:
 - The naive implementation of Softmax may lead to stability issues as explained in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article
 
 ---
-### 2. Using PyTorch Version of Softmax
+### Approach 2 - Using PyTorch Version of Softmax
 
 - We will follow the same steps as in the approach 1 
 
@@ -176,7 +176,7 @@ Note:
 - This is explained in detail in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article
 
 ---
-### 3. Using Own Implementation - Stable Way
+### Approach 3 - Using Own Implementation - Stable Way
 
 - In [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we introduced Log softmax which calculates softmax and applies log in one go
 - The steps involved in this approach are outlined in the figure below
@@ -240,7 +240,7 @@ tensor(0.3306)
 
 ---
 
-### 4. Using PyTorch Version of LogSoftmax
+### Approach 4 - Using PyTorch Version of LogSoftmax
 
 - We will follow the same steps as in the approach 3
 
@@ -260,6 +260,19 @@ Note:
 
 ---
 
+### Approach 5 - Using Cross Entropy Loss function directly from PyTorch 
+
+- We will follow the steps as shown below
+
+<img src="{{site.url}}/images/loss_fn/loss2.png">
+
+```
+>>> ce_loss = nn.functional.cross_entropy(z,y)  # Step 1 to 4 all combined
+>>> ce_loss
+tensor(0.3306)
+```
+
+---
 ## References
 
 (Cross Entropy Loss Notebook)[https://github.com/gouherdanish/mnist_classification]
