@@ -49,10 +49,15 @@ There are various approaches we can take to calculate Cross Entropy. However eve
 
 Depending on the above, below we present possible approaches to calculate Cross Entropy in PyTorch
 
-For all the approaches we describe below, the 
+For all the approaches we describe below, we consider the following logits (z) and target values (y)
+
+```
+>>> z = torch.tensor([[1,0.5,2],[0.5,3,1]])
+>>> y = torch.tensor([2,1])
+```
 
 ---
-### Using Own Implementation - Unstable Way
+### Using Naive Implementation of Softmax
 
 - The steps involved in this approach are outlined in the figure below
 
@@ -107,11 +112,11 @@ tensor([[0., 0., 1.],
 
 ```
 def nll_loss(logp,y):
-    torch.tensor([torch.dot(logp_,y_) for logp_,y_ in zip(logp,y)])
+    torch.tensor([-torch.dot(logp_,y_) for logp_,y_ in zip(logp,y)])
 
 >>> loss = nll_loss(logp,y)
 >>> loss
-tensor([-0.4644, -0.1967])
+tensor([0.4644, 0.1967])
 ```
 
 _Case 2 - Target y is in Class Number form (0 to N)_
@@ -133,6 +138,9 @@ def nll_loss(logp,y):
 tensor([0.4644, 0.1967])
 ```
 
+Note:
+- In both cases, we get the same output but Case 2 seems easy to compute
+
 **Step 4 - Take mean**
 
 - For calculating Cross Entropy loss across all examples in the batch, we need to take the average
@@ -141,18 +149,39 @@ tensor([0.4644, 0.1967])
 >>> ce_loss = loss.mean()
 >>> ce_loss
 tensor(0.3306)
-
-- Note that, this naive implementation of Softmax may lead to stability issues
 ```
 
----
-### Using Own Implementation - Stable Way
+Note:
+- The naive implementation of Softmax may lead to stability issues as explained in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article
 
-- In [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we explained that using naive implementation of softmax can lead to stability issues
-- We also showed that we can use Normalization to circumevent these issues and also introduced Log softmax which calculates both softmax and applies log in one go
-- The steps involved in this approach are outlined in the figure below
+---
+### 2. Using PyTorch Implementation of Softmax
+
+- We will follow the same flow as in the approach 1 
 
 <img src="{{site.url}}/images/loss_fn/loss1.png">
+
+- But now, instead of using our own implementation, we can use PyTorch functions
+
+```
+>>> p = nn.functional.softmax(z)                # Step 1
+>>> logp = torch.log(p)                         # Step 2
+>>> ce_loss = nn.functional.nll_loss(logp,y)    # Step 3 and 4
+>>> ce_loss
+tensor(-0.3306)
+```
+
+Note:
+- PyTorch uses normalized version of softmax to handle underflow/overflow issues with exponentiation
+- This is explained in detail in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article
+
+---
+### 3. Using Own Implementation - Stable Way
+
+- In [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article, we introduced Log softmax which calculates softmax and applies log in one go
+- The steps involved in this approach are outlined in the figure below
+
+<img src="{{site.url}}/images/loss_fn/loss2.png">
 
 - Below we explain each step in detail
 
@@ -175,12 +204,12 @@ tensor([[-1.4644, -1.9644, -0.4644],
         [-2.6967, -0.1967, -2.1967]])
 ```
 
-- Note that this is same as the output in Step 2 of previous section 
+- Note that this is same as the output in Step 2 of previous approaches
 - Thus we successfully calculated softmax and applied log also in one go.
 
 **Step 2 - Dot Product ($y \dot \log p_i$)**
 
-- Let's assume that Target y is in Class Number form (0 to N)
+- Let's assume that target y is in Class Number form (0 to N)
 
 ```
 >>> y = torch.tensor([2,1])
@@ -207,21 +236,6 @@ tensor([0.4644, 0.1967])
 >>> ce_loss = loss.mean()
 >>> ce_loss
 tensor(0.3306)
-```
-
----
-### 3. Using PyTorch Implementation - 1
-
-- Instead of using our own implementation, we can use PyTorch functions
-
-<img src="{{site.url}}/images/loss_fn/loss1.png">
-
-```
->>> p = nn.functional.softmax(z)
->>> logp = torch.log(p)
->>> ce_loss = nn.functional.nll_loss(logp,y)
->>> ce_loss
-tensor(-0.3306)
 ```
 
 ---
