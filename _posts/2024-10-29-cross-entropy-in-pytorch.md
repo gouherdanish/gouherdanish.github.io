@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cross Entropy Loss : PyTorch Implementation"
+title: "Implementing Cross Entropy Loss in PyTorch"
 date: 2024-10-29
 tags: ["Machine Learning"]
 ---
@@ -112,13 +112,13 @@ tensor(0.3306)
 ---
 ## References
 
-[Cross Entropy Loss Notebook](https://github.com/gouherdanish/ml_concepts/blob/main/cross_entropy_loss.ipynb)
+1. [Cross Entropy Loss Notebook](https://github.com/gouherdanish/ml_concepts/blob/main/cross_entropy_loss.ipynb)
+2. [Introduction to Cross Entropy](https://gouherdanish.github.io/2024/08/15/cross-entropy.html)
+3. [Properties of Cross Entropy](https://gouherdanish.github.io/2024/08/16/properties-of-cross-entropy.html)
+4. [Understanding Softmax Function](https://gouherdanish.github.io/2024/10/28/softmax.html)
+
 
 ---
 ## Conclusion:
 
 - We explored various ways of calculating cross-entropy loss
-
-
-
-
