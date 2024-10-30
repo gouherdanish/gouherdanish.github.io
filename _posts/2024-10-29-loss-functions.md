@@ -112,7 +112,7 @@ tensor([[0., 0., 1.],
 
 ```
 def nll_loss(logp,y):
-    torch.tensor([-torch.dot(logp_,y_) for logp_,y_ in zip(logp,y)])
+    return torch.tensor([-torch.dot(logp_,y_) for logp_,y_ in zip(logp,y)])
 
 >>> loss = nll_loss(logp,y)
 >>> loss
@@ -207,7 +207,7 @@ tensor([[-1.4644, -1.9644, -0.4644],
 - Note that this is same as the output in Step 2 of previous approaches
 - Thus we successfully calculated softmax and applied log also in one go.
 
-**Step 2 - Dot Product ($y \dot \log p_i$)**
+**Step 2 - Calculate CE Loss**
 
 - Let's assume that target y is in Class Number form (0 to N)
 
@@ -221,7 +221,7 @@ tensor([2,1])
 
 ```
 def nll_loss(logp,y):
-    return -logp[range(len(y)),y]
+    return -logp[range(len(y)),y].mean()
 
 >>> loss = nll_loss(logp,y)
 >>> loss
@@ -233,7 +233,7 @@ tensor([0.4644, 0.1967])
 - For calculating Cross Entropy loss across all examples in the batch, we need to take the average
 
 ```
->>> ce_loss = loss.mean()
+>>> ce_loss = nll_loss(logp,y)
 >>> ce_loss
 tensor(0.3306)
 ```
