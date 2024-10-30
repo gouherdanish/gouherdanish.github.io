@@ -43,7 +43,7 @@ $$ L = \frac{1}{m} \sum_{k=1}^m \ell_k $$
 
 
 ---
-## How to calculate Cross Entropy ?
+## How to calculate Cross Entropy in PyTorch ?
 
 - There are various approaches we can take to calculate Cross Entropy. However every approach boils down to the way we apply individual PyTorch functions
 - We present possible approaches to calculate Cross Entropy in PyTorch below
