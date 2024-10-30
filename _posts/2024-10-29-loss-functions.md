@@ -155,9 +155,9 @@ Note:
 - The naive implementation of Softmax may lead to stability issues as explained in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article
 
 ---
-### 2. Using PyTorch Implementation of Softmax
+### 2. Using PyTorch Version of Softmax
 
-- We will follow the same flow as in the approach 1 
+- We will follow the same steps as in the approach 1 
 
 <img src="{{site.url}}/images/loss_fn/loss1.png">
 
@@ -168,7 +168,7 @@ Note:
 >>> logp = torch.log(p)                         # Step 2
 >>> ce_loss = nn.functional.nll_loss(logp,y)    # Step 3 and 4
 >>> ce_loss
-tensor(-0.3306)
+tensor(0.3306)
 ```
 
 Note:
@@ -240,9 +240,34 @@ tensor(0.3306)
 
 ---
 
+### 4. Using PyTorch Version of LogSoftmax
+
+- We will follow the same steps as in the approach 3
+
+<img src="{{site.url}}/images/loss_fn/loss2.png">
+
+- But now, instead of using our own implementation, we can use PyTorch functions
+
+```
+>>> logp = nn.functional.log_softmax(z)         # Step 1 and 2
+>>> ce_loss = nn.functional.nll_loss(logp,y)    # Step 3 and 4
+>>> ce_loss
+tensor(0.3306)
+```
+
+Note:
+- This is explained in detail in [this](https://gouherdanish.github.io/2024/10/28/softmax.html) article
+
+---
+
+## References
+
+(Cross Entropy Loss Notebook)[https://github.com/gouherdanish/mnist_classification]
+
+## Conclusion:
+
+- We explored various ways of calculating cross-entropy loss
 
 
-Github 
-- [Logistic Regression from Scratch](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression.py)
-- [Logistic Regression using Sklearn](https://github.com/gouherdanish/ml_concepts/blob/main/logistic_regression_sklearn.py)
+
 
