@@ -264,6 +264,7 @@ Note:
 
 (Cross Entropy Loss Notebook)[https://github.com/gouherdanish/mnist_classification]
 
+---
 ## Conclusion:
 
 - We explored various ways of calculating cross-entropy loss
