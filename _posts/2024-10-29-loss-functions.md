@@ -11,18 +11,21 @@ Loss functions are used extensively in Machine Learning. Cross Entropy Loss is u
 ## Background
 
 - In a classification problem, we predict what will be the category of the input data out of given classes
-- E.g. In MNIST classification, we predict what is the digit in the given input image 
-- Classification problem can be solved using Machine Learning by both traditional ML techniques and Deep Learning using Neural Networks
-- Below is a Multilayer Perceptron (MLP) architecture for the MNIST classification
+- E.g. In Iris Dataset, we have 150 examples covering 3 types of Iris flowers
+- Let's say we want to build some classfication model to predict the type of Iris Flower given its features
+- During forward propagation, we apply our model over the extracted features which yields us logit values as shown below
 
-<img src="{{site.url}}/images/loss_fn/nn1.png">
+<img src="{{site.url}}/images/loss_fn/logit.png">
+
+- Later, we combine these logits with our target values to calculate some loss metric which measures how well our model did
+- Cross Entropy Loss function is used to measure loss in case of Classification Problems
 
 ---
 
 ## What is Cross Entropy Loss Function ?
 
 - Previously, in [this](https://gouherdanish.github.io/2024/08/15/cross-entropy.html) article, we understood the concept behind Cross Entropy 
-- Later, in [this](https://gouherdanish.github.io/2024/08/16/properties-of-cross-entropy.html) article, we did a detailed mathematical analysis of the properties of cross entropy
+- Later, in [this](https://gouherdanish.github.io/2024/08/16/properties-of-cross-entropy.html) article, we did a detailed mathematical analysis of the various properties of cross entropy and why it is ideal as a loss function
 - Intuitively Cross Entropy measures how well one probability distribution approximates another
 - Cross Entropy Loss for one input example can be defined as,
 
@@ -42,11 +45,8 @@ $$ L = \frac{1}{m} \sum_{k=1}^m \ell_k $$
 ---
 ## How to calculate Cross Entropy ?
 
-- There are various approaches we can take to calculate Cross Entropy. However every approach boils down to couple important points
-    - whether we apply individual functions separately or we apply them in one go
-    - whether we use our own implementations or we use PyTorch functions
-
-- Depending on these factors, we present possible approaches to calculate Cross Entropy in PyTorch below
+- There are various approaches we can take to calculate Cross Entropy. However every approach boils down to the way we apply individual PyTorch functions
+- We present possible approaches to calculate Cross Entropy in PyTorch below
 - For all the approaches we describe below, we consider the following logits (z) and target values (y)
 
 ```
@@ -57,7 +57,7 @@ $$ L = \frac{1}{m} \sum_{k=1}^m \ell_k $$
 ---
 ### Approach 1 - Using Softmax function from PyTorch 
 
-- We will follow the same steps as outlined below
+- We will follow the steps as outlined below
 
 <img src="{{site.url}}/images/loss_fn/loss1.png">
 
