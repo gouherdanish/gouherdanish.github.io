@@ -15,7 +15,7 @@ Loss functions are used extensively in Machine Learning. Cross Entropy Loss is u
 - Let's say we want to build some classfication model to predict the type of Iris Flower given its features
 - During forward propagation, we apply our model over the extracted features which yields us logit values as shown below
 
-<img src="{{site.url}}/images/loss_fn/logit.png">
+<img src="{{site.url}}/images/loss_fn/logit2.png">
 
 - Later, we combine these logits with our target values to calculate some loss metric which measures how well our model did
 - Cross Entropy Loss function is used to measure loss in case of Classification Problems
