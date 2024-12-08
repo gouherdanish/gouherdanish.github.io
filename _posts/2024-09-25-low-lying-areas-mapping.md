@@ -5,7 +5,7 @@ date: 2024-09-25
 tags: ["Geospatial"]
 ---
 
-Streamlit provides a very easy way to create a web application from demo purpose
+Streamlit provides a very easy way to create a web application for demo purpose
 
 ---
 ### Background
