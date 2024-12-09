@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Streamlit app for Digit Recognition"
-date: 2024-12-10
+date: 2024-12-09
 tags: ["Machine Learning"]
 ---
 
