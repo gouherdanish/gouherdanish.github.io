@@ -29,14 +29,19 @@ streamlit run app.py
 - Uploaded Image is rendered on the page with the Digit Predicted along with the Model Confidence
 <img src="{{site.url}}/images/mnist/pred.png"/>
 
+- For some image, the prediction might be wrong as shown below
+<img src="{{site.url}}/images/mnist/pred_wrong.png"/>
+
+- In such cases, we can supply correct label to retrain the model on this data
+<img src="{{site.url}}/images/mnist/retrain.png"/>
+
 ---
 ### Reference
 
 Implementation and code can be found on Github
-- [Urban Flooding](https://github.com/gouherdanish/urban_flooding)
+- [Digit Recognition](https://github.com/gouherdanish/mnist_classification)
 
 ---
 ### Conclusion
-- Urban flooding is a growing cause of concern in Bangalore
-- This app aims to identify the low-lying areas in Bangalore which are at risk of Urban flooding
+- We created a Streamlit app for Digit recognition in uploaded images
 
