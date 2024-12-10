@@ -39,10 +39,9 @@ streamlit run app.py
 ### Reference
 
 Implementation and code can be found on Github
-- [Urban Flooding](https://github.com/gouherdanish/urban_flooding)
+- [Digit Recognition](https://github.com/gouherdanish/mnist_classification)
 
 ---
 ### Conclusion
-- Urban flooding is a growing cause of concern in Bangalore
-- This app aims to identify the low-lying areas in Bangalore which are at risk of Urban flooding
+- We created a Streamlit app for Digit recognition in uploaded images
 
