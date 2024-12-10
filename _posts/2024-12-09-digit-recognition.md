@@ -29,6 +29,12 @@ streamlit run app.py
 - Uploaded Image is rendered on the page with the Digit Predicted along with the Model Confidence
 <img src="{{site.url}}/images/mnist/pred.png"/>
 
+- For some image, the prediction might be wrong as shown below
+<img src="{{site.url}}/images/mnist/pred_wrong.png"/>
+
+- In such cases, we can supply correct label to retrain the model on this data
+<img src="{{site.url}}/images/mnist/retrain.png"/>
+
 ---
 ### Reference
 
