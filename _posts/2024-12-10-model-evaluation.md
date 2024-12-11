@@ -73,6 +73,8 @@ Epoch 10, Train acc=0.987, Val acc=0.970, Train loss=0.000, Val loss=0.001
 Elapsed Time: 20.8068s <-- 
 ...
 ```
+
+**Comparison**
 - We can run for multiple epochs for each model to arrive at average time per epoch
 
 | Model | Num Epochs | Elapsed Time (s) |  Avg Time per Epoch (s) |
@@ -101,12 +103,97 @@ Elapsed Time: 0.0111s
 Elapsed Time: 0.0244s   <--
 ```
 
+**Comparison**
 - We can run for multiple epochs for each model to arrive at average time per epoch
 
 | Model |  Avg Time per Epoch (ms) |
 | ----- | ------------------------ |
 | LeNet |           11.1 ms        |
 | MLP   |           24.4 ms        |
+
+---
+
+### Calculating Parameter Count
+
+**Define Model**
+- Let's say, we have an MLP model for our Digit Recognizer App
+    - Input is an Mnist image of size 28*28 pixels
+    - MLP model consisting of a single hidden layer of 512 neurons
+    - Output is of size 10 corresponding to 10 digit classes
+- We can define the model architecture in PyTorch as follows
+
+```
+class MLP(nn.Module):
+    def __init__(self):
+        super(MLP,self).__init__()
+        self.model_name = 'mlp'
+        self.fc1 = nn.Linear(28*28, 512)
+        self.relu = nn.ReLU()
+        self.output = nn.Linear(512, 10)
+    
+    def forward(self, x):
+        x = x.view(-1,28*28)
+        x = self.relu(self.fc1(x))
+        return self.output(x)
+```
+
+**Observe Model**
+- We can create a model instance and observe its layers
+
+```
+>>> model = MLP()
+>>> print(model)
+MLP(
+  (fc1): Linear(in_features=784, out_features=512, bias=True)
+  (relu): ReLU()
+  (output): Linear(in_features=512, out_features=10, bias=True)
+)
+```
+
+**Parameters**
+- In PyTorch, there is a `numel()` method which gives the number of elements in a given tensor
+
+```
+>>> for p in model.parameters():
+        print(p.size(), p.numel())
+torch.Size([512, 784]) 401408   <-- Weights of fc1 layer (512 * 784 = 401408)
+torch.Size([512]) 512           <-- Bias of fc1 layer
+torch.Size([10, 512]) 5120      <-- Weights of output layer (512 * 10 = 5120)
+torch.Size([10]) 10             <-- Bias of output layer
+```
+
+- We can use this method to create a function which calculates the total parameter count of a given model
+```
+def count_params(model):
+    return sum([p.numel() for p in model.parameters() if p.requires_grad])
+```
+
+**MLP Model**
+
+```
+>>> from model.mlp import MLP
+>>> model = MLP()
+>>> count_params(model)
+407050
+```
+
+**LeNet Model**
+
+```
+>>> from model.lenet import LeNet 
+>>> model = LeNet()
+>>> count_params(model)
+44426
+```
+
+**Comparison**
+```
+| Model |  Parameter Count |
+| ----- | ---------------- |
+| LeNet |     44426        |
+| MLP   |     407050       |
+```
+
 
 ---
 ### Reference
