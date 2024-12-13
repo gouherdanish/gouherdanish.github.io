@@ -13,12 +13,13 @@ Parameter Count and Flops count are important variables to evaluate an ML Model
 
 **Parameter Count**
 - Refers to the total number of trainable weights and biases in the model.
+- It is a measure of the model size
 - It remains constant regardless of the input size because it depends solely on the architecture of the model.
 
 **Flops Count**
 - It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model.
 - FLOPs depend on the input size (e.g., height and width for images, sequence length for text).
-- Measures the computational complexity of the model for a given input.
+- It is a measure of the computational complexity of the model for a given input.
 
 ---
 
@@ -115,39 +116,10 @@ def count_params(model):
 - Note that, the method to calculate Flops differs based on the type of layer, so we need to take this into account
 
 ```
-def count_flops(model,input_size):
-    total_flops = 0
-    prev_size = input_size
-    for layer in model.children():
-        if isinstance(layer,nn.Conv2d):
-            # Convolutional FLOPs
-            C_in, H_in, W_in = prev_size
-            C_out = layer.out_channels
-            kernel_h, kernel_w = layer.kernel_size
-            stride_h, stride_w = layer.stride
-            padding_h, padding_w = layer.padding
-            H_out = (H_in - kernel_h + 2 * padding_h) // stride_h + 1
-            W_out = (W_in - kernel_w + 2 * padding_w) // stride_w + 1
-            
-            flops_conv = H_out * W_out * C_out * kernel_h * kernel_w * C_in
-            total_flops += flops_conv
-            prev_size = (C_out, H_out, W_out)
-        elif isinstance(layer, nn.MaxPool2d) or isinstance(layer, nn.AvgPool2d):
-            # Pooling FLOPs
-            C_in, H_in, W_in = prev_size
-            kernel_h, kernel_w = layer.kernel_size
-            stride_h, stride_w = layer.stride
-            H_out = (H_in - kernel_h) // stride_h + 1
-            W_out = (W_in - kernel_w) // stride_w + 1
-            flops_pool = H_out * W_out * C_in * (kernel_h * kernel_w)
-            total_flops += flops_pool
-            prev_size = (C_in, H_out, W_out)
-        elif isinstance(layer,nn.Linear):
-            # Fully connected FLOPs
-            flops_mul = layer.in_features * layer.out_features
-            flops_add = layer.out_features
-            total_flops += flops_mul + flops_add
-    return total_flops
+>>> from eval.evaluate import ModelEvaluator
+>>> eval = ModelEvaluator()
+>>> eval.evaluate(model,input_size=(1,28,28))
+{'param_count': 44426, 'flops': 2176080}
 ```
 
 - Using the function defined above let's calculate the Total Flops Count for our model
