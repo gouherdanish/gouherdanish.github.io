@@ -114,18 +114,17 @@ def count_params(model):
 
 - There is no standard function in PyTorch to give Flops Count right off the bat. So, we need to implement this function from scratch
 - Note that, the method to calculate Flops differs based on the type of layer, so we need to take this into account
+- We have provided the implementation [here](https://github.com/gouherdanish/mnist_classification/blob/main/eval/evaluate.py)
 
 ```
 >>> from eval.evaluate import ModelEvaluator
->>> eval = ModelEvaluator()
->>> eval.evaluate(model,input_size=(1,28,28))
-{'param_count': 44426, 'flops': 2176080}
+>>> ModelEvaluator.count_flops(model,input_size=(1,28,28))
+2176080
 ```
 
-- Using the function defined above let's calculate the Total Flops Count for our model
+---
 
-```
->>> model = LeNet()
->>> count_flops(model,input_size=(1,28,28))
+### Conclusion
 
-```
+- We explored two Model evaluation metrics namely Parameter Count and Flops Count which measure the model size and computational cost respectively
+- We also provided hand calculation and implementation for these metrics in PyTorch
