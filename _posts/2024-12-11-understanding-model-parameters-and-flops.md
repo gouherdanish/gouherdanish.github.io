@@ -11,60 +11,51 @@ Parameter Count and Flops count are important variables to evaluate an ML Model
 
 ### Background
 
-- A Deep Learning Model can have different types of Layers e.g.
-    - Fully Connected Layer
-    - Convolutional Layer
-    - Pooling Layer
-- Calculating the parameter count and flops for each layer is important to get the correct picture
-
----
-
-### Example : LeNet
-
-- LeNet Model that we created for our [Digit Recognizer App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html) had 5 layers
+- A Deep Learning Model can have different types of layers 
+- As an example, the LeNet-5 Model that we created for our [Digit Recognizer App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html) had 5 layers
     - 2 Convolutional Layers
-    - 2 Fully Connected Layers
-    - 1 Output Layers of 10 neurons
-- Refer [LeNet Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/lenet.py)
+    - 2 Fully Connected Hidden Layers
+    - 1 Fully Connected Output Layers of 10 neurons
+
+<img src="{{site.url}}/images/mnist/lenet.png">
+
+- Calculating the parameter count and flops for each layer is important to get the correct picture
 
 ---
 
 ### Fully Connected Layer
 
+<img src="{{site.url}}/images/mnist/fc_params.png">
 
 
-**Define Model**
-- Let's say, we have an MLP model for our Digit Recognizer App
-    - Input is an Mnist image of size 28*28 pixels
-    - MLP model consisting of a single hidden layer of 512 neurons
-    - Output is of size 10 corresponding to 10 digit classes
-- We can define the model architecture in PyTorch as follows
+<img src="{{site.url}}/images/mnist/fc_flops.png">
 
-```
-class MLP(nn.Module):
-    def __init__(self):
-        super(MLP,self).__init__()
-        self.model_name = 'mlp'
-        self.fc1 = nn.Linear(28*28, 512)
-        self.relu = nn.ReLU()
-        self.output = nn.Linear(512, 10)
-    
-    def forward(self, x):
-        x = x.view(-1,28*28)
-        x = self.relu(self.fc1(x))
-        return self.output(x)
-```
+---
 
-**Observe Model**
-- We can create a model instance and observe its layers
+### Convolutional Layer
+
+<img src="{{site.url}}/images/mnist/conv_params.png">
+
+
+<img src="{{site.url}}/images/mnist/conv_flops.png">
+
+---
+
+### Implementation
+
+- We have provided PyTorch implementation of the LeNet-5 model architecture in our [App](https://github.com/gouherdanish/mnist_classification/blob/main/model/lenet.py)
+- Below we import that model 
 
 ```
->>> model = MLP()
+>>> from model.lenet import LeNet
+>>> model = LeNet()
 >>> print(model)
-MLP(
-  (fc1): Linear(in_features=784, out_features=512, bias=True)
-  (relu): ReLU()
-  (output): Linear(in_features=512, out_features=10, bias=True)
+LeNet(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (fc1): Linear(in_features=256, out_features=120, bias=True)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=10, bias=True)
 )
 ```
 
