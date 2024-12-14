@@ -112,9 +112,23 @@ def count_params(model):
 
 #### Implementing Flops Count Function
 
-- There is no standard function in PyTorch to give Flops Count right off the bat. So, we need to implement this function from scratch
+- We can see the layers of any model as follows
+
+```
+>>> for p in model.children():
+        print(p)
+Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1))
+Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+Linear(in_features=256, out_features=120, bias=True)
+Linear(in_features=120, out_features=84, bias=True)
+Linear(in_features=84, out_features=10, bias=True)
+```
+
+- As observed, different layers have different way to calculate floating point operations
+- As of now, there is no standard function in PyTorch to give Flops Count right off the bat. So, we need to implement this function from scratch
 - Note that, the method to calculate Flops differs based on the type of layer, so we need to take this into account
 - We have provided the implementation [here](https://github.com/gouherdanish/mnist_classification/blob/main/eval/evaluate.py)
+
 
 ```
 >>> from eval.evaluate import ModelEvaluator

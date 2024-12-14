@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Evaluating a ML Model"
-date: 2024-12-10
+title: "Evaluating ML Models"
+date: 2024-12-13
 tags: ["Machine Learning"]
 ---
 
@@ -9,13 +9,33 @@ Evaluating a Machine Learning model is essential in understanding the model comp
 
 ---
 
-### Evaluating Training Time
+### Background
 
-- Let's see how we can use this function to find training time for the LeNet Model we created for our [Digit Recognition App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html)
+- In our [Digit Recognition App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html), we have created two models, trained them with MNIST data and used them for inference.
+- Below is a brief summary of these two models
+
+**LeNet Model**
+- LeNet Model had 5 layers
+    - 2 Convolutional Layers
+    - 2 Fully Connected Layers
+    - 1 Output Layers of 10 neurons
+- Refer [LeNet Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/lenet.py)
+
+**Evaluate MLP Model**
+- MLP Model that we created for our App had 
+    - 1 Fully connected layer of 512 neurons
+    - 1 Output layer of 10 neurons
+- Refer [MLP Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/mlp.py)
+
+---
+### Training Time
+
+- It refers to the time it takes to train a model for given number of epochs
 
 **Create Timeit function**
 - We can use Python `time` module to create a function which can calculate the time elapsed during a function call
 - Below is a possible implementation of this function
+- We will see how we can use this function to find training time for different models
 
 ```
 import time
@@ -39,14 +59,8 @@ def train(...):
     ...
 ```
 
-**Evaluate LeNet Model**
-- LeNet Model that we created for our App had 5 layers
-    - 2 Convolutional Layers
-    - 2 Fully Connected Layers
-    - 1 Output Layers of 10 neurons
-- Refer [LeNet Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/lenet.py)
-- To evaluate the training time, we can run the batch training pipeline for the app for LeNet model for 10 epochs as follows
-
+**LeNet Model**
+- To evaluate the training time for LeNet model, we can run the batch training pipeline as follows
 ```
 >>> python batch_training.py --model_name lenet --epochs 10
 Epoch 01, Train acc=0.886, Val acc=0.948, Train loss=0.003, Val loss=0.001
@@ -58,12 +72,8 @@ Elapsed Time: 47.5396s <--
 
 - Notice, training LeNet model took ~48 seconds for 10 epochs
 
-**Evaluate MLP Model**
-- MLP Model that we created for our App had 
-    - 1 Fully connected layer of 512 neurons
-    - 1 Output layer of 10 neurons
-- Refer [MLP Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/mlp.py)
-- We can evaluate the training time for MLP model using the same utility function that we created above
+**MLP Model**
+- On similar lines, we can evaluate the training time for MLP model as follows
 
 ```
 >>> python batch_training.py --model_name lenet --epochs 10
@@ -74,6 +84,7 @@ Elapsed Time: 20.8068s <--
 ...
 ```
 
+---
 **Comparison**
 - We can run for multiple epochs for each model to arrive at average time per epoch
 
@@ -84,19 +95,19 @@ Elapsed Time: 20.8068s <--
 
 
 ---
-### Calculating Inference Latency
+### Inference Latency
 
 - Inference latency is a measure of the average time it takes to classify each example
 - We can use the same utility function to calculate the inference latency as well
 
-**Using LeNet Model**
+**LeNet Model**
 ```
 >>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/1a.png --model_name lenet
 {'confidence': tensor([0.9999]), 'pred_label': tensor([1])}
 Elapsed Time: 0.0111s
 ```
 
-**Using MLP Model**
+**MLP Model**
 ```
 >>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/1a.png --model_name mlp
 {'confidence': tensor([0.6122]), 'pred_label': tensor([1])}
@@ -113,23 +124,16 @@ Elapsed Time: 0.0244s   <--
 
 ---
 
-### Calculating Parameter Count
+### Parameter Count
 
+- It refers to the total number of trainable weights and biases in the model.
+- It is a measure of the model size
 - In PyTorch, there is a `numel()` method which gives the number of elements in a given tensor
 - We can use this method to create a function which calculates the total parameter count of a given model
 
 ```
 def count_params(model):
     return sum([p.numel() for p in model.parameters() if p.requires_grad])
-```
-
-**MLP Model**
-
-```
->>> from model.mlp import MLP
->>> model = MLP()
->>> count_params(model)
-407050
 ```
 
 **LeNet Model**
@@ -139,6 +143,15 @@ def count_params(model):
 >>> model = LeNet()
 >>> count_params(model)
 44426
+```
+
+**MLP Model**
+
+```
+>>> from model.mlp import MLP
+>>> model = MLP()
+>>> count_params(model)
+407050
 ```
 
 **Comparison**
@@ -151,30 +164,32 @@ def count_params(model):
 ---
 ### Floating Point Operations (Flops) 
 
-- In PyTorch, there is a `numel()` method which gives the number of elements in a given tensor
-- We can use this method to create a function which calculates the total parameter count of a given model
+- It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model.
+- FLOPs depend on the input size (e.g., height and width for images, sequence length for text).
+- It is a measure of the computational complexity of the model for a given input.
 
-```
-def count_params(model):
-    return sum([p.numel() for p in model.parameters() if p.requires_grad])
-```
-
-**MLP Model**
-
-```
->>> from model.mlp import MLP
->>> model = MLP()
->>> count_params(model)
-407050
-```
+Note:
+- There is no standard function in PyTorch to give Flops Count right off the bat. So, we need to implement this function from scratch
+- Note that, the method to calculate Flops differs based on the type of layer, so we need to take this into account
+- We have provided the implementation [here](https://github.com/gouherdanish/mnist_classification/blob/main/eval/evaluate.py)
 
 **LeNet Model**
 
 ```
->>> from model.lenet import LeNet 
+>>> from model.lenet import LeNet
 >>> model = LeNet()
->>> count_params(model)
-44426
+>>> from eval.evaluate import ModelEvaluator
+>>> ModelEvaluator.count_flops(model,input_size=(1,28,28))
+2176080
+```
+
+**MLP Model**
+```
+>>> from model.mlp import MLP
+>>> model = MLP()
+>>> from eval.evaluate import ModelEvaluator
+>>> ModelEvaluator.count_flops(model,input_size=(1,28,28))
+2176080
 ```
 
 **Comparison**
