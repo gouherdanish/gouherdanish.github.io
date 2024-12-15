@@ -9,23 +9,41 @@ Evaluating a Machine Learning model is essential in understanding the model comp
 
 ---
 
-### Background
+## Background
 
 - In our [Digit Recognition App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html), we have created two models, trained them with MNIST data and used them for inference.
 - Below is a brief summary of these two models
 
-**LeNet Model**
+### LeNet Model
 - LeNet Model had 5 layers
     - 2 Convolutional Layers
     - 2 Fully Connected Layers
     - 1 Output Layers of 10 neurons
+
+<img src="{{site.url}}/images/mnist/lenet.png">
+
 - Refer [LeNet Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/lenet.py)
 
-**Evaluate MLP Model**
+### MLP Model
 - MLP Model that we created for our App had 
     - 1 Fully connected layer of 512 neurons
     - 1 Output layer of 10 neurons
+
+<img src="{{site.url}}/images/mnist/mlp.png">
+
 - Refer [MLP Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/mlp.py)
+
+---
+
+## Model Evaluation
+
+- Evaluating a model means benchmarking it based on its performance, speed, size and usability
+- There are various parameters which help us evaluate a model objectively
+    - Training Time
+    - Inference Latency
+    - Parameter Count
+    - Flops Count
+- Below we study each of these parameter in detail and present a comparative evaluation of MLP and LeNet models
 
 ---
 ### Training Time
