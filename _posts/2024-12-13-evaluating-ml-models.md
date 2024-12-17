@@ -207,15 +207,24 @@ Note:
 >>> model = MLP()
 >>> from eval.evaluate import ModelEvaluator
 >>> ModelEvaluator.count_flops(model,input_size=(1,28,28))
-2176080
+813056
 ```
 
 **Comparison**
 
-| Model |  Parameter Count |
-| ----- | ---------------- |
-| LeNet |     44426        |
-| MLP   |     407050       |
+| Model |  Flops Count |
+| ----- | ------------ |
+| LeNet |     2176080  |
+| MLP   |     813056   |
+
+---
+
+### Final Observation
+
+| Model | Training Time per Epoch | Inference Latency | Parameters Count | Flops Count |
+| ----- | ----------------------- | ----------------- | ---------------- | ----------- |
+| LeNet |        4.75 s           |        11 ms      |       44426      |   2176080   |
+| MLP   |        2.80 s           |        24 ms      |       407050     |   813056    |
 
 
 ---
