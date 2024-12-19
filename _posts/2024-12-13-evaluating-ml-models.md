@@ -45,6 +45,8 @@ Evaluating a Machine Learning model is essential in understanding the model comp
     - Flops Count
 - Below we study each of these parameter in detail and present a comparative evaluation of MLP and LeNet models
 
+---
+
 ### 1. Training Time
 
 - It refers to the time it takes to train a model for given number of epochs
@@ -102,7 +104,6 @@ Elapsed Time: 20.8068s <--
 
 - Notice, training MLP model took ~21 seconds for 10 epochs
 
----
 **Comparison**
 
 | Model | Num Epochs | Elapsed Time (s) |  Avg Time per Epoch (s) |
@@ -112,7 +113,7 @@ Elapsed Time: 20.8068s <--
 
 
 ---
-### Inference Latency
+### 2. Inference Latency
 
 - Inference latency is a measure of the average time it takes to classify each example
 - We can use the same utility function to calculate the inference latency as well
@@ -140,7 +141,7 @@ Elapsed Time: 0.0244s   <--
 
 ---
 
-### Parameter Count
+### 3. Parameter Count
 
 - It refers to the total number of trainable weights and biases in the model.
 - It is a measure of the model size
@@ -180,7 +181,7 @@ def count_params(model):
 | MLP   |     407050       |
 
 ---
-### Floating Point Operations (Flops) 
+### 4. Floating Point Operations (Flops) 
 
 - It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model.
 - Flops count depend on the input size (e.g., height and width for images, sequence length for text).
