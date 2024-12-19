@@ -9,12 +9,12 @@ Evaluating a Machine Learning model is essential in understanding the model comp
 
 ---
 
-## Background
+### Background
 
 - In our [Digit Recognition App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html), we have created two ML models, trained them with MNIST data and used them for inference.
 - Below is a brief summary of these two models
 
-### MLP Model
+**MLP Model**
 - MLP Model that we created for our App had 2 Fully Connected layers viz.
     - 1 Fully connected hidden layer of 512 neurons
     - 1 Output layer of 10 neurons
@@ -23,7 +23,7 @@ Evaluating a Machine Learning model is essential in understanding the model comp
 
 - For implementation, refer [MLP Model](https://github.com/gouherdanish/mnist_classification/blob/main/model/mlp.py) 
 
-### LeNet Model
+**LeNet Model**
 - For our App, we had build LeNet-5 model which had 5 layers, viz.
     - 2 Convolutional layers
     - 2 Fully Connected hidden layers
@@ -35,7 +35,7 @@ Evaluating a Machine Learning model is essential in understanding the model comp
 
 ---
 
-## Model Evaluation
+### Model Evaluation
 
 - Evaluating a model means benchmarking it based on its performance, speed, size and usability
 - There are various parameters which help us evaluate a model objectively
@@ -47,7 +47,7 @@ Evaluating a Machine Learning model is essential in understanding the model comp
 
 ---
 
-### 1. Training Time
+#### 1. Training Time
 
 - It refers to the time it takes to train a model for given number of epochs
 - We can use Python `time` module to create a function which can calculate the time elapsed during a function call
@@ -113,7 +113,7 @@ Elapsed Time: 20.8068s <--
 
 
 ---
-### 2. Inference Latency
+#### 2. Inference Latency
 
 - Inference latency is a measure of the average time it takes to classify each example
 - We can use the same utility function to calculate the inference latency as well
@@ -141,7 +141,7 @@ Elapsed Time: 0.0244s   <--
 
 ---
 
-### 3. Parameter Count
+#### 3. Parameter Count
 
 - It refers to the total number of trainable weights and biases in the model.
 - It is a measure of the model size
@@ -181,7 +181,7 @@ def count_params(model):
 | MLP   |     407050       |
 
 ---
-### 4. Floating Point Operations (Flops) 
+#### 4. Floating Point Operations (Flops) 
 
 - It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model.
 - Flops count depend on the input size (e.g., height and width for images, sequence length for text).
