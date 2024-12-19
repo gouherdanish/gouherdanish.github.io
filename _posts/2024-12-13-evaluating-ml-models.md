@@ -100,11 +100,10 @@ Elapsed Time: 20.8068s <--
 ...
 ```
 
-- Notice, training LeNet model took ~21 seconds for 10 epochs
+- Notice, training MLP model took ~21 seconds for 10 epochs
 
 ---
 **Comparison**
-- We can run for multiple epochs for each model to arrive at average time per epoch
 
 | Model | Num Epochs | Elapsed Time (s) |  Avg Time per Epoch (s) |
 | ----- | ---------- | ---------------- | ----------------------- |
@@ -120,20 +119,19 @@ Elapsed Time: 20.8068s <--
 
 **LeNet Model**
 ```
->>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/1a.png --model_name lenet
+>>> python single_inference.py --img ../data/sample/1a.png --model_name lenet
 {'confidence': tensor([0.9999]), 'pred_label': tensor([1])}
 Elapsed Time: 0.0111s
 ```
 
 **MLP Model**
 ```
->>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/1a.png --model_name mlp
+>>> python single_inference.py --img ../data/sample/1a.png --model_name mlp
 {'confidence': tensor([0.6122]), 'pred_label': tensor([1])}
 Elapsed Time: 0.0244s   <--
 ```
 
 **Comparison**
-- We can run for multiple epochs for each model to arrive at average time per epoch
 
 | Model |  Inference Latency (ms)  |
 | ----- | ------------------------ |
@@ -146,6 +144,8 @@ Elapsed Time: 0.0244s   <--
 
 - It refers to the total number of trainable weights and biases in the model.
 - It is a measure of the model size
+
+Note:
 - In PyTorch, there is a `numel()` method which gives the number of elements in a given tensor
 - We can use this method to create a function which calculates the total parameter count of a given model
 
@@ -183,12 +183,12 @@ def count_params(model):
 ### Floating Point Operations (Flops) 
 
 - It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model.
-- FLOPs depend on the input size (e.g., height and width for images, sequence length for text).
+- Flops count depend on the input size (e.g., height and width for images, sequence length for text).
 - It is a measure of the computational complexity of the model for a given input.
 
 Note:
 - There is no standard function in PyTorch to give Flops Count right off the bat. So, we need to implement this function from scratch
-- Note that, the method to calculate Flops differs based on the type of layer, so we need to take this into account
+- The method to calculate Flops differs based on the type of layer, so we need to take this into account
 - We have provided the implementation [here](https://github.com/gouherdanish/mnist_classification/blob/main/eval/evaluate.py)
 
 **LeNet Model**
@@ -226,6 +226,7 @@ Note:
 | LeNet |        4.75 s           |        11 ms      |       44426      |   2176080   |
 | MLP   |        2.80 s           |        24 ms      |       407050     |   813056    |
 
+- 
 
 ---
 ### Reference
