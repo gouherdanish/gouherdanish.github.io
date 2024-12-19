@@ -219,14 +219,28 @@ Note:
 
 ---
 
-### Final Observation
+### Observations
+
+- The overall summary looks as follows
 
 | Model | Training Time per Epoch | Inference Latency | Parameters Count | Flops Count |
 | ----- | ----------------------- | ----------------- | ---------------- | ----------- |
 | LeNet |        4.75 s           |        11 ms      |       44426      |   2176080   |
 | MLP   |        2.80 s           |        24 ms      |       407050     |   813056    |
 
-- 
+- Training time is higher for LeNet model than MLP model
+    - LeNet is computationally more complex as depicted from higher Flops count. It involves performing a large number of multiplications and additions for each filter as they slide across the spatial dimensions of the input image
+    - During backpropagation, gradients need to be computed for each filter and propagated across multiple spatial positions in the feature maps which significantly increases the computation compared to MLP
+    - Convolutional networks often include additional layers (e.g., pooling, dropout) to improve generalization but at the cost of increased training time
+    - Convolutions involve sparse sliding-window operations, which can be less efficient on certain hardware during training
+    - Although LeNet has fewer parameters which reduces memory usage but often it requires more training iterations to converge because the model may need to learn more sophisticated spatial features
+
+- LeNet is faster than MLP for inference
+    - Inference latency is measured for each input image. 
+    - Since LeNet has fewer parameters than MLP hence they require less memory to store weights
+    - Convolutional layers reuse the same weights across the entire spatial dimension of the input (weight sharing), it is more efficient. 
+    - Although LeNet has higher flops count, the convolutional layers process relatively small, localized regions of the input at a time, making operations more efficient. However, MLP involves dense matrix multiplication which takes time
+    - Libraries like PyTorch, Tensoflow have highly optimized implementations for CNNs
 
 ---
 ### Reference
