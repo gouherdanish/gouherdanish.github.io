@@ -45,7 +45,7 @@ Parameter Count and Flops count are important variables to evaluate an ML Model
 <img src="{{site.url}}/images/mnist/fc_flops.png">
 
 Note:
-- For fully connected layer, FLOPs and parameter count are the same because the layer is purely linear.
+- For fully connected layer, FLOPs is comparable/proprotional to parameter count because the layer is purely linear.
 
 ---
 
