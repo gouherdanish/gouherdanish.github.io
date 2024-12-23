@@ -11,29 +11,46 @@ Retraining is crucial to enable model to keep learning overtime.
 
 ### Background
 
-- Earlier we had created our own [Digit Recognizer App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html) which has two features
-    - it can recognize the single digit present in an image
-    - if a given image is classified incorrectly, we can supply the correct label and it can retrain the model as shown below
+Earlier we had created our own [Digit Recognizer App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html) which has two features
+
+- It can recognize the single digit present in an image
 
 <img src="{{site.url}}/images/mnist/pred_wrong.png"/>
+
+- If a given image is classified incorrectly, we can supply the correct label and it can retrain the model as shown below
 <img src="{{site.url}}/images/mnist/retrain.png"/>
 
-- In this blog, we will understand how we have built the retraining feature in our app
+In this blog, we will understand how we have built the retraining feature in our app
 
+---
 ### Approach
 
-0. Model misclassifies an image
-1. Read Misclassfied Image and Provided Correct Label
-2. Apply Transforms and prepare DataLoader
-3. Load Model weights
-4. Model Retraining
-5. Save Model 
+1. Model misclassifies an image
+2. Read Misclassfied Image and Provided Correct Label
+3. Apply Transforms and prepare DataLoader
+4. Load Model weights
+5. Model Retraining
+6. Save Model 
 
 ---
 
 #### Step 0 - Model misclassifies an image
 
-<img src="{{site.url}}/images/mnist/pred_wrong_7.png"/>
+- Below we supply the handwritten image of number `7` from the App
+
+<img src="{{site.url}}/images/mnist/pred_wrong_7a.png"/>
+
+- Internally, the uploaded bytearray image is converted to numpy array as shown in code snippet
+
+```
+uploaded_file = st.sidebar.file_uploader("Upload an image file", type=["png", "jpg", "jpeg"])
+file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+```
+
+- Notice how the image is misclassified as `3`
+
+- The same can be verified by running inference on this file locally
 
 ```
 >>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/7a.png
@@ -42,55 +59,16 @@ Retraining is crucial to enable model to keep learning overtime.
 
 ---
 
-#### Step 1 - Read Misclassified Image
+#### Step 1 - Provide Correct Label for Misclassified Image
 
-- Images are read in mainly two ways 
+- We can provide correct label for the misclassified image from the App directly and press `Use for Retraining` as follows
 
-1. Live App
-    - Image file is uploaded on the Streamlit App by the user
-    - The uploaded image is converted to numpy array which can be read by the 
+<img src="{{site.url}}/images/mnist/retrain_7a.png"/>
 
-```
-uploaded_file = st.sidebar.file_uploader("Upload an image file", type=["png", "jpg", "jpeg"])
-file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-```
-
-2. Local Testing
-    - While running the code locally, a local path can be provided by the user in the command line arguments 
+- This is invariably same as executing following command via terminal
 
 ```
-parser = argparse.ArgumentParser()
-parser.add_argument('--img',type=str,required=True,help='path of test image in case of incremental inference')
-parser.add_argument('--label',type=int,required=True,help='path of test image in case of incremental inference')
-```
-
-- Next we create `SingleDataPreparation` class which can handle reading single image either from a path or numpy array as shown below
-
-```
-
-class SingleDataPreparation(DataPreparation):
-    def __init__(
-            self,
-            img:Union[str,Path,np.ndarray],
-            label:int=-1) -> None:
-        ...
-
-    def _load_data(self):
-        """
-        Function to load data into a PyTorch Dataset object
-        - if path string is provided, it uses cv2 to read the image from the path into a numpy array
-        - if numpy array is provided directly, it is used as is
-        """
-        if isinstance(self.img,str):
-            self.img = Path(self.img)
-        if isinstance(self.img,Path):
-            self.img = cv2.imread(self.img,cv2.IMREAD_GRAYSCALE)
-        return SingleDataset(
-            img=self.img,
-            label=self.label,
-            transform=self.transform
-        )
+python retraining.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/7a.png --label 7
 ```
 
 Refer [retraining.py](https://github.com/gouherdanish/mnist_classification/blob/main/retraining.py)
