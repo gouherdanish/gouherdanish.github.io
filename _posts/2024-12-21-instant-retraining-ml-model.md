@@ -202,7 +202,7 @@ ModelCheckpoint.save(
 - As observed above, the retrained model correctly classifies the image now
 
 Note: 
-- There might be a case where even after retraining the misclassified image with correct label, it is still misclassified. 
+- There may be cases where even after retraining the misclassified image with correct label, it is still misclassified. 
 - We might need to retrain for multiple iterations on the same image
 
 ---
@@ -211,22 +211,18 @@ Note:
 
 **Pros**
 
-1. Mitigate Data Drift / Model Drift
-
-- Retraining with new data captures evolving data patterns and 
-- Used as a mitigation mechanism to resolve Data Drift and Model Drift scenarios
+- Mitigate Data Drift / Model Drift
+    - Retraining with new data captures evolving data patterns 
+    - Used as a mitigation mechanism to resolve Data Drift and Model Drift scenarios
 
 **Cons**
 
-1. Catastrophic Forgetting:
+- Catastrophic Forgetting:
+    - There might be cases where the model might misclassify the images which it was earlier classiying correctly. This happens since the retrained model may overwrite or lose knowledge learned from older data.
+    - Techniques like replay mechanisms or regularization can help mitigate this.
 
-- There might be cases where the model might misclassify the images which it was earlier classiying correctly 
-    - This happens since the retrained model may overwrite or lose knowledge learned from older data.
-- Techniques like replay mechanisms or regularization can help mitigate this.
-
-2. Data Imbalance:
-
-- New data might not represent the overall data distribution.
+- Data Imbalance:
+    - New data might not represent the overall data distribution.
 
 ---
 
