@@ -23,6 +23,41 @@ In this blog, we will understand how we varying the depth and width of MLP model
 **Model**
 <img src="{{site.url}}/images/mnist/mlp-d1.png">
 
+**Training**
+
+```
+>>> python batch_training.py --model_name mlp --epochs 2
+Elapsed Time: 4.5192s
+Train Accuracy : 92.3%
+Val Accuracy : 94.9%
+```
+
+**Inference**
+
+- Batch Inference
+
+```
+>>> python batch_inference.py --model_name mlp
+{'param_count': 407050, 'flops': 813056}
+Test Accuracy : 95.9%
+Elapsed Time: 0.3216s
+```
+
+- Incremental Inference
+
+```
+>>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/3.png
+{'confidence': tensor([0.9987]), 'pred_label': tensor([3])}
+Elapsed Time: 0.0185s
+```
+
+**Summary**
+
+| Model | Num Epochs | Elapsed Time (s) |  Avg Time per Epoch (s) |
+| ----- | ---------- | ---------------- | ----------------------- |
+| LeNet |     10     |       47.54 s    |           4.75 s        |
+
+
 #### Case 2 - MLP having 1 Hidden Layer of 256 Neurons
 
 **Model**
