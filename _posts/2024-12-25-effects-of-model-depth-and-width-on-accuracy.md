@@ -57,6 +57,7 @@ Elapsed Time: 0.0185s
 | ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
 |  MLP  |      2     |     4.52 s    |        2.26 s           |       0.018 s     |   95.9%  |   813056    |   407050   |
 
+---
 #### Case 2 - MLP having 1 Hidden Layer of 256 Neurons
 
 **Model**
@@ -96,6 +97,7 @@ Elapsed Time: 0.0204s
 | ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
 |  MLP  |      2     |     4.15 s    |        2.08 s           |       0.020 s     |   95.2%  |   406528    |   203530   |
 
+---
 #### Case 3 - MLP having 1 Hidden Layer of 128 Neurons
 
 **Model**
@@ -134,6 +136,8 @@ Elapsed Time: 0.0115s
 | Model | Num Epochs | Training Time | Training Time per Epoch | Inference Latency | Accuracy |    Flops    | Parameters |
 | ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
 |  MLP  |      2     |     3.93 s    |        1.97 s           |       0.011 s     |   94.3%  |   203264    |   101770   |
+
+---
 
 #### Case 4 - MLP having 1 Hidden Layer of 1024 Neurons
 
@@ -219,6 +223,84 @@ Elapsed Time: 0.0185s
 #### Case 2 - MLP having 2 Hidden Layers
 
 **Model**
+<img src="{{site.url}}/images/mnist/mlp-d2_1.png">
+
+**Training**
+
+```
+>>> python batch_training.py --model_name mlp --epochs 2
+Elapsed Time: 4.8258s
+Train Accuracy : 93.0%
+Val Accuracy : 95.4%
+```
+
+**Inference**
+
+_Batch Inference_
+
+```
+>>> python batch_inference.py --model_name mlp
+{'param_count': 669706, 'flops': 1337344}
+Test Accuracy : 96.1%
+Elapsed Time: 0.3371s
+```
+
+_Incremental Inference_
+
+```
+>>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/3.png
+{'confidence': tensor([0.9987]), 'pred_label': tensor([3])}
+Elapsed Time: 0.0158s
+```
+
+**Summary**
+
+| Model | Num Epochs | Training Time | Training Time per Epoch | Inference Latency | Accuracy |    Flops    | Parameters |
+| ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
+|  MLP  |      2     |     4.83 s    |        2.41 s           |       0.016 s     |   96.1%  |   1337344   |   669706   |
+
+#### Case 3 - MLP having 3 Hidden Layers
+
+**Model**
+<img src="{{site.url}}/images/mnist/mlp-d3_1.png">
+
+**Training**
+
+```
+>>> python batch_training.py --model_name mlp --epochs 2
+Elapsed Time: 5.3044s
+Train Accuracy : 92.4%
+Val Accuracy : 95.2%
+```
+
+**Inference**
+
+_Batch Inference_
+
+```
+>>> python batch_inference.py --model_name mlp
+{'param_count': 932362, 'flops': 1861632}
+Test Accuracy : 96.5%
+Elapsed Time: 0.3450s
+```
+
+_Incremental Inference_
+
+```
+>>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/3.png
+{'confidence': tensor([0.9987]), 'pred_label': tensor([3])}
+Elapsed Time: 0.0171s
+```
+
+**Summary**
+
+| Model | Num Epochs | Training Time | Training Time per Epoch | Inference Latency | Accuracy |    Flops    | Parameters |
+| ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
+|  MLP  |      2     |     5.30 s    |        2.65 s           |       0.017 s     |   96.5%  |   1861632   |   932362   |
+
+#### Case 4 - MLP having 2 Hidden Layers
+
+**Model**
 <img src="{{site.url}}/images/mnist/mlp-d2.png">
 
 **Training**
@@ -255,7 +337,7 @@ Elapsed Time: 0.0103s
 | ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
 |  MLP  |      2     |     4.78 s    |        2.39 s           |       0.010 s     |   95.9%  |   1070080   |   535818   |
 
-#### Case 3 - MLP having 3 Hidden Layers
+#### Case 4 - MLP having 3 Hidden Layers
 
 **Model**
 <img src="{{site.url}}/images/mnist/mlp-d3.png">
