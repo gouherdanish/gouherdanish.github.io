@@ -13,10 +13,12 @@ Accuracy of ML model depends on multiple factors
 
 - In our [Digit Recognition App](https://gouherdanish.github.io/2024/12/09/digit-recognition.html), we created very simple MLP model with just one hidden layer, trained it with MNIST data and used it for inference.
 
-In this blog, we will understand how we varying the depth and width of MLP model affects the Model accuracy
+- In this blog, we will understand how we varying the depth and width of MLP model affects the Model accuracy
 
 ---
-### Effect of Hidden Layer Width
+### Effect of Width
+
+- Width of a hidden layer in a neural network corresponds to the number of neurons within that layer
 
 #### Case 1 - MLP having 1 Hidden Layer of 512 Neurons
 
@@ -208,7 +210,9 @@ nes due to which latency also increases
 <img src="{{site.url}}/images/mnist/mlp-w-g3.png">
 
 ---
-### Effect of Depth of Neural Network
+### Effect of Depth
+
+- Depth corresponds to the number of hidden layers in the neural network 
 
 #### Case 1 - MLP having 1 Hidden Layer
 
