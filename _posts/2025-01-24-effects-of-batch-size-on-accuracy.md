@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Effect of Model Depth and Width on Accuracy"
+title: "Effect of Batch Size on Accuracy"
 date: 2024-12-25
 tags: ["Machine Learning"]
 ---
