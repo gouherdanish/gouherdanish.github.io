@@ -91,13 +91,19 @@ Val Accuracy : 95.2%
 
 **Model Size**
 
+- Refers to the size of the model on disk
+
 <img src="{{site.url}}/images/mnist/mlp-comp-g1.png">
 
 **Model Parameters**
 
+- Refers to the total number of trainable weights and biases in the model
+
 <img src="{{site.url}}/images/mnist/mlp-comp-g2.png">
 
 **Floating Point Operations**
+
+- Represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model 
 
 <img src="{{site.url}}/images/mnist/mlp-comp-g3.png">
 
@@ -110,22 +116,41 @@ Note:
 
 **Batch Size vs Training Time**
 
+- From below graph, we observe that Training time decreases as Batch size increases
+- However, at Batch Size = 64, the training time starts to level off and increasing the Batch Size does not show much improvement
+
 <img src="{{site.url}}/images/mnist/mlp-hp-g1.png">
 
 **Batch Size vs Inference Latency**
+
+- From below graph, we observe that Inference Latency decreases as Batch size increases
+- However at Batch Size = 64, the latency starts to level off and increasing the Batch Size does not show much improvement
 
 <img src="{{site.url}}/images/mnist/mlp-hp-g2.png">
 
 **Batch Size vs Accuracy**
 
+- From below graph, we observe that Accuracy initially increases as Batch size increases
+- Interestingly, increasing the Batch size beyond a certain point causes the Accuracy to decrease. So there exists an "Ideal" batch size which works best
+- We note that depending on the model, there can be different "ideal" Batch sizes
+    - Batch Size = 16 works best for 1st MLP model
+    - Batch Size = 64 works best for 2nd MLP model
+- In general, it is up to the user to select the Batch size for their specific use case
+
 <img src="{{site.url}}/images/mnist/mlp-hp-g3.png">
 
 **Batch Size vs Energy Consumption**
 
+- In technical terms, the Energy Consumption represents the amount of $CO_2$ emitted with one inference
+- It is directly dependent on the Inference Latency as defined in the article [Digit Recognition App](https://gouherdanish.github.io/2025/01/28/measuring-carbon-footprint-of-ml-inference.html)
+- From below graph, we observe that Energy Consumption decreases as Batch size increases
+- However at Batch Size = 64, the latency starts to level off and increasing the Batch Size does not show much improvement
+
 <img src="{{site.url}}/images/mnist/mlp-hp-g4.png">
 
 Note:
-- We can observe that the Training Time, Inference Latency and the Energy Consumption decreases as the Batch Size increases all the while improving the Accuracy
+- We can observe that the Training Time, Inference Latency and the Energy Consumption decreases as the Batch Size increases
+- The accuracy graph is interesting in the sense that the 
 
 ### Conclusion
 
