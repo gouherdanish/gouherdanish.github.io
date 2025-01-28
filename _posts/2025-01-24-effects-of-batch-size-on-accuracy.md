@@ -22,50 +22,81 @@ Accuracy of ML model depends on multiple factors
     - When Batch size = 1, it is called Stochastic Gradient Descent
     - When Batch size = Training Size, it is called Full Batch Gradient Descent
 
-#### Case 1 - MLP having 1 Hidden Layer of 512 Neurons
+### Case 1 - MLP having 1 Hidden Layer of 1024 Neurons
 
 **Model**
-<img src="{{site.url}}/images/mnist/mlp-d1.png">
+<img src="{{site.url}}/images/mnist/mlp-1024_1.png">
+
+#### Batch Size = 16
 
 **Training**
 
 ```
 >>> python batch_training.py --model_name mlp --epochs 2
-Elapsed Time: 4.5192s
-Train Accuracy : 92.3%
-Val Accuracy : 94.9%
+Epoch 01, Train acc=0.911, Val acc=0.935, Train loss=0.018, Val loss=0.013
+Epoch 02, Train acc=0.955, Val acc=0.968, Train loss=0.009, Val loss=0.007
+Elapsed Time: 19.2111s
+Train Accuracy : 93.3%
+Val Accuracy : 95.2%
 ```
 
-**Inference**
-
-_Batch Inference_
+**Evaluation**
 
 ```
 >>> python batch_inference.py --model_name mlp
-{'param_count': 407050, 'flops': 813056}
-Test Accuracy : 96.2%
-Elapsed Time: 0.3216s
+{'size': '9.8 MB', 'params': 814090, 'flops': 1626112, 'latency': '23.8 μs', 'accuracy': '96.7%', 'CO2eq': '271.6 μgCO2eq'}
 ```
-
-_Incremental Inference_
-
-```
->>> python single_inference.py --img /Users/gouher/Documents/personal/codes/ml/ml_projects/mnist_classification/data/sample/3.png
-{'confidence': tensor([0.9987]), 'pred_label': tensor([3])}
-Elapsed Time: 0.006s
-```
-
-**Summary**
-
-| Model | Num Epochs | Training Time | Training Time per Epoch | Inference Latency | Accuracy |    Flops    | Parameters |
-| ----- | ---------- | ------------- | ----------------------- | ----------------- | -------- | ----------- | ---------- |
-|  MLP  |      2     |     4.52 s    |        2.26 s           |       0.006 s     |   96.2%  |   813056    |   407050   |
 
 ---
-#### Case 4 - MLP having 2 Hidden Layers of 1024 Neurons - Batch Size = 1
+#### Batch Size = 64
+
+**Training**
+
+```
+>>> python batch_training.py --model_name mlp --epochs 2
+Epoch 01, Train acc=0.911, Val acc=0.936, Train loss=0.005, Val loss=0.003
+Epoch 02, Train acc=0.959, Val acc=0.959, Train loss=0.002, Val loss=0.002
+Elapsed Time: 8.5666s
+Train Accuracy : 93.5%
+Val Accuracy : 94.7%
+```
+
+**Evaluation**
+
+```
+>>> python batch_inference.py --model_name mlp
+{'size': '9.8 MB', 'params': 814090, 'flops': 1626112, 'latency': '5.1 μs', 'accuracy': '96.4%', 'CO2eq': '58.2 μgCO2eq'}
+```
+
+---
+#### Batch Size = 128
+
+**Training**
+
+```
+>>> python batch_training.py --model_name mlp --epochs 2
+Epoch 01, Train acc=0.898, Val acc=0.945, Train loss=0.003, Val loss=0.001
+Epoch 02, Train acc=0.956, Val acc=0.962, Train loss=0.001, Val loss=0.001
+Elapsed Time: 6.9615s
+Train Accuracy : 92.7%
+Val Accuracy : 95.4%
+```
+
+**Evaluation**
+
+```
+>>> python batch_inference.py --model_name mlp
+{'size': '9.8 MB', 'params': 814090, 'flops': 1626112, 'latency': '4.3 μs', 'accuracy': '96.4%', 'CO2eq': '49.0 μgCO2eq'}
+```
+
+---
+
+### Case 2 - MLP having 2 Hidden Layers of 1024 Neurons
 
 **Model**
-<img src="{{site.url}}/images/mnist/mlp-w1.png">
+<img src="{{site.url}}/images/mnist/mlp-1024_2.png">
+
+#### Batch Size = 1
 
 **Training**
 
@@ -80,17 +111,32 @@ Val Accuracy : 93.3%
 
 **Evaluation**
 
-_Batch Inference_
-
 ```
 >>> python batch_evaluate.py --model_name mlp
 {'size': '17.7 MB', 'params': 1470474, 'flops': 2936832, 'latency': '88.8 μs', 'accuracy': '93.6%', 'CO2eq': '1012.6 μgCO2eq'}
 ```
 
-#### Case 5 - MLP having 2 Hidden Layers of 1024 Neurons - Batch Size = 64
+#### Batch Size = 16
 
-**Model**
-<img src="{{site.url}}/images/mnist/mlp-w1.png">
+**Training**
+
+```
+>>> python batch_training.py --model_name mlp --epochs 2
+Epoch 01, Train acc=0.929, Val acc=0.952, Train loss=0.015, Val loss=0.009
+Epoch 02, Train acc=0.964, Val acc=0.953, Train loss=0.008, Val loss=0.010
+Elapsed Time: 33.5073s
+Train Accuracy : 94.6%
+Val Accuracy : 95.3%
+```
+
+**Evaluation**
+
+```
+>>> python batch_evaluate.py --model_name mlp
+{'size': '17.7 MB', 'params': 1470474, 'flops': 2936832, 'latency': '32.0 μs', 'accuracy': '95.3%', 'CO2eq': '364.8 μgCO2eq'}
+```
+
+#### Batch Size = 64
 
 **Training**
 
@@ -105,36 +151,29 @@ Val Accuracy : 95.8%
 
 **Evaluation**
 
-_Batch Inference_
-
 ```
 >>> python batch_evaluate.py --model_name mlp
 {'size': '17.7 MB', 'params': 1470474, 'flops': 2936832, 'latency': '10.3 μs', 'accuracy': '97.2%', 'CO2eq': '117.2 μgCO2eq'}
 ```
 
-#### Case 6 - MLP having 2 Hidden Layers of 1024 Neurons - Batch Size = 100
-
-**Model**
-<img src="{{site.url}}/images/mnist/mlp-w1.png">
+#### Batch Size = 128
 
 **Training**
 
 ```
 >>> python batch_training.py --model_name mlp --epochs 2
-Epoch 01, Train acc=0.932, Val acc=0.968, Train loss=0.002, Val loss=0.001
-Epoch 02, Train acc=0.970, Val acc=0.970, Train loss=0.001, Val loss=0.001
-Elapsed Time: 11.2474s
-Train Accuracy : 95.1%
-Val Accuracy : 96.9%
+Epoch 01, Train acc=0.932, Val acc=0.952, Train loss=0.002, Val loss=0.001
+Epoch 02, Train acc=0.972, Val acc=0.964, Train loss=0.001, Val loss=0.001
+Elapsed Time: 10.1892s
+Train Accuracy : 95.2%
+Val Accuracy : 95.8%
 ```
 
 **Evaluation**
 
-_Batch Inference_
-
 ```
 >>> python batch_evaluate.py --model_name mlp
-{'size': '17.7 MB', 'params': 1470474, 'flops': 2936832, 'latency': '9.1 μs', 'accuracy': '96.7%', 'CO2eq': '103.4 μgCO2eq'}
+{'size': '17.7 MB', 'params': 1470474, 'flops': 2936832, 'latency': '9.0 μs', 'accuracy': '96.6%', 'CO2eq': '102.6 μgCO2eq'}
 ```
 
 ### Conclusion
