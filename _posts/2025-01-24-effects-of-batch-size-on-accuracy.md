@@ -91,24 +91,25 @@ Val Accuracy : 95.2%
 
 **Model Size**
 
-- Refers to the size of the model on disk
+- It refers to the size of the model on disk
 
 <img src="{{site.url}}/images/mnist/mlp-comp-g1.png">
 
 **Model Parameters**
 
-- Refers to the total number of trainable weights and biases in the model
+- It refers to the total number of trainable weights and biases in the model
 
 <img src="{{site.url}}/images/mnist/mlp-comp-g2.png">
 
 **Floating Point Operations**
 
-- Represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model 
+- It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model 
 
 <img src="{{site.url}}/images/mnist/mlp-comp-g3.png">
 
 Note:
-- We can observe that the 2nd MLP Model is bigger in terms of all three criteria presented above
+- We can observe that the 2nd MLP Model is almost twice as big in terms of all three criteria presented above
+- This is due to the extra Hidden layer of neurons present in 2nd MLP model
 
 ---
 
@@ -142,15 +143,11 @@ Note:
 **Batch Size vs Energy Consumption**
 
 - In technical terms, the Energy Consumption represents the amount of $CO_2$ emitted with one inference
-- It is directly dependent on the Inference Latency as defined in the article [Digit Recognition App](https://gouherdanish.github.io/2025/01/28/measuring-carbon-footprint-of-ml-inference.html)
+- It is directly dependent on the Inference Latency as defined in this [article](https://gouherdanish.github.io/2025/01/28/measuring-carbon-footprint-of-ml-inference.html)
 - From below graph, we observe that Energy Consumption decreases as Batch size increases
 - However at Batch Size = 64, the latency starts to level off and increasing the Batch Size does not show much improvement
 
 <img src="{{site.url}}/images/mnist/mlp-hp-g4.png">
-
-Note:
-- We can observe that the Training Time, Inference Latency and the Energy Consumption decreases as the Batch Size increases
-- The accuracy graph is interesting in the sense that the 
 
 ### Conclusion
 
