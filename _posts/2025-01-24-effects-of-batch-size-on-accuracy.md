@@ -32,10 +32,6 @@ Accuracy of ML model depends on multiple factors
     - MLP having 1 Hidden Layer of 1024 Neurons
     - MLP having 2 Hidden Layers of 1024 Neurons each
 
-<img src="{{site.url}}/images/mnist/mlp-1024_1.png">
-
-<img src="{{site.url}}/images/mnist/mlp-1024_2.png">
-
 Note:
     - In case of 2nd model, we will observe a huge jump in number of model parameters due to extra layer of neurons
     - This will cause training to become extremely slow 
@@ -86,6 +82,12 @@ Val Accuracy : 95.2%
 
 ---
 ### Model Comparison
+
+**Architecture**
+
+<img src="{{site.url}}/images/mnist/mlp-1024_1.png" alt="MLP-1">
+
+<img src="{{site.url}}/images/mnist/mlp-1024_2.png" alt="MLP-2">
 
 **Model Size**
 
