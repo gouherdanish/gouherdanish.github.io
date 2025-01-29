@@ -116,7 +116,7 @@ Elapsed Time: 20.8068s <--
 #### 2. Inference Latency
 
 - Inference latency is a measure of the average time it takes to classify each example
-- We can use the same utility function to calculate the inference latency as well
+- We can use the above timeit utility function to calculate the inference latency as well
 
 **LeNet Model**
 ```
@@ -138,6 +138,21 @@ Elapsed Time: 0.0244s   <--
 | ----- | ------------------------ |
 | LeNet |           11.1 ms        |
 | MLP   |           24.4 ms        |
+
+Note:
+- There might be cases when doing first inference takes longer but subsequent inferences take less time. This happens due to cols start issues after which caching improves the time further on
+- Hence, a possible etter way to calculate latency would be to take an average of multiple inferences as follows
+
+```
+inferencing = InferenceFactory.get(strategy='batch',model=model)
+for batch_X, batch_y in dataloader:
+    start_time = time.time()
+    batch_acc = inferencing._infer_batch(batch_X, batch_y)
+    end_time = time.time()
+    runtime = end_time - start_time
+    latency = runtime / len(batch_y)
+```
+- This has been implemented in `eval` module [here](https://github.com/gouherdanish/mnist_classification/tree/main/eval)
 
 ---
 
