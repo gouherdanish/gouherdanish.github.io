@@ -5,9 +5,9 @@ date: 2025-01-28
 tags: ["Machine Learning"]
 ---
 
+Nothing exists until it is measured - Niels Bohr
 
-Nothing exists until it is measured.
-- Niels Bohr
+Measuring carbon emission allows us to measure the environmental impact of ML inference
 
 ---
 
@@ -30,17 +30,12 @@ Nothing exists until it is measured.
 
 - It refers to the amount of Energy consumed in the form of electricity by all the components of the system
 - Major ML computation workload is performed by 3 units specifically
-
-Energy Consumed by CPU ($kWh$) = TDP of CPU ($kW$) * Latency ($h$)
-Energy Consumed by RAM ($kWh$) = TDP of RAM ($kW$) * Latency ($h$)
-Energy Consumed by GPU ($kWh$) = TDP of GPU ($kW$) * Latency ($h$) 
+    - Energy Consumed by CPU ($kWh$) = TDP of CPU ($kW$) * Latency ($h$)
+    - Energy Consumed by RAM ($kWh$) = TDP of RAM ($kW$) * Latency ($h$)
+    - Energy Consumed by GPU ($kWh$) = TDP of GPU ($kW$) * Latency ($h$) 
 
 - So, we can calculate the Total Energy consumed by summing up the energy consumed by all the units
-
-Total Energy Consumed for 1 Inference ($kWh$) = 
-    Energy Consumed by CPU 
-    + Energy Consumed by RAM 
-    + Energy Consumed by GPU
+    - Total Energy Consumed for 1 Inference ($kWh$) = Energy Consumed by CPU + RAM + GPU
 - It is usually measured in joules($J$) or kilowatthours($kWh$)
 
 Note:
@@ -56,7 +51,6 @@ Carbon Emission for 1 Inference ($gCO_2$) =
     Carbon Intensity of Country ($gCO_2 / kWh$) 
     * 
     Total Energy Consumed for 1 Inference ($kWh$)
-```
 
 Note:
 - Carbon Intensity of each country in the world is available in a public database
@@ -92,17 +86,17 @@ Implementation and code can be found on Github
 - [Digit Recognition App](https://github.com/gouherdanish/mnist_classification)
 
 Other references
-[1]. https://ourworldindata.org/grapher/carbon-intensity-electricity?tab=table#explore-the-data
-[2]. https://www.isunshare.com/computer/how-to-measure-cpu-power-consumption.html 
-[3]. https://link.springer.com/chapter/10.1007/978-3-031-11658-2_3#:~:text=In%20a%20very%20simple%20and,about%20the%20energy%20consumption%20instantly
-[4]. https://www.geeksforgeeks.org/how-to-measure-your-pcs-power-consumption/
-[5]. https://mlco2.github.io/codecarbon/methodology.html#
-[6]. https://versus.com/en/apple-m1/cpu-tdp
+- [1]. https://ourworldindata.org/grapher/carbon-intensity-electricity?tab=table#explore-the-data
+- [2]. https://www.isunshare.com/computer/how-to-measure-cpu-power-consumption.html 
+- [3]. https://link.springer.com/chapter/10.1007/978-3-031-11658-2_3#:~:text=In%20a%20very%20simple%20and,about%20the%20energy%20consumption%20instantly
+- [4]. https://www.geeksforgeeks.org/how-to-measure-your-pcs-power-consumption/
+- [5]. https://mlco2.github.io/codecarbon/methodology.html#
+- [6]. https://versus.com/en/apple-m1/cpu-tdp
+- [7]. https://mlco2.github.io/codecarbon/examples.html
 
 ---
 ### Conclusion
-- We evaluated the efficiency of ML model based on following 
-    - Training time and Inference latency
-    - Parameter Count 
-    - Floating Point Operations or Flops
+
+- We understood important concepts related to energy consumption during inference
+- We explored a basic implementation of calculating carbon emission for doing 1 inference which allows us to measure the environmental impact of ML inference
 
