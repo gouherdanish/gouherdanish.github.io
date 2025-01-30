@@ -92,6 +92,7 @@ Other references
 - [4]. https://www.geeksforgeeks.org/how-to-measure-your-pcs-power-consumption/
 - [5]. https://mlco2.github.io/codecarbon/methodology.html#
 - [6]. https://versus.com/en/apple-m1/cpu-tdp
+- [7]. https://mlco2.github.io/codecarbon/examples.html
 
 ---
 ### Conclusion
