@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Effect of Batch Size on Accuracy"
+title: "Effect of Batch Size"
 date: 2024-12-25
 tags: ["Machine Learning"]
 ---
@@ -126,8 +126,10 @@ Val Accuracy : 95.2%
 
 **Architecture**
 
+_MLP-1_
 <img src="{{site.url}}/images/mnist/mlp-1024_1.png" alt="MLP-1">
 
+_MLP-2_
 <img src="{{site.url}}/images/mnist/mlp-1024_2.png" alt="MLP-2">
 
 **Model Size**
