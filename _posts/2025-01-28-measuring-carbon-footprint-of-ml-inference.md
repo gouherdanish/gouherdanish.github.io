@@ -80,6 +80,12 @@ def compute_carbon_emission(runtime):
 ```
 
 ---
+### Usage
+
+- We have included the above function in the `evaluate.py` file inside the `eval` [module](https://github.com/gouherdanish/mnist_classification/blob/main/eval/evaluate.py)
+- Also, in [this](https://gouherdanish.github.io/2024/12/25/effects-of-batch-size-on-accuracy.html) article, we have shown how we can evaluate a given model based on various metrics including carbon emissions 
+
+---
 ### References
 
 Implementation and code can be found on Github
@@ -95,6 +101,7 @@ Other references
 - [7]. https://mlco2.github.io/codecarbon/examples.html
 
 ---
+
 ### Conclusion
 
 - We understood important concepts related to energy consumption during inference
