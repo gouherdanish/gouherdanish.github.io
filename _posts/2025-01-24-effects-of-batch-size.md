@@ -32,12 +32,6 @@ Accuracy of ML model depends on multiple factors
     - MLP having 1 Hidden Layer of 1024 Neurons
     - MLP having 2 Hidden Layers of 1024 Neurons each
 
-Note:
-    - In case of 2nd model, we will observe a huge jump in number of model parameters due to extra layer of neurons
-    - This will cause training to become extremely slow 
-    - So, we introduce an extra Centercrop transform to reduce the input size from 28*28 to 20*20
-    - This effectively reduces the number of model parameters and aids in faster training
-
 - For each of these models, we will study the effects of following Batch sizes
     - Batch size = 1
     - Batch size = 16
