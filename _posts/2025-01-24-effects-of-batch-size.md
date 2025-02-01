@@ -104,6 +104,12 @@ Val Accuracy : 95.2%
 <img src="{{site.url}}/images/mnist/mlp-hp-g4.png">
 
 ---
+### References
+
+Implementation and code can be found on Github
+- [Digit Recognition App](https://github.com/gouherdanish/mnist_classification)
+
+---
 ### Conclusion
 
 - We presented two MLP models and studied the dependency of various model evaluation parameters on Batch size

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Calculating Carbon Footprint of ML Inference"
+title: "Measuring Carbon Footprint of ML Inference"
 date: 2025-01-28
 tags: ["Machine Learning"]
 ---

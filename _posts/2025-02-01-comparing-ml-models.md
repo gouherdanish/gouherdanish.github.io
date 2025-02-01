@@ -105,6 +105,12 @@ Note:
 - Due to its higher latency, MLP-2 has higher Carbon Footprint and therefore has worse impact on the environment
 
 ---
+### References
+
+Implementation and code can be found on Github
+- [Digit Recognition App](https://github.com/gouherdanish/mnist_classification)
+
+---
 ### Conclusion
 
 - We explored multiple ways or criteria to evaluate a given ML model
