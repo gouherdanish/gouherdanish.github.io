@@ -5,7 +5,7 @@ date: 2025-02-01
 tags: ["Machine Learning"]
 ---
 
-Two ML models can be compared based on multiple metrics based on performance, accuracy and environmental impact.
+Two ML models can be compared based on evaluation metrics depending on performance, accuracy and environmental impact.
 
 ---
 
