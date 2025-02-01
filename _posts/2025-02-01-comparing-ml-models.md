@@ -42,6 +42,12 @@ _MLP-1_
 _MLP-2_
 <img src="{{site.url}}/images/mnist/mlp-1024_2.png" alt="MLP-2">
 
+Note:
+    - In case of 2nd model, we will observe a huge jump in number of model parameters due to extra layer of neurons
+    - This will cause training to become extremely slow 
+    - So, we introduce an extra Centercrop transform to reduce the input size from 28*28 to 20*20
+    - This effectively reduces the number of model parameters and aids in relatively faster training
+
 **Model Size**
 
 - It refers to the size of the model on disk
