@@ -1,7 +1,17 @@
+---
+layout: post
+title: "Comparing two ML Models"
+date: 2025-02-01
+tags: ["Machine Learning"]
+---
 
-**Evaluation**
+Two ML models can be compared based on multiple metrics based on performance, accuracy and environmental impact.
 
-- Next, we evaluate these two models on multiple criteria as highlighted below
+---
+
+### Model Evaluation
+
+- An ML model can be evaluated based on multiple criteria such as
     - Model Size
     - Number of Model Parameters
     - Floating Point Operations
@@ -9,7 +19,7 @@
     - Inference Latency
     - Accuracy
     - Carbon Footprint
-- These evaluation functions are implemented in the `evaluate.py` file inside the `eval` module
+- Multiple evaluation functions are implemented in the `evaluate.py` file inside the `eval` module
 - This module is invoked while running the `batch_evaluate.py` file as follows which will load the model weights created from above and evaluate it based on the criteria outlined inside the `eval` module
 
 ```
@@ -20,7 +30,8 @@
 ---
 ### Model Comparison
 
-- We have seen that for most practical purposes, a batch size of 64 can be considered since it provides a good balance between performance and accuracy 
+- Given two ML models, we can evaluate each one based on the above evaluation strategy and compare the values to arrive at a comparative result
+- We take a batch size of 64 for both the ML models since it provides a good balance between performance and accuracy. Refer [this](https://gouherdanish.github.io/2024/12/25/effects-of-batch-size.html) article
 - Let's compare the two models that we have created above using the evaluation metrics
 
 **Architecture**
