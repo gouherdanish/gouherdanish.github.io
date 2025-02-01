@@ -140,8 +140,8 @@ Elapsed Time: 0.0244s   <--
 | MLP   |           24.4 ms        |
 
 Note:
-- There might be cases when doing first inference takes longer but subsequent inferences take less time. This happens due to cols start issues after which caching improves the time further on
-- Hence, a possible etter way to calculate latency would be to take an average of multiple inferences as follows
+- There might be cases when doing first inference takes longer but subsequent inferences take less time. This happens due to cold start issues. The time for further inference thereafter.
+- Hence, a possibly better way to calculate latency would be to take an average of multiple inferences as follows
 
 ```
 inferencing = InferenceFactory.get(strategy='batch',model=model)
