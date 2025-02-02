@@ -21,6 +21,7 @@ Two ML models can be compared based on evaluation metrics depending on performan
     - Carbon Footprint
 - Multiple evaluation functions are implemented in the `evaluate.py` file inside the `eval` module
 - This module is invoked while running the `batch_evaluate.py` file as follows which will load the model weights created from above and evaluate it based on the criteria outlined inside the `eval` module
+- Refer [Digit Recognition App](https://github.com/gouherdanish/mnist_classification)
 
 ```
 >>> python batch_evaluate.py --model_name mlp
