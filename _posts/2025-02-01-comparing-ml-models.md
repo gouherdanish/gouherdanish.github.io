@@ -46,7 +46,7 @@ _MLP-2_
 Note:
     - In case of 2nd model, we will observe a huge jump in number of model parameters due to extra layer of neurons
     - This will cause training to become extremely slow 
-    - So, we introduce an extra Centercrop transform to reduce the input size from 28*28 to 20*20
+    - So, we introduce an extra Centercrop transform to reduce the input size from $28*28$ to $20*20$
     - This effectively reduces the number of model parameters and aids in relatively faster training
 
 **Model Size**
@@ -96,7 +96,7 @@ Note:
 - It represents the equivalent amount of $CO_2$ emitted during one inference
 - MLP-2 has higher carbon footprint since it has higher latency 
 
-<img src="{{site.url}}/images/mnist/mlp-comp-g4.png">
+<img src="{{site.url}}/images/mnist/mlp-comp-g7.png">
 
 ---
 ### Observations
