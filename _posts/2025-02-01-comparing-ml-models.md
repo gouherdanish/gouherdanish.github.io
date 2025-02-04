@@ -46,7 +46,7 @@ _MLP-2_
 Note:
 - In case of 2nd model, we will observe a huge jump in number of model parameters due to extra layer of neurons
 - This will cause training to become extremely slow 
-- So, we introduce an extra Centercrop transform to reduce the input size from $28 \mul 28$ to $20 \mul 20$
+- So, we introduce an extra Centercrop transform to reduce the input size from $28 \times 28$ to $20 \times 20$
 - This effectively reduces the number of model parameters and aids in relatively faster training
 
 **Model Size**
