@@ -12,7 +12,7 @@ Two ML models can be compared based on evaluation metrics depending on performan
 ### Background
 
 - In [previous](https://gouherdanish.github.io/2025/02/01/comparing-ml-models.html) article, we compared two MLP models for Digit Recognition task on MNIST data
-- Continuing on that, we will introduce LeNet-5 architecture and compare its performance with MLP .
+- Continuing on that, we will introduce LeNet-5 architecture and compare its performance with MLP.
 
 ---
 ### Model Comparison
@@ -41,7 +41,7 @@ _LeNet-5_
 **Model Size**
 
 - It refers to the size of the model on disk
-- LeNet is around 14 times smaller in size than MLP as it has less number of parameters involved
+- With just 0.5 MB on disk, LeNet is around 14 times smaller in size than MLP as it has less number of parameters involved
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g1.png">
 
@@ -57,7 +57,7 @@ _LeNet-5_
 
 - It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model 
 - LeNet has higher Flops count since it involves performing a large number of multiplications and additions for each filter as they slide across the spatial dimensions of the input image
-- This implies LeNet is a computationally more complex model than MLP
+- This implies that LeNet is a computationally more complex model than MLP
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g3.png">
 
@@ -78,7 +78,7 @@ _LeNet-5_
 **Accuracy**
 
 - It represents the number of correct predictions done per 100 test samples
-- LeNet with 97.8% accuracy has substantial (>2%) improvement compared to MLP (95.7%)
+- With 97.8% accuracy, LeNet gives substantial (>2%) improvement in Accuracy compared to MLP (95.7%)
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g6.png">
 
@@ -93,8 +93,8 @@ _LeNet-5_
 ### Observations
 
 - LeNet gives substantial increase in Accuracy compared to MLP.
-- However, LeNet, being an inherently complex model, performs slower in Training and Inference. 
-    - This can be improved using optimized hardware accelerators e.g. Nvidia cuDNN 
+- But, being an inherently complex model, LeNet performs slower in Training and Inference. 
+    - However, this can be improved using optimized hardware accelerators e.g. Nvidia cuDNN 
 - LeNet's small size makes it ideal for use in edge devices
 
 ---
@@ -106,5 +106,5 @@ Implementation and code can be found on Github
 ---
 ### Conclusion
 
-- We introduce LeNet architecture and compared its performance with MLP
+- We introduced LeNet architecture and compared its performance with MLP
 - We concluded that even with its extremely small size, LeNet is able to give higher Accuracy and comparable performance with respect to MLP 
