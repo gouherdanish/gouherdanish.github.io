@@ -41,7 +41,7 @@ _LeNet-5_
 **Model Size**
 
 - It refers to the size of the model on disk
-- LeNet is around 14 times smaller in size than MLP
+- LeNet is around 14 times smaller in size than MLP as it has less number of parameters involved
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g1.png">
 
@@ -56,44 +56,46 @@ _LeNet-5_
 **Floating Point Operations**
 
 - It represents the number of arithmetic operations (multiplications, additions, etc.) required to process one input sample through the model 
-- MLP-2 has higher Flops count since the extra neurons add more computation overhead 
+- LeNet has higher Flops count since it involves performing a large number of multiplications and additions for each filter as they slide across the spatial dimensions of the input image
+- This implies LeNet is a computationally more complex model than MLP
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g3.png">
 
 **Training Time**
 
 - It represents the time it takes to run one epoch for the given ML model
-- MLP-2 takes longer to train due to higher number of parameters
+- LeNet takes ~1.5 times longer to train due to higher Flops count
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g4.png">
 
 **Latency**
 
 - It represents the time it takes to run one inference for the given ML model
-- MLP-2 takes longer to do inference due to more number of parameters
+- LeNet takes ~4 times longer to do inference due to higher Flops count
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g5.png">
 
 **Accuracy**
 
 - It represents the number of correct predictions done per 100 test samples
-- MLP-2 (97.2%) has very little and incremental improvement compared to MLP-1 (96.4%)
+- LeNet with 97.8% accuracy has substantial (>2%) improvement compared to MLP (95.7%)
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g6.png">
 
 **Carbon Footprint**
 
 - It represents the equivalent amount of $CO_2$ emitted during one inference
-- MLP-2 has higher carbon footprint since it has higher latency 
+- LeNet has higher carbon footprint since it has higher latency 
 
 <img src="{{site.url}}/images/mnist/mlp-vs-lenet-comp-g7.png">
 
 ---
 ### Observations
 
-- Although bigger in size, MLP-2 adds very liitle to the Accuracy compated to MLP-1
-- Due to the extra layer of neurons, the computational complexity increases which causes MLP-2 performance to deteriorate as evident from higher Training Time and Inference Latency 
-- Due to its higher latency, MLP-2 has higher Carbon Footprint and therefore has worse impact on the environment
+- LeNet gives substantial increase in Accuracy compared to MLP.
+- However, LeNet, being an inherently complex model, performs slower in Training and Inference. 
+    - This can be improved using optimized hardware accelerators e.g. Nvidia cuDNN 
+- LeNet's small size makes it ideal for use in edge devices
 
 ---
 ### References
@@ -104,5 +106,5 @@ Implementation and code can be found on Github
 ---
 ### Conclusion
 
-- We explored multiple ways or criteria to evaluate a given ML model
-- We concluded that having a bigger model is not always better. We must focus on balancing performance and accuracy to get better results
+- We introduce LeNet architecture and compared its performance with MLP
+- We concluded that even with its extremely small size, LeNet is able to give higher Accuracy and comparable performance with respect to MLP 
