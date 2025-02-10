@@ -107,4 +107,4 @@ Implementation and code can be found on Github
 ### Conclusion
 
 - We introduced LeNet architecture and compared its performance with MLP
-- We concluded that even with its extremely small size, LeNet is able to give higher Accuracy and comparable performance with respect to MLP 
+- Even with its extremely small size, LeNet is able to give higher Accuracy and comparable performance with respect to MLP 
