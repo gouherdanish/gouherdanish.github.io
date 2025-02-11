@@ -10,8 +10,7 @@ Quantization is the art of trading precision for efficiency—where every bit sa
 ---
 
 ### Definition
-- Quantization is a technique used in deep learning.
-- It converts high-precision floating-point values into lower-precision formats while trying to preserve model accuracy.
+- Quantization is a technique used in deep learning which converts high-precision floating-point values into lower-precision formats while trying to preserve model accuracy.
 
 **High Precision Formats**
 - Double Precision (FP64)
@@ -21,6 +20,11 @@ Quantization is the art of trading precision for efficiency—where every bit sa
 - Half Precision (FP16)
 - 8-bit Integer (INT8)
 - 16-bit Integer (INT16)
+
+---
+### Quantization by Scaling
+
+
 
 ---
 ### Conclusion
