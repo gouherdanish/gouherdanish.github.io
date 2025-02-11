@@ -32,6 +32,7 @@ Quantization is the art of trading precision for efficiency—where every bit sa
 **Formula**
 
 _Quantization_
+
 $$ q = round(x/s) $$
 
 where,
@@ -52,6 +53,8 @@ $$ dx = |x' - x| $$
 
 **Example**
 
+_Quantization_
+
 ```
 >>> x = torch.tensor([-10.0, -5.0, 0.0, 5.0, 10.0])     # PyTorch creates FP32 floats by default
 >>> tmin, tmax = min(t), max(t)
@@ -62,6 +65,22 @@ $$ dx = |x' - x| $$
 >>> q = q.to(torch.int8)                                # Changing data type explicitly
 >>> q
 tensor([-127,  -64,    0,   64,  127], dtype=torch.int8)
+```
+
+_De-quantization_
+
+```
+>>> x' = q.float() * scale
+>>> x'
+tensor([-10.3404,  -5.7357,   0.0000,   5.7357,  10.2596])
+```
+
+_Quantization Loss_
+
+```
+>>> loss = torch.abs(x' - x)
+>>> loss
+tensor([0.0404, 0.0357, 0.0000, 0.0357, 0.0404])
 ```
 
 ---
