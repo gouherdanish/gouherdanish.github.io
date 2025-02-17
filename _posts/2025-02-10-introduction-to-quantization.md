@@ -28,6 +28,7 @@ Quantization is the art of trading precision for efficiency—where every bit sa
 - It is the most basic form of quantization
 - Here, a floating-point value is scaled and rounded to an integer without a zero-point offset
 - It is a special case of affine quantization where the zero point is always 0
+- It is good for symmetric data
 
 **Formula**
 
@@ -53,37 +54,54 @@ $$ dx = |x' - x| $$
 
 **Example**
 
-_Quantization_
+_Quantization Function_
+
+- We first define a function which will take a FP32 float tensor and return a INT8 quantized tensor
+```
+def quantize(t: torch.Tensor) -> torch.Tensor:
+    tmin, tmax = min(t), max(t)
+    qmin, qmax = -128, 127                              # INT8 Range
+    scale = (tmax - tmin) / (qmax - qmin)               # Min-Max Scaling
+    q = torch.round(t/scale)                            # Quantization Formula
+    q = torch.clamp(q,-128,127)                         # Clipping to INT8 range to avoid overflow
+    q = q.to(torch.int8)                                # Changing data type explicitly
+    return q
+```
+
+- Now, we take an example tensor and apply the above function to quantize it
 
 ```
->>> x = torch.tensor([-10.0, -5.0, 0.0, 5.0, 10.0])     # PyTorch creates FP32 floats by default
->>> tmin, tmax = min(t), max(t)
->>> qmin, qmax = -128, 127                              # INT8 Range
->>> scale = (tmax - tmin) / (qmax - qmin)               # Min-Max Scaling
->>> q = torch.round(t/scale)                            # Quantization Formula
->>> q = torch.clamp(q,-128,127)                         # Clipping to INT8 range to avoid overflow
->>> q = q.to(torch.int8)                                # Changing data type explicitly
->>> q
+>>> x = torch.tensor([-10.0, -5.0, 0.0, 5.0, 10.0])     # PyTorch creates FP32 tensors by default
+>>> q = quantize(x)
 tensor([-127,  -64,    0,   64,  127], dtype=torch.int8)
 ```
 
-_De-quantization_
+_De-quantization Function_
+
+- We define a inverse function which takes the quantized tensor and returns us the dequantized value
 
 ```
->>> x' = q.float() * scale
->>> x'
+def dequantize(t: torch.Tensor) -> torch.Tensor:
+    return t.float() * scale
+```
+
+- Coming to our example, Applying the above function gives us the following dequantized tensor
+```
+>>> dq = dequantize(q)
+>>> dq
 tensor([-10.3404,  -5.7357,   0.0000,   5.7357,  10.2596])
 ```
 
 _Quantization Loss_
 
 ```
->>> loss = torch.abs(x' - x)
+>>> loss = torch.abs(dq - x)
 >>> loss
 tensor([0.0404, 0.0357, 0.0000, 0.0357, 0.0404])
 ```
 
 ---
 ### Conclusion
+
 - We introduced Quantization and explored various techniques
 
