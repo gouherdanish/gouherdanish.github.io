@@ -58,6 +58,9 @@ $$ L = \frac{1}{m} \sum_{k=1}^m \ell_k $$
 ### Approach 1 - Using Softmax function from PyTorch 
 
 - We will follow the steps as outlined below
+    - Calculate Softmax
+    - Apply log
+    - Find Cross Entropy Loss
 
 <img src="{{site.url}}/images/loss_fn/loss1.png">
 
@@ -80,10 +83,12 @@ Note:
 ### Approach 2 - Using LogSoftmax function from PyTorch 
 
 - We will follow the steps outlined below
+    - Calculate Log Softmax which essentially merges the steps 1 and 2
+    - Next, we find Cross Entropy Loss
 
 <img src="{{site.url}}/images/loss_fn/loss2.png">
 
-- But now, instead of using our own implementation, we can use PyTorch functions
+- This can be implemented using PyTorch functions as follows
 
 ```
 >>> logp = nn.functional.log_softmax(z)         # Step 1 - Calculate log softmax
@@ -100,11 +105,12 @@ Note:
 ### Approach 3 - Using Cross Entropy Loss function from PyTorch 
 
 - We will follow the steps as shown below
+    - Here all three steps are merged into one
 
 <img src="{{site.url}}/images/loss_fn/loss3.png">
 
 ```
->>> ce_loss = nn.functional.cross_entropy(z,y)  # Step 1 to 4 all combined
+>>> ce_loss = nn.functional.cross_entropy(z,y)  # Step 1 to 3 all combined
 >>> ce_loss
 tensor(0.3306)
 ```

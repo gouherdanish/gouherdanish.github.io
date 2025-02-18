@@ -38,15 +38,21 @@ For mathematical proofs of these properties, refer [this](https://gouherdanish.g
 
 #### Example - Biased Coin Toss
 
+**Step 1 - Problem Setup**
+
 Consider a biased coin which gives Head 4 out of 5 times. The Random variable, X can be represented as,
 
 $$ X = (H,T) $$
+
+**Step 2a - True Distribution ($p(x)$)**
 
 True Probability distribution of X can be given by,
 
 $$ p(H) = 0.8, \; p(T) = 0.2 $$
 
-Entropy (Uncertainty) in the true distribution can be calculated as,
+**Step 2b - Entropy of True Distribution ($H(p)$)**
+
+Entropy (Uncertainty) in the true distribution can be calculated as highlighted in [this](https://gouherdanish.github.io/2024/08/13/entropy) article,
 
 $$ H(p) = -p(H) \log p(H) - p(T) \log p(T) $$
 
@@ -54,11 +60,15 @@ $$ H(p) = -0.8 \log 0.8 - 0.2 \log 0.2 $$
 
 $$ H(p) = 0.5004024235381879 $$
 
+**Step 3a - Predicted Distribution ($q(x)$)**
+
 Assume, there is a model which predicts that the coin is un-biased 
 
 Predicted Probability distribution of X is given by,
 
-$$ Q(H) = 0.5, \; Q(T) = 0.5 $$
+$$ q(H) = 0.5, \; q(T) = 0.5 $$
+
+**Step 3b - Cross Entropy ($H(p,q)$)**
 
 Cross Entropy induced because of using Q to predict P can be given by
 
@@ -67,6 +77,8 @@ $$ H(p,q) = -p(H) \log q(H) - p(T) \log q(T) $$
 $$ H(p,q) = -0.8 \log 0.5 - 0.2 \log 0.5 $$
 
 $$ H(p,q) = 0.6931471805599453 $$
+
+**Step 4 - KL-Divergence ($D_(KL)$)**
 
 KL-Divergence can be calculated as,
 
