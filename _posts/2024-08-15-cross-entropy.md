@@ -50,7 +50,7 @@ True Probability distribution of X can be given by,
 
 $$ p(H) = 0.8, \; p(T) = 0.2 $$
 
-**Step 2b - Entropy of True Distribution ($H(p)$)**
+**Step 3 - Entropy of True Distribution ($H(p)$)**
 
 Entropy (Uncertainty) in the true distribution can be calculated as highlighted in [this](https://gouherdanish.github.io/2024/08/13/entropy) article,
 
@@ -60,7 +60,7 @@ $$ H(p) = -0.8 \log 0.8 - 0.2 \log 0.2 $$
 
 $$ H(p) = 0.5004024235381879 $$
 
-**Step 3a - Predicted Distribution ($q(x)$)**
+**Step 4 - Predicted Distribution ($q(x)$)**
 
 Assume, there is a model which predicts that the coin is un-biased 
 
@@ -68,7 +68,7 @@ Predicted Probability distribution of X is given by,
 
 $$ q(H) = 0.5, \; q(T) = 0.5 $$
 
-**Step 3b - Cross Entropy ($H(p,q)$)**
+**Step 5 - Cross Entropy ($H(p,q)$)**
 
 Cross Entropy induced because of using Q to predict P can be given by
 
@@ -78,7 +78,7 @@ $$ H(p,q) = -0.8 \log 0.5 - 0.2 \log 0.5 $$
 
 $$ H(p,q) = 0.6931471805599453 $$
 
-**Step 4 - KL-Divergence ($D_(KL)$)**
+**Step 6 - KL-Divergence ($D_{KL}$)**
 
 KL-Divergence can be calculated as,
 
