@@ -91,7 +91,11 @@ $$ H(p,q) = -\sum_{i} p_i \log q_i $$
 
 From Property 3, Cross entropy is minimized when $p(x_i) = q(x_i)$
 
-$$ H(p,q)_{min} = H(p,p) = -\sum_{i} p_i \log p_i = H(p) $$
+$$ H(p,q) \ge -\sum_{i} p_i \log p_i $$
+
+$$ H(p,q) \ge H(p) $$
+
+$$ H(p,q)_{min} = H(p) $$
 
 ---
 
@@ -129,6 +133,8 @@ $$ H(p,q) = -\sum_{i} p_i \log q_i $$
 $$ \Rightarrow H(p,q) = -\sum_{i} p_i \log \left( p_i {q_i} \over {p_i} \right) $$
 
 $$ \Rightarrow H(p,q) = -\sum_{i} p_i \log p_i -\sum_{i} p_i \log \left({q_i} \over {p_i} \right) $$
+
+$$ \Rightarrow H(p,q) = -\sum_{i} p_i \log p_i +\sum_{i} p_i \log \left({p_i} \over {q_i} \right) $$
 
 $$ \Rightarrow H(p,q) = H(p) + D_{KL}(p,q) $$
 
