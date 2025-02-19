@@ -11,9 +11,13 @@ Entropy has several desirable properties. Some of these properties are presented
 
 **Proof:**
 
-$$ \Rightarrow H(p,q) = -\sum_{i} p(x_i) \log \left(q( x_i) \right) >= 0 $$ 
+By Definition,
+
+$$ H(p,q) = -\sum_{i} p(x_i) \log \left(q( x_i) \right) >= 0 $$ 
 
 Since $0 <= p(x), q(x) <= 1 $
+
+$$ \Rightarrow H(p,q) >= 0 $$
 
 ---
 ### 2. Cross entropy is asymmetric
@@ -24,6 +28,8 @@ $$ H(p,q) = -\sum_{i} p_i \log q_i $$
 
 $$ H(q,p) = -\sum_{i} q_i \log p_i $$
 
+Since $p_i \ne q_i $
+
 $$ \Rightarrow H(p,q) \ne H(q,p) $$ 
 
 ---
@@ -31,7 +37,7 @@ $$ \Rightarrow H(p,q) \ne H(q,p) $$
 
 **Proof:**
 
-Minimize cross entropy
+To minimize cross entropy, 
 
 $$ H(p,q) = -\sum_{i} p_i \log q_i $$
 
@@ -41,7 +47,7 @@ $$ \sum_{i} p(x_i) = 1 $$
 
 $$ \sum_{i} q(x_i) = 1 $$
 
-Lagrangian can be set up as follows,
+We can setup Lagrangian as follows,
 
 $$ L = - \sum_{i=1}^n p(x_i) \log q( x_i) + \lambda \left( \sum_{i=1}^n q(x_i) - 1 \right) + \phi \left( \sum_{i=1}^n p(x_i) - 1 \right)$$
 
@@ -67,7 +73,7 @@ $$ \Rightarrow \sum_{i} \lambda q_i = 1 $$
 
 $$ \Rightarrow \lambda \sum_{i} q_i = 1 $$
 
-$$ \Rightarrow \lambda (1) = 1 \; Since \sum q_i = 1 $$ 
+$$ \Rightarrow \lambda (1) = 1 \ \left( Since \sum q_i = 1 \right)$$ 
 
 $$ \Rightarrow \lambda = 1 $$
 
