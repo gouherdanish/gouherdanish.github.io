@@ -260,7 +260,7 @@ $$ \Rightarrow \hat{y} - y = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5
 
 $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
-$$ \Rightarrow \ell = \left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
+$$ \Rightarrow \ell = -\left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
 $$ \Rightarrow \ell = \left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right) $$
 
