@@ -61,7 +61,7 @@ $$ \sigma(z) \in (0,1) $$
 
 - Cross entropy for one example can be defined as,
 
-$$ H(y,\hat{y}) = - \sum_{k=1}^n y_k \log \hat{y_k} $$
+$$ \ell = H(y,\hat{y}) = - \sum_{k=1}^n y_k \log \hat{y_k} $$
 
 Here,
 - $y$ denotes actual ground truth binary label which is either 0 or 1 
@@ -71,7 +71,7 @@ Here,
 
 For Binary Classification, $n = 2$
 
-$$ H(y,\hat{y}) = - y_1 \log \hat{y_1} - y_2 \log \hat{y_2} $$
+$$ \Rightarrow \ell = H(y,\hat{y}) = - y_1 \log \hat{y_1} - y_2 \log \hat{y_2} $$
 
 Also, since probabilities sum to 1,
 
@@ -81,7 +81,7 @@ $$ \hat{y_1} + \hat{y_2} = 1 \implies \hat{y_2} = 1 - \hat{y_1}$$
 
 we can write the Binary Cross Entropy loss for one example as,
 
-$$ \ell = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+$$ \Rightarrow \ell = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 Average Cross Entropy loss over all `m` examples can be given by,
 
@@ -97,7 +97,19 @@ From above, we have derived the Binary cross entropy loss for $i^{th}$ example,
 
 $$ \ell_i = - y_i \log\hat{y_i} - (1 - y_i) \log(1 - \hat{y_i}) $$
 
-We can calculate required partial derivatives as follows,
+Next, for our model to work, it has to start learning which means it has to improve its predictions which will come only by iteratively decreasing the above loss.
+
+For this purpose, we want to understand how does the loss change by tweaking our model parameters i.e. weights and biases.
+
+Particularly, we want to find out the partial derivatives of loss function i.e.
+
+$$ \frac{\partial L}{\partial w} $$
+
+However, due to function dependency (L depends on $y_i$, then $y_i$ depends on z and finally z depends on w), we need to use product rule of derivatives as follows,
+
+$$ \frac{\partial \ell_i}{\partial w_i} = \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial z_i} \times \frac{\partial z_i}{\partial w_i} $$
+
+We can calculate required individual partial derivatives as follows,
 
 #### 1. Calculate $ \frac{\partial \ell_i}{\partial \hat{y_i}} $
 
