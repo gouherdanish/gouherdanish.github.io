@@ -105,7 +105,7 @@ Particularly, we want to find out the partial derivatives of loss function i.e.
 
 $$ \frac{\partial \ell_i}{\partial w} $$
 
-However, due to function dependency ($\ell_i$ depends on $y_i$, then $y_i$ depends on z and finally z depends on w), we need to use product rule of derivatives as follows,
+However, due to function dependency (l depends on y, then y depends on z and finally z depends on w), we need to use product rule of derivatives as follows,
 
 $$ \frac{\partial \ell_i}{\partial w_i} = \frac{\partial \ell_i}{\partial \hat{y_i}} \times \frac{\partial \hat{y_i}}{\partial z_i} \times \frac{\partial z_i}{\partial w_i} $$
 
