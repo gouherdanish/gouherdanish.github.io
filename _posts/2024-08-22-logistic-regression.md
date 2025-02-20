@@ -61,13 +61,13 @@ $$ \sigma(z) \in (0,1) $$
 
 - Cross entropy for one example can be defined as,
 
-$$ H(y,\hat{y}) = - \sum_{i=1}^n y_i \log \hat{y_i} $$
+$$ H(y,\hat{y}) = - \sum_{k=1}^n y_k \log \hat{y_k} $$
 
 Here,
 - $y$ denotes actual ground truth binary label which is either 0 or 1 
 - $\hat{y}$ denotes predicted probability value which is a real value between 0 and 1 (represented by Sigmoid function)
 - `n` represents the number of output classes 
-- `i` represents $i^{th}$ class
+- `k` represents $k^{th}$ class
 
 For Binary Classification, $n = 2$
 
@@ -248,7 +248,7 @@ $$ \Rightarrow \hat{y} - y = \left( \begin{array}{cc} -0.5 \\ -0.5 \\ 0.5 \\ 0.5
 
 $$ \ell = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
-$$ \Rightarrow \ell = -\left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
+$$ \Rightarrow \ell = \left( \begin{array}{cc} 1 \\ 1 \\ 0 \\ 0 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) -\left( \begin{array}{cc} 0 \\ 0 \\ 1 \\ 1 \end{array} \right) \log \left( \begin{array}{cc} 0.5 \\ 0.5 \\ 0.5 \\ 0.5 \end{array} \right) $$
 
 $$ \Rightarrow \ell = \left( \begin{array}{cc} 0.693 \\ 0.693 \\ 0.693 \\ 0.693 \end{array} \right) $$
 
