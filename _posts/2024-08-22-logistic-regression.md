@@ -61,7 +61,7 @@ $$ \sigma(z) \in (0,1) $$
 
 - Cross entropy for one example can be defined as,
 
-$$ H(y,\hat{y}) = - \sum_{k=1}^n y_k \log \hat{y_k} $$
+$$ \ell = H(y,\hat{y}) = - \sum_{k=1}^n y_k \log \hat{y_k} $$
 
 Here,
 - $y$ denotes actual ground truth binary label which is either 0 or 1 
@@ -71,7 +71,7 @@ Here,
 
 For Binary Classification, $n = 2$
 
-$$ H(y,\hat{y}) = - y_1 \log \hat{y_1} - y_2 \log \hat{y_2} $$
+$$ \Rightarrow \ell = H(y,\hat{y}) = - y_1 \log \hat{y_1} - y_2 \log \hat{y_2} $$
 
 Also, since probabilities sum to 1,
 
@@ -81,7 +81,7 @@ $$ \hat{y_1} + \hat{y_2} = 1 \implies \hat{y_2} = 1 - \hat{y_1}$$
 
 we can write the Binary Cross Entropy loss for one example as,
 
-$$ \ell = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
+$$ \Rightarrow \ell = H \left( y,\hat{y} \right) = - y \log \hat{y} - (1-y) \log (1-\hat{y}) $$
 
 Average Cross Entropy loss over all `m` examples can be given by,
 
