@@ -24,35 +24,37 @@ Quantization is the art of trading precision for efficiency—where every bit sa
 ---
 ### Simple Scaling Quantization
 
-**Introduction**
+#### Introduction
 - It is the most basic form of quantization
 - Here, a floating-point value is scaled and rounded to an integer without a zero-point offset
 - It is a special case of affine quantization where the zero point is always 0
 - It is good for symmetric data
 
-**Formula**
+#### Formula
 
 _Quantization_
 
-$$ q = round(x/s) $$
+$$ q = round(t/scale) $$
 
 where,
-- x = Original floating-point value
-- s = Scale factor
+- t = Original FP32 tensor
+- scale = Scale factor
 - q = Quantized integer
 
 _De-quantization_
 
-$$ x' = q * s $$
+$$ x' = q * scale $$
 
 where,
 - x' = de-quantized value
 
-_Quantization Loss_
+_Quantization Error_
 
-$$ dx = |x' - x| $$
+$$ Absolute error = |x' - x| $$
 
-**Example**
+$$ Absolute Percentage error = 100 \times \frac{|x' - x|}{x} $$
+
+#### Implementation
 
 _Quantization Function_
 
@@ -68,14 +70,6 @@ def quantize(t: torch.Tensor) -> torch.Tensor:
     return q
 ```
 
-- Now, we take an example tensor and apply the above function to quantize it
-
-```
->>> x = torch.tensor([-10.0, -5.0, 0.0, 5.0, 10.0])     # PyTorch creates FP32 tensors by default
->>> q = quantize(x)
-tensor([-127,  -64,    0,   64,  127], dtype=torch.int8)
-```
-
 _De-quantization Function_
 
 - We define a inverse function which takes the quantized tensor and returns us the dequantized value
@@ -85,20 +79,51 @@ def dequantize(t: torch.Tensor) -> torch.Tensor:
     return t.float() * scale
 ```
 
-- Coming to our example, Applying the above function gives us the following dequantized tensor
+#### Hand Calculation
+
+_Case 1 - For data symmetric around 0_
+
+**Step 1**
+- Here, we take an simple example tensor which is symmetric around zero
+
+```
+>>> t = torch.tensor([-10.0, -5.0, 0.0, 5.0, 10.0])     # PyTorch creates FP32 tensors by default
+```
+
+**Step 2**
+- Next we use above created functions to demonstrate the Simple Scaling based Quantization 
+
+```
+>>> q = quantize(t)
+>>> q
+tensor([-127,  -64,    0,   64,  127], dtype=torch.int8)
+```
+
+**Step 3**
+- Similarly we can apply the inverse function to get the dequantized tensor
 ```
 >>> dq = dequantize(q)
 >>> dq
-tensor([-10.3404,  -5.7357,   0.0000,   5.7357,  10.2596])
+tensor([-9.9608, -5.0196,  0.0000,  5.0196,  9.9608])
 ```
 
-_Quantization Loss_
+**Step 4**
+- Finally, we can calculcate the error due to quantization as follows
 
 ```
->>> loss = torch.abs(dq - x)
->>> loss
-tensor([0.0404, 0.0357, 0.0000, 0.0357, 0.0404])
+# Absolute Error
+>>> ae = torch.abs(dq - t)
+>>> ae
+tensor([0.0392, 0.0196, 0.0000, 0.0196, 0.0392])
+
+# Absolute Percentage Error
+>>> ape = torch.where(t == 0, 0, 100 * torch.abs(dq - t)/t)
+>>> ape
+tensor([-0.3922, -0.3922,  0.0000,  0.3922,  0.3922])
 ```
+
+_Case 2 - Asymmetric Data_
+
 
 ---
 ### Conclusion
