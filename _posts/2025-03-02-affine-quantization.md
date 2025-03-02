@@ -48,15 +48,17 @@ Affine quantization maps floating-point values to integer values using a linear 
 
 $$ Q(x) = round \left(\frac {x}{s} \right) + z $$
 
+from the range $[x_{min}, x_{max}]$ to $[q_{min}, q_{max}]$
+
 $$ q_{min} = Q(x_{min}) = round \left(\frac {x_{min}}{s} \right) + z  $$
 
 $$ q_{max} = Q(x_{max}) = round \left(\frac {x_{max}}{s} \right) + z  $$
 
 Ignoring rounding, we can solve for s and z,
 
-$$ q_{max} - q_{min} = \left(\frac {x_{max}}{s} + z \right) - \left(\frac {x_{min}}{s} + z \right)
+$$ q_{max} - q_{min} = \left(\frac {x_{max}}{s} + z \right) - \left(\frac {x_{min}}{s} + z \right) $$
 
-$$ q_{max} - q_{min} = \frac {x_{max} - x_{min}}{s}
+$$ q_{max} - q_{min} = \frac {x_{max} - x_{min}}{s} $$
 
 $$ s =  \frac{x_{max} - x_{min}}{q_{max} - q_{min}} $$
 
