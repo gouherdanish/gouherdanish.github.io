@@ -21,10 +21,10 @@ Quantization is the art of trading precision for efficiency—where every bit sa
 
 _Quantization_
 
-$$ q = round \left(\frac {t}{s} \right) + z $$
+$$ q = round \left(\frac {x}{s} \right) + z $$
 
 where,
-- t = Original FP32 tensor
+- x = Original FP32 tensor
 - s = Scale factor
 - z = Zero Point
 - q = Quantized integer
@@ -48,41 +48,76 @@ Affine quantization maps floating-point values to integer values using a linear 
 
 $$ Q(x) = round \left(\frac {x}{s} \right) + z $$
 
-$$ q_{min} = Q(x_{min}) = round \left(\frac {x_{min}}{s} \right) + z  $$
+from the range $[x_{min}, x_{max}]$ to $[q_{min}, q_{max}]$
 
-$$ q_{max} = Q(x_{max}) = round \left(\frac {x_{max}}{s} \right) + z  $$
+$$ q_{min} = Q(x_{min}) = round \left(\frac {x_{min}}{s} \right) + z  --(1) $$
+
+$$ q_{max} = Q(x_{max}) = round \left(\frac {x_{max}}{s} \right) + z  --(2) $$
 
 Ignoring rounding, we can solve for s and z,
 
-$$ q_{max} - q_{min} = \left(\frac {x_{max}}{s} + z \right) - \left(\frac {x_{min}}{s} + z \right)
+$$ q_{max} - q_{min} = \left(\frac {x_{max}}{s} + z \right) - \left(\frac {x_{min}}{s} + z \right) $$
 
-$$ q_{max} - q_{min} = \frac {x_{max} - x_{min}}{s}
+$$ q_{max} - q_{min} = \frac {x_{max} - x_{min}}{s} $$
 
 $$ s =  \frac{x_{max} - x_{min}}{q_{max} - q_{min}} $$
 
+This means, the scale can be calculated as per Min-Max Scaling Scheme
+
+Next, from equation (1),
+
+$$ z = q_{min} - round \left(\frac {x_{min}}{s} \right) $$
+
+### Important Terms
+
+_Scale_
+
+- Scale represents the step size which is used to map real numbers into integers
+    - A small scale means finer precision (small steps between numbers).
+    - A large scale means fewer unique values are represented (larger steps).
+
+- From above, we have derived the formula for scale as follows,
+
+$$ s =  \frac{x_{max} - x_{min}}{q_{max} - q_{min}} $$
+
+_Zero Point_
+
+- Zero Point is the integer value in Quantized domain that corresponds to zero value in the input floating point data.
+
+<img src="{{site.url}}/images/quantize/zero_point.png" alt="Zero Point">
+
 #### Implementation
 
-_Quantization Function_
+_Define Scale and Zero Point Function_
+
+- Below, we define a function to calculate the scale factor and zero point for a given tensor
+
+```
+def calculate_scale(t, qmin=0, qmax=255):
+    tmin, tmax = t.min(), t.max()
+    scale = (tmax - tmin) / (qmax - qmin)
+    zero_point = torch.round(qmin - tmin/s)
+    return scale,zero_point
+```
+
+_Define Quantization Function_
 
 - We first define a function which will take a FP32 float tensor and return a INT8 quantized tensor
+
 ```
-def quantize(t: torch.Tensor) -> torch.Tensor:
-    tmin, tmax = min(t), max(t)
-    qmin, qmax = 0, 255                                 # UINT8 Range
-    scale = (tmax - tmin) / (qmax - qmin)               # Min-Max Scaling
-    q = torch.round(t/scale)                            # Quantization Formula
-    q = torch.clamp(q,-128,127)                         # Clipping to INT8 range to avoid overflow
-    q = q.to(torch.int8)                                # Changing data type explicitly
+def quantize(t, scale, zero_point):
+    q = torch.round(t/scale + zero_point)      
+    q = q.to(torch.uint8)
     return q
 ```
 
-_De-quantization Function_
+_Define Dequantization Function_
 
 - We define a inverse function which takes the quantized tensor and returns us the dequantized value
 
 ```
-def dequantize(t: torch.Tensor) -> torch.Tensor:
-    return t.float() * scale
+def dequantize(q,scale,zero_point):
+    return (q - zero_point) * scale
 ```
 
 #### Hand Calculation
