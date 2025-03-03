@@ -87,3 +87,45 @@ SEPAR - Sid, Effect, Principal, Action, Resource
 - AWS Management Console
 - AWS CLI
 - AWS SDK (boto3)
+
+---
+
+### AWS Cloudshell
+
+- Terminal inside AWS cloud
+- Free to use
+- Region-scoped
+- Can upload/download files
+
+---
+
+### IAM Roles
+
+- Roles are created for AWS services which need permission to perform actions to other AWS services on our behalf
+- Ex. EC2 instance roles, Lambda function roles etc.
+
+---
+
+### IAM Security Tools
+
+- Credentials Report
+    - account level
+    - lists all the users of my account and the status of their credentials
+- Access Advisor 
+    - user level
+    - gives info on which services used by this user and when
+
+---
+
+### IAM Guidelines & Best Practices
+
+- Do not use root account except for account setup
+- Do not share your user creds with others
+    - One physical user is for one AWS user
+- Assign users to groups and attach permissions to groups
+- Create strong paaword policy
+- Use/Enforce MFA
+- Use Roles for giving permissions to AWS services
+- Use access keys for programmatic access (CLI/SDK)
+- Use Credentials Report and Access Advisor to audit permissions for AWS account
+- Never share IAM users and Access Keys
