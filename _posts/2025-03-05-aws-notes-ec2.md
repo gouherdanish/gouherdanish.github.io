@@ -177,3 +177,16 @@ Examples
 - can reserve instances in a specific AZ for any duration
 - On demand charges applicable whether you launch instances or not
 - can combine with Regional Reserved Instances or Savings Plan for billing discounts
+
+---
+
+### EC2 - IP Cost
+
+- IPv4 
+    - 3.7 bn unique IP addresses (finish soon)
+    - Most websites supported
+    - [0-255].[0-255].[0-255].[0-255]:
+    - EC2 Free Tier applicable
+    - other services IP charged @ $0.005/hr
+- IPv6
+    - 
