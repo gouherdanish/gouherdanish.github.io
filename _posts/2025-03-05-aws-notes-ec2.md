@@ -114,10 +114,79 @@ Examples
 - In case connection is refused, then SG would've worked correctly and implies an application error
 - By Default, all inbound traffic is blocked and all outbound traffic is authorized
 - EC2 containing multiple SGs attached can be accessed by other EC2 instances having those individual SGs
-- Port 22 - SSH (Secure Shell) - log in to linux
-- Port 21 - FTP (File Transfer Proticol) - upload files into fileshare
-- Port 22 - SFTP (Secure FTP) - upload files using ssh
-- Port 80 - HTTP - access unsecured websites
-- Port 443 - HTTPS - access secured websites
-- Port 3389 - RDP - Remote Desktop Protocol - log into Windows Machine
+- Important
+    - Port 22 - SSH (Secure Shell) - log in to linux
+    - Port 21 - FTP (File Transfer Proticol) - upload files into fileshare
+    - Port 22 - SFTP (Secure FTP) - upload files using ssh
+    - Port 80 - HTTP - access unsecured websites
+    - Port 443 - HTTPS - access secured websites
+    - Port 3389 - RDP - Remote Desktop Protocol - log into Windows Machine
 
+---
+
+### EC2 - Instance Purchasing Options
+
+1. On-Demand
+
+- pay for what you use 
+    - Linux/Windows by second, other OS by hour
+- Has the highest cost but no upfront payment and no long term commitment
+- Recommended for short-term and un-interrupted workload
+
+2. Reserved Instances
+
+- ~72% discount compared to on-demand
+- can reserve instances of specific features (Instance Type, OS, Region, Tenancy)
+- can reserve for 1 yr or 3 yr
+- can opt for full upfront payment, partial or no upfront payment
+- Recommended for steady-state applications (e.g. database)
+
+3. EC2 Savings Plan
+
+- you commit to a certain type of usage ($10/hr for 1 or 3 yrs)
+- ~72% discount, usage spills charged at on demand rate
+- locked on EC2 Instance family & Region (e.g. M5 in us-east-1)
+- Flexible across Instance size, OS, Tenancy
+
+4. Spot Instance
+
+- Most cost-efficient option (~90% discount)
+- can lose such instance if current spot price is higher than your max price
+- useful for workloads that are resilient to failure
+    - batch jobs
+    - image processing
+    - data analysis
+    - Distributed workloads
+
+5. EC2 Dedicated Host
+
+- a physical server with EC2 capacity fully dedicated for your use (it's always the same physical machine for as long as you are paying)
+- allows to address compliance requirements and use server-bound software licenses (per socket, per core, per VM)
+- On demand or reserved
+- Most expensive
+- Useful for software with complicated software licensing model (BYOL)
+
+6. EC2 Dedicated Instances
+
+- the hardware is "yours" (you are not sharing it with others) for the time your instance is running
+- If you stop/start instance, you can get some other hardware somewhere else
+- So your instance is moved around on different physical servers - whichever is not occupied by others at the time
+
+7. EC2 Capacity Reservations
+
+- can reserve instances in a specific AZ for any duration
+- On demand charges applicable whether you launch instances or not
+- can combine with Regional Reserved Instances or Savings Plan for billing discounts
+
+---
+
+### EC2 - IP Cost
+
+- IPv4 
+    - 3.7 bn unique IP addresses (finish soon)
+    - Most websites supported
+    - [0-255].[0-255].[0-255].[0-255]:
+    - EC2 Free Tier applicable
+    - other services IP charged @ $0.005/hr
+- IPv6
+    - 
