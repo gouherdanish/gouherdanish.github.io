@@ -183,10 +183,23 @@ Examples
 ### EC2 - IP Cost
 
 - IPv4 
-    - 3.7 bn unique IP addresses (finish soon)
-    - Most websites supported
-    - [0-255].[0-255].[0-255].[0-255]:
+    - 3.7 bn unique IP addresses (running out)
+    - Most websites support only IPv4
+    - Format: [0-255].[0-255].[0-255].[0-255]
+    - Ex: 192.168.0.1
     - EC2 Free Tier applicable
     - other services IP charged @ $0.005/hr
 - IPv6
-    - 
+    - AWS supports both IPv4 and IPv6
+    - Contains hexadecimal characters
+    - Ex: abcd.1.efgh.23.4567.gh
+
+- Public IP
+    - the machine can be identified on the internet (can be geolocated)
+    - must be unique globally; no two machines can have same public IP
+
+- Private IP
+    - the machine can only be identified over the private network
+    - must be unique on the private network
+    - two different private networks can have same private IPs
+    - machines connect to internet using NAT + internet gateway (a proxy)
