@@ -180,7 +180,7 @@ Examples
 
 ---
 
-### EC2 - IP Cost
+### EC2 - IP Address
 
 - IPv4 
     - 3.7 bn unique IP addresses (running out)
@@ -203,3 +203,9 @@ Examples
     - must be unique on the private network
     - two different private networks can have same private IPs
     - machines connect to internet using NAT + internet gateway (a proxy)
+
+- Elastic IP
+    - Public IP of EC2 instance changes when re-started
+    - Elastic IP is needed when public IP needs to be kept fixed
+    - Elastic IP is attached to one instance at a time (limit of 5 Elastic IPs)
+    - Generally advised not to use Elastic IP, instead use random public IP and attach DNS
