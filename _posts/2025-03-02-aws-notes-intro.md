@@ -67,7 +67,7 @@ _How to chose a Region_
 - AZ'z are geographically separate from each other so that they are isolated from disasters
 - AZ's are mutually connected with high-bandwidth and ultra low latency networking altogether forming a region
 
-<img src="{{site.url}}/images/aws/aws-az.png" alt="Availability Zones">
+<img src="{{site.url}}/images/aws/aws-az-1.png" alt="Availability Zones">
 
 ---
 
