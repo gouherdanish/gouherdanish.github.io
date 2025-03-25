@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "AWS Notes - IAM"
-date: 2025-03-05
+title: "AWS Notes - EC2"
+date: 2025-03-25
 tags: ["Cloud"]
 ---
 
