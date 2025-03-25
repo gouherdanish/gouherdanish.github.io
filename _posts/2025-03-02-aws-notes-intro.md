@@ -34,7 +34,7 @@ AWS stands for Amazon Web Services
 - 13th consecutive year being market leader
 - 31% market share (25% Microsoft)
 - $90 bn Annual revenue (2023)
-- >1mn active users
+- +1mn active users
 
 ---
 
@@ -47,8 +47,11 @@ AWS stands for Amazon Web Services
 _How to chose a Region_
 
 **Compliance** - data in France may have to stay in France; data governance and legal requirements
+
 **Proximity** - if app users are mostly in US, then launch closer to the users to reduce latency
+
 **Available services** - some services/features are not available in every region
+
 **Pricing** - varies from region to region
 
 ---
