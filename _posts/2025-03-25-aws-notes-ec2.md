@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "AWS Notes - IAM"
-date: 2025-03-05
+title: "AWS Notes - EC2"
+date: 2025-03-25
 tags: ["Cloud"]
 ---
 
@@ -126,14 +126,14 @@ Examples
 
 ### EC2 - Instance Purchasing Options
 
-1. On-Demand
+**On-Demand**
 
 - pay for what you use 
     - Linux/Windows by second, other OS by hour
 - Has the highest cost but no upfront payment and no long term commitment
 - Recommended for short-term and un-interrupted workload
 
-2. Reserved Instances
+**Reserved Instances**
 
 - ~72% discount compared to on-demand
 - can reserve instances of specific features (Instance Type, OS, Region, Tenancy)
@@ -141,14 +141,14 @@ Examples
 - can opt for full upfront payment, partial or no upfront payment
 - Recommended for steady-state applications (e.g. database)
 
-3. EC2 Savings Plan
+**EC2 Savings Plan**
 
 - you commit to a certain type of usage ($10/hr for 1 or 3 yrs)
 - ~72% discount, usage spills charged at on demand rate
 - locked on EC2 Instance family & Region (e.g. M5 in us-east-1)
 - Flexible across Instance size, OS, Tenancy
 
-4. Spot Instance
+**Spot Instance**
 
 - Most cost-efficient option (~90% discount)
 - can lose such instance if current spot price is higher than your max price
@@ -158,7 +158,7 @@ Examples
     - data analysis
     - Distributed workloads
 
-5. EC2 Dedicated Host
+**EC2 Dedicated Host**
 
 - a physical server with EC2 capacity fully dedicated for your use (it's always the same physical machine for as long as you are paying)
 - allows to address compliance requirements and use server-bound software licenses (per socket, per core, per VM)
@@ -166,13 +166,13 @@ Examples
 - Most expensive
 - Useful for software with complicated software licensing model (BYOL)
 
-6. EC2 Dedicated Instances
+**EC2 Dedicated Instances**
 
 - the hardware is "yours" (you are not sharing it with others) for the time your instance is running
 - If you stop/start instance, you can get some other hardware somewhere else
 - So your instance is moved around on different physical servers - whichever is not occupied by others at the time
 
-7. EC2 Capacity Reservations
+**EC2 Capacity Reservations**
 
 - can reserve instances in a specific AZ for any duration
 - On demand charges applicable whether you launch instances or not
@@ -215,7 +215,7 @@ Examples
 
 It allows us to define how we want the EC2 instances to be placed wrt each other on AWS
 
-- Cluster PG
+**Cluster PG**
 _What_ - all EC2 instances are placed in same AZ
 _Pros_ - Low Latency and High Throughput (upto 10 Gbps bandwidth)
 _Cons_ - If AZ fails, all instances will fail at once
@@ -223,7 +223,7 @@ _Uses_ - Big Data jobs that needs to complete fast
 
 <img src="{{site.url}}/images/aws/aws-pg-cluster.png">
 
-- Spread PG
+**Spread PG**
 _What_ - each EC2 instance is on different hardware (rack) across different AZ
 _Pros_ - minimizes failure risk, high availability
 _Cons_ - Limitation : 7 EC2 instances per PG; 7 EC2 instances per AZ
@@ -231,7 +231,7 @@ _Uses_ - Critical applications where each instance must be isolated from failure
 
 <img src="{{site.url}}/images/aws/aws-pg-spread.png">
 
-- Partition PG
+**Partition PG**
 _What_ - partition represents a rack in a data center; many EC2 in one partition; upto 7 partition per AZ; can span across multiple AZ; 100s of EC2 can be in one PG
 _Pros_ - safe from rack failure as EC2 instances are distributed across multiple hardware racks
 _Cons_ - still one partition failure can cause multiple EC2 instances to fail
