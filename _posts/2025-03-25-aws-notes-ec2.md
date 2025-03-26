@@ -216,25 +216,36 @@ Examples
 It allows us to define how we want the EC2 instances to be placed wrt each other on AWS
 
 **Cluster PG**
+
 _What_ - all EC2 instances are placed in same AZ
+
 _Pros_ - Low Latency and High Throughput (upto 10 Gbps bandwidth)
+
 _Cons_ - If AZ fails, all instances will fail at once
+
 _Uses_ - Big Data jobs that needs to complete fast
 
 <img src="{{site.url}}/images/aws/aws-pg-cluster.png">
 
 **Spread PG**
 _What_ - each EC2 instance is on different hardware (rack) across different AZ
+
 _Pros_ - minimizes failure risk, high availability
+
 _Cons_ - Limitation : 7 EC2 instances per PG; 7 EC2 instances per AZ
+
 _Uses_ - Critical applications where each instance must be isolated from failure
 
 <img src="{{site.url}}/images/aws/aws-pg-spread.png">
 
 **Partition PG**
+
 _What_ - partition represents a rack in a data center; many EC2 in one partition; upto 7 partition per AZ; can span across multiple AZ; 100s of EC2 can be in one PG
+
 _Pros_ - safe from rack failure as EC2 instances are distributed across multiple hardware racks
+
 _Cons_ - still one partition failure can cause multiple EC2 instances to fail
+
 _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 
 <img src="{{site.url}}/images/aws/aws-pg-partition.png">
