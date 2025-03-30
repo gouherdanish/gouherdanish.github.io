@@ -228,6 +228,7 @@ _Uses_ - Big Data jobs that needs to complete fast
 <img src="{{site.url}}/images/aws/aws-pg-cluster.png">
 
 **Spread PG**
+
 _What_ - each EC2 instance is on different hardware (rack) across different AZ
 
 _Pros_ - minimizes failure risk, high availability
@@ -249,3 +250,16 @@ _Cons_ - still one partition failure can cause multiple EC2 instances to fail
 _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 
 <img src="{{site.url}}/images/aws/aws-pg-partition.png">
+
+---
+### EC2 - Elastic Network Interface (ENI)
+
+- logical component in a VPC that represents a Virtual Network Card and can have
+    - one primary private IPv4
+    - one or more secondary IPv4
+    - one Elastic IP per private IPv4
+    - one public IPv4
+    - one or more security groups
+    - MAC address
+- can be created independently and attached to EC2 instances on the fly for failover
+- bound to specific AZ
