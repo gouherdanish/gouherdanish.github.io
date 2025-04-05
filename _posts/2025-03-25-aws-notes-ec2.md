@@ -11,7 +11,24 @@ EC2 stands for Elastic Compute Cloud;
 
 ### EC2 : Intro
 
-- Infrastructure as a Service (IaaS)
+- Cloud providers have many physical hosts/servers stacked on Racks in Data Center
+- Each host has hardware components e.g. CPU, RAM, Network Cards etc.
+
+<img src="{{site.url}}/images/aws/host.png">
+ 
+- AWS uses Hypervisor software (AWS Nitro) to virtualize the underlying hardware
+
+<img src="{{site.url}}/images/aws/virtualization.png">
+
+- EC2 Instances are virtual machines (VMs) having their own provisioned resources sliced out of the bare metal hardware.
+- Multiple EC2 instances can share the same physical host
+    - but they have to belong to the same family (e.g. m5)
+    - E.g. the above host can support multiple EC2s as follows
+        - 12 instances of m5.2xlarge
+        - 24 instances of m5.xlarge
+        - 48 instances of m5.large
+        - or a mix of these (10 * m5.2xlarge, 1 * m5.xlarge, 2 * m5.large)
+- EC2 service represents Infrastructure as a Service (IaaS)
 - Consists of multiple services
     - Rent virtual machines (EC2)
     - Store data on virtual drives (EBS)
@@ -82,7 +99,7 @@ _Use cases_
 - Distributed cache stores
 
 Examples
-- r5.xlarge - 4 vCPU, 32 GB RAM, EBS-only, 10 Gbps network bandwidth
+- r5.xlarge - 4 vCPU, 32 GB RAM, 468 GB SSD, 10 Gbps network bandwidth
 
 **Storage Optimized**
 
@@ -97,7 +114,7 @@ _Use cases_
 - Data warehousing applications
 
 Examples
-- r5.xlarge - 4 vCPU, 32 GB RAM, EBS-only, 10 Gbps network bandwidth
+- i8g.large - 2 vCPU, 16 GB RAM, EBS-only, 10 Gbps network bandwidth
 
 ---
 
