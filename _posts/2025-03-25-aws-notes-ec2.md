@@ -115,6 +115,7 @@ _Use cases_
 
 Examples
 - i8g.large - 2 vCPU, 16 GB RAM, EBS-only, 10 Gbps network bandwidth
+- i3.16xlarge - 64 vCPU, 488 GB, 8 * 1900GB NVMe SSD, 3.3 million Read IOPS, 1.4 million Write IOPS
 
 ---
 
@@ -280,3 +281,97 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
     - MAC address
 - can be created independently and attached to EC2 instances on the fly for failover
 - bound to specific AZ
+
+---
+### EC2 - Hibernate
+
+- **Stop** - The data on EBS is kept intact on next start
+- **Terminate** - EBS volumes are lost
+- **Start**
+    - _First Start_ - OS boots and EC2 user script is run
+    - _Following starts_ - OS boots
+    - application starts, caches get warmed up => takes time
+- **Hibernate**
+    - while stopping the EC2, the RAM state is written to a file in EBS volume => in-memory state is preserved
+    - while re-starting the EC2, the RAM state is loaded from the EBS => OS boot is much faster
+    - Available for almost all instance families and instance purchase options
+    - Instance RAM size s/b <150 GB; bare metal instances are not supported
+    - Root volume must be EBS, large and encrypted. (Instance store is not supported)
+    - Not more than 60 days
+
+---
+### EC2 - EBS (Elastic Block Store)
+
+- EBS volumes are not physically attached to host machine like the instance store (NVMe)
+- Instead it is a network drive which stores data in a remote storage cluster in the same AZ and reads/writes data via high-speed private AWS network
+- Multiple EBS volumes can be attached to one EC2
+    - But one EBS volume can not be attached to multiple EC2 instances
+- Root EBS Volume
+    - created when EC2 is launched e.g. /dev/xvda
+    - contains OS and is required to boot when launched
+    - Delete on Termination - True (default) - can be changed
+- Additional EBS Volume
+    - extra EBS volumes attached for storage e.g. /dev/sdf
+    - does not contain OS
+    - Delete on Termination - False (default) - can be changed
+- Even if the EC2 host dies, the data is safe => data durability
+- EBS has lower performance (high latency) than local NVMes since it is network-bound
+
+---
+### EC2 - EBS Volume Types
+
+- General Purpose SSD
+    - cost-effective and low latency (balances price and performance)
+    - Used in root volumes for OS bootup, Dev/test environments
+    - 1 GiB - 16 TiB
+    - gp2/gp3
+- Provisioned IOPS
+    - io1/io2 - highest performance SSD volume (low latency/high throughput workload)
+    - st1 - low cost HDD (frequently accessed/throughput intensive workload)
+    - sc1 - lowest cost HDD (less frequently accessed workloads)
+- EBS volumes are characterized by Size/Throughput/IOPS
+- gp2/gp3 or io1/io2 can only be used as root volumes
+
+---
+### EC2 - EBS Snapshots
+
+- EBS Snapshots can be saved to S3 and new EBS volumes can be recreated from that
+    - Recommended to detach volumes before taking snapshot but not necessary
+    - can copy snapshots across AZ / Regions
+- Features
+    - EBS Enapshots can be saved to Archive tier
+        - 75% cheaper
+        - 24-72 hr for restoring
+    - Recycle Bin can be setup for EBS Snapshots
+        - accidental deletion can be recovered
+        - can specify retention from 1day - 1yr
+    - Fast Snapshot Restore (FSR)
+        - no latency on first use
+        - costs money
+
+---
+### EC2 - Instance Store
+
+- Some specific EC2 instances are created on top of such physical hosts which have a Hard Disk directly attached to it
+- Pros - provides better I/O performance
+- Cons - loses data once stopped (ephemeral)
+- Good for buffer/cache/temporary content
+
+
+---
+### EC2 - AMI (Amazon Machine Image)
+
+- EC2 instances are launched using an AMI image
+    - can use public AMI (provided by AWS)
+    - can make our own AMI
+    - can use 3rd party AMI (AWS Marketplace)
+- Own AMI might be needed in case when we want our EC2 to always have some predefined softwares installed
+    - Usually these are installed via EC2 user scripts
+    - Doing this everytime might take a longer time
+    - So, recommended to create own image which will launch EC2 faster
+- AMI are built for specific region and can be copied across regions
+- AMI Creation Process
+    - Launch EC2 with custom script
+    - Stop EC2 instance
+    - Build AMI by saving image (saves EBS snapshots)
+    - Launch EC2 using My AMI
