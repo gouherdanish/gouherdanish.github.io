@@ -320,16 +320,21 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 ---
 ### EC2 - EBS (Elastic Block Store)
 
+<img src="{{site.url}}/images/aws/aws-ebs.png">
+
 - EBS volumes are not physically attached to host machine like the instance store (NVMe)
 - Instead it is a network drive which stores data in a remote storage cluster in the same AZ and reads/writes data via high-speed private AWS network
 - Multiple EBS volumes can be attached to one EC2
     - But one EBS volume can not be attached to multiple EC2 instances (except io1/io2)
+- Feels like a local drive e.g. /dev/xvda, /dev/nvme01
+    - since the EC2 OS formats the EBS with a filesystem (ext4, xfs) and mounts it
+    - AWS Nitro makes it look local despite routing requests over the network
 - Root EBS Volume
-    - created when EC2 is launched e.g. /dev/xvda
+    - created when EC2 is launched
     - contains OS and is required to boot when launched
     - Delete on Termination - True (default) - can be changed
 - Additional EBS Volume
-    - extra EBS volumes attached for storage e.g. /dev/sdf
+    - extra EBS volumes attached for stora n nnnmnne.g. /dev/sdf
     - does not contain OS
     - Delete on Termination - False (default) - can be changed
 - Even if the EC2 host dies, the data is safe => data durability
@@ -383,45 +388,6 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
         - Max Throughput = 250 MiB/s
 
 ---
-### EC2 - EFS (Elastic File System)
-
-- Managed Network File System (NFS) which can be mounted on multiple EC2 across AZs but within same region
-    - Uses NFSv4.1 protocol
-    - Based on POSIX file system (Linux)
-    - Need to setup security group to control access to EFS
-- Pros
-    - Highly available and 
-    - Scalable
-        - filesystem auto-scales, no capacity planning needed
-        - 1000s of concurrent NFS clients
-        - 10 GB/s throughput
-- Cons
-    - Very costly (3 times the gp2 cost), Pay per use
-- Limitation
-    - Only compatible with Linux-based AMI
-- Performance Modes
-    - General Purpose (default) - low-latency usecases (webserver, CMS etc)
-    - Max I/O - high latency, high throughput, highly parallel use-cases (Big Data)
-- Throughput Modes
-    - Bursting
-        - throughput increases with size (Good for general purpose/spiky workloads)
-        - e.g. size = 1 TB gets baseline throughput of 50 MiB/s
-        - During lean period, credits build up if not using EFS that much
-        - During spikes, accumulated credits are used up to support upto 100 MiB/s
-    - Provisioned
-        - fixed throughput (Good for steady I/O)
-        - e.g. size = 1 TB can be setup with 1 GiB/s throughput
-    - Elastic
-        - auto-scales throughput based on workload
-            - reads can get upto 3 GiB/s and writes upto 1 GiB/s
-        - Good for unpredictable workload
-- Storage Classes
-    - Standard Tier - for frequently accessed files (high cost to store files, no retrieval cost)
-    - Infrequent Access Tier - low cost to store files, high retrieval cost
-    - Archive Tier - for rarely accessed files (e.g. annual) (lowest cost, 50% cheaper)
-    - Can implement lifecycle policy - move files to Archive/IA if not accessed for N days
-
----
 ### EC2 - EBS Snapshots
 
 - EBS Snapshots can be saved to S3 and new EBS volumes can be recreated from that
@@ -457,9 +423,51 @@ _How to encrypt an un-encrypted EBS volume_
 - This new EBS volume can be attached to the EC2
 
 ---
+### EC2 - EFS (Elastic File System)
+
+<img src="{{site.url}}/images/aws/aws-efs.png">
+
+- Managed Network File System (NFS) which can be mounted on multiple EC2 across AZs but within same region
+    - Uses NFSv4.1 protocol
+    - mounted like a shared folder (/mnt/efs), and it behaves like a normal POSIX file system (Linux)
+    - Need to setup security group to control access to EFS
+- Pros
+    - Highly available 
+    - Scalable
+        - filesystem auto-scales, no capacity planning needed
+        - 1000s of concurrent NFS clients
+        - 10 GB/s throughput
+- Cons
+    - Very costly (3 times the gp2 cost), Pay per use
+- Limitation
+    - Only compatible with Linux-based AMI
+- Performance Modes
+    - General Purpose (default) - low-latency usecases (webserver, CMS etc)
+    - Max I/O - high latency, high throughput, highly parallel use-cases (Big Data)
+- Throughput Modes
+    - Bursting
+        - throughput increases with size (Good for general purpose/spiky workloads)
+        - e.g. size = 1 TB gets baseline throughput of 50 MiB/s
+        - During lean period, credits build up if not using EFS that much
+        - During spikes, accumulated credits are used up to support upto 100 MiB/s
+    - Provisioned
+        - fixed throughput (Good for steady I/O)
+        - e.g. size = 1 TB can be setup with 1 GiB/s throughput
+    - Elastic
+        - auto-scales throughput based on workload
+            - reads can get upto 3 GiB/s and writes upto 1 GiB/s
+        - Good for unpredictable workload
+- Storage Classes
+    - Standard Tier - for frequently accessed files (high cost to store files, no retrieval cost)
+    - Infrequent Access Tier - low cost to store files, high retrieval cost
+    - Archive Tier - for rarely accessed files (e.g. annual) (lowest cost, 50% cheaper)
+    - Can implement lifecycle policy - move files to Archive/IA if not accessed for N days
+
+---
 ### EC2 - Instance Store
 
 - Some specific EC2 instances are created on top of such physical hosts which have a Hard Disk directly attached to it
 - Pros - provides better I/O performance
 - Cons - loses data once stopped (ephemeral)
 - Good for buffer/cache/temporary content
+
