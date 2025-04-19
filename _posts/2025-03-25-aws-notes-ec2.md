@@ -283,6 +283,24 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 - bound to specific AZ
 
 ---
+### EC2 - AMI (Amazon Machine Image)
+
+- EC2 instances are launched using an AMI image
+    - can use public AMI (provided by AWS)
+    - can make our own AMI
+    - can use 3rd party AMI (AWS Marketplace)
+- Own AMI might be needed in case when we want our EC2 to always have some predefined softwares installed
+    - Usually these are installed via EC2 user scripts
+    - Doing this everytime might take a longer time
+    - So, recommended to create own image which will launch EC2 faster
+- AMI are built for specific region and can be copied across regions
+- AMI Creation Process
+    - Launch EC2 with custom script
+    - Stop EC2 instance
+    - Build AMI by saving image (saves EBS snapshots)
+    - Launch EC2 using My AMI
+
+---
 ### EC2 - Hibernate
 
 - **Stop** - The data on EBS is kept intact on next start
@@ -302,16 +320,21 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 ---
 ### EC2 - EBS (Elastic Block Store)
 
+<img src="{{site.url}}/images/aws/aws-ebs.png">
+
 - EBS volumes are not physically attached to host machine like the instance store (NVMe)
 - Instead it is a network drive which stores data in a remote storage cluster in the same AZ and reads/writes data via high-speed private AWS network
 - Multiple EBS volumes can be attached to one EC2
-    - But one EBS volume can not be attached to multiple EC2 instances
+    - But one EBS volume can not be attached to multiple EC2 instances (except io1/io2)
+- Feels like a local drive e.g. /dev/xvda, /dev/nvme01
+    - since the EC2 OS formats the EBS with a filesystem (ext4, xfs) and mounts it
+    - AWS Nitro makes it look local despite routing requests over the network
 - Root EBS Volume
-    - created when EC2 is launched e.g. /dev/xvda
+    - created when EC2 is launched
     - contains OS and is required to boot when launched
     - Delete on Termination - True (default) - can be changed
 - Additional EBS Volume
-    - extra EBS volumes attached for storage e.g. /dev/sdf
+    - extra EBS volumes attached for stora n nnnmnne.g. /dev/sdf
     - does not contain OS
     - Delete on Termination - False (default) - can be changed
 - Even if the EC2 host dies, the data is safe => data durability
@@ -320,17 +343,49 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 ---
 ### EC2 - EBS Volume Types
 
+- EBS volumes are characterized by 
+    - Size - how much data can it store - GB/TB
+    - IOPS - how many read/write operations can the volume handle per second
+    - Throughput - how much volume of data is transferred per second - MB/s
+- Only gp2/gp3 or io1/io2 can be used as root volumes
 - General Purpose SSD
     - cost-effective and low latency (balances price and performance)
     - Used in root volumes for OS bootup, Dev/test environments
     - 1 GiB - 16 TiB
-    - gp2/gp3
-- Provisioned IOPS
-    - io1/io2 - highest performance SSD volume (low latency/high throughput workload)
-    - st1 - low cost HDD (frequently accessed/throughput intensive workload)
-    - sc1 - lowest cost HDD (less frequently accessed workloads)
-- EBS volumes are characterized by Size/Throughput/IOPS
-- gp2/gp3 or io1/io2 can only be used as root volumes
+    - gp3 (newer version of SSD)
+        - IOPS = 3000 to 16000
+        - Throughput = 125 MiB/s, can be increased upto 1000 MiB/s
+        - no link between IOPS and throughput
+    - gp2 (older version, smaller)
+        - IOPS = 3000 to 16000 (linked to size, 3 IOPS per GB)
+- Provisioned IOPS SSD
+    - used for critical business applications (e.g. database)
+    - provide sustained IOPS performance (low latency/high throughput workload)
+    - io1
+        - Size = 4 GiB - 16 TiB
+        - Max IOPS = 64000 (Nitro EC2), 32000 (others)
+        - IOPS not linked to size
+    - io2
+        - Size = 4 GiB - 64 TiB
+        - Max IOPS = 256000 (linked to size, 1000 IOPS per GiB)
+    - io1/io2 support EBS Multi-attach feature
+        - upto 16 EC2 instances can be attached to same EBS volume
+        - all EC2 instances and EBS should be in the same AZ
+        - must use cluster-aware file system
+            - e.g. GFS2 (Redhat), OCFS2 (Oracle), CephFS, Lustre
+            - not XFS, EXT4, NTFS etc.
+- HDD
+    - cannot be used as root volume
+    - Size = 125 GiB - 16 TiB
+    - st1
+        - throughput-optimized, low cost HDD 
+        - used for Big Data, log processing (frequently accessed/throughput intensive workload)
+        - Max IOPS = 500
+        - Max Throughput = 500 MiB/s
+    - sc1
+        - lowest cost HDD (less frequently accessed workloads)
+        - Max IOPS = 250
+        - Max Throughput = 250 MiB/s
 
 ---
 ### EC2 - EBS Snapshots
@@ -350,6 +405,65 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
         - costs money
 
 ---
+### EC2 - EBS Encryption
+
+- Creating an encrypted EBS volume encrypts the following
+    - data at rest inside the volume
+    - data in motion between EC2 and EBS
+    - snapshots 
+    - EBS volumes created from snapshots
+- Minimal impact on latency
+- leverages AES-256 (KMS)
+
+_How to encrypt an un-encrypted EBS volume_
+
+- Create a snapshot of the EBS volume
+- Encrypt the snapshot (using copy)
+- Create new EBS volume from the snapshot (will be encrypted)
+- This new EBS volume can be attached to the EC2
+
+---
+### EC2 - EFS (Elastic File System)
+
+<img src="{{site.url}}/images/aws/aws-efs.png">
+
+- Managed Network File System (NFS) which can be mounted on multiple EC2 across AZs but within same region
+    - Uses NFSv4.1 protocol
+    - mounted like a shared folder (/mnt/efs), and it behaves like a normal POSIX file system (Linux)
+    - Need to setup security group to control access to EFS
+- Pros
+    - Highly available 
+    - Scalable
+        - filesystem auto-scales, no capacity planning needed
+        - 1000s of concurrent NFS clients
+        - 10 GB/s throughput
+- Cons
+    - Very costly (3 times the gp2 cost), Pay per use
+- Limitation
+    - Only compatible with Linux-based AMI
+- Performance Modes
+    - General Purpose (default) - low-latency usecases (webserver, CMS etc)
+    - Max I/O - high latency, high throughput, highly parallel use-cases (Big Data)
+- Throughput Modes
+    - Bursting
+        - throughput increases with size (Good for general purpose/spiky workloads)
+        - e.g. size = 1 TB gets baseline throughput of 50 MiB/s
+        - During lean period, credits build up if not using EFS that much
+        - During spikes, accumulated credits are used up to support upto 100 MiB/s
+    - Provisioned
+        - fixed throughput (Good for steady I/O)
+        - e.g. size = 1 TB can be setup with 1 GiB/s throughput
+    - Elastic
+        - auto-scales throughput based on workload
+            - reads can get upto 3 GiB/s and writes upto 1 GiB/s
+        - Good for unpredictable workload
+- Storage Classes
+    - Standard Tier - for frequently accessed files (high cost to store files, no retrieval cost)
+    - Infrequent Access Tier - low cost to store files, high retrieval cost
+    - Archive Tier - for rarely accessed files (e.g. annual) (lowest cost, 50% cheaper)
+    - Can implement lifecycle policy - move files to Archive/IA if not accessed for N days
+
+---
 ### EC2 - Instance Store
 
 - Some specific EC2 instances are created on top of such physical hosts which have a Hard Disk directly attached to it
@@ -357,21 +471,3 @@ _Uses_ - Partition aware applications viz. Big Data e.g. HDFS, HBase, Cassandra
 - Cons - loses data once stopped (ephemeral)
 - Good for buffer/cache/temporary content
 
-
----
-### EC2 - AMI (Amazon Machine Image)
-
-- EC2 instances are launched using an AMI image
-    - can use public AMI (provided by AWS)
-    - can make our own AMI
-    - can use 3rd party AMI (AWS Marketplace)
-- Own AMI might be needed in case when we want our EC2 to always have some predefined softwares installed
-    - Usually these are installed via EC2 user scripts
-    - Doing this everytime might take a longer time
-    - So, recommended to create own image which will launch EC2 faster
-- AMI are built for specific region and can be copied across regions
-- AMI Creation Process
-    - Launch EC2 with custom script
-    - Stop EC2 instance
-    - Build AMI by saving image (saves EBS snapshots)
-    - Launch EC2 using My AMI
