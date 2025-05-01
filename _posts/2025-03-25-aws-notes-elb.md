@@ -109,3 +109,19 @@ ELB stands for Elastic Load Balancer
 - Good for microservices & container-based apps (ex: Docker and ECS)
 - Client IP is not visible to servers directly
     - inserted in header X-Forwared-For
+
+_Can a target group have instances across Region ?_
+**NO, target group is tied to one Region**
+
+_Can a target group have instances across AZ ?_
+**YES, it is recommended for High Availability**
+
+_Can a target group have multiple instances in same AZ ? Explain with example scenario._
+**YES**
+- Imagine you are running an E-commerce APP and you are expecting high spikes during a sale.
+- Having 3 EC2 instances can handle 3X more traffic than a single EC2 => Scalability
+- In case one EC2 instance fails, other EC2 instances can serve the traffic => High Availability
+- Updating the app can be done one instance at a time without app downtime => Rolling Deployments
+
+
+
