@@ -62,7 +62,7 @@ ELB stands for Elastic Load Balancer
         - LB handles the central management of SSL Certs and offloads CPU of backend servers (performance)
     - it enforces stickiness with cookies
         - LB maintains a session state by inserting a cookie while sending back response to browser (client)
-        - cookie (e.g. AWSALB, AWSALBAPP) has the info on the target instance ID
+        - cookie has the info on the target instance ID (e.g. AWSALB, AWSALBAPP)
         - when browser sends new request, it attaches the same cookie which is decoded by LB and routed to same backend instance
     - it handles failure of instances
         - LB does regular health checks (/health => 200 OK else Unhealthy)
@@ -88,11 +88,32 @@ ELB stands for Elastic Load Balancer
         - IP
 
 ---
+### Target Groups
+
+- It is a group of EC2 instances to which the traffic is routed by the ELB
+- There can be various types of target groups supported by ALB or NLB
+
+_Can a target group have instances across Region ?_
+**NO, target group is tied to one Region**
+
+_Can a target group have instances across AZ ?_
+**YES, it is recommended for High Availability**
+
+_Can a target group have multiple instances in same AZ ? Explain with example scenario._
+**YES**
+- Imagine you are running an E-commerce APP and you are expecting high spikes during a sale.
+- Having 3 EC2 instances can handle 3X more traffic than a single EC2 => Scalability
+- In case one EC2 instance fails, other EC2 instances can serve the traffic => High Availability
+- Updating the app can be done one instance at a time without app downtime => Rolling Deployments
+
+
+---
 ### Application Load Balancer
 
 <img src="{{site.url}}/images/aws/aws-alb.png">
 
-- Operates on Application Layer 7 (HTTP)
+- Operates on Application Layer (L7)
+- Balances load from HTTP/HTTPS traffic
 - Can load balance on multiple applications
     - either on multiple machines (target group)
     - or on same machine (ex: containers)
@@ -110,18 +131,53 @@ ELB stands for Elastic Load Balancer
 - Client IP is not visible to servers directly
     - inserted in header X-Forwared-For
 
-_Can a target group have instances across Region ?_
-**NO, target group is tied to one Region**
+_Does ALB support fixed static IP or Elastic IP ?_
+- **NO**, we can't associate Elastic IPs (EIPs) with an ALB
+- ALB is provisioned with dynamic public or private IPs which change if ALB is stopped and restarted
+- So, instead of using IPs directly, AWS provides DNS name (e.g., my-alb-1234567890.us-east-1.elb.amazonaws.com)
+- If we want to share fixed IP with clients or whitelist IPs in a firewall, we can
+    - use NLB instead which support static IP
+    - use NLB in front of ALB which gets us both static IPs and Layer 7 features
 
-_Can a target group have instances across AZ ?_
-**YES, it is recommended for High Availability**
+_If ALB is slower than NLB, why is it still used ?_
+- ALB provides smart routing based on the request (Path-based, Host-based, Header)
+- It provides SSL termination which offloads decryption from backend servers end
+- It also provides sticky sessions using cookies
+- It also provides Full support for HTTP/2 and websocket based traffic
 
-_Can a target group have multiple instances in same AZ ? Explain with example scenario._
-**YES**
-- Imagine you are running an E-commerce APP and you are expecting high spikes during a sale.
-- Having 3 EC2 instances can handle 3X more traffic than a single EC2 => Scalability
-- In case one EC2 instance fails, other EC2 instances can serve the traffic => High Availability
-- Updating the app can be done one instance at a time without app downtime => Rolling Deployments
+_Unlike NLB, ALB has to inspect the HTTP traffic and do SSL termination, is it possible to become a bottleneck ?_
+- **NO**, ALB is fully managed by AWS
+- In case of increased traffic, it auto-scales to multiple Load Balancer Nodes
+- It is also distributed across multi-AZ
 
 
+---
+### Network Load Balancer
 
+<img src="{{site.url}}/images/aws/aws-nlb.png">
+
+- Operates on Transport Layer (L4)
+- Balances load from TCP, UDP, TLS traffic
+- Very high performance and ultra-low latency (millions of requests per second)
+- NLB supports one static IP (Elastic IP) per AZ but ALB does not
+
+Use cases
+- Services requiring ultra-low latency and high throughput e.g. Gaming apps, streaming, databases
+- Need SSL/TLS passthrough (end to end encryption) where SSL decryption is handled by backend servers
+- If clients need fixed static IP for each AZ
+
+_Why is NLB faster than ALB ?_
+- NLB works at Layer 4, it just forwards packets
+- it does not inspect or modify traffic 
+
+_If UDP traffic comes to NLB, does it convert to tcp and then forward it ?_
+- **NO**, NLB operates at Layer 4 which supports UDP packets without any modifications
+
+_Can NLB route http/https traffic from internet ?_
+- **YES, it can**, but when it forwards HTTP or HTTPS traffic, it treats it as TCP traffic and doesn't inspect the contents of the HTTP/HTTPS protocol itself or perform URL-based routing
+- Also, For HTTPS traffic, NLB does TLS passthrough, meaning it doesn't decrypt the traffic. The backend EC2 instances would need to handle the SSL decryption
+
+_Does NLB support health check of targets ?_
+- **YES**, NLB performs Layer 4 (TCP or HTTP/HTTPS) health checks which are used to determine whether to send traffic to a target
+- If you're using TCP health checks, NLB checks whether it can establish a TCP connection to the target.
+- If you're using HTTP/HTTPS health checks, NLB sends an HTTP GET to the specified path and expects a 200 OK response.
