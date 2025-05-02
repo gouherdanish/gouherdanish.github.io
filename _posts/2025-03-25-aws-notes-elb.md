@@ -61,9 +61,7 @@ ELB stands for Elastic Load Balancer
         - LB decrypts HTTPS requests from client and sends plain HTTP to EC2 (simplified backend)
         - LB handles the central management of SSL Certs and offloads CPU of backend servers (performance)
     - it enforces stickiness with cookies
-        - LB maintains a session state by inserting a cookie while sending back response to browser (client)
-        - cookie has the info on the target instance ID (e.g. AWSALB, AWSALBAPP)
-        - when browser sends new request, it attaches the same cookie which is decoded by LB and routed to same backend instance
+        - when the user makes the first request, if the request goes to backend instance 1, then on second request also, his request will go to instance 1 itself
     - it handles failure of instances
         - LB does regular health checks (/health => 200 OK else Unhealthy)
 
@@ -110,13 +108,14 @@ _Can a target group have multiple instances in same AZ ? Explain with example sc
 ---
 ### Application Load Balancer
 
-<img src="{{site.url}}/images/aws/aws-alb.png">
-
 - Operates on Application Layer (L7)
 - Balances load from HTTP/HTTPS traffic
 - Can load balance on multiple applications
     - either on multiple machines (target group)
     - or on same machine (ex: containers)
+
+<img src="{{site.url}}/images/aws/aws-alb.png">
+
 - Target groups can be 
     - EC2 instances
     - ECS tasks
@@ -150,16 +149,15 @@ _Unlike NLB, ALB has to inspect the HTTP traffic and do SSL termination, is it p
 - In case of increased traffic, it auto-scales to multiple Load Balancer Nodes
 - It is also distributed across multi-AZ
 
-
 ---
 ### Network Load Balancer
-
-<img src="{{site.url}}/images/aws/aws-nlb.png">
 
 - Operates on Transport Layer (L4)
 - Balances load from TCP, UDP, TLS traffic
 - Very high performance and ultra-low latency (millions of requests per second)
 - NLB supports one static IP (Elastic IP) per AZ but ALB does not
+
+<img src="{{site.url}}/images/aws/aws-nlb.png">
 
 Use cases
 - Services requiring ultra-low latency and high throughput e.g. Gaming apps, streaming, databases
@@ -181,3 +179,26 @@ _Does NLB support health check of targets ?_
 - **YES**, NLB performs Layer 4 (TCP or HTTP/HTTPS) health checks which are used to determine whether to send traffic to a target
 - If you're using TCP health checks, NLB checks whether it can establish a TCP connection to the target.
 - If you're using HTTP/HTTPS health checks, NLB sends an HTTP GET to the specified path and expects a 200 OK response.
+
+---
+### Gateway Load Balancer
+
+- Deploy and manage 3rd party network security appliances on AWS
+    - e.g. Firewal, IDPS, DPIS
+- Before routing the request to the backend app server, the Load balancer routes to this target group consisting of these firewall which analyze the request for intrusion
+- If all looks good, then it is routed back to the LB and then to the backend server
+
+<img src="{{site.url}}/images/aws/aws-gwlb.png">
+
+- Works on Network Layer (L3)
+- Uses GENEVE Protocol (Port 6081)
+- Two functions
+    - Single Entry/Exit point for all traffic
+    - distributes traffic to the virtual appliances not to the backend instances
+
+---
+
+### Cookies
+- LB maintains a session state by inserting a cookie while sending back response to client (browser)
+- cookie has the info on the target instance ID (e.g. AWSALB, AWSALBAPP)
+- when browser sends new request, it attaches the same cookie which is decoded by LB and routed to same backend instance
