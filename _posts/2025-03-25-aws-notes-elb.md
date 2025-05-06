@@ -205,7 +205,7 @@ _Does NLB support health check of targets ?_
     - Each request from the client is treated as completely new
     - Ex. if you log in and the session ID isn't saved in a cookie (or URL, or storage), the server forgets you on the next request — you'll be logged out or prompted again
 - Cookies maintain "state" to the otherwise stateless HTTP protocol
-- Cookies enable Load Balancer stickiness by redirecting same client to the same backend instance 
+- Cookies enable Load Balancer "stickiness" by redirecting same client to the same backend instance 
     - works for CLB, ALB, NLB
     - we can control expiration date of the cookie
     - may bring imbalance to the load over EC2 instances
@@ -228,12 +228,12 @@ _Breakdown of Cookie attributes_
 - `Domain=example.com` : Specifies which domain(s) should receive the cookie; subdomains not included
 - `Expires=Wed, 15 May 2025 12:00:00 GMT` : When the cookie will be deleted by the browser. Without it, it’s a session cookie (deleted on tab/browser close)
 - `Secure` : Only send this cookie over HTTPS connections
-- `HttpOnly` : JavaScript cannot access this cookie (prevents XSS attacks)
-- `SameSite=Strict` : Controls cross-site requests. Strict blocks cookie on all cross-origin requests (prevents CSRF)
+- `HttpOnly` : JavaScript cannot access this cookie (prevents XSS attacks i.e. Cross-site Scripting)
+- `SameSite=Strict` : Controls cross-site requests. Strict blocks cookie on all cross-origin requests (prevents CSRF i.e. Cross-side Request Forgery)
 
 _How does cookie work ?_
-- User logs in, server verifies credentials, creates a session ID
-- Server sets a cookie by sending a Set-Cookie header in the HTTP response
+- User logs in, server verifies credentials, creates a session ID and stores user data in DB
+- Server sets a cookie by sending a Set-Cookie header containing the session ID in the HTTP response
 `Set-Cookie: session_id=abc123; Path=/; Domain=example.com; Expires=Wed, 15 May 2025 12:00:00 GMT; Secure; HttpOnly; SameSite=Strict`
 - Browser attaches this cookie on future requests
 
@@ -246,13 +246,20 @@ Cookie: session_id=abc123
 - Server recognizes the session and knows which user is making request
 - The user stays logged in as long as the cookie is valid.
 
-
-_What's the alternate way ?_
+_What's the alternate way ? What is their downsides ? When to use those ?_
 - URL-based session ID
     - User logs in and gets assigned a session ID (abc123)
     - This session ID is passed as a query parameter or part of the URL path (`https://example.com/dashboard?sessionid=abc123`)
     - On each request, the server extracts the session ID from the URL and looks it up
     - This allows session continuity without cookies
+    - Cons
+        - Security risk if someone copies and shared the URL, it may be leak their session
+        - Security risk as URLs are stored in browser history which might leak session ID
+        - Hard to manage as session ID has to be passed to all the links in a page
+        - Not RESTful, Embedding state in URLs breaks the stateless principles of REST
+    - Usecases
+        - Apps where cookies are disabled
+        - constrained environments e.g. embedded devices
 
 - Using Local Storage (ex - JWT Token)
     - User logs in -> server returns a JWT token in the response body
@@ -262,10 +269,28 @@ _What's the alternate way ?_
     - Cons 
         - Overhead on client-side to store and attach the token
         - Need to refresh the token before it expires
+    - Usecases
+        - Best for mobile apps or microservices where stateless auth is needed
 
 _Just like JWT token, cookie is also stored at client side. then why cookie is better ?_
-- Cookies are stored per domain (google.com) in the browser cookie jar. All cookies matching a domain are automatically attached while sending a HTTP request
-- JWT token are stored in `localStorage` or `sessionStorage` which are completely accessible to Javascript, making them vulnerable to XSS if your site is compromised
+- Automatically attached 
+    - Cookies are stored per domain (google.com) in the browser cookie jar. All cookies matching a domain are automatically attached while sending an HTTP request
+- Security Concerns
+    - XSS vulnerability
+        - JWT token are stored in `localStorage` or `sessionStorage` which are completely accessible to Javascript, making them vulnerable to XSS if your site is compromised
+        - Cookies maintain an attribute `HttpOnly`, then Javascript won't be able to read it
+    - CSRF vulnerability
+        - JWT are immune to 
+
+_Difference between Stateful and Stateless Authentication_
+- In a stateless authentication system, 
+    - the server does not store any session data
+    - all the needed info (like user ID, roles, expiry) is stored in the token (e.g., JWT)
+    - The token is self-contained and verified on each request using a signature.
+
+- In a stateful system:
+    - The server stores session data (like a session ID mapped to a user) in memory or a database.
+    - The cookie just contains a reference (e.g., session_id=xyz) to that state.
 
 _How does Stickiness work in LB ?_
 - LB maintains a session state by inserting a cookie while sending back response to client (browser)
