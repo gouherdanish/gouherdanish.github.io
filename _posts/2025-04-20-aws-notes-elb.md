@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AWS Notes - ELB"
-date: 2025-04-18
+date: 2025-04-28
 tags: ["Cloud"]
 ---
 
@@ -292,6 +292,15 @@ _Difference between Stateful and Stateless Authentication_
     - The server stores session data (like a session ID mapped to a user) in memory or a database.
     - The cookie just contains a reference (e.g., session_id=xyz) to that state.
 
+_Can we make a cookie stateless ?_
+**Yes**, by combining JWT and cookie
+- If server stores JWT token inside the cookie while sending response
+`Set-Cookie: token=<JWT>; HttpOnly; Secure; SameSite=Strict`
+- This token is a self-contained JWT (e.g., includes user ID, role, and expiry)
+- On every request, the browser sends this cookie
+- The server does NOT store session data — it just verifies the JWT
+- It is stateless because the session data is not stored in DB. Each request has all the required info in the token
+
 _How does Stickiness work in LB ?_
 - LB maintains a session state by inserting a cookie while sending back response to client (browser)
 - cookie has the info on the target instance ID (e.g. AWSALB, AWSALBAPP)
@@ -309,3 +318,6 @@ _How does Stickiness work in LB ?_
 
 - Each load balancer node in a given AZ only routes to targets (EC2s) in its own AZ.
 <img src="{{site.url}}/images/aws/aws-elb-cross-off.png">
+
+---
+### 
