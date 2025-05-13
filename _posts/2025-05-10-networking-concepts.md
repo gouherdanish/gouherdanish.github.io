@@ -34,24 +34,10 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 #### NIC
 
 - Network Interface Card (NIC) is a hardware component that enables a computer or device to connect to a network
-- It acts as the bridge between the computer and the physical network medium (ethernet cable or wifi)
+- Refer [this](https://gouherdanish.github.io/2025/05/12/nic.html) for more info
 
 <img src="{{site.url}}/images/networking/nic.png">
 
-- Two Types
-    - Wired NICs 
-        - Uses Ethernet cables and 
-        - Convert digital data into electrical signals for transmission and vice versa
-    - Wireless NICs 
-        - Utilize Wi-Fi and convert data into radio waves for transmission
-- Two Kinds
-    - Full-duplex NICs can send and receive data simultaneously
-    - Half-duplex NICs can either send or receive at one time
-- Modulation/Demodulation
-    - Modulation is the process of encoding information into a transmitted signal
-        - converting digital signal into analog signal is called Modulation
-        - Amplitude Modulation (AM), Frequency Modulation (FM)
-        - e.g. In radio braodcasting, audio signals are modulated onto a radio frequency carrier wave
-    - Demodulation is the process of extracting information from the transmitted signal
-        - converting analog signal into digital signal is called Demodulation
-        - e.g. In radio reception, a receiver demodulates the radio frequency carrier wave to extract the original audio signal
+#### Switch
+
+- 
