@@ -40,4 +40,8 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 #### Switch
 
-- 
+- It is a hardware device that connects devices within the LAN 
+- forwards data to the correct destination
+- Operates at Layer 2 (Data Link) of the OSI model
+
+<img src="{{site.url}}/images/networking/switch.png">
