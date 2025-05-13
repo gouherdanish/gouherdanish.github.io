@@ -41,7 +41,13 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 #### Switch
 
 - It is a hardware device that connects devices within the LAN 
-- forwards data to the correct destination
+- It forwards data packets _between two devices_
+- It forwards data to the correct inteneded destination by keeping track of the destination MAC address
+    - In contrast, a Hub broadcasts data packets to all connected devices, regardless of the destination
 - Operates at Layer 2 (Data Link) of the OSI model
 
 <img src="{{site.url}}/images/networking/switch.png">
+
+#### Router
+
+- It is a network device that forwards data packets _between different networks_
