@@ -31,3 +31,14 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 <img src="{{site.url}}/images/networking/lan.png">
 
+#### NIC
+
+- Network Interface Card (NIC) is a hardware component that enables a computer or device to connect to a network
+- It acts as the bridge between the computer and the physical network medium (ethernet cable or wifi)
+- Two Types
+    - Wired NICs - Use Ethernet cables and convert digital data into electrical signals for transmission
+    - Wireless NICs - Utilize Wi-Fi and convert data into radio waves for transmission
+- Two Kinds
+    - Full-duplex NICs can send and receive data simultaneously
+    - Half-duplex NICs can either send or receive at one time
+- 
