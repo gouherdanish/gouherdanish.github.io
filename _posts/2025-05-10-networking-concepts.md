@@ -52,16 +52,19 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 #### Router
 
 - It is a network device that connects local area networks (LANs) to the internet and other networks
+- It is also referred to as a Default Gateway sometimes
 - It forwards data packets _between different networks_
 - It uses routing tables, which contain information about the different networks they are connected to and the best paths to reach them
 - Operate at Layer 3 of the OSI model (the network layer), making decisions based on IP addresses, which are the primary identifier for network communication
-- In includes additional settings like Firewall for enahanced security
+- It includes additional settings like Firewall for enahanced security
+- Routers assign IPs dynamically (DHCP), which can change over time
 
 <img src="{{site.url}}/images/networking/router.png">
 
 #### Firewall
 
 - A firewall protects your network by blocking or allowing traffic (incoming or outgoing) based on rules you set
+- It can be hardware or software
 - It acts as a gatekeeper, deciding which packets can enter or leave your network
 - Ex: Block all traffic from the internet to internal IPs except port 80 (HTTP) and 443 (HTTPS).
 - Firewall is a generic concept which can be setup on any network device 
@@ -73,5 +76,25 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 - It stands for Demilitarized Zone
 - It is a special network zone that exposes one device directly to the internet, bypassing the router’s firewall protections
+- DMZs are used for hosting servers that need public access and a DMZ host exposes all ports of the designated host
 - Often used for gaming consoles, surveillance systems, or test servers
 - The device in DMZ is vulnerable to internet attacks and must be secured manually
+- Best Practices
+    - Use an internal API layer or proxy, not direct DB connection
+    - Only open specific ports like 80 or 443
+- Alternatively, we can use port forwarding
+
+#### Port Forwarding
+
+- Port forwarding tells the router to redirect specific types of incoming traffic to a specific internal device on your network
+- Ex: Forward port 22 from the internet to 192.168.1.100:22 to enable remote SSH login
+    - Here internet traffic comes at Router's port 22
+    - It is forwarded to port 22 of the internal server located at 192.168.1.100 (Private IP known to Router)
+- Usually, port forwarding rule is setup in Router Web UI -> Advanced, NAT, or Firewall Settings
+- Following things are required
+    - External Port (e.g. 80) - where the internet sends traffic to
+    - Internal IP (e.g. 192.168.1.100) - your device or webserver private IP
+    - Internal Port (e.g. 80) - where the webserver listens to
+    - Protocol (TCP or UDP) - depending on the application being served
+
+
