@@ -57,9 +57,37 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - It uses routing tables, which contain information about the different networks they are connected to and the best paths to reach them
 - Operate at Layer 3 of the OSI model (the network layer), making decisions based on IP addresses, which are the primary identifier for network communication
 - It includes additional settings like Firewall for enahanced security
-- Routers assign IPs dynamically (DHCP), which can change over time
+- Routers assign IPs dynamically via DHCP, which can change over time as DHCP lease expires
 
 <img src="{{site.url}}/images/networking/router.png">
+
+#### DHCP
+
+- It stands for Dynamic Host Configuration Protocol
+- It is a network protocol that automatically assigns IP addresses and other network configuration parameters to devices on a network
+
+_DHCP Server_
+
+- A server on the network that manages the IP address pool and assigns addresses to clients.
+- It is situated inside the router
+
+_DHCP Client_
+
+- A device (like a computer, phone, or router) that requests an IP address from the DHCP server.
+
+_DHCP Lease_
+
+- The time period for which a device is assigned a particular IP address.
+
+_Process_
+
+- When a client connects to the network, it broadcasts a DHCP request to find a DHCP server. 
+- The server responds with a DHCP offer, which includes an IP address, subnet mask, and other configuration parameters. - The client then sends a DHCP request to accept the offer, and the server grants the lease
+
+_Benefits_
+- Automated and centralized IP Address Management
+- IP Address Reuse
+
 
 #### Firewall
 
