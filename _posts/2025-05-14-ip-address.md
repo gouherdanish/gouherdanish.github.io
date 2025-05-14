@@ -19,8 +19,11 @@ Devices must have an IP to communicate with each other in a network
 ### Can the IP address of a device change ? If yes, in what cases ?
 
 - IP address of a device can change if the device moves to a new network
-- It can also change in the same network if it is disconnected and reconnected
-    - usually it won't change if reconnected in few minutes
+- It can also change in the same network in the following cases
+    - if the device is disconnected and reconnected
+        - usually it won't change if reconnected in few minutes
+    - if another device takes your old IP before you reconnect.
+    - if the DHCP lease of the ip expired (24 hr)
 
 ### When is an IP address assigned 
 
