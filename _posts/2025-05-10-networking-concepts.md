@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Docker Concepts and Usage"
+title: "Networking Concepts"
 date: 2025-05-10
 tags: ["Networking"]
 ---
@@ -63,33 +63,6 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 #### DHCP
 
-- It stands for Dynamic Host Configuration Protocol
-- It is a network protocol that automatically assigns IP addresses and other network configuration parameters to devices on a network
-
-_DHCP Server_
-
-- A server on the network that manages the IP address pool and assigns addresses to clients.
-- It is situated inside the router
-
-_DHCP Client_
-
-- A device (like a computer, phone, or router) that requests an IP address from the DHCP server.
-
-_DHCP Lease_
-
-- The time period for which a device is assigned a particular IP address.
-
-_Process_
-
-- When a client is not connected to a network, it will not have any IP address
-    - Since IP address is a logical addressing to identify a device in a network
-    - If the device is not connected to the network at all, then there is no point of having an IP
-- When a client connects to the network, it broadcasts a DHCP request to find a DHCP server. 
-- The server responds with a DHCP offer, which includes an IP address, subnet mask, and other configuration parameters. - The client then sends a DHCP request to accept the offer, and the server grants the lease
-
-_Benefits_
-- Automated and centralized IP Address Management
-- IP Address Reuse
 
 
 #### Firewall
