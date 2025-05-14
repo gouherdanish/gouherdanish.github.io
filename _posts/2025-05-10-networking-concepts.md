@@ -81,6 +81,9 @@ _DHCP Lease_
 
 _Process_
 
+- When a client is not connected to a network, it will not have any IP address
+    - Since IP address is a logical addressing to identify a device in a network
+    - If the device is not connected to the network at all, then there is no point of having an IP
 - When a client connects to the network, it broadcasts a DHCP request to find a DHCP server. 
 - The server responds with a DHCP offer, which includes an IP address, subnet mask, and other configuration parameters. - The client then sends a DHCP request to accept the offer, and the server grants the lease
 
