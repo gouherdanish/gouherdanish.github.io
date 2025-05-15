@@ -16,50 +16,6 @@ Devices must have an IP to communicate with each other in a network
 - IP address is decided by the router (logically) to locate a device in the network (just like your mail come to your address)
 
 ---
-### IP Address vs MAC Address
-
-_logical / physical_
-- IP Address is a logical addressing of a device in the network (like your street address)
-- MAC Address is physical addressing of device 
-
-_assigned by_
-- IP address is assinged by Router DHCP (software)
-- MAC address is assigned by Hardware and is burned into NIC by manufacturer
-
-_changes?_
-- IP address can change dynamically
-- MAC address can't change usually
-
-_layer_
-- IP address is used at Layer 3 (Network Layer)
-- MAC address is used at Layer 2 (Data Link Layer)
-
-_Format_
-- IP address is 32-bit (IPv4) or 128-bit (IPv6)
-- MAC address is 48-bit hexadecimal 
-
-
-_Example_
-- IP = 192.168.0.1
-- MAC = 00:1A:3B:4C:5D:6E
-
-### Can the IP address of a device change ? If yes, in what cases ?
-
-Yes, in following cases
-- IP address of a device can change if the device moves to a new network 
-- It can also change in the same network in the following cases
-    - if the DHCP lease of the ip expired (24 hr)
-    - if the device is restarted or disconnected and reconnected
-        - usually it won't change if reconnected in few minutes
-    - if another device takes your old IP before you reconnect.
-    - if the router reboots or restarts or resets its lease tables
-
-### When is an IP address assigned 
-
-- If the device is not connected to the network at all, then there is no point of having an IP
-
-
----
 ### How is IP address assigned 
 
 - When a client is not connected to a network, it will not have any IP address
@@ -85,6 +41,19 @@ inet 192.168.0.104 netmask 0xffffff00 broadcast 192.168.0.255
 - The devices remember their last assigned IP and while reconnecting they ask the DHCP if they can reuse the last one if available
 
 ---
+### Can the IP address of a device change ? If yes, in what cases ?
+
+Yes, IP can change in following cases
+- IP address of a device can change if the device moves to a new network 
+- It can also change in the same network in the following cases
+    - if the DHCP lease of the ip expired (24 hr)
+    - if the device is restarted or disconnected and reconnected
+        - usually it won't change if reconnected in few minutes
+    - if another device takes your old IP before you reconnect.
+    - if the router reboots or restarts or resets its lease tables
+
+---
+
 ### What is DHCP
 
 - DHCP stands for Dynamic Host Configuration Protocol
@@ -107,4 +76,30 @@ _Benefits_
 - Automated and centralized IP Address Management
 - IP Address Reuse
 
+---
+### IP Address vs MAC Address
+
+_logical / physical_
+- IP Address is a logical addressing of a device in the network (like your street address)
+- MAC Address is physical addressing of device 
+
+_assigned by_
+- IP address is assinged by Router DHCP (software)
+- MAC address is assigned by Hardware and is burned into NIC by manufacturer
+
+_changes?_
+- IP address can change dynamically
+- MAC address can't change usually
+
+_layer_
+- IP address is used at Layer 3 (Network Layer)
+- MAC address is used at Layer 2 (Data Link Layer)
+
+_Format_
+- IP address is 32-bit (IPv4) or 128-bit (IPv6)
+- MAC address is 48-bit hexadecimal 
+
+_Example_
+- IP = 192.168.0.1
+- MAC = 00:1A:3B:4C:5D:6E
 ---
