@@ -19,23 +19,48 @@ Devices must have an IP to communicate with each other in a network
 ### Can the IP address of a device change ? If yes, in what cases ?
 
 Yes, in following cases
-- IP address of a device can change if the device moves to a new network
+- IP address of a device can change if the device moves to a new network 
 - It can also change in the same network in the following cases
+    - if the DHCP lease of the ip expired (24 hr)
     - if the device is restarted or disconnected and reconnected
         - usually it won't change if reconnected in few minutes
     - if another device takes your old IP before you reconnect.
-    - if the DHCP lease of the ip expired (24 hr)
-    - if the router is restarted or reset
+    - if the router reboots or restarts or resets its lease tables
 
 ### When is an IP address assigned 
 
 - If the device is not connected to the network at all, then there is no point of having an IP
-ifconfig | grep "inet "
+
 
 ---
-### How is IP address assigned - DHCP
+### How is IP address assigned 
 
-- It stands for Dynamic Host Configuration Protocol
+- When a client is not connected to a network, it will not have any IP address
+    - as seen below, there is just the localhost IP available, not the router-assigned one
+
+```
+$ ifconfig | grep "inet "
+inet 127.0.0.1 netmask 0xff000000 
+```
+
+- When a client connects to the network, the router assigns an IP from its pool of available IPs
+
+```
+$ ifconfig | grep "inet "
+inet 127.0.0.1 netmask 0xff000000 
+inet 192.168.0.104 netmask 0xffffff00 broadcast 192.168.0.255
+```
+
+- Internally, while connecting to wifi, the client broadcasts a DHCP request to find a DHCP server
+- The server responds with a DHCP offer, which includes an IP address, subnet mask, and other configuration parameters
+- The client then sends a DHCP request to accept the offer, and the server grants the lease
+- This lease is for 24hr after which the IP address expires and returned back to the DHCP IP pool 
+- The devices remember their last assigned IP and while reconnecting they ask the DHCP if they can reuse the last one if available
+
+---
+### What is DHCP
+
+- DHCP stands for Dynamic Host Configuration Protocol
 - It is a network protocol that automatically assigns IP addresses and other network configuration parameters to devices on a network
 
 _DHCP Server_
@@ -50,12 +75,6 @@ _DHCP Client_
 _DHCP Lease_
 
 - The time period for which a device is assigned a particular IP address.
-
-_Process_
-
-- When a client is not connected to a network, it will not have any IP address
-- When a client connects to the network, it broadcasts a DHCP request to find a DHCP server. 
-- The server responds with a DHCP offer, which includes an IP address, subnet mask, and other configuration parameters. - The client then sends a DHCP request to accept the offer, and the server grants the lease
 
 _Benefits_
 - Automated and centralized IP Address Management
