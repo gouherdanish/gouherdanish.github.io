@@ -13,17 +13,19 @@ Devices must have an IP to communicate with each other in a network
 - IP address is a unique identifier assigned to each device connected to a network that uses the Internet Protocol
 - It’s how devices find and communicate with each other over the internet or a local network (LAN)
 - It is a logical addressing of a device in the network (like your street address)
-    - it is decided by the router (logically) to locate a device in the network (just like your mail come to your address)
+- IP address is decided by the router (logically) to locate a device in the network (just like your mail come to your address)
 
 ---
 ### Can the IP address of a device change ? If yes, in what cases ?
 
+Yes, in following cases
 - IP address of a device can change if the device moves to a new network
 - It can also change in the same network in the following cases
-    - if the device is disconnected and reconnected
+    - if the device is restarted or disconnected and reconnected
         - usually it won't change if reconnected in few minutes
     - if another device takes your old IP before you reconnect.
     - if the DHCP lease of the ip expired (24 hr)
+    - if the router is restarted or reset
 
 ### When is an IP address assigned 
 
