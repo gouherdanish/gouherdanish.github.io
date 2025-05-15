@@ -16,6 +16,33 @@ Devices must have an IP to communicate with each other in a network
 - IP address is decided by the router (logically) to locate a device in the network (just like your mail come to your address)
 
 ---
+### IP Address vs MAC Address
+
+_logical / physical_
+- IP Address is a logical addressing of a device in the network (like your street address)
+- MAC Address is physical addressing of device 
+
+_assigned by_
+- IP address is assinged by Router DHCP (software)
+- MAC address is assigned by Hardware and is burned into NIC by manufacturer
+
+_changes?_
+- IP address can change dynamically
+- MAC address can't change usually
+
+_layer_
+- IP address is used at Layer 3 (Network Layer)
+- MAC address is used at Layer 2 (Data Link Layer)
+
+_Format_
+- IP address is 32-bit (IPv4) or 128-bit (IPv6)
+- MAC address is 48-bit hexadecimal 
+
+
+_Example_
+- IP = 192.168.0.1
+- MAC = 00:1A:3B:4C:5D:6E
+
 ### Can the IP address of a device change ? If yes, in what cases ?
 
 Yes, in following cases
@@ -79,3 +106,5 @@ _DHCP Lease_
 _Benefits_
 - Automated and centralized IP Address Management
 - IP Address Reuse
+
+---
