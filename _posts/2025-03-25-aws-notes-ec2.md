@@ -210,7 +210,7 @@ Examples
 - IPv6
     - AWS supports both IPv4 and IPv6
     - Contains hexadecimal characters
-    - Ex: abcd.1.efgh.23.4567.gh
+    - Ex: 2001:0db8:0000:0000:0000:0000:0042:8329
 
 - Public IP
     - the machine can be identified on the internet (can be geolocated)

@@ -72,6 +72,13 @@ _DHCP Lease_
 
 - The time period for which a device is assigned a particular IP address.
 
+_DHCP Reservation_
+
+- It is also know as static IP address assignment
+- It allows you to reserve a specific IP address from a DHCP server for a device based on its MAC address
+- This ensures the device consistently receives the same IP address whenever it connects to the network
+- Ex: Printers, servers, VoIP Devices, Routers, Switches etc have fixed IPs
+
 _Benefits_
 - Automated and centralized IP Address Management
 - IP Address Reuse
@@ -102,4 +109,18 @@ _Format_
 _Example_
 - IP = 192.168.0.1
 - MAC = 00:1A:3B:4C:5D:6E
+
 ---
+### IPv4 vs IPv6
+
+- IPv4 is 32-bit while IPv6 is 128-bit
+- Ex:
+    - IPv4 = 192.168.0.1
+    - IPv6 = 2001:0db8:0000:0000:0000:0000:0042:8329
+- In IPv4 each group is 8 bit integer, while in IPv6 each group is 16 bit hexadecimal (each digit is a 4-bit hexadecimal)
+
+---
+### Public vs Private IP
+
+- Public IP is used to identify a machine on the public internet
+- Private IP is used to identify a machine over the private network
