@@ -84,7 +84,9 @@ _Benefits_
 - IP Address Reuse
 
 ---
-### IP Address vs MAC Address
+### Some Important Concepts
+
+**IP Address vs MAC Address**
 
 _logical / physical_
 - IP Address is a logical addressing of a device in the network (like your street address)
@@ -102,7 +104,7 @@ _layer_
 - IP address is used at Layer 3 (Network Layer)
 - MAC address is used at Layer 2 (Data Link Layer)
 
-_Format_
+_format_
 - IP address is 32-bit (IPv4) or 128-bit (IPv6)
 - MAC address is 48-bit hexadecimal 
 
@@ -110,8 +112,7 @@ _Example_
 - IP = 192.168.0.1
 - MAC = 00:1A:3B:4C:5D:6E
 
----
-### IPv4 vs IPv6
+**IPv4 vs IPv6**
 
 - IPv4 is 32-bit while IPv6 is 128-bit
 - Ex:
@@ -119,8 +120,12 @@ _Example_
     - IPv6 = 2001:0db8:0000:0000:0000:0000:0042:8329
 - In IPv4 each group is 8 bit integer, while in IPv6 each group is 16 bit hexadecimal (each digit is a 4-bit hexadecimal)
 
----
-### Public vs Private IP
+**Public vs Private IP**
 
 - Public IP is used to identify a machine on the public internet
 - Private IP is used to identify a machine over the private network
+
+**Static vs Dynamic IP**
+
+- Static IP: Assigned and does not change, useful for devices needing a permanent address within the network. 
+- Dynamic IP: Assigned temporarily and can change over time
