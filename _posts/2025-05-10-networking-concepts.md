@@ -167,3 +167,5 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - Maps an IP address to a MAC address in a local network
 - necessary to deliver data on Ethernet or Wi-Fi, which uses MAC addresses 
 - works at Layer 2
+
+`Who has IP 192.168.1.1? → I do! My MAC is 00:1A:2B:3C:4D:5E`
