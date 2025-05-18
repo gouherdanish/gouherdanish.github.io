@@ -129,3 +129,4 @@ _Example_
 
 - Static IP: Assigned and does not change, useful for devices needing a permanent address within the network. 
 - Dynamic IP: Assigned temporarily and can change over time
+

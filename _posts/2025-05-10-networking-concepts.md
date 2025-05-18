@@ -61,10 +61,6 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 <img src="{{site.url}}/images/networking/router.png">
 
-#### DHCP
-
-
-
 #### Firewall
 
 - A firewall protects your network by blocking or allowing traffic (incoming or outgoing) based on rules you set
@@ -101,4 +97,73 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
     - Internal Port (e.g. 80) - where the webserver listens to
     - Protocol (TCP or UDP) - depending on the application being served
 
+---
 
+### Some Important Concepts
+
+**Classful IP Addressing**
+
+- IP addresses are globally managed by Internet Assigned Numbers Authority (IANA) and Regional Internet Registries (RIR)
+- The 32-bit IPv4 address is divided into five classes - A, B, C, D and E
+- Class A - 10.0.0.0/8 (first 8 bits is the network ID)
+- Class B - 172.16.0.0/16 (first 16 bits are the network part)
+- Class C - 192.168.1.0/24 (first 24 bits are the network part)
+
+<img src="{{site.url}}/images/networking/router.png">
+
+**CIDR**
+
+- CIDR = Classless Inter-Domain Routing 
+- This notation is a concise way to represent an IP address and its associated network mask
+- Example: 
+    - 192.168.1.0/24
+    - This means that 192.168.1 is the network part while the last 8-bit is the host part
+    - IP range = 192.168.1.1 - 192.168.1.254 
+    - 2 IPs are reserved
+        - 192.168.1.0 - For router/gateway
+        - 192.168.1.255 - For Broadcast
+
+
+**Subnet**
+
+- short form for Sub-network
+- it is a smaller network logically segmented from a larger IP network (VPC)
+- In IP terms, a subnet is defined by an IP address + a subnet mask
+- Example:
+    - VPC CIDR = 10.0.0.0/16
+    - Subnet 1 is given by 10.0.1.0/24 (Public)
+    - Subnet 2 is given by 10.0.2.0/24 (Private)
+- In AWS, a subnet is a CIDR block within the VPC range
+
+**Subnet Mask**
+
+- The subnet mask defines how many bits of the IP address represent the network part and how many represent hosts.
+- Example:
+    - IP = 192.168.0.1
+    - Subnet Mask = 255.255.255.0 means that first 24 bits of the IP address are part of network
+
+**DNS**
+
+- stands for Domain Name System
+- translates human-friendly domain names into IP addresses so the device knows where to send the request on the internet
+- without DNS, you'd need to remember and enter IPs for every website.
+- works at Layer 7
+
+`google.com -> 142.250.64.78`
+
+**NAT**
+
+- stands for Network Address Translation
+- Maps private IP addresses to a public IP address for internet communication
+- It allows multiple devices in a home network to share one internet-facing public IP address
+- This way you don't need public IPs for each individual device since IPv4 addresses are limited
+- works at Layer 3
+
+`Device IP: 192.168.1.5 → Router (NAT) → Public IP: 203.0.113.20`
+
+**ARP**
+
+- stands for Address Resolution Protocol
+- Maps an IP address to a MAC address in a local network
+- necessary to deliver data on Ethernet or Wi-Fi, which uses MAC addresses 
+- works at Layer 2
