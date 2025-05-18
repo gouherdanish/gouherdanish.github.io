@@ -148,6 +148,8 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - translates human-friendly domain names into IP addresses so the device knows where to send the request on the internet
 - without DNS, you'd need to remember and enter IPs for every website.
 - works at Layer 7
+- DNS servers are distributed globally and hosted by ISPs, Google (8.8.8.8), Cloudflare(1.1.1.1)
+    - Request goes to these servers and gets resolved to an IP from where the requested data is relayed back to the device
 
 `google.com -> 142.250.64.78`
 
@@ -158,6 +160,7 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - It allows multiple devices in a home network to share one internet-facing public IP address
 - This way you don't need public IPs for each individual device since IPv4 addresses are limited
 - works at Layer 3
+- NAT happens at the router or NAT Gateway
 
 `Device IP: 192.168.1.5 → Router (NAT) → Public IP: 203.0.113.20`
 
@@ -167,5 +170,8 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - Maps an IP address to a MAC address in a local network
 - necessary to deliver data on Ethernet or Wi-Fi, which uses MAC addresses 
 - works at Layer 2
+- It is a broad-cast based protocol
+    - your device broadcasts an ARP request and the concerned device responds with its MAC
+- There is no server involved here, the data is cached in sender's ARP cache
 
 `Who has IP 192.168.1.1? → I do! My MAC is 00:1A:2B:3C:4D:5E`
