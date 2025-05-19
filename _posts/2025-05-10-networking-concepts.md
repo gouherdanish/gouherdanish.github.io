@@ -223,3 +223,17 @@ _Is Network Load Balancer a Reverse Proxy ?_
 - NLB is just a load balancer, it's not a reverse proxy
 - A reverse proxy does application-aware traffic routing e.g. ALB, Nginx
 
+**Encoding vs Encryption**
+
+Both are used to transform the input data. However there is one difference
+
+_Usecase_
+    - Encoding converts data for compatibility or representation e.g. Binary encoding, Base-62 encoding
+    - Encryption secures data by making it unreadable to unauthorized parties
+
+_Reversible_
+    - Encoding is easily reversible while Encrytion is only reversible if you have the secret key that encypted it
+
+---
+
+
