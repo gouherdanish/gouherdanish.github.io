@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Networking Concepts"
-date: 2025-05-10
+title: "OSI Networking"
+date: 2025-05-19
 tags: ["Networking"]
 ---
 
@@ -52,3 +52,8 @@ OSI stands for Open Systems Interconnection
 - Protocols
     - TCP - Transmission Control Protocol (for reliable, ordered delivery)
     - UDP - User Datagram Protocol (for faster, less-reliable delivery)
+- Key Functions
+    - Segmentation - It breaks down large messages to smaller segments "packets" for transmission
+    - Flow Control - It controls the flow of data to prevent the receiver from being overwhelmed, especially with TCP
+    - Error Control - It provides mechanisms for detecting and correcting errors during data transmission
+    - Multiplexing - 
