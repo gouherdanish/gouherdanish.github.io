@@ -122,8 +122,13 @@ _Example_
 
 **Public vs Private IP**
 
-- Public IP is used to identify a machine on the public internet
-- Private IP is used to identify a machine over the private network
+_Scope_
+    - Public IP is used to identify a machine on the public internet
+    - Private IP is used to identify a machine over the private network
+
+_Alias_
+    - Public IP is also called External IP
+    - Private IP is also called Internal IP
 
 **Static vs Dynamic IP**
 

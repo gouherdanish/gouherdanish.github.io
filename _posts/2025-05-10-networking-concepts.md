@@ -31,14 +31,14 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 <img src="{{site.url}}/images/networking/lan.png">
 
-#### NIC
+**NIC**
 
 - Network Interface Card (NIC) is a hardware component that enables a computer or device to connect to a network
 - Refer [this](https://gouherdanish.github.io/2025/05/12/nic.html) for more info
 
 <img src="{{site.url}}/images/networking/nic.png">
 
-#### Switch
+**Switch**
 
 - It is a hardware device that connects devices within the LAN 
 - It forwards data packets _between two devices_
@@ -49,7 +49,7 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 <img src="{{site.url}}/images/networking/switch.png">
 
-#### Router
+**Router**
 
 - It is a network device that connects local area networks (LANs) to the internet and other networks
 - It is also referred to as a Default Gateway sometimes
@@ -61,7 +61,7 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 
 <img src="{{site.url}}/images/networking/router.png">
 
-#### Firewall
+**Firewall**
 
 - A firewall protects your network by blocking or allowing traffic (incoming or outgoing) based on rules you set
 - It can be hardware or software
@@ -72,7 +72,7 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
     - On a Windows system, we can use Windows Defender GUI and setup inbound Allow TCP:80 rule
     - On a Homw router, we can login to its Web UI and add Allow TCP:80 rule in the Firewall
 
-#### DMZ
+**DMZ**
 
 - It stands for Demilitarized Zone
 - It is a special network zone that exposes one device directly to the internet, bypassing the router’s firewall protections
@@ -84,7 +84,7 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
     - Only open specific ports like 80 or 443
 - Alternatively, we can use port forwarding
 
-#### Port Forwarding
+**Port Forwarding**
 
 - Port forwarding tells the router to redirect specific types of incoming traffic to a specific internal device on your network
 - Ex: Forward port 22 from the internet to 192.168.1.100:22 to enable remote SSH login
@@ -96,6 +96,13 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
     - Internal IP (e.g. 192.168.1.100) - your device or webserver private IP
     - Internal Port (e.g. 80) - where the webserver listens to
     - Protocol (TCP or UDP) - depending on the application being served
+
+**Internal vs External Port**
+
+In a Home LAN,
+- External port is at the router's end is exposed to the internet and the traffic reaches at this port
+- Internal port is at each of the internal devices.
+- Using the port forwarding rule, the router forwards the internet traffic it receives to a specific device (internal IP) and the exposed port on that device
 
 ---
 
@@ -109,7 +116,7 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - Class B - 172.16.0.0/16 (first 16 bits are the network part)
 - Class C - 192.168.1.0/24 (first 24 bits are the network part)
 
-<img src="{{site.url}}/images/networking/router.png">
+<img src="{{site.url}}/images/networking/classful_addressing.png">
 
 **CIDR**
 
@@ -175,3 +182,44 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
 - There is no server involved here, the data is cached in sender's ARP cache
 
 `Who has IP 192.168.1.1? → I do! My MAC is 00:1A:2B:3C:4D:5E`
+
+**Forward Proxy**
+
+- Also called client-side proxy
+- The forward proxy lives on the client side, between your device and the internet
+- Used for access control for outbound traffic (Workplace restrictions, parental control)
+- Masks client device IP address (Maintains anonymity)
+- Ex - VPN, Tor
+- On home wifi (without forward proxy), request goes straight to your router 
+    - Client → Router → ISP → Google
+- On office wifi (with forward proxy), all HTTP/HTTPs request are forwarded to the configured proxy first
+    - this way outbound requests are filtered
+    - Client → **Proxy** → Router → ISP → Google
+
+<img src="{{site.url}}/images/networking/forward_proxy.png">
+
+**Reverse Proxy**
+
+- Also called server-side proxy
+- Accepts requests from the internet, then forwards them to one of several backend servers
+    - The client doesn't know which server handled the request (Maintains anonymity)
+- Reverse proxy acts as an intermediary between clients and servers
+- Reverse proxy is able to inspect headers in the HTTP request and route based on 
+    - hostname or domain
+    - URL path
+    - Content (e.g. image requests sent to separate server)
+    - Geolocation (nearest to client)
+- Used for 
+    - load balancing
+    - SSL Termination
+    - security and firewalling
+    - path-based routing
+
+<img src="{{site.url}}/images/networking/reverse_proxy.png">
+
+_Is Network Load Balancer a Reverse Proxy ?_
+
+**No**, 
+- NLB is just a load balancer, it's not a reverse proxy
+- A reverse proxy does application-aware traffic routing e.g. ALB, Nginx
+
