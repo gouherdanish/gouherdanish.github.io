@@ -97,6 +97,7 @@ There are 7 layers in OSI model
     - Error Handling - It detects and corrects errors that may occur during data transmission (FCS, checksum)
 - Output
     - Frame = [Ethernet Header/Trailer] + [IP Packet] + [CRC checksum]
+    - Ethernet Header contains MAC addresses, EtherType, CRC
 - Component Involved
     - NIC hardware + DMA (Direct Memory Access - copies data from main RAM)
 
@@ -128,11 +129,20 @@ Think of sending a physical letter:
 --
 ## Actual process
 
-- 
-- Application hands encrypted data to OS via system calls (socket send process e.g. send() or write())
-- OS kernel networking subsystem encapsulates data with TCP header => segments
-- OS kernel immediately wraps the TCP segment with IP header
-    - The  is added by the same network stack logic, often within the same function call
-- OS stores the segments temporarily in kernel buffers inside RAM
+- User types `google.com` in browser
+- Browser resolves DNS to Google's public IP address (local cache or DNS lookup)
+- Browser calls OS to initiate a TCP Handshake which enables reliable connection
+- Browser calls OS to initiate a TLS Handshake to get shared session keys
+- Browser prepares HTTP request and calls OS which stores this data inside user space of RAM
+- Browser encrypts the data using the session key. OS still stores the Encrypted Data in user space of RAM
+- OS kernel copies data to kernel space
+- OS kernel networking subsystem encapsulates data with TCP header => TCP segments
+- OS kernel immediately wraps the TCP segment with IP header (within the same function call) => IP Packets
+- OS kernel notifies NIC 
+- NIC accesses the data inside RAM using DMA (Direct memory access) via dedicated PCIe lanes
+- NIC adds Ethernet header => Frames
+- NIC passes the frame to the PHY layer chip
+- PHY converts encrypted bits to precise voltage signals, which are tranferred to RJ45 port as analog waveform
+- RJ45 port just transfers the data to copper wires
 
-<img src="{{site.url}}/images/networking/osi.png">
+<img src="{{site.url}}/images/networking/osi-flow.png">
