@@ -63,6 +63,9 @@ There are 7 layers in OSI model
     - Multiplexing - It allows multiple applications on a host to simultaneously send and receive data by assigning each connection a unique source and destination port
 - Output
     - TCP Segment = [TCP Header] + [Encrypted Data]
+    - TCP Header contains Source Port, Destination Port, Sequence Number, ACK Flags, Option etc.
+
+<img src="{{site.url}}/images/networking/tcp-seg.png">
 
 ---
 ### Layer 3 - Network Layer (IP)
@@ -77,7 +80,8 @@ There are 7 layers in OSI model
     - Packet - It encapsulates data into packets and then forwards these packets to the next hop in the network, eventually reaching the destination
 - Output
     - IP Packet = [IP Header] + [TCP Segment]
-    
+    - IP header contains (source IP, dest IP, TTL, checksum, etc.)
+
 ---
 ### Layer 2 - Data Link Layer
 
@@ -88,11 +92,13 @@ There are 7 layers in OSI model
     - IEEE 802.11 (Wifi) - the standard for wireless networking, defining how devices connect to wireless access points and transmit data wirelessly
     - ARP - Address Resolution Protocol (IP address -> MAC address)
 - Key Functions
-    - Framing - It adds headers and trailers to the data from Network Layer
+    - Framing - It adds ethernet headers and trailers to the data from Network Layer
     - Physical Addressing - It adds source and destination MAC addresses (to the header part)
     - Error Handling - It detects and corrects errors that may occur during data transmission (FCS, checksum)
 - Output
-    - Frame = [Ethernet Header] + [IP Packet] + [CRC]
+    - Frame = [Ethernet Header/Trailer] + [IP Packet] + [CRC checksum]
+- Component Involved
+    - NIC hardware + DMA (Direct Memory Access - copies data from main RAM)
 
 ---
 ### Layer 1 - Physical Layer
@@ -122,3 +128,11 @@ Think of sending a physical letter:
 --
 ## Actual process
 
+- 
+- Application hands encrypted data to OS via system calls (socket send process e.g. send() or write())
+- OS kernel networking subsystem encapsulates data with TCP header => segments
+- OS kernel immediately wraps the TCP segment with IP header
+    - The  is added by the same network stack logic, often within the same function call
+- OS stores the segments temporarily in kernel buffers inside RAM
+
+<img src="{{site.url}}/images/networking/osi.png">

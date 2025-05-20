@@ -168,3 +168,10 @@ _Analogy_
 - Think of a building (computer) with an IP address as its street address. 
 - Each apartment in the building (application) needs a unique door (port) for mail delivery (data). 
 - The postman (network) uses the IP address to find the building and the port to deliver the mail to the right apartment
+
+**Internal vs External Port**
+
+In a Home LAN,
+- External port is at the router's end is exposed to the internet and the traffic reaches at this port
+- Internal port is at each of the internal devices.
+- Using the port forwarding rule, the router forwards the internet traffic it receives to a specific device (internal IP) and the exposed port on that device

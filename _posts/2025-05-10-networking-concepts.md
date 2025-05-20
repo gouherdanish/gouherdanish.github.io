@@ -97,13 +97,6 @@ _Personal Area Networks (PANs)_: Connect devices around a single person, like a 
     - Internal Port (e.g. 80) - where the webserver listens to
     - Protocol (TCP or UDP) - depending on the application being served
 
-**Internal vs External Port**
-
-In a Home LAN,
-- External port is at the router's end is exposed to the internet and the traffic reaches at this port
-- Internal port is at each of the internal devices.
-- Using the port forwarding rule, the router forwards the internet traffic it receives to a specific device (internal IP) and the exposed port on that device
-
 ---
 
 ### Some Important Concepts
@@ -200,9 +193,8 @@ In a Home LAN,
 <img src="{{site.url}}/images/networking/reverse_proxy.png">
 
 _Is Network Load Balancer a Reverse Proxy ?_
-
-**No**, 
-- NLB is just a load balancer, it's not a reverse proxy
+ 
+- No, NLB is just a load balancer, it's not a reverse proxy
 - A reverse proxy does application-aware traffic routing e.g. ALB, Nginx
 
 **Encoding vs Encryption**
@@ -218,6 +210,8 @@ _Reversible_
 
 **Multiplexing**
 
+_Hardware Multiplexing_
+
 - It takes several input signals and combines them into a single output signal for transmission over a shared channel
 - (Analogy) multiple phone calls combined to transmit over one single wire
 
@@ -232,7 +226,7 @@ _Working Principle - 2-to-1 Multiplexer_
 
 <img src="{{site.url}}/images/networking/mux_21.png">
 
-- Multiplexer is a digital circuit which is implemented by logic gate 
+- Multiplexer is a digital electronic circuit which is implemented by logic gate 
 - When S=0,
     - first AND Gate gets D0 and S=1 which outputs D0
     - second AND Gate gets D1 and S=0 which outputs 0
@@ -247,6 +241,10 @@ _Working Principle - 2-to-1 Multiplexer_
 | 1 | D1 |
 
 <img src="{{site.url}}/images/networking/mux_21_logic_gate.png">
+
+_Software Multiplexing_
+
+
 ---
 
 
