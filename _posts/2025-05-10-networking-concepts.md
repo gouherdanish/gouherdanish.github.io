@@ -108,28 +108,10 @@ In a Home LAN,
 
 ### Some Important Concepts
 
-**Classful IP Addressing**
+**IP Address**
 
-- IP addresses are globally managed by Internet Assigned Numbers Authority (IANA) and Regional Internet Registries (RIR)
-- The 32-bit IPv4 address is divided into five classes - A, B, C, D and E
-- Class A - 10.0.0.0/8 (first 8 bits is the network ID)
-- Class B - 172.16.0.0/16 (first 16 bits are the network part)
-- Class C - 192.168.1.0/24 (first 24 bits are the network part)
-
-<img src="{{site.url}}/images/networking/classful_addressing.png">
-
-**CIDR**
-
-- CIDR = Classless Inter-Domain Routing 
-- This notation is a concise way to represent an IP address and its associated network mask
-- Example: 
-    - 192.168.1.0/24
-    - This means that 192.168.1 is the network part while the last 8-bit is the host part
-    - IP range = 192.168.1.1 - 192.168.1.254 
-    - 2 IPs are reserved
-        - 192.168.1.0 - For router/gateway
-        - 192.168.1.255 - For Broadcast
-
+- IP address is a logical addressing of a device in a network (like your street address)
+- Refer [this](https://gouherdanish.github.io/2025/05/14/ip-address.html) for more info
 
 **Subnet**
 

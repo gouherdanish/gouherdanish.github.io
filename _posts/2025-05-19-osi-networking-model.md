@@ -8,7 +8,7 @@ tags: ["Networking"]
 OSI stands for Open Systems Interconnection
 
 ---
-### Introduction
+## Introduction
 
 - OSI is a conceptual framework that divides network communication into seven abstract layers
 - It aims to facilitate communication between different systems, even if they have different hardware or software
@@ -16,6 +16,10 @@ OSI stands for Open Systems Interconnection
 - The model is fundamental to protocol development, as each layer defines the protocols and services used at that level
 
 ---
+## Layers
+
+There are 7 layers in OSI model
+
 ### Layer 7 - Application Layer 
 
 - This layer provides services to the end-user, such as web browsing, email, and file transfer
@@ -46,7 +50,7 @@ OSI stands for Open Systems Interconnection
     - Terminate Connections
 
 ---
-### Layer 4 - Transport Layer
+### Layer 4 - Transport Layer (TCP)
 
 - It manages end-to-end communication between applications, ensuring reliable data delivery
 - Protocols
@@ -56,4 +60,65 @@ OSI stands for Open Systems Interconnection
     - Segmentation - It breaks down large messages to smaller segments "packets" for transmission
     - Flow Control - It controls the flow of data to prevent the receiver from being overwhelmed, especially with TCP
     - Error Control - It provides mechanisms for detecting and correcting errors during data transmission
-    - Multiplexing - 
+    - Multiplexing - It allows multiple applications on a host to simultaneously send and receive data by assigning each connection a unique source and destination port
+- Output
+    - TCP Segment = [TCP Header] + [Encrypted Data]
+
+---
+### Layer 3 - Network Layer (IP)
+
+- It is responsible for routing and forwarding data packets across interconnected networks
+- Protocols
+    - IP - Internet Protocol
+    - ICMP - Internet Control Message Protocol
+- Key Functions
+    - Logical Addressing - It assigns logical addresses (IP) to devices, so they can be identified across networks
+    - Routing - It determines the optimal path for data packets to travel through the network
+    - Packet - It encapsulates data into packets and then forwards these packets to the next hop in the network, eventually reaching the destination
+- Output
+    - IP Packet = [IP Header] + [TCP Segment]
+    
+---
+### Layer 2 - Data Link Layer
+
+- It is responsible for transferring data between neighboring nodes on a single network segment. 
+- It provides the creation, transmission, and reception of data frames
+- Protocols
+    - Ethernet: most widely used protocol for wired networks, defining how data is framed and transmitted over Ethernet cables
+    - IEEE 802.11 (Wifi) - the standard for wireless networking, defining how devices connect to wireless access points and transmit data wirelessly
+    - ARP - Address Resolution Protocol (IP address -> MAC address)
+- Key Functions
+    - Framing - It adds headers and trailers to the data from Network Layer
+    - Physical Addressing - It adds source and destination MAC addresses (to the header part)
+    - Error Handling - It detects and corrects errors that may occur during data transmission (FCS, checksum)
+- Output
+    - Frame = [Ethernet Header] + [IP Packet] + [CRC]
+
+---
+### Layer 1 - Physical Layer
+
+- It is responsible for the raw transmission of data bits (0s and 1s) over a physical medium 
+    - Ex: cables, fiber optics, or wireless channels
+- Key Functions
+    - It establishes the raw connection between devices, handling the physical aspects of data transfer
+    - It converts data into electrical, optical, or electromagnetic signals for transmission
+    - devices include hubs, repeaters, modems, and cables
+- Output
+    - Voltage changes (Ethernet) or Modulated RF signals (Wifi)
+    - Encoded signals sent on the wire or air
+
+---
+## Analogy
+
+Think of sending a physical letter:
+
+- You write the message (Layer 7: Application).
+- Encrypt or format it nicely (Layer 6: Presentation).
+- Put it in an envelope (Layer 4–5: Session & Transport).
+- Write address, add tracking info (Layer 3: Network).
+- Put it in a package with labels for local delivery (Layer 2: Data Link).
+- Hand it to the mailman (Layer 1: Physical — the only point when it actually leaves you)
+
+--
+## Actual process
+

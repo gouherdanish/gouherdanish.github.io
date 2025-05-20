@@ -135,3 +135,36 @@ _Alias_
 - Static IP: Assigned and does not change, useful for devices needing a permanent address within the network. 
 - Dynamic IP: Assigned temporarily and can change over time
 
+**Classful IP Addressing**
+
+- IP addresses are globally managed by Internet Assigned Numbers Authority (IANA) and Regional Internet Registries (RIR)
+- The 32-bit IPv4 address is divided into five classes - A, B, C, D and E
+- Class A - 10.0.0.0/8 (first 8 bits is the network ID)
+- Class B - 172.16.0.0/16 (first 16 bits are the network part)
+- Class C - 192.168.1.0/24 (first 24 bits are the network part)
+
+<img src="{{site.url}}/images/networking/classful_addressing.png">
+
+**CIDR**
+
+- CIDR = Classless Inter-Domain Routing 
+- This notation is a concise way to represent an IP address and its associated network mask
+- Example: 
+    - 192.168.1.0/24
+    - This means that 192.168.1 is the network part while the last 8-bit is the host part
+    - IP range = 192.168.1.1 - 192.168.1.254 
+    - 2 IPs are reserved
+        - 192.168.1.0 - For router/gateway
+        - 192.168.1.255 - For Broadcast
+
+**Port**
+
+- Port is a 16-bit integer number from 0 to 65535 (16-bit) 
+- Ports are not physical connectors like USB or Ethernet ports
+- It represents a virtual endpoint within the operating system's software stack
+- It is typically assigned by the operating system
+
+_Analogy_
+- Think of a building (computer) with an IP address as its street address. 
+- Each apartment in the building (application) needs a unique door (port) for mail delivery (data). 
+- The postman (network) uses the IP address to find the building and the port to deliver the mail to the right apartment
