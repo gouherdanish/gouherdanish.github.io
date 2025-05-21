@@ -126,13 +126,13 @@ Think of sending a physical letter:
 - Put it in a package with labels for local delivery (Layer 2: Data Link).
 - Hand it to the mailman (Layer 1: Physical — the only point when it actually leaves you)
 
---
+---
 ## Actual process
 
 - User types `google.com` in browser
-- Browser resolves DNS to Google's public IP address (local cache or DNS lookup)
+- Browser resolves DNS to Google's public IP address (using local cache or DNS lookup)
 - Browser calls OS to initiate a TCP Handshake which enables reliable connection
-- Browser calls OS to initiate a TLS Handshake to get shared session keys
+- Browser calls OS to initiate a TLS Handshake to get shared session keys (If HTTPS)
 - Browser prepares HTTP request and calls OS which stores this data inside user space of RAM
 - Browser encrypts the data using the session key. OS still stores the Encrypted Data in user space of RAM
 - OS kernel copies data to kernel space
@@ -142,15 +142,16 @@ Think of sending a physical letter:
 - NIC accesses the data inside RAM using DMA (Direct memory access) via dedicated PCIe lanes
 - NIC adds Ethernet header => Frames 
 - (Wired) 
-    - NIC passes the frame to the PHY layer chip
-    - PHY converts encrypted bits to precise voltage signals using Line Coding Schemes
-        - e.g. Manchester Encoding, 8B/10B encoding, 128B/130B encoding
+    - NIC passes the framed bits to the PHY layer chip
+    - PHY converts digital bits to precise voltage signals (DAC) using [Line Coding Schemes](https://gouherdanish.github.io/2025/05/12/nic.html)
     - Voltage signals travel as analog waveform along ethernet cables reaching Router
-    - Router NIC converts ADC, checks IP header, does NAT, converts back DAC 
-    - Data travels along the Internet Backbone    
 - (Wireless) 
-    - NIC passes the frame to RF Front-end
-    - RF Front-end
-
+    - NIC passes the framed bits to Baseband Processor
+    - Baseband Processor converts digital bits to digital form of modulated waveform using [modulation](https://gouherdanish.github.io/2025/05/12/nic.html). The output is still numbers (digital)
+    - DAC in the RF Front-end converts the modulated digital IQ samples to a continuous analog waveform
+    - RF Front-end does mixing, amplification, filtering and sends to antenna
+    - Antenna emits EM wave which is caught by Router Antenna
+- Router NIC converts ADC, checks IP header, does NAT, converts back DAC 
+- Data travels along the Internet Backbone reaching Google
 
 <img src="{{site.url}}/images/networking/osi-flow.png">
