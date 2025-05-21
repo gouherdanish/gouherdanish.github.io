@@ -163,6 +163,14 @@ _Alias_
 - Ports are not physical connectors like USB or Ethernet ports
 - It represents a virtual endpoint within the operating system's software stack
 - It is typically assigned by the operating system
+- Important Ports
+    - Port 21 - FTP (File Transfer Proticol) - upload files into fileshare
+    - Port 22 - SSH (Secure Shell) - log in to linux
+    - Port 22 - SFTP (Secure FTP) - upload files using ssh
+    - Port 25/993 - Email
+    - Port 80 - HTTP - access unsecured websites
+    - Port 443 - HTTPS - access secured websites
+    - Port 3389 - RDP - Remote Desktop Protocol - log into Windows Machine
 
 _Analogy_
 - Think of a building (computer) with an IP address as its street address. 

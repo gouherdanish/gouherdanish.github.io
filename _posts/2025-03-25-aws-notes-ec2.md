@@ -132,13 +132,7 @@ Examples
 - In case connection is refused, then SG would've worked correctly and implies an application error
 - By Default, all inbound traffic is blocked and all outbound traffic is authorized
 - EC2 containing multiple SGs attached can be accessed by other EC2 instances having those individual SGs
-- Important
-    - Port 22 - SSH (Secure Shell) - log in to linux
-    - Port 21 - FTP (File Transfer Proticol) - upload files into fileshare
-    - Port 22 - SFTP (Secure FTP) - upload files using ssh
-    - Port 80 - HTTP - access unsecured websites
-    - Port 443 - HTTPS - access secured websites
-    - Port 3389 - RDP - Remote Desktop Protocol - log into Windows Machine
+- Refer [this](https://gouherdanish.github.io/2025/05/14/ip-address.html) for important ports
 
 ---
 

@@ -210,45 +210,6 @@ _Reversible_
 
     - Encoding is easily reversible while Encrytion is only reversible if you have the secret key that encypted it
 
-**Hardware Multiplexing**
-
-- It takes several input signals and combines them into a single output signal for transmission over a shared channel
-- (Analogy) multiple phone calls combined to transmit over one single wire
-
-<img src="{{site.url}}/images/networking/mux.png">
-
-_Working Principle - 2-to-1 Multiplexer_
-- The multiplexer works like a multiple-input and single-output switch. 
-- The output gets connected to only one of the n data inputs at a given instant of time. 
-- Uses Time-Division Multiplexing (TDM) to divide time into tiny slots and the MUX selects one input line at each time slice
-- However it looks like multiple streams are flowing simultaneously because the switching happens very fast at GHz or MHz scale
-- Therefore, the multiplexer is ‘many into one’ and it works as the digital equivalent of an analog selector switch
-
-<img src="{{site.url}}/images/networking/mux_21.png">
-
-_Implementation_
-- Multiplexer is a digital electronic circuit which is implemented in IC by logic gate 
-- When S=0,
-    - first AND Gate gets D0 and S=1 which outputs D0
-    - second AND Gate gets D1 and S=0 which outputs 0
-    - D0 OR 0 => D0
-- When S=1,
-    - first AND Gate gets D0 and S=0 which outputs 0
-    - second AND Gate gets D1 and S=1 which outputs D1
-    - 0 OR D1 => D1
-
-| S | Y |
-| 0 | D0 |
-| 1 | D1 |
-
-<img src="{{site.url}}/images/networking/mux_21_logic_gate.png">
-
-**Software Multiplexing**
-
-- It allows multiple applications on a host to simultaneously send and receive data by assigning each connection a unique source and destination port
-- It is done at the Transport Layer
-
-
 ---
 
 
