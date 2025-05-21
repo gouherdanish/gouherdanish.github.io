@@ -140,9 +140,17 @@ Think of sending a physical letter:
 - OS kernel immediately wraps the TCP segment with IP header (within the same function call) => IP Packets
 - OS kernel notifies NIC 
 - NIC accesses the data inside RAM using DMA (Direct memory access) via dedicated PCIe lanes
-- NIC adds Ethernet header => Frames
-- NIC passes the frame to the PHY layer chip
-- PHY converts encrypted bits to precise voltage signals, which are tranferred to RJ45 port as analog waveform
-- RJ45 port just transfers the data to copper wires
+- NIC adds Ethernet header => Frames 
+- (Wired) 
+    - NIC passes the frame to the PHY layer chip
+    - PHY converts encrypted bits to precise voltage signals using Line Coding Schemes
+        - e.g. Manchester Encoding, 8B/10B encoding, 128B/130B encoding
+    - Voltage signals travel as analog waveform along ethernet cables reaching Router
+    - Router NIC converts ADC, checks IP header, does NAT, converts back DAC 
+    - Data travels along the Internet Backbone    
+- (Wireless) 
+    - NIC passes the frame to RF Front-end
+    - RF Front-end
+
 
 <img src="{{site.url}}/images/networking/osi-flow.png">

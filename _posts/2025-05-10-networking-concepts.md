@@ -202,15 +202,15 @@ _Is Network Load Balancer a Reverse Proxy ?_
 Both are used to transform the input data. However there is one difference
 
 _Usecase_
+
     - Encoding converts data for compatibility or representation e.g. Binary encoding, Base-62 encoding
     - Encryption secures data by making it unreadable to unauthorized parties
 
 _Reversible_
+
     - Encoding is easily reversible while Encrytion is only reversible if you have the secret key that encypted it
 
-**Multiplexing**
-
-_Hardware Multiplexing_
+**Hardware Multiplexing**
 
 - It takes several input signals and combines them into a single output signal for transmission over a shared channel
 - (Analogy) multiple phone calls combined to transmit over one single wire
@@ -220,13 +220,14 @@ _Hardware Multiplexing_
 _Working Principle - 2-to-1 Multiplexer_
 - The multiplexer works like a multiple-input and single-output switch. 
 - The output gets connected to only one of the n data inputs at a given instant of time. 
-    - Uses Time-Division Multiplexing (TDM) to divide time into tiny slots and the MUX selects one input line at each time slice
-- However it looks like multiple streams are flowing simultaneously because the switching happens at GHz or MHz scale
+- Uses Time-Division Multiplexing (TDM) to divide time into tiny slots and the MUX selects one input line at each time slice
+- However it looks like multiple streams are flowing simultaneously because the switching happens very fast at GHz or MHz scale
 - Therefore, the multiplexer is ‘many into one’ and it works as the digital equivalent of an analog selector switch
 
 <img src="{{site.url}}/images/networking/mux_21.png">
 
-- Multiplexer is a digital electronic circuit which is implemented by logic gate 
+_Implementation_
+- Multiplexer is a digital electronic circuit which is implemented in IC by logic gate 
 - When S=0,
     - first AND Gate gets D0 and S=1 which outputs D0
     - second AND Gate gets D1 and S=0 which outputs 0
@@ -242,7 +243,10 @@ _Working Principle - 2-to-1 Multiplexer_
 
 <img src="{{site.url}}/images/networking/mux_21_logic_gate.png">
 
-_Software Multiplexing_
+**Software Multiplexing**
+
+- It allows multiple applications on a host to simultaneously send and receive data by assigning each connection a unique source and destination port
+- It is done at the Transport Layer
 
 
 ---
