@@ -154,4 +154,7 @@ Think of sending a physical letter:
 - Router NIC converts ADC, checks IP header, does NAT, converts back DAC 
 - Data travels along the Internet Backbone reaching Google
 
-<img src="{{site.url}}/images/networking/osi-flow.png">
+<img src="{{site.url}}/images/networking/osi.png">
+
+---
+##
