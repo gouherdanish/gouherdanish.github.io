@@ -127,7 +127,13 @@ Think of sending a physical letter:
 - Hand it to the mailman (Layer 1: Physical — the only point when it actually leaves you)
 
 ---
-## Actual process
+## Processes involved in OSI Model
+
+- OSI encapsulates the journey of a client request from when it is created to when it actually leaves the client's device
+- Throughout the layers, the data is encrypted, appended with metadata and made ready for it to be transferred via the physical medium
+- So, the data leaves the client device only when it has gone through all the OSI steps
+
+_Details_
 
 - User types `google.com` in browser
 - Browser resolves DNS to Google's public IP address (using local cache or DNS lookup)
