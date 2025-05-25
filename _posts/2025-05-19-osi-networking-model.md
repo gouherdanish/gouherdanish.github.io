@@ -172,6 +172,10 @@ _Details_
 - Router performs Network Address Translation (NAT)
     - Router finds Source Private IP of device, replaces with its Public IP
     - Router finds Source port on which app was running on device, replaces it with a random high number port
-- Router NIC does A2D conversion and performs NAT
+- Router NIC performs D2A conversion and sends to ISP (Internet Service Provider)
+- From there, data is routed through mutiple network hops across internet backbone travel through physical medium
+    - (ethernet) - copper wire
+    - (fibre optic) - light waves
+
 
 <img src="{{site.url}}/images/networking/client-server.png">
