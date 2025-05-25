@@ -163,4 +163,15 @@ _Details_
 <img src="{{site.url}}/images/networking/osi.png">
 
 ---
-##
+## Data journey
+
+- Appropriately formatted client request leaves the client's device, it can take two pathways depending on how the home LAN is setup
+    - (Wired) The data travels through twisted copper cables in form of analog electrical waveform (voltage signals) and reaches Router
+    - (Wireless) It travels through air in form of Electromagnetic Waves (RF) and reaches the router
+- Router NIC does Analog to Digital conversion, 
+- Router performs Network Address Translation (NAT)
+    - Router finds Source Private IP of device, replaces with its Public IP
+    - Router finds Source port on which app was running on device, replaces it with a random high number port
+- Router NIC does A2D conversion and performs NAT
+
+<img src="{{site.url}}/images/networking/client-server.png">
