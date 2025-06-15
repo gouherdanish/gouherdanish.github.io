@@ -1,24 +1,41 @@
 ---
 layout: post
 title: "Electronic Components"
-date: 2025-05-21
+date: 2025-06-15
 tags: ["Networking"]
 ---
 
-Computer networking is about connecting two or more computers together
+Electronic components are the foundation of digital electronics and computers
 
 ---
 ### Introduction
 
+- Electronic components are the basic building blocks used in electronic circuits to control current, voltage, and signal behavior
+- They are made from semiconductors, conductors, and insulators and work together to perform tasks like amplification, filtering, switching, and energy storage
 
 ---
 ### Components
 
 **Resistor**
 
+- limits or controls current in a circuit.
+- made of a mixture of finely powdered carbon and an insulating material, usually ceramic
+- converts electrical energy into heat by resisting electron flow.
+- Units - Ohm
+- Example: Prevents an LED from burning out by limiting current to a safe value.
+
 **Capacitor**
 
+- Stores and releases electrical energy quickly.
+- made of two conductive plates (electrodes) separated by an insulating material called a dielectric (air, glass, plastic)
+- Used in power supplies to smooth voltage
+- Units - Farad (F)
+
 **Inductor**
+
+- A coil of wire generates a magnetic field when current passes through it
+- Used in Transformers and AC-to-DC converters
+- Units - Henry (H)
 
 **Transistor**
 
@@ -26,6 +43,9 @@ Computer networking is about connecting two or more computers together
 
 **Diode**
 
+- Allows current to flow only in one direction 
+- Works on the fact that a semiconductor junction (p-n) blocks reverse current
+- Used for converting AC to DC
 
 ---
 
