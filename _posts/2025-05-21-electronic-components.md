@@ -24,6 +24,8 @@ Electronic components are the foundation of digital electronics and computers
 - Units - Ohm
 - Example: Prevents an LED from burning out by limiting current to a safe value.
 
+<img src="{{site.url}}/images/networking/resistor.png">
+
 **Capacitor**
 
 - Stores and releases electrical energy quickly.
@@ -31,15 +33,13 @@ Electronic components are the foundation of digital electronics and computers
 - Used in power supplies to smooth voltage
 - Units - Farad (F)
 
+<img src="{{site.url}}/images/networking/capacitor.png">
+
 **Inductor**
 
 - A coil of wire generates a magnetic field when current passes through it
 - Used in Transformers and AC-to-DC converters
 - Units - Henry (H)
-
-**Transistor**
-
-**BJT**
 
 **Diode**
 
@@ -47,6 +47,27 @@ Electronic components are the foundation of digital electronics and computers
 - Works on the fact that a semiconductor junction (p-n) blocks reverse current
 - Used for converting AC to DC
 
+**Transistor**
+
+- Transistors can turn a circuit on or off (Switch)
+- They can increase the strength of an electrical signal, like making a weak radio signal stronger (Amplification)
+- They are made of semiconductor materials, often silicon with different doping (impurities)
+- They are often arranged in either a NPN or PNP configuration
+- Two types - BJT and MOSFET (Field Effect Transistor)
+
+<img src="{{site.url}}/images/networking/transistor.png">
+
+**BJT**
+
+- stands for Bipolar Junction Transistor
+- consists of Emittor, Base and Collector pins
+- At the p-n junction of EB, there develops a barrier of 0.7V due to forward bias
+- Once the applied voltage crosses 0.7V, it is able to conduct electrons 
+- Reverse bias develops across BC p-n junction, excess electrons now cross this reverse bias and reach collector
+
+<img src="{{site.url}}/images/networking/transistor.png">
+
+<img src="{{site.url}}/images/networking/transistor-circuit.png">
 ---
 
 ### Some Important Concepts
