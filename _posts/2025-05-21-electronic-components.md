@@ -65,9 +65,9 @@ Electronic components are the foundation of digital electronics and computers
 - Once the applied voltage crosses 0.7V, it is able to conduct electrons 
 - Reverse bias develops across BC p-n junction, excess electrons now cross this reverse bias and reach collector
 
-<img src="{{site.url}}/images/networking/transistor.png">
-
 <img src="{{site.url}}/images/networking/transistor-circuit.png">
+
+<img src="{{site.url}}/images/networking/transistor-npn.png">
 ---
 
 ### Some Important Concepts
