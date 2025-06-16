@@ -54,6 +54,7 @@ Electronic components are the foundation of digital electronics and computers
 - They are made of semiconductor materials, often silicon with different doping (impurities)
 - They are often arranged in either a NPN or PNP configuration
 - Two types - BJT and MOSFET (Field Effect Transistor)
+- Used to create Logic gates
 
 <img src="{{site.url}}/images/networking/transistor.png">
 
@@ -62,7 +63,7 @@ Electronic components are the foundation of digital electronics and computers
 - stands for Bipolar Junction Transistor
 - consists of Emittor, Base and Collector pins
 - At the p-n junction of EB, there develops a barrier of 0.7V due to forward bias
-- Once the applied voltage crosses 0.7V, it is able to conduct electrons 
+- Once the applied voltage crosses 0.7V, it is able to conduct electrons from E to B
 - Reverse bias develops across BC p-n junction, excess electrons now cross this reverse bias and reach collector
 
 <img src="{{site.url}}/images/networking/transistor-circuit.png">
