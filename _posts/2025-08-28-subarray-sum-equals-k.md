@@ -160,9 +160,9 @@ def longest_subarr(arr, k):
 
 _Time Complexity_
 
-- For each start index i, the inner loop is running from i to n
+- For each start index i, we are doing finite O(1) operations
 
-$$ T(n) = (n) + (n-1) + ... + (2) + (1) $$
+$$ T(n) = (1) + (1) + ... + (1) + (1) $$
 
 $$ \Rightarrow T(n) = O(n) $$
 
