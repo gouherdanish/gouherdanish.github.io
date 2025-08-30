@@ -77,9 +77,10 @@ _Time Complexity_
 
 $$ T(n) = (1+2+...+n) + (1+2+...+n-1) + ... + (1+2) + 1 $$
 
-$$ \RightArrow T(n) = O(n^3) $$
+$$ \Rightarrow T(n) = O(n^3) $$
 
 _Space Complexity_
+
 - We are using $O(1)$ space
 
 ### Running Sum Approach
@@ -109,10 +110,49 @@ _Time Complexity_
 
 $$ T(n) = (n) + (n-1) + ... + (2) + (1) $$
 
-$$ \RightArrow T(n) = O(n^2) $$
+$$ \Rightarrow T(n) = O(n^2) $$
+
+_Space Complexity_
+
+- We are using $O(1)$ space
 
 ### Hashmap Approach
 
 _Logic_
 
-- 
+- If time is more important, then we can trade-off with space and use Hashmap to store Prefix Sums
+- Prefix Sum at i is defined as the cumulative sum of all array elements till i
+
+$$F(i) = a_0 + a_1 + ... + a_i$$
+
+- Note that any subarray sum can be written in terms of Prefix Sums as follows
+
+$$Subarray Sum (i to j) = a_i + a_{i+1} + ... + a_j $$
+
+$$ k = (a_0 + ... + a_j) - (a_0 + ... +a_i)$$
+
+$$ k = F(j) - F(i)$$
+
+$$ F(j) = F(i) + k $$
+
+$$ F(i) = F(j) - k $$
+
+<img src="{{site.url}}/images/dsa/array/subarray_sum_equals_k_hashmap.png">
+
+_Code_
+
+```
+def longest_subarr(arr, k):
+    n = len(arr)
+    max_len = 0
+    sum = 0
+    cache = {}
+    for i in range(n):
+        sum += arr[i] 
+        rem = sum - k
+        if rem in cache:
+            max_len = max(max_len, i-cache[rem])
+        if sum == k:
+            max_len = max(max_len, len(arr[:i]))
+    return max_len
+```
