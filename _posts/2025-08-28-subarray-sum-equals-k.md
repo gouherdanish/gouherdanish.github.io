@@ -6,53 +6,32 @@ tags: ["Data Structures"]
 ---
 
 Array is very important and widely used data structure
+
 ---
 ## Introduction
 
 - Subarray is a contiguous sequence of elements from the array.
-- Each subarray can be defined by two indices
-    - Start Index i : [0, n-1]
-    - End Index j : [i, n-1]
+- Let's take an example of an array A having n = 3 elements
+    - A = [10, 5, 14] n = 3
+- Here are the possible subarrays that we can create from A 
+    - [10]
+    - [10, 5]
+    - [10, 5, 14]
+    - [5]
+    - [5, 14]
+    - [14]
+- Total number of subarrays = 3 + 2 + 1 = 6
 
 _How many subarrays are present in a given array of length n ?_
 
+- In short, this is given by $\binom{n+1}{2}$
+- Intuitively, each subarray can be defined by two indices
+    - Start Index i : [0, n-1]
+    - End Index j : [i, n-1]
 - Number of choices for starting index (i) = n
 - For each start index i, the number of choices for end index (j) = n-i
 
-Example: 
-- A = [10, 5, 14] n = 3
-- For i = 0,
-    - for j = 0, SA1 = [10]
-    - for j = 1, SA2 = [10, 5]
-    - for j = 2, SA3 = [10, 5, 14]
-- For i = 1,
-    - for j = 1, SA4 = [5]
-    - for j = 2, SA5 = [5, 14]
-- For i = 2,
-    - for j = 2, SA6 = [14]
-- Total number of subarrays = 3 + 2 + 1 = 6
-
-In General,
-
-Total number of subarrays =
-    Number of subarrays for i=0
-    + Number of subarrays for i=1
-    + Number of subarrays for i=2
-    ...
-    + Number of subarrays for i=n-2
-    + Number of subarrays for i=n-1
-
-Total number of subarrays =
-    (n)
-    + (n-1)
-    + (n-2)
-    ...
-    + 2
-    + 1
-
-Total number of subarrays = 
-
-$$\sigma_{i=1}^n i = \frac {n(n+1)}{2}$$
+So, Total number of subarrays = $\sum_{i=0}^{n} (n-i) = \frac {n(n+1)}{2}$
 
 ---
 ## Problem #1 - Longest Subarray with Sum k
@@ -94,10 +73,15 @@ def longest_subarr(arr, k):
 
 _Time Complexity_
 - For each subarray defined by (i,j), we are iterating through this subarray to find its sum
+- $O(n^3)$
 
 $$
 T(n) = (1+2+...+n) + (1+2+...+n-1) + ... + (1+2) + 1
+
 \RightArrow T(n) = O(n^3)
 $$
+
+_Space Complexity_
+- We are using $O(1)$ space
 
 ### 
