@@ -75,13 +75,44 @@ _Time Complexity_
 - For each subarray defined by (i,j), we are iterating through this subarray to find its sum
 - $O(n^3)$
 
-$$
-T(n) = (1+2+...+n) + (1+2+...+n-1) + ... + (1+2) + 1
+$$ T(n) = (1+2+...+n) + (1+2+...+n-1) + ... + (1+2) + 1 $$
 
-\RightArrow T(n) = O(n^3)
-$$
+$$ \RightArrow T(n) = O(n^3) $$
 
 _Space Complexity_
 - We are using $O(1)$ space
 
-### 
+### Running Sum Approach
+
+_Logic_
+
+- Instead of finding each end indices and then iterating start to end, we can save one loop by using running sum
+
+_Code_
+
+```
+def longest_subarr(arr, k):
+    n = len(arr)
+    max_len = 0
+    for i in range(n):
+        sum = 0
+        for j in range(i,n):
+            sum += nums[j]
+            if sum == k:
+                max_len = max(max_len, p+1-j)
+    return max_len
+```
+
+_Time Complexity_
+
+- For each start index i, the inner loop is running from i to n
+
+$$ T(n) = (n) + (n-1) + ... + (2) + (1) $$
+
+$$ \RightArrow T(n) = O(n^2) $$
+
+### Hashmap Approach
+
+_Logic_
+
+- 
