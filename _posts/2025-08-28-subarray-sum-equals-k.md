@@ -157,3 +157,15 @@ def longest_subarr(arr, k):
         cache[sum] = min(cache.get(sum,0),i) # if same prefix sum appears again, we should take the one which appeared earlier
     return max_len
 ```
+
+_Time Complexity_
+
+- For each start index i, the inner loop is running from i to n
+
+$$ T(n) = (n) + (n-1) + ... + (2) + (1) $$
+
+$$ \Rightarrow T(n) = O(n) $$
+
+_Space Complexity_
+
+- We are using $O(n)$ space
