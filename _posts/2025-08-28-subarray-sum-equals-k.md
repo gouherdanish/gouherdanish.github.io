@@ -153,6 +153,7 @@ def longest_subarr(arr, k):
         if rem in cache:
             max_len = max(max_len, i-cache[rem])
         if sum == k:
-            max_len = max(max_len, len(arr[:i]))
+            max_len = max(max_len, i+1)
+        cache[sum] = min(cache.get(sum,0),i) # if same prefix sum appears again, we should take the one which appeared earlier
     return max_len
 ```
