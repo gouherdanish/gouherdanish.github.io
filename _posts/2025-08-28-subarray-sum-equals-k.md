@@ -168,4 +168,50 @@ $$ \Rightarrow T(n) = O(n) $$
 
 _Space Complexity_
 
-- We are using $O(n)$ space
+- We are using $O(n)$ space since we are using a hashmap
+
+
+### Two Pointer Approach
+
+_Logic_
+
+- If array has all positive elements, we can optimize further on space using sliding window (two pointer) approach
+- In this case, the sum will increase if window size expands and decrease if it shrinks.
+
+<img src="{{site.url}}/images/dsa/array/subarray_sum_equals_k_2ptrs.png">
+
+_Code_
+
+```
+def longest_subarr(arr, k):
+    n = len(arr)
+    max_len = 0
+    sum = 0
+    left, right = 0,0
+    while right < n:
+        sum += arr[right]
+        while sum > k and left <= right:
+            sum -= arr[left]
+            left += 1
+        if sum == k:
+            max_len = max(max_len, right-left+1)
+        right += 1
+    return max_len
+```
+
+_Time Complexity_
+
+- Right Pointer will go from 0 till n
+- But the left pointer only moves in certain condition and does not move for each right pointer position
+
+$$ T(n) = O(1) + O(1) + 2*O(1) ... + (1) + (1) $$
+
+- In the worst condition, the left pointer can move n positions overall
+$$ T(n) <= O(n) + O(n) = O(2n) $$
+
+$$ \Rightarrow T(n) = O(n) $$
+
+_Space Complexity_
+
+- We are using $O(1)$ space 
+
