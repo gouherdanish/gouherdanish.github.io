@@ -24,7 +24,7 @@ Array is very important and widely used data structure
 
 _How many subarrays are present in a given array of length n ?_
 
-- In short, this is given by $\binom{n+1}{2}$
+- In short, this is given by $\binom{n+1}{2} = \frac {n(n+1)}{2}$
 - Intuitively, each subarray can be defined by two indices
     - Start Index i : [0, n-1]
     - End Index j : [i, n-1]
